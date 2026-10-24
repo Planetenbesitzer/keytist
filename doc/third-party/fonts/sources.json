@@ -1,0 +1,116 @@
+[
+  {
+    "file": "Lato-OFL.txt",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/lato/OFL.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e"
+  },
+  {
+    "file": "Apache-2.0.txt",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+    "file": "SourceHanSans-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-han-sans/release/LICENSE.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "fcac737e761ec63dbfbdce11030a1780161920d80315edba9c8beff1c2bac5a2"
+  },
+  {
+    "file": "Roboto-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/googlefonts/roboto-2/main/LICENSE",
+    "retrievedAt": "2026-10-16",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "file": "SourceSerif4-LICENSE.md",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/4.004R/LICENSE.md",
+    "retrievedAt": "2026-10-16",
+    "sha256": "bb1e7cb76848ee07553f92081428cd5e6eb41a85b65114cb15cc66d22718bf27"
+  },
+  {
+    "file": "LXGWWenKai-Screen-OFL.txt",
+    "url": "https://raw.githubusercontent.com/lxgw/LxgwWenKai-Screen/main/OFL.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "ba38832f9d7e0ad601a1ab90d58f251ba957532885ef80dca050a611962fd8b6"
+  },
+  {
+    "file": "JetBrainsMono-v1.0.3-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/JetBrains/JetBrainsMono/v1.0.3/LICENSE",
+    "retrievedAt": "2026-10-16",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "file": "LXGWNeoXiHei-LICENSE.md",
+    "url": "https://raw.githubusercontent.com/lxgw/LxgwNeoXiHei/main/LICENSE.md",
+    "retrievedAt": "2026-10-16",
+    "sha256": "bce9800ab47cd0961c2a536d5ecfb983442d58eec1db5ff88a5f1a8d1c682367"
+  },
+  {
+    "file": "LXGWNeoZhiSong-LICENSE.md",
+    "url": "https://raw.githubusercontent.com/lxgw/LxgwNeoZhiSong/main/LICENSE.md",
+    "retrievedAt": "2026-10-16",
+    "sha256": "1483c7de02dcf8b9c54b3b1aacabf7d6bdf32d412ca6724c0292ea68e862d8cf"
+  },
+  {
+    "file": "Merriweather-OFL.txt",
+    "url": "https://raw.githubusercontent.com/SorkinType/Merriweather/master/OFL.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "a7ba785ad99b6eae0444ab89910e512d4af9865937fddbcb5c72c4f59f55d6ad"
+  },
+  {
+    "file": "Inter-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/rsms/inter/v3.3/LICENSE.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "cc36dd53b88f8c7f138b9708e0c4b598816e4e52c7e252859e67e1e7edbcf117"
+  },
+  {
+    "file": "Literata-OFL.txt",
+    "url": "https://raw.githubusercontent.com/googlefonts/literata/main/OFL.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "8742963604cd89dc81437811a850018fc03b2bfad686d7422c8235967c87614e"
+  },
+  {
+    "file": "DeYiHei-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/atelier-anchor/smiley-sans/main/LICENSE",
+    "retrievedAt": "2026-10-16",
+    "sha256": "9401f4050f1b66c26b6ccdc8b0e14a3c1cc37aac122eda84386f25854a9bec72"
+  },
+  {
+    "file": "SourceHanSerif-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-han-serif/release/LICENSE.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "9ff5bb567e1b92c801fc1069e5fbf992ff8efccacb9db94e5959a5b3ba9bb903"
+  },
+  {
+    "file": "Montserrat-OFL.txt",
+    "url": "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/OFL.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e"
+  },
+  {
+    "file": "MiSans-LICENSE.pdf",
+    "url": "https://hyperos.mi.com/font-download/MiSans%E5%AD%97%E4%BD%93%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE.pdf",
+    "retrievedAt": "2026-10-16",
+    "sha256": "4a93a27cd2bd81b3b5ecfd0a853144a876fa26938a93a68443c67d74172fcb86"
+  },
+  {
+    "file": "ZhuQueFangSong-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/TrionesType/zhuque/main/LICENSE.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "66cc01ad4df62fca6936431a426104cb32a52ce8da49de9a7d643e02d7659043"
+  },
+  {
+    "file": "SourceSansPro-LICENSE.md",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/2.020R-ro/1.075R-it/LICENSE.txt",
+    "retrievedAt": "2026-10-16",
+    "sha256": "653aaf9819e33cf1e2b3523c5d4d6c3dae925d770cb4563030f96655321ca2e9"
+  },
+  {
+    "file": "ARPHICPL.TXT",
+    "source": "Verbatim embedded OpenType nameID 13 from src/assets/fonts/WenDingPLKaiTi.woff2; the same text occurs in WenDingPLSongTi.woff2",
+    "retrievedAt": "2026-10-16",
+    "sha256": "3a5e90c0957524a89e48203febcd4492ca4393678abaa7e5b4d70f3ff32b386d"
+  }
+]

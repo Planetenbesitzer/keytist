@@ -1,0 +1,48 @@
+/* Local, macOS-inspired editing chrome. Slide typography stays document-owned. */
+body { -webkit-font-smoothing: antialiased; font-size: 13px; }
+html { overflow: clip; }
+body { position: fixed; inset: 0; }
+button, input, select, textarea { font-family: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, [role=button]:focus-visible { outline: 3px solid #007aff65; outline-offset: 2px; }
+.pptist-editor {
+  .canvas-tool {
+    background: linear-gradient(#fbfbfd, #f3f3f6); padding: 0 18px;
+    .add-element-handler { gap: 4px; }
+    .add-element-handler .insert-handler-item {
+      height: 52px; min-width: 49px; margin: 0; padding: 5px 8px; border-radius: 8px;
+      flex-direction: column; gap: 5px; font-size: 20px; color: #424249;
+      .icon { margin: 0; font-size: 21px; }
+      .text { display: inline !important; font-size: 10px; font-weight: 500; letter-spacing: .2px; }
+      &.group-btn { flex-direction: row; gap: 0; margin-right: 0; }
+      .group-btn-main { flex-direction: column; gap: 5px; min-width: 45px; padding: 0 3px; border-radius: 6px; }
+      .arrow { width: 11px; font-size: 9px; padding: 0; color: #8e8e93; }
+      &:hover { background: #e8e8ed !important; }
+    }
+    .equation-tool { color: #007aff !important; }
+    .font-tool { flex-direction:column; justify-content:center; gap:5px; min-width:49px; height:52px; font-size:21px; color:#424249; span{font-size:10px;} }
+    .handler-item { border-radius: 6px; height: 29px; color: #727278; }
+    .more > .handler-item { display: none; }
+    .more-icon { display: block; }
+    .right-handler { background: #e8e8ed; border-radius: 7px; height: 28px; align-self: center; padding: 0 2px;
+      .handler-item {padding:0 5px;} .text{font-size:11px; font-variant-numeric:tabular-nums; width:39px;}
+      .viewport-size-adaptation {display:none;}
+    }
+  }
+  .thumbnails { background: #f4f4f7; .add-slide {height:45px;background:#f7f7f9;font-size:11px;} .thumbnail-list {padding:13px 0;} .thumbnail-item {padding:9px 0;} .thumbnail-item.active {background:#dceaff;} .thumbnail {box-shadow:0 2px 5px #0000000b;} .label {font-size:10px;width:22px;} .page-number{font-size:10px;color:#8e8e93;background:#f7f7f9;} }
+  .canvas { background: #e9e9ee; }
+  .viewport-wrapper { box-shadow: 0 12px 42px #00000017, 0 0 0 1px #00000005; }
+  .remark { background: #f7f7f9; .ProseMirror {font-size:11px; color:#8e8e93;} }
+  .toolbar { background: #fafafc;
+    > .tabs.card { margin:0 13px 4px; height:29px; padding:2px; background:#e9e9ed; border-radius:7px;
+      .tab {background:transparent; border:0 !important; border-radius:5px; color:#6e6e73; font-size:11px;}
+      .tab.active {background:#fff; color:#27272b; box-shadow:0 1px 3px #00000016;}
+    }
+    > .content {padding:16px 14px;}
+  }
+}
+.color-picker { border-radius:10px; padding:3px; .picker-saturation-wrap{border-radius:7px;} .picker-presets-color {border-radius:50%; outline:1px solid #0000000a; transition:transform .1s; &:hover{transform:scale(1.18);outline:2px solid #007aff;} } .picker-gradient-color{border-radius:2px;} }
+.pptist-editor .button {letter-spacing:0;}
+.tippy-box, .modal-content, .drawer {border-radius:10px;}
+@media(max-width:1150px){.pptist-editor .canvas-tool .add-element-handler {gap:0;} .pptist-editor .canvas-tool .add-element-handler .insert-handler-item {min-width:43px;padding-left:5px;padding-right:5px;} }
+@media(max-width:1000px){.pptist-editor .layout-content-left {width:150px;} .pptist-editor .layout-content-center{width:calc(100% - 150px - 260px);} .pptist-editor .layout-content-right{width:260px;} }

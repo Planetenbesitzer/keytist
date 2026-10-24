@@ -1,0 +1,1156 @@
+{
+  "extractedAt": "2026-10-16",
+  "source": "Embedded OpenType name table from the repository font files; exact unique strings, no inferred copyright or license grants.",
+  "fonts": [
+    {
+      "file": "src/assets/fonts/AlibabaPuHuiTi.woff2",
+      "sha256": "e03857d7e181a9201baee2edef8dc6dba054dcb42a4b763cf75bb3dbdee2b321",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright ?2020-2021 Alibaba (China) Co., Ltd. All rights reserved."
+        },
+        {
+          "nameId": 1,
+          "text": "Alibaba PuHuiTi 2.0"
+        },
+        {
+          "nameId": 2,
+          "text": "55 Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "Hanyi Alibaba-PuHuiTi-2-55-Regular v2.00"
+        },
+        {
+          "nameId": 4,
+          "text": "Alibaba PuHuiTi 2 55 Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.00"
+        },
+        {
+          "nameId": 6,
+          "text": "AlibabaPuHuiTi_2_55_Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "Alibaba Design;Hanyi Fonts"
+        },
+        {
+          "nameId": 0,
+          "text": "(c) 2020-2021 阿里巴巴（中国）有限公司，版权所有"
+        },
+        {
+          "nameId": 1,
+          "text": "阿里巴巴普惠体 2.0"
+        },
+        {
+          "nameId": 4,
+          "text": "阿里巴巴普惠体 2 55 Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "Alibaba Design；汉仪字库"
+        },
+        {
+          "nameId": 0,
+          "text": "Copyright © 2020-2021 Alibaba (China) Co., Ltd. All rights reserved."
+        },
+        {
+          "nameId": 1,
+          "text": "Alibaba PuHuiTi 2.0 55 Regular"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 1,
+          "text": "阿里巴巴普惠体 2.0 55 Regular"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/DeYiHei.woff2",
+      "sha256": "ecd63faa61348c4f2480b5fddd8c48fd76f12542328eaa530b2a69badff68ab9",
+      "names": [
+        {
+          "nameId": 1,
+          "text": "Smiley Sans Oblique"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 4,
+          "text": "Smiley Sans Oblique"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.0.1"
+        },
+        {
+          "nameId": 6,
+          "text": "SmileySans-Oblique"
+        },
+        {
+          "nameId": 0,
+          "text": "Copyright © 2022–2024 atelierAnchor. All rights reserved."
+        },
+        {
+          "nameId": 3,
+          "text": "2.0.1;UKWN;SmileySans-Oblique"
+        },
+        {
+          "nameId": 8,
+          "text": "atelierAnchor"
+        },
+        {
+          "nameId": 9,
+          "text": "oooooohmygosh, Nagisa Chen, Janine Sui, Heda Shi, Jian Li"
+        },
+        {
+          "nameId": 11,
+          "text": "https://atelier-anchor.com"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+        },
+        {
+          "nameId": 14,
+          "text": "https://scripts.sil.org/OFL"
+        },
+        {
+          "nameId": 1,
+          "text": "得意黑"
+        },
+        {
+          "nameId": 4,
+          "text": "得意黑 斜体"
+        },
+        {
+          "nameId": 8,
+          "text": "atelierAnchor 锚坞"
+        },
+        {
+          "nameId": 9,
+          "text": "oooooohmygosh, 陈渚, 眭佳宁, 史贺达, 李健"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/Inter.woff2",
+      "sha256": "882a776738faa7f4c1812e5f4472b75ea2335fa59e4e652ec61afd485fbb6507",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright 2017-2019 The Inter project authors"
+        },
+        {
+          "nameId": 1,
+          "text": "Inter"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "Inter Regular:2019:20b39288a"
+        },
+        {
+          "nameId": 4,
+          "text": "Inter Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "3.3;20b39288a"
+        },
+        {
+          "nameId": 6,
+          "text": "Inter-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "rsms"
+        },
+        {
+          "nameId": 9,
+          "text": "Rasmus Andersson"
+        },
+        {
+          "nameId": 11,
+          "text": "https://rsms.me/"
+        },
+        {
+          "nameId": 13,
+          "text": "OFL 1.1 (SIL Open Font License, Version 1.1)"
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/JetBrainsMono.woff2",
+      "sha256": "d0966764caef6b95080051d70607b800b2f4026c81a0bc3d1411fa8a0d72008f",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "© 2000-2020 JetBrains s.r.o. Developed with drive and IntelliJ IDEA."
+        },
+        {
+          "nameId": 1,
+          "text": "JetBrains Mono"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "Version 1.0.3;JB;JetBrainsMono-Regular;2020;FLVI-701"
+        },
+        {
+          "nameId": 4,
+          "text": "JetBrains Mono Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 1.0.3"
+        },
+        {
+          "nameId": 6,
+          "text": "JetBrainsMono-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "JetBrains"
+        },
+        {
+          "nameId": 9,
+          "text": "Philipp Nurullin, Konstantin Bulenkov"
+        },
+        {
+          "nameId": 11,
+          "text": "https://www.jetbrains.com"
+        },
+        {
+          "nameId": 13,
+          "text": "Licensed under the Apache License, Version 2.0"
+        },
+        {
+          "nameId": 14,
+          "text": "http://www.apache.org/licenses/LICENSE-2.0"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/LXGWNeoXiHei.woff2",
+      "sha256": "5664fc0cedf1feef2440aa0e31dabeea870ccd870d12bec214cd2561159d2645",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright(c) 2021-2026 LXGW; Information-technology Promotion Agency, Japan (IPA), 2003-2019. You must accept \"https://opensource.org/licenses/IPA/\" to use this product."
+        },
+        {
+          "nameId": 1,
+          "text": "LXGW Neo XiHei"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "LXGW Neo XiHei:Version 1.302"
+        },
+        {
+          "nameId": 4,
+          "text": "LXGW Neo XiHei"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 1.302;May 26, 2026"
+        },
+        {
+          "nameId": 6,
+          "text": "LXGWNeoXiHei"
+        },
+        {
+          "nameId": 13,
+          "text": "https://opensource.org/licenses/IPA/"
+        },
+        {
+          "nameId": 14,
+          "text": "https://opensource.org/licenses/IPA/"
+        },
+        {
+          "nameId": 1,
+          "text": "霞鹜新晰黑"
+        },
+        {
+          "nameId": 4,
+          "text": "霞鹜新晰黑"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/LXGWNeoZhiSong.woff2",
+      "sha256": "d7b7eb47e9f87d637506d564374e571095ed9841a31aeba7d14178058fe4a32b",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright(c) 2023-2026 LXGW; Information-technology Promotion Agency, Japan (IPA), 2003-2019. You must accept \"https://opensource.org/licenses/IPA/\" to use this product."
+        },
+        {
+          "nameId": 1,
+          "text": "LXGW Neo ZhiSong"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "LXGW Neo ZhiSong:Version 1.064"
+        },
+        {
+          "nameId": 4,
+          "text": "LXGW Neo ZhiSong"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 1.064;May 26, 2026"
+        },
+        {
+          "nameId": 6,
+          "text": "LXGWNeoZhiSong"
+        },
+        {
+          "nameId": 13,
+          "text": "https://opensource.org/licenses/IPA/"
+        },
+        {
+          "nameId": 14,
+          "text": "https://opensource.org/licenses/IPA/"
+        },
+        {
+          "nameId": 1,
+          "text": "霞鹜新致宋"
+        },
+        {
+          "nameId": 4,
+          "text": "霞鹜新致宋"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/LXGWWenKai.woff2",
+      "sha256": "5cf730147cd4923546015110f9085216b023df388e2c5ca270b5db17d8de496b",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright 2021-2023 LXGW (https://github.com/lxgw/LxgwWenKai-Screen)\r\nCopyright 2020 The Klee Project Authors (https://github.com/fontworks-fonts/Klee)"
+        },
+        {
+          "nameId": 1,
+          "text": "LXGW WenKai GB Screen"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "LXGW WenKai GB Screen:Version 1.311"
+        },
+        {
+          "nameId": 4,
+          "text": "LXGW WenKai GB Screen"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 1.311;October 6, 2023"
+        },
+        {
+          "nameId": 6,
+          "text": "LXGWWenKaiGBScreen"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/Lato.woff2",
+      "sha256": "2b77bcd1b4117373d5eb9270517693dbbae13a8413895119a5d47fccabf06b58",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright (c) 2010-2011 by tyPoland Lukasz Dziedzic with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1."
+        },
+        {
+          "nameId": 1,
+          "text": "Lato"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "tyPolandLukaszDziedzic: Lato Regular: 2011"
+        },
+        {
+          "nameId": 4,
+          "text": "Lato Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 1.104; Western+Polish opensource"
+        },
+        {
+          "nameId": 6,
+          "text": "Lato-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "tyPoland Lukasz Dziedzic"
+        },
+        {
+          "nameId": 9,
+          "text": "Lukasz Dziedzic"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.typoland.com/"
+        },
+        {
+          "nameId": 13,
+          "text": "Copyright (c) 2010-2011 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL)."
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/Literata.woff2",
+      "sha256": "9cbf844b0f489436445d0329ea65af91f1b922471220b0f30afbdf5ff510b6cc",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright 2014 Google Inc. All Rights Reserved."
+        },
+        {
+          "nameId": 1,
+          "text": "Literata Book"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "2.003;TT  ;LiterataBook-Regular"
+        },
+        {
+          "nameId": 4,
+          "text": "Literata Book Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.003;PS 002.003;hotconv 1.0.88;makeotf.lib2.5.64775"
+        },
+        {
+          "nameId": 6,
+          "text": "LiterataBook-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "TypeTogether"
+        },
+        {
+          "nameId": 9,
+          "text": "Latin by Veronika Burian and Jose Scaglione. Greek by Irene Vlachou. Cyrillic by Vera Evstafieva"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.google.com"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL"
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/Merriweather.woff2",
+      "sha256": "c1bcbe5a6df1f87073c46bbc9cbb8a5d9a343fe4ed49904d3049ae01464d0eb0",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright 2016 The Merriweather Project Authors (https://github.com/EbenSorkin/Merriweather), with Reserved Font Name \"Merriweather\"."
+        },
+        {
+          "nameId": 1,
+          "text": "Merriweather"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "2.002;STC ;Merriweather-Regular"
+        },
+        {
+          "nameId": 4,
+          "text": "Merriweather Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.002"
+        },
+        {
+          "nameId": 6,
+          "text": "Merriweather-Regular"
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/MiSans.woff2",
+      "sha256": "7d7a4ba4faf18306e446787c1ab1bd1e90c9f27bfa937cd8eb3469c7504e563f",
+      "names": [
+        {
+          "nameId": 1,
+          "text": "MiSans"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "4.003;HNYI;MiSans-Regular"
+        },
+        {
+          "nameId": 4,
+          "text": "MiSans"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 4.003"
+        },
+        {
+          "nameId": 6,
+          "text": "MiSans-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "Hanyi Fonts"
+        },
+        {
+          "nameId": 9,
+          "text": "Beijing Xiaomi Mobile Software Co.,Ltd & Hanyi Fonts"
+        },
+        {
+          "nameId": 11,
+          "text": "https://www.hanyi.com.cn/"
+        },
+        {
+          "nameId": 8,
+          "text": "汉仪字库"
+        },
+        {
+          "nameId": 9,
+          "text": "北京小米移动软件有限公司，汉仪字库"
+        },
+        {
+          "nameId": 0,
+          "text": "Copyright © 2020-2023 Beijing Xiaomi Mobile Software Co.,Ltd. All Rights Reserved."
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/Montserrat.woff2",
+      "sha256": "051e07c36000b67674db518087ef8108666c0c244237ed635c1a3b95cf347cc1",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright 2011 - 2016 The Montserrat Project Authors (julieta.ulanovsky@gmail.com)"
+        },
+        {
+          "nameId": 1,
+          "text": "Montserrat"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "4.000;ULA ;Montserrat-Regular"
+        },
+        {
+          "nameId": 4,
+          "text": "Montserrat Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 4.000;PS 004.000;hotconv 1.0.88;makeotf.lib2.5.64775"
+        },
+        {
+          "nameId": 6,
+          "text": "Montserrat-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "Julieta Ulanovsky"
+        },
+        {
+          "nameId": 9,
+          "text": "Julieta Ulanovsky"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.zkysky.com.ar/"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL"
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/OpenSans.woff2",
+      "sha256": "02ac87c8d5bfd4262a54d45f99cfa44605fa16b104de3d5ac6702e2460bfc1f7",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Digitized data copyright © 2010-2011, Google Corporation."
+        },
+        {
+          "nameId": 1,
+          "text": "Open Sans"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "Ascender - Open Sans Build 100"
+        },
+        {
+          "nameId": 4,
+          "text": "Open Sans"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 1.10"
+        },
+        {
+          "nameId": 6,
+          "text": "OpenSans"
+        },
+        {
+          "nameId": 8,
+          "text": "Ascender Corporation"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.ascendercorp.com/"
+        },
+        {
+          "nameId": 13,
+          "text": "Licensed under the Apache License, Version 2.0"
+        },
+        {
+          "nameId": 14,
+          "text": "http://www.apache.org/licenses/LICENSE-2.0"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/Roboto.woff2",
+      "sha256": "124b73a90d0ac0480ccbbf539cef537d8c44b3d4616436205555dc138e56405f",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Font data copyright Google 2011"
+        },
+        {
+          "nameId": 1,
+          "text": "Roboto"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "Google:Roboto:2011"
+        },
+        {
+          "nameId": 4,
+          "text": "Roboto Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 1.00000; 2011"
+        },
+        {
+          "nameId": 6,
+          "text": "Roboto-Regular"
+        },
+        {
+          "nameId": 9,
+          "text": "Google"
+        },
+        {
+          "nameId": 11,
+          "text": "Google.com"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/SourceHanSans.woff2",
+      "sha256": "baef3d9c86508d957eee369b1289a1a918a6f1f394f10bd1129332c84f91c671",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "© 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+        },
+        {
+          "nameId": 1,
+          "text": "Source Han Sans CN VF"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "2.004;ADBO;SourceHanSansCNVF-ExtraLight;ADOBE"
+        },
+        {
+          "nameId": 4,
+          "text": "Source Han Sans CN VF"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603"
+        },
+        {
+          "nameId": 6,
+          "text": "SourceHanSansCNVF-ExtraLight"
+        },
+        {
+          "nameId": 8,
+          "text": "Adobe"
+        },
+        {
+          "nameId": 9,
+          "text": "Ryoko NISHIZUKA 西塚涼子 (kana, bopomofo & ideographs); Paul D. Hunt (Latin, Greek & Cyrillic); Sandoll Communications 산돌커뮤니케이션, Soo-young JANG 장수영 & Joo-yeon KANG 강주연 (hangul elements, letters & syllables)"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.adobe.com/type/"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        },
+        {
+          "nameId": 1,
+          "text": "思源黑体 CN VF"
+        },
+        {
+          "nameId": 4,
+          "text": "思源黑体 CN VF"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/SourceHanSerif.woff2",
+      "sha256": "4a39a09928cb92aca1e1bf72d841718ecb9c9549c1d1fa95620b8b42f49434db",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "© 2017-2023 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+        },
+        {
+          "nameId": 1,
+          "text": "Source Han Serif CN VF"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "2.002;ADBO;SourceHanSerifCNVF-ExtraLight;ADOBE"
+        },
+        {
+          "nameId": 4,
+          "text": "Source Han Serif CN VF"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.002;hotconv 1.1.0;makeotfexe 2.6.0"
+        },
+        {
+          "nameId": 6,
+          "text": "SourceHanSerifCNVF-ExtraLight"
+        },
+        {
+          "nameId": 8,
+          "text": "Adobe"
+        },
+        {
+          "nameId": 9,
+          "text": "Ryoko NISHIZUKA 西塚涼子 (kana & ideographs); Frank Grießhammer (Latin, Greek & Cyrillic); Wenlong ZHANG 张文龙 (bopomofo); Sandoll Communications 산돌커뮤니케이션, Soohyun PARK 박수현, Yejin WE 위예진 & Donghoon HAN 한동훈 (hangul elements, letters & syllables)"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.adobe.com/type/"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        },
+        {
+          "nameId": 1,
+          "text": "思源宋体 CN VF"
+        },
+        {
+          "nameId": 4,
+          "text": "思源宋体 CN VF"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/SourceSansPro.woff2",
+      "sha256": "6d6b2e4fd32a1d5b7bf35474f0c32cb84bb8dc2d7b51e9e24dfbcecaa987154a",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright 2010, 2012, 2014 Adobe Systems Incorporated (http://www.adobe.com/), with Reserved Font Name ‘Source’."
+        },
+        {
+          "nameId": 1,
+          "text": "Source Sans Pro"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "2.020;ADBO;SourceSansPro-Regular;ADOBE"
+        },
+        {
+          "nameId": 4,
+          "text": "Source Sans Pro"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.020;PS 2.0;hotconv 1.0.86;makeotf.lib2.5.63406"
+        },
+        {
+          "nameId": 6,
+          "text": "SourceSansPro-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "Adobe Systems Incorporated"
+        },
+        {
+          "nameId": 9,
+          "text": "Paul D. Hunt"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.adobe.com/type"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL. This Font Software is distributed on an ‘AS IS’ BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/SourceSerif4.woff2",
+      "sha256": "2a8a02e9d20b0914515875d2afb2af18d14733a659d39e168200ede164f7d865",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "© 2014 - 2021 Adobe Systems Incorporated (http://www.adobe.com/), with Reserved Font Name ‘Source’."
+        },
+        {
+          "nameId": 1,
+          "text": "Source Serif 4"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "4.004;ADBO;SourceSerif4-Regular;ADOBE"
+        },
+        {
+          "nameId": 4,
+          "text": "Source Serif 4"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 4.004;hotconv 1.0.117;makeotfexe 2.5.65602"
+        },
+        {
+          "nameId": 6,
+          "text": "SourceSerif4-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "Adobe Systems Incorporated"
+        },
+        {
+          "nameId": 9,
+          "text": "Frank Grießhammer"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.adobe.com/type"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL. This Font Software is distributed on an ‘AS IS’ BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/WenDingPLKaiTi.woff2",
+      "sha256": "5c91fd0d539e35631dd5086451bc37732fa19e9eb9f7202eb881d6616f6d3634",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "(c) Copyright 1994-1999, Arphic Technology Co., Ltd."
+        },
+        {
+          "nameId": 1,
+          "text": "AR PL KaitiM GB"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "AR PL KaitiM GB"
+        },
+        {
+          "nameId": 4,
+          "text": "AR PL KaitiM GB"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.11"
+        },
+        {
+          "nameId": 6,
+          "text": "GBZenKai-Medium"
+        },
+        {
+          "nameId": 8,
+          "text": "Arphic Technology Co., Ltd."
+        },
+        {
+          "nameId": 9,
+          "text": "Arphic Technology Co., Ltd."
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.arphic.com.tw"
+        },
+        {
+          "nameId": 13,
+          "text": "ARPHIC PUBLIC LICENSE\n\nCopyright (C) 1999 Arphic Technology Co., Ltd.\n11Fl. No.168, Yung Chi Rd., Taipei, 110 Taiwan\nAll rights reserved except as specified below.\n\nEveryone is permitted to copy and distribute verbatim copies of this license document, but changing it is forbidden.\n\nPreamble\n\n   The licenses for most software are designed to take away your freedom to share and change it. By contrast, the ARPHIC PUBLIC LICENSE specifically permits and encourages you to use this software, provided that you give the recipients all the rights that we gave you and make sure they can get the modifications of this software.\n\nLegal Terms\n\n0. Definitions:\n   Throughout this License, \"Font\" means the TrueType fonts \"AR PL Mingti2L Big5\", \"AR PL KaitiM Big5\" (BIG-5 character set) and \"AR PL SungtiL GB\", \"AR PL KaitiM GB\" (GB character set) which are originally distributed by Arphic, and the derivatives of those fonts created through any modification including modifying glyph, reordering glyph, converting format, changing font name, or adding/deleting some characters in/from glyph table.\n\n   \"PL\" means \"Public License\".\n\n   \"Copyright Holder\" means whoever is named in the copyright or copyrights for the Font.\n\n   \"You\" means the licensee, or person copying, redistributing or modifying the Font.\n\n   \"Freely Available\" means that you have the freedom to copy or modify the Font as well as redistribute copies of the Font under the same conditions you received, not price. If you wish, you can charge for this service.\n\n1. Copying & Distribution\n   You may copy and distribute verbatim copies of this Font in any medium, without restriction, provided that you retain this license file (ARPHICPL.TXT) unaltered in all copies.\n\n2. Modification\n   You may otherwise modify your copy of this Font in any way, including modifying glyph, reordering glyph, converting format, changing font name, or adding/deleting some characters in/from glyph table, and copy and distribute such modifications under the terms of Section 1 above, provided that the following conditions are met:\n\n   a) You must insert a prominent notice in each modified file stating how and when you changed that file.\n\n   b) You must make such modifications Freely Available as a whole to all third parties under the terms of this License, such as by offering access to copy the modifications from a designated place, or distributing the modifications on a medium customarily used for software interchange.\n\n   c) If the modified fonts normally reads commands interactively when run, you must cause it, when started running for such interactive use in the most ordinary way, to print or display an announcement including an appropriate copyright notice and a notice that there is no warranty (or else, saying that you provide a warranty) and that users may redistribute the Font under these conditions, and telling the user how to view a copy of this License.\n\n   These requirements apply to the modified work as a whole. If identifiable sections of that work are not derived from the Font, and can be reasonably considered independent and separate works in themselves, then this License and its terms, do not apply to those sections when you distribute them as separate works. Therefore, mere aggregation of another work not based on the Font with the Font on a volume of a storage or distribution medium does not bring the other work under the scope of this License.\n\n3. Condition Subsequent\n   You may not copy, modify, sublicense, or distribute the Font except as expressly provided under this License. Any attempt otherwise to copy, modify, sublicense or distribute the Font will automatically retroactively void your rights under this License. However, parties who have received copies or rights from you under this License will keep their licenses valid so long as such parties remain in full compliance.\n\n4. Acceptance\n   You are not required to accept this License, since you have not signed it. However, nothing else grants you permission to copy, modify, sublicense or distribute the Font. These actions are prohibited by law if you do not accept this License. Therefore, by copying, modifying, sublicensing or distributing the Font, you indicate your acceptance of this License and all its terms and conditions.\n\n5. Automatic Receipt\n   Each time you redistribute the Font, the recipient automatically receives a license from the original licensor to copy, distribute or modify the Font subject to these terms and conditions. You may not impose any further restrictions on the recipients' exercise of the rights granted herein. You are not responsible for enforcing compliance by third parties to this License. \n\n6. Contradiction\n   If, as a consequence of a court judgment or allegation of patent infringement or for any other reason (not limited to patent issues), conditions are imposed on you (whether by court order, agreement or otherwise) that contradict the conditions of this License, they do not excuse you from the conditions of this License. If you cannot distribute so as to satisfy simultaneously your obligations under this License and any other pertinent obligations, then as a consequence you may not distribute the Font at all. For example, if a patent license would not permit royalty-free redistribution of the Font by all those who receive copies directly or indirectly through you, then the only way you could satisfy both it and this License would be to refrain entirely from distribution of the Font.\n\n   If any portion of this section is held invalid or unenforceable under any particular circumstance, the balance of the section is intended to apply and the section as a whole is intended to apply in other circumstances. \n\n7. NO WARRANTY\n   BECAUSE THE FONT IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE FONT, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS OR OTHER PARTIES PROVIDE THE FONT \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE FONT IS WITH YOU. SHOULD THE FONT PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n8. DAMAGES WAIVER\n   UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING, IN NO EVENT WILL ANY COPYRIGHTT HOLDERS, OR OTHER PARTIES WHO MAY COPY, MODIFY OR REDISTRIBUTE THE FONT AS PERMITTED ABOVE, BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, INCIDENTAL, SPECIAL OR EXEMPLARY DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE FONT (INCLUDING BUT NOT LIMITED TO PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERRUPTION), EVEN IF SUCH HOLDERS OR OTHER PARTIES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\n"
+        },
+        {
+          "nameId": 1,
+          "text": "文鼎ＰＬ简中楷"
+        },
+        {
+          "nameId": 3,
+          "text": "文鼎ＰＬ简中楷"
+        },
+        {
+          "nameId": 4,
+          "text": "文鼎ＰＬ简中楷"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/WenDingPLSongTi.woff2",
+      "sha256": "a184dc98dc720f5ab5bf09576ae2843570634ce65aa09e58ec34532c8dffb668",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "(c) Copyright 1994-1999, Arphic Technology Co., Ltd."
+        },
+        {
+          "nameId": 1,
+          "text": "AR PL SungtiL GB"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "AR PL SungtiL GB"
+        },
+        {
+          "nameId": 4,
+          "text": "AR PL SungtiL GB"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 2.11"
+        },
+        {
+          "nameId": 6,
+          "text": "BousungEG-Light-GB"
+        },
+        {
+          "nameId": 8,
+          "text": "Arphic Technology Co., Ltd."
+        },
+        {
+          "nameId": 9,
+          "text": "Arphic Technology Co., Ltd."
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.arphic.com.tw"
+        },
+        {
+          "nameId": 13,
+          "text": "ARPHIC PUBLIC LICENSE\n\nCopyright (C) 1999 Arphic Technology Co., Ltd.\n11Fl. No.168, Yung Chi Rd., Taipei, 110 Taiwan\nAll rights reserved except as specified below.\n\nEveryone is permitted to copy and distribute verbatim copies of this license document, but changing it is forbidden.\n\nPreamble\n\n   The licenses for most software are designed to take away your freedom to share and change it. By contrast, the ARPHIC PUBLIC LICENSE specifically permits and encourages you to use this software, provided that you give the recipients all the rights that we gave you and make sure they can get the modifications of this software.\n\nLegal Terms\n\n0. Definitions:\n   Throughout this License, \"Font\" means the TrueType fonts \"AR PL Mingti2L Big5\", \"AR PL KaitiM Big5\" (BIG-5 character set) and \"AR PL SungtiL GB\", \"AR PL KaitiM GB\" (GB character set) which are originally distributed by Arphic, and the derivatives of those fonts created through any modification including modifying glyph, reordering glyph, converting format, changing font name, or adding/deleting some characters in/from glyph table.\n\n   \"PL\" means \"Public License\".\n\n   \"Copyright Holder\" means whoever is named in the copyright or copyrights for the Font.\n\n   \"You\" means the licensee, or person copying, redistributing or modifying the Font.\n\n   \"Freely Available\" means that you have the freedom to copy or modify the Font as well as redistribute copies of the Font under the same conditions you received, not price. If you wish, you can charge for this service.\n\n1. Copying & Distribution\n   You may copy and distribute verbatim copies of this Font in any medium, without restriction, provided that you retain this license file (ARPHICPL.TXT) unaltered in all copies.\n\n2. Modification\n   You may otherwise modify your copy of this Font in any way, including modifying glyph, reordering glyph, converting format, changing font name, or adding/deleting some characters in/from glyph table, and copy and distribute such modifications under the terms of Section 1 above, provided that the following conditions are met:\n\n   a) You must insert a prominent notice in each modified file stating how and when you changed that file.\n\n   b) You must make such modifications Freely Available as a whole to all third parties under the terms of this License, such as by offering access to copy the modifications from a designated place, or distributing the modifications on a medium customarily used for software interchange.\n\n   c) If the modified fonts normally reads commands interactively when run, you must cause it, when started running for such interactive use in the most ordinary way, to print or display an announcement including an appropriate copyright notice and a notice that there is no warranty (or else, saying that you provide a warranty) and that users may redistribute the Font under these conditions, and telling the user how to view a copy of this License.\n\n   These requirements apply to the modified work as a whole. If identifiable sections of that work are not derived from the Font, and can be reasonably considered independent and separate works in themselves, then this License and its terms, do not apply to those sections when you distribute them as separate works. Therefore, mere aggregation of another work not based on the Font with the Font on a volume of a storage or distribution medium does not bring the other work under the scope of this License.\n\n3. Condition Subsequent\n   You may not copy, modify, sublicense, or distribute the Font except as expressly provided under this License. Any attempt otherwise to copy, modify, sublicense or distribute the Font will automatically retroactively void your rights under this License. However, parties who have received copies or rights from you under this License will keep their licenses valid so long as such parties remain in full compliance.\n\n4. Acceptance\n   You are not required to accept this License, since you have not signed it. However, nothing else grants you permission to copy, modify, sublicense or distribute the Font. These actions are prohibited by law if you do not accept this License. Therefore, by copying, modifying, sublicensing or distributing the Font, you indicate your acceptance of this License and all its terms and conditions.\n\n5. Automatic Receipt\n   Each time you redistribute the Font, the recipient automatically receives a license from the original licensor to copy, distribute or modify the Font subject to these terms and conditions. You may not impose any further restrictions on the recipients' exercise of the rights granted herein. You are not responsible for enforcing compliance by third parties to this License. \n\n6. Contradiction\n   If, as a consequence of a court judgment or allegation of patent infringement or for any other reason (not limited to patent issues), conditions are imposed on you (whether by court order, agreement or otherwise) that contradict the conditions of this License, they do not excuse you from the conditions of this License. If you cannot distribute so as to satisfy simultaneously your obligations under this License and any other pertinent obligations, then as a consequence you may not distribute the Font at all. For example, if a patent license would not permit royalty-free redistribution of the Font by all those who receive copies directly or indirectly through you, then the only way you could satisfy both it and this License would be to refrain entirely from distribution of the Font.\n\n   If any portion of this section is held invalid or unenforceable under any particular circumstance, the balance of the section is intended to apply and the section as a whole is intended to apply in other circumstances. \n\n7. NO WARRANTY\n   BECAUSE THE FONT IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE FONT, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS OR OTHER PARTIES PROVIDE THE FONT \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE FONT IS WITH YOU. SHOULD THE FONT PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n8. DAMAGES WAIVER\n   UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING, IN NO EVENT WILL ANY COPYRIGHTT HOLDERS, OR OTHER PARTIES WHO MAY COPY, MODIFY OR REDISTRIBUTE THE FONT AS PERMITTED ABOVE, BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, INCIDENTAL, SPECIAL OR EXEMPLARY DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE FONT (INCLUDING BUT NOT LIMITED TO PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERRUPTION), EVEN IF SUCH HOLDERS OR OTHER PARTIES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\n"
+        },
+        {
+          "nameId": 1,
+          "text": "文鼎ＰＬ简报宋"
+        },
+        {
+          "nameId": 3,
+          "text": "文鼎ＰＬ简报宋"
+        },
+        {
+          "nameId": 4,
+          "text": "文鼎ＰＬ简报宋"
+        }
+      ]
+    },
+    {
+      "file": "src/assets/fonts/ZhuQueFangSong.woff2",
+      "sha256": "81dd160d3c4608a70cc9eb794e4aaf8b1a6b07dec1a5284c48e402f0ffba1459",
+      "names": [
+        {
+          "nameId": 0,
+          "text": "Copyright 2023 JadeFoci"
+        },
+        {
+          "nameId": 1,
+          "text": "Zhuque Fangsong (technical preview)"
+        },
+        {
+          "nameId": 2,
+          "text": "Regular"
+        },
+        {
+          "nameId": 3,
+          "text": "0.108;TRIO;ZhuqueFangsong-Regular"
+        },
+        {
+          "nameId": 4,
+          "text": "Zhuque Fangsong (technical preview) Regular"
+        },
+        {
+          "nameId": 5,
+          "text": "Version 0.108"
+        },
+        {
+          "nameId": 6,
+          "text": "ZhuqueFangsong-Regular"
+        },
+        {
+          "nameId": 8,
+          "text": "TrionesType"
+        },
+        {
+          "nameId": 9,
+          "text": "Junyi Yu, Yeong-sy Han, Yehang Yin"
+        },
+        {
+          "nameId": 11,
+          "text": "http://www.trionestype.com/"
+        },
+        {
+          "nameId": 13,
+          "text": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL"
+        },
+        {
+          "nameId": 14,
+          "text": "http://scripts.sil.org/OFL"
+        },
+        {
+          "nameId": 1,
+          "text": "朱雀仿宋（预览测试版）"
+        },
+        {
+          "nameId": 8,
+          "text": "璇玑造字"
+        },
+        {
+          "nameId": 9,
+          "text": "余俊益、韩泳思、殷叶航"
+        }
+      ]
+    }
+  ]
+}

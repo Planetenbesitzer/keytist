@@ -1,0 +1,18 @@
+$fonts: 'SourceHanSans', 'SourceHanSerif', 'WenDingPLSongTi', 'ZhuQueFangSong', 'LXGWWenKai', 'LXGWNeoZhiSong', 'LXGWNeoXiHei', 'WenDingPLKaiTi', 'DeYiHei', 'SourceSerif4', 'Inter', 'JetBrainsMono', 'Literata', 'Roboto', 'OpenSans', 'Montserrat', 'SourceSansPro', 'Merriweather', 'Lato';
+
+// These are the actual ranges of the bundled variable fonts, not synthetic
+// weights claimed for the regular-only font files.
+$font-weights: (
+  'SourceHanSans': 250 900,
+  'SourceHanSerif': 250 900,
+);
+
+@each $font in $fonts {
+  @font-face {
+    font-display: swap;
+    font-family: $font;
+    font-weight: if(map-has-key($font-weights, $font), map-get($font-weights, $font), 400);
+    font-style: if($font == 'DeYiHei', oblique, normal);
+    src: url('../fonts/#{$font}.woff2') format('woff2');
+  }
+}

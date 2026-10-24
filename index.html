@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/studio.svg">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Slide Studio · 本地演示文稿编辑器">
+        <title>Slide Studio · 本地演示</title>
+
+    <style>
+      .first-screen-loading {
+        width: 200px;
+        height: 200px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -100px;
+        margin-left: -100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .first-screen-loading-spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid #007aff;
+        border-top-color: transparent;
+        border-radius: 50%;
+        box-sizing: border-box;
+        animation: spinner .8s linear infinite;
+      }
+      .first-screen-loading-text {
+        margin-top: 20px;
+        color: #007aff;
+      }
+      @keyframes spinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="first-screen-loading">
+        <div class="first-screen-loading-spinner"></div>
+        <div class="first-screen-loading-text">正在打开文稿…</div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+
+  <script>
+    document.oncontextmenu = e => e.preventDefault()
+  </script>
+</html>

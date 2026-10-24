@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>让内容，自己说话。 · HTML 演示示例</title>
+  <style>
+    :root { color-scheme: light; --accent: #007aff; --accent-soft: #eaf3ff; --ink: #1d1d1f; --muted: #86868b; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100%; margin: 0; }
+    body { background: #f5f5f7; color: var(--ink); font-family: "Helvetica Neue", Arial, "PingFang SC", sans-serif; -webkit-font-smoothing: antialiased; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    .slide { width: 100%; max-width: 1680px; min-height: 100vh; padding: clamp(24px, 3vw, 52px) clamp(28px, 5.1vw, 88px) 26px; margin: auto; display: flex; flex-direction: column; gap: clamp(20px, 3vh, 36px); }
+    .topline, .signature, .status, .card-header, .card-actions, .control-label, .footer { display: flex; align-items: center; }
+    .topline { justify-content: space-between; gap: 24px; }
+    .signature { gap: 11px; color: var(--accent); font-size: 12px; font-weight: 650; letter-spacing: 2px; }
+    .mark { width: 24px; height: 19px; border: 2px solid currentColor; border-radius: 5px; position: relative; }
+    .mark::before { content: ""; position: absolute; width: 2px; height: 5px; background: currentColor; top: 17px; left: 9px; }
+    .mark::after { content: ""; position: absolute; width: 12px; height: 2px; background: currentColor; top: 21px; left: 4px; border-radius: 3px; }
+    .status { gap: 8px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .status-dot { width: 6px; height: 6px; border-radius: 100%; background: #ff9f0a; }
+    .status.is-ready .status-dot { background: #34a853; }
+    .content { flex: 1; display: grid; grid-template-columns: minmax(270px, .77fr) minmax(440px, 1.23fr); align-items: center; gap: clamp(32px, 5vw, 88px); }
+    .eyebrow { color: var(--accent); font-size: 11px; font-weight: 650; letter-spacing: 2.5px; margin: 0 0 24px; }
+    h1 { font-size: clamp(42px, 4.8vw, 76px); line-height: 1.17; letter-spacing: -2.5px; font-weight: 650; margin: 0; max-width: 470px; overflow-wrap: anywhere; }
+    .intro { font-size: clamp(15px, 1.45vw, 20px); line-height: 1.8; color: var(--muted); margin: 25px 0 0; }
+    .note { margin-top: 34px; max-width: 350px; }
+    .note label { display: block; font-size: 12px; color: #6e6e73; margin-bottom: 10px; }
+    .note-row { display: flex; gap: 8px; }
+    .note input { min-width: 0; width: 100%; padding: 11px 12px; border: 1px solid #dedee3; background: #fff; border-radius: 11px; color: var(--ink); font-size: 13px; }
+    .note button { flex: none; padding: 10px 14px; border: 0; border-radius: 11px; background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600; }
+    .note-hint { margin: 9px 0 0; font-size: 11px; color: #a0a0a5; line-height: 1.6; }
+    .card { min-width: 0; background: #fff; border: 1px solid #e9e9ed; border-radius: 25px; padding: clamp(22px, 2.5vw, 36px); box-shadow: 0 12px 34px #252b3810, 0 1px 3px #252b3805; }
+    .card-header { justify-content: space-between; gap: 16px; }
+    .card-title { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.3px; }
+    .card-subtitle { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+    .play { border: 0; border-radius: 20px; padding: 11px 17px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 550; white-space: nowrap; }
+    .plot { margin: 24px -6px 17px; border-radius: 15px; background: linear-gradient(180deg, var(--accent-soft), #fff 85%); overflow: hidden; }
+    canvas { display: block; width: 100%; height: clamp(190px, 30vh, 300px); }
+    .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 27px; padding-top: 16px; border-top: 1px solid #f0f0f3; }
+    .control-label { justify-content: space-between; gap: 12px; font-size: 12px; margin-bottom: 12px; }
+    output { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+    input[type="range"] { width: 100%; margin: 0; accent-color: var(--accent); cursor: pointer; }
+    .card-actions { margin-top: 22px; justify-content: space-between; gap: 16px; }
+    .text-button { padding: 0; border: 0; background: none; color: var(--accent); font-size: 12px; font-weight: 550; }
+    .plot-caption { margin: 20px 0 0; font-size: 10px; color: #a0a0a5; line-height: 1.65; }
+    .footer { justify-content: space-between; color: #a0a0a5; font-size: 10px; letter-spacing: .4px; gap: 20px; padding-top: 4px; }
+    .page-number { color: #6e6e73; font-variant-numeric: tabular-nums; }
+    @media (max-width: 850px) {
+      .slide { gap: 25px; padding: 25px; }
+      .content { grid-template-columns: 1fr; gap: 28px; }
+      h1 { font-size: 48px; max-width: 100%; }
+      .intro { font-size: 16px; margin-top: 18px; }
+      .note { margin-top: 22px; max-width: 460px; }
+      .eyebrow { margin-bottom: 16px; }
+      canvas { height: 230px; }
+      .status { font-size: 10px; }
+    }
+    @media (max-height: 650px) and (min-width: 851px) {
+      .slide { gap: 20px; padding-top: 26px; padding-bottom: 18px; }
+      h1 { font-size: 48px; }
+      .intro { font-size: 16px; margin-top: 18px; }
+      .note { margin-top: 22px; }
+      .card { padding: 23px; }
+      .plot { margin-top: 16px; margin-bottom: 9px; }
+      canvas { height: 175px; }
+      .plot-caption { margin-top: 12px; }
+      .card-actions { margin-top: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <main class="slide">
+    <header class="topline">
+      <div class="signature"><span class="mark" aria-hidden="true"></span> SLIDE STUDIO</div>
+      <div class="status" id="ready-status" role="status"><span class="status-dot" aria-hidden="true"></span><span id="status-text">正在准备交互</span></div>
+    </header>
+    <section class="content" aria-label="交互式 HTML 演示">
+      <div class="story">
+        <p class="eyebrow">A LITTLE ROOM TO INTERACT</p>
+        <h1 id="headline">让内容，<br>自己说话。</h1>
+        <p class="intro">一张幻灯片，也可以是一段体验。<br>拖动滑杆，看看一个想法如何变化。</p>
+        <form class="note" id="headline-form">
+          <label for="headline-input">给这页换一句标题</label>
+          <div class="note-row"><input id="headline-input" name="headline" value="让内容，自己说话。" maxlength="32" autocomplete="off"><button type="submit">更新</button></div>
+          <p class="note-hint">也可以在输入框里按 Enter。内容只留在这一页。</p>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div><h2 class="card-title">波形实验室</h2><p class="card-subtitle">一点变化，立刻看见。</p></div>
+          <button class="play" id="play-button" type="button" aria-pressed="false">播放动画</button>
+        </div>
+        <div class="plot"><canvas id="wave-canvas" role="img" aria-label="随振幅和频率变化的正弦波图像">浏览器不支持 canvas；请使用较新的本机浏览器。</canvas></div>
+        <div class="controls">
+          <div><label class="control-label" for="amplitude">振幅 <output id="amplitude-value" for="amplitude">65%</output></label><input id="amplitude" type="range" min="0.1" max="1" step="0.05" value="0.65"></div>
+          <div><label class="control-label" for="frequency">频率 <output id="frequency-value" for="frequency">2.0</output></label><input id="frequency" type="range" min="1" max="4" step="0.1" value="2"></div>
+        </div>
+        <div class="card-actions"><button class="text-button" id="palette-button" type="button">换一种配色 ↗</button><button class="text-button" id="reset-button" type="button">重置曲线</button></div>
+        <p class="plot-caption">滑杆支持键盘方向键。按钮、表单与图像由这一份 HTML 直接驱动。</p>
+      </div>
+    </section>
+    <footer class="footer"><span>单文件 · 完全本地 · 无需联网</span><span class="page-number">HTML / 01</span></footer>
+  </main>
+  <script>
+    (() => {
+      'use strict'
+      const canvas = document.getElementById('wave-canvas')
+      const context = canvas.getContext('2d')
+      const amplitude = document.getElementById('amplitude')
+      const frequency = document.getElementById('frequency')
+      const amplitudeValue = document.getElementById('amplitude-value')
+      const frequencyValue = document.getElementById('frequency-value')
+      const playButton = document.getElementById('play-button')
+      const palettes = [
+        { color: '#007aff', soft: '#eaf3ff', rgb: '0,122,255' },
+        { color: '#8b5cf6', soft: '#f2edff', rgb: '139,92,246' },
+        { color: '#079b88', soft: '#e8f7f2', rgb: '7,155,136' },
+      ]
+      let palette = 0
+      let phase = 0
+      let playing = false
+      let animation = 0
+      let previousTime = 0
+
+      function draw() {
+        const bounds = canvas.getBoundingClientRect()
+        if (!context || !bounds.width || !bounds.height) return
+        const density = Math.min(window.devicePixelRatio || 1, 2)
+        const width = bounds.width
+        const height = bounds.height
+        if (canvas.width !== Math.round(width * density) || canvas.height !== Math.round(height * density)) {
+          canvas.width = Math.round(width * density)
+          canvas.height = Math.round(height * density)
+        }
+        context.setTransform(density, 0, 0, density, 0, 0)
+        context.clearRect(0, 0, width, height)
+        const left = 27
+        const right = width - 23
+        const middle = height / 2
+        const magnitude = Number(amplitude.value) * height * 0.34
+        const cycles = Number(frequency.value)
+        context.lineWidth = 1
+        context.strokeStyle = '#dce3ec'
+        context.setLineDash([3, 5])
+        for (const fraction of [0.25, 0.5, 0.75]) {
+          context.beginPath()
+          context.moveTo(left + (right - left) * fraction, 18)
+          context.lineTo(left + (right - left) * fraction, height - 24)
+          context.stroke()
+        }
+        context.setLineDash([])
+        context.strokeStyle = '#cdd7e4'
+        context.beginPath()
+        context.moveTo(left, middle)
+        context.lineTo(right, middle)
+        context.stroke()
+        const y = x => middle - magnitude * Math.sin(((x - left) / (right - left)) * Math.PI * 2 * cycles - phase)
+        context.beginPath()
+        context.moveTo(left, middle)
+        for (let x = left; x <= right; x += 1) context.lineTo(x, y(x))
+        context.lineTo(right, middle)
+        context.closePath()
+        context.fillStyle = `rgba(${palettes[palette].rgb},0.08)`
+        context.fill()
+        context.beginPath()
+        for (let x = left; x <= right; x += 1) {
+          if (x === left) context.moveTo(x, y(x))
+          else context.lineTo(x, y(x))
+        }
+        context.lineWidth = 3
+        context.lineCap = 'round'
+        context.strokeStyle = palettes[palette].color
+        context.stroke()
+        const dotX = left + (right - left) * 0.625
+        context.beginPath()
+        context.arc(dotX, y(dotX), 5, 0, Math.PI * 2)
+        context.fillStyle = '#fff'
+        context.fill()
+        context.lineWidth = 2.5
+        context.stroke()
+      }
+      function updateControls() {
+        amplitudeValue.textContent = `${Math.round(Number(amplitude.value) * 100)}%`
+        frequencyValue.textContent = Number(frequency.value).toFixed(1)
+        canvas.setAttribute('aria-label', `正弦波，振幅 ${amplitudeValue.textContent}，频率 ${frequencyValue.textContent}`)
+        draw()
+      }
+      function tick(time) {
+        if (!playing) return
+        phase += Math.min(time - previousTime, 60) * 0.0012
+        previousTime = time
+        draw()
+        animation = requestAnimationFrame(tick)
+      }
+      playButton.addEventListener('click', () => {
+        playing = !playing
+        playButton.textContent = playing ? '暂停动画' : '播放动画'
+        playButton.setAttribute('aria-pressed', String(playing))
+        if (playing) {
+          previousTime = performance.now()
+          animation = requestAnimationFrame(tick)
+        } else cancelAnimationFrame(animation)
+      })
+      amplitude.addEventListener('input', updateControls)
+      frequency.addEventListener('input', updateControls)
+      document.getElementById('palette-button').addEventListener('click', () => {
+        palette = (palette + 1) % palettes.length
+        document.documentElement.style.setProperty('--accent', palettes[palette].color)
+        document.documentElement.style.setProperty('--accent-soft', palettes[palette].soft)
+        draw()
+      })
+      document.getElementById('reset-button').addEventListener('click', () => {
+        amplitude.value = '0.65'
+        frequency.value = '2'
+        phase = 0
+        updateControls()
+      })
+      document.getElementById('headline-form').addEventListener('submit', event => {
+        event.preventDefault()
+        const title = document.getElementById('headline-input').value.trim()
+        if (title) document.getElementById('headline').textContent = title
+      })
+      if (typeof ResizeObserver === 'function') new ResizeObserver(draw).observe(canvas)
+      else window.addEventListener('resize', draw)
+      document.getElementById('ready-status').classList.add('is-ready')
+      document.getElementById('status-text').textContent = '交互已就绪'
+      updateControls()
+    })()
+  </script>
+</body>
+</html>
