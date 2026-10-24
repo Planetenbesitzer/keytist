@@ -2,6 +2,8 @@
 
 [English](README.md) | 简体中文
 
+[![GitHub Stars](https://img.shields.io/github/stars/Planetenbesitzer/keytist?style=flat&logo=github&label=Stars&color=007aff&labelColor=1d1d1f)](https://github.com/Planetenbesitzer/keytist/stargazers)
+
 基于 [PPTist](https://github.com/pipipi-pikachu/PPTist) 的本地演示文稿编辑器，采用 Keynote 风格的界面与编辑体验，面向科研报告和网页展示。
 
 用可编辑的文字、图片、形状和 LaTeX 制作 slides；需要动态解释时，直接插入完整的 HTML/CSS/JavaScript 网页。完成后，一键导出紧凑的 HTML 文件，用于报告、静态网站或博客。应用名称仍为 **Slide Studio**，本仓库名为 **keytist**。
@@ -107,6 +109,22 @@ npm run type-check
 node --test --test-concurrency=1 scripts/tests/*.test.mjs
 npm run build
 ```
+
+## 支持项目
+
+如果 Keytist 对你制作科研报告或交互演示有帮助，欢迎在 [GitHub 上点一个 Star](https://github.com/Planetenbesitzer/keytist)，帮助更多人发现这个项目，也鼓励我们持续完善它。
+
+### Star 增长曲线
+
+<a href="https://www.star-history.com/?repos=Planetenbesitzer%2Fkeytist&amp;type=date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Planetenbesitzer/keytist&amp;type=date&amp;theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Planetenbesitzer/keytist&amp;type=date" />
+    <img alt="Keytist Star 增长曲线" src="https://api.star-history.com/chart?repos=Planetenbesitzer/keytist&amp;type=date" width="800" />
+  </picture>
+</a>
+
+徽章和曲线会自动更新；缓存可能导致显示的数量有所滞后。
 
 ## 许可与致谢
 

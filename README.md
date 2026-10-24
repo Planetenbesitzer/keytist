@@ -2,6 +2,8 @@
 
 English | [简体中文](README_zh.md)
 
+[![GitHub Stars](https://img.shields.io/github/stars/Planetenbesitzer/keytist?style=flat&logo=github&label=Stars&color=007aff&labelColor=1d1d1f)](https://github.com/Planetenbesitzer/keytist/stargazers)
+
 A local presentation editor built on [PPTist](https://github.com/pipipi-pikachu/PPTist), with a Keynote-inspired interface and a workflow for scientific talks and the web.
 
 Create slides with editable text, images, shapes and LaTeX. Add a complete HTML/CSS/JavaScript page when a static figure is not enough, then export the presentation as a compact HTML file for a talk, a website or your blog. The application is called **Slide Studio**; this repository is **keytist**.
@@ -107,6 +109,22 @@ npm run type-check
 node --test --test-concurrency=1 scripts/tests/*.test.mjs
 npm run build
 ```
+
+## Support the project
+
+If Keytist helps you create scientific talks or interactive presentations, consider giving the repository a [Star on GitHub](https://github.com/Planetenbesitzer/keytist). It helps more people discover the project and encourages continued development.
+
+### Star history
+
+<a href="https://www.star-history.com/?repos=Planetenbesitzer%2Fkeytist&amp;type=date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Planetenbesitzer/keytist&amp;type=date&amp;theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Planetenbesitzer/keytist&amp;type=date" />
+    <img alt="Keytist star history chart" src="https://api.star-history.com/chart?repos=Planetenbesitzer/keytist&amp;type=date" width="800" />
+  </picture>
+</a>
+
+The badge and chart update automatically; caching may delay the displayed counts.
 
 ## License and attribution
 
