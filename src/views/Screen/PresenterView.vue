@@ -1,24 +1,24 @@
 <template>
   <div class="presenter-view">
     <div class="toolbar">
-      <div class="tool-btn" @click="changeViewMode('base')"><i-icon-park-outline:list-view class="tool-icon" /><span>普通视图</span></div>
-      <div class="tool-btn" @click="openAudienceView()"><i-icon-park-outline:peoples-two class="tool-icon" /><span>观众视图</span></div>
-      <div class="tool-btn" :class="{ 'active': writingBoardToolVisible }" @click="writingBoardToolVisible = !writingBoardToolVisible"><i-icon-park-outline:write class="tool-icon" /><span>画笔</span></div>
-      <div class="tool-btn" :class="{ 'active': laserPen }" @click="laserPen = !laserPen"><i-icon-park-outline:magic class="tool-icon" /><span>激光笔</span></div>
-      <div class="tool-btn" :class="{ 'active': timerlVisible }" @click="timerlVisible = !timerlVisible"><i-icon-park-outline:stopwatch-start class="tool-icon" /><span>计时器</span></div>
+      <div class="tool-btn" @click="changeViewMode('base')"><i-icon-park-outline:list-view class="tool-icon" /><span>{{ t("普通视图") }}</span></div>
+      <div class="tool-btn" @click="openAudienceView()"><i-icon-park-outline:peoples-two class="tool-icon" /><span>{{ t("观众视图") }}</span></div>
+      <div class="tool-btn" :class="{ 'active': writingBoardToolVisible }" @click="writingBoardToolVisible = !writingBoardToolVisible"><i-icon-park-outline:write class="tool-icon" /><span>{{ t("画笔") }}</span></div>
+      <div class="tool-btn" :class="{ 'active': laserPen }" @click="laserPen = !laserPen"><i-icon-park-outline:magic class="tool-icon" /><span>{{ t("激光笔") }}</span></div>
+      <div class="tool-btn" :class="{ 'active': timerlVisible }" @click="timerlVisible = !timerlVisible"><i-icon-park-outline:stopwatch-start class="tool-icon" /><span>{{ t("计时器") }}</span></div>
       <div class="tool-btn" @click="() => fullscreenState ? manualExitFullscreen() : enterFullscreen()">
         <i-icon-park-outline:off-screen-one class="tool-icon" v-if="fullscreenState" />
         <i-icon-park-outline:full-screen-one class="tool-icon" v-else />
-        <span>{{ fullscreenState ? '退出全屏' : '全屏' }}</span>
+        <span>{{ fullscreenState ? t("退出全屏") : t("全屏") }}</span>
       </div>
       <Divider class="divider" />
-      <div class="tool-btn" @click="exitScreening()"><i-icon-park-outline:power class="tool-icon" /><span>结束放映</span></div>
+      <div class="tool-btn" @click="exitScreening()"><i-icon-park-outline:power class="tool-icon" /><span>{{ t("结束放映") }}</span></div>
     </div>
 
     <div class="content">
-      <div 
-        class="slide-list-wrap" 
-        :class="{ 'laser-pen': laserPen }" 
+      <div
+        class="slide-list-wrap"
+        :class="{ 'laser-pen': laserPen }"
         ref="slideListWrapRef"
       >
         <ScreenSlideList
@@ -32,29 +32,29 @@
           @touchend="($event: TouchEvent) => touchEndListener($event)"
           v-contextmenu="contextmenus"
         />
-        <WritingBoardTool 
+        <WritingBoardTool
           :slideWidth="slideWidth"
           :slideHeight="slideHeight"
           :left="-365"
           :top="-155"
-          v-if="writingBoardToolVisible" 
-          @close="writingBoardToolVisible = false" 
+          v-if="writingBoardToolVisible"
+          @close="writingBoardToolVisible = false"
         />
 
-        <CountdownTimer 
-          v-if="timerlVisible" 
-          :left="75" 
-          @close="timerlVisible = false" 
+        <CountdownTimer
+          v-if="timerlVisible"
+          :left="75"
+          @close="timerlVisible = false"
         />
       </div>
       <div class="thumbnails"
         ref="thumbnailsRef"
         @wheel.prevent="$event => handleMousewheelThumbnails($event)"
       >
-        <div 
+        <div
           class="thumbnail"
           :class="{ 'active': index === slideIndex }"
-          v-for="(slide, index) in slides" 
+          v-for="(slide, index) in slides"
           :key="slide.id"
           @click="turnSlideToIndex(index)"
         >
@@ -65,7 +65,7 @@
 
     <div class="remark">
       <div class="header">
-        <span>演讲者备注</span>
+        <span>{{ t("演讲者备注") }}</span>
         <span>P {{slideIndex + 1}} / {{slides.length}}</span>
       </div>
       <div class="remark-content ProseMirror-static" :class="{ 'empty': !currentSlideRemark }" :style="{ fontSize: remarkFontSize + 'px' }" v-html="currentSlideRemark || '无备注'"></div>
@@ -78,6 +78,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, nextTick, ref, watch, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'

@@ -12,22 +12,22 @@
       v-contextmenu="contextmenus"
     />
 
-    <SlideThumbnails 
-      v-if="slideThumbnailModelVisible" 
-      :turnSlideToIndex="turnSlideToIndex" 
+    <SlideThumbnails
+      v-if="slideThumbnailModelVisible"
+      :turnSlideToIndex="turnSlideToIndex"
       @close="slideThumbnailModelVisible = false"
     />
 
-    <WritingBoardTool 
+    <WritingBoardTool
       :slideWidth="slideWidth"
       :slideHeight="slideHeight"
-      v-if="writingBoardToolVisible" 
-      @close="writingBoardToolVisible = false" 
+      v-if="writingBoardToolVisible"
+      @close="writingBoardToolVisible = false"
     />
 
-    <CountdownTimer 
-      v-if="timerlVisible" 
-      @close="timerlVisible = false" 
+    <CountdownTimer
+      v-if="timerlVisible"
+      @close="timerlVisible = false"
     />
 
     <div class="tools-left">
@@ -35,21 +35,21 @@
       <i-custom:right class="tool-btn" @click="execNext()" />
     </div>
 
-    <div 
-      class="tools-right" :class="{ 'visible': rightToolsVisible }" 
+    <div
+      class="tools-right" :class="{ 'visible': rightToolsVisible }"
       @mouseleave="rightToolsVisible = false"
       @mouseenter="rightToolsVisible = true"
     >
       <div class="content">
-        <div class="tool-btn page-number" @click="slideThumbnailModelVisible = true">幻灯片 {{slideIndex + 1}} / {{slides.length}}</div>
-        <i-icon-park-outline:write class="tool-btn" v-tooltip="'画笔工具'" @click="writingBoardToolVisible = true" />
-        <i-icon-park-outline:magic class="tool-btn" v-tooltip="'激光笔'" :class="{ 'active': laserPen }" @click="laserPen = !laserPen" />
-        <i-icon-park-outline:stopwatch-start class="tool-btn" v-tooltip="'计时器'" :class="{ 'active': timerlVisible }" @click="timerlVisible = !timerlVisible" />
-        <i-icon-park-outline:list-view class="tool-btn" v-tooltip="'演讲者视图'" @click="changeViewMode('presenter')" />
-        <i-icon-park-outline:peoples-two class="tool-btn" v-tooltip="'观众视图'" @click="openAudienceView()" />
-        <i-icon-park-outline:off-screen-one class="tool-btn" v-tooltip="'退出全屏'" v-if="fullscreenState" @click="manualExitFullscreen()" />
-        <i-icon-park-outline:full-screen-one class="tool-btn" v-tooltip="'进入全屏'" v-else @click="enterFullscreen()" />
-        <i-icon-park-outline:power class="tool-btn" v-tooltip="'结束放映'" @click="exitScreening()" />
+        <div class="tool-btn page-number" @click="slideThumbnailModelVisible = true">{{ t("幻灯片") }} {{slideIndex + 1}} / {{slides.length}}</div>
+        <i-icon-park-outline:write class="tool-btn" v-tooltip="t('画笔工具')" @click="writingBoardToolVisible = true" />
+        <i-icon-park-outline:magic class="tool-btn" v-tooltip="t('激光笔')" :class="{ 'active': laserPen }" @click="laserPen = !laserPen" />
+        <i-icon-park-outline:stopwatch-start class="tool-btn" v-tooltip="t('计时器')" :class="{ 'active': timerlVisible }" @click="timerlVisible = !timerlVisible" />
+        <i-icon-park-outline:list-view class="tool-btn" v-tooltip="t('演讲者视图')" @click="changeViewMode('presenter')" />
+        <i-icon-park-outline:peoples-two class="tool-btn" v-tooltip="t('观众视图')" @click="openAudienceView()" />
+        <i-icon-park-outline:off-screen-one class="tool-btn" v-tooltip="t('退出全屏')" v-if="fullscreenState" @click="manualExitFullscreen()" />
+        <i-icon-park-outline:full-screen-one class="tool-btn" v-tooltip="t('进入全屏')" v-else @click="enterFullscreen()" />
+        <i-icon-park-outline:power class="tool-btn" v-tooltip="t('结束放映')" @click="exitScreening()" />
       </div>
     </div>
 
@@ -58,6 +58,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'

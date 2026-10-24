@@ -30,7 +30,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
+import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue'
+import { language } from '@/i18n'
 import { debounce } from 'lodash'
 import { useMainStore } from '@/store'
 import type { EditorView } from 'prosemirror-view'
@@ -55,6 +56,8 @@ const mainStore = useMainStore()
 
 const editorViewRef = useTemplateRef<HTMLElement>('editorViewRef')
 let editorView: EditorView
+// Recompute the empty-state decoration without dispatching a document edit.
+watch(language, () => editorView?.setProps({}))
 
 const attr = ref<TextAttrs>()
 

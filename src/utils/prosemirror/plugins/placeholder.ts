@@ -1,3 +1,4 @@
+import { t } from '@/i18n'
 import { Plugin } from 'prosemirror-state'
 import { Decoration, DecorationSet } from 'prosemirror-view'
 import type { Node } from 'prosemirror-model'
@@ -13,7 +14,7 @@ export const placeholderPlugin = (placeholder: string) => {
         const { $from } = state.selection
         if (isEmptyParagraph($from.parent)) {
           const decoration = Decoration.node($from.before(), $from.after(), {
-            'data-placeholder': placeholder,
+            'data-placeholder': t(placeholder),
           })
           return DecorationSet.create(state.doc, [decoration])
         }

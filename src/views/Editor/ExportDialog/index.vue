@@ -37,7 +37,7 @@ const { dialogForExport } = storeToRefs(mainStore)
 const setDialogForExport = mainStore.setDialogForExport
 
 const tabs: TabItem[] = [
-  { key: 'html', label: '发布 HTML' },
+  { key: 'html', label: '导出 HTML' },
   { key: 'pptist', label: '导出 PPTIST 文件' },
   { key: 'pptx', label: '导出 PPTX' },
   { key: 'image', label: '导出图片' },

@@ -1,93 +1,115 @@
-# Slide Studio · 本地演示
+# Keytist · Slide Studio
 
-基于 PPTist 定制的本地演示文稿编辑器。界面采用浅灰工具栏、蓝色选中状态、系统字体与分区检查器；文稿数据、图片和导入字体保存在本机。
+English | [简体中文](README_zh.md)
 
-## 打开
+A local presentation editor built on [PPTist](https://github.com/pipipi-pikachu/PPTist), with a Keynote-inspired interface and a workflow for scientific talks and the web.
 
-收到分享压缩包后，请先阅读 [开始使用.md](开始使用.md)。包内已有构建结果；安装 Node.js 20 或以上版本后即可启动，不需要先安装项目依赖。
+Create slides with editable text, images, shapes and LaTeX. Add a complete HTML/CSS/JavaScript page when a static figure is not enough, then export the presentation as a compact HTML file for a talk, a website or your blog. The application is called **Slide Studio**; this repository is **keytist**.
 
-在 macOS 的“应用程序”中打开 **Slide Studio**。它会启动本地服务并打开浏览器；无需保留终端窗口。重复打开会复用现有服务。浏览器地址是 **http://127.0.0.1:4178**。
+## What makes it useful
 
-应用入口安装在 `/Applications/Slide Studio.app`。若移动源码目录，可在新位置运行 `bash scripts/install-macos-app.sh` 重新安装入口。备用入口是本目录的 **启动 Slide Studio.command**，使用它时需保持启动窗口开启。
+- **Keynote-inspired editing.** Coordinated colors, a familiar format inspector, customizable styles, image frames and shadows, collapsible sidebars, group resizing and keyboard shortcuts.
+- **Equations belong in the argument.** Insert editable LaTeX as a standalone vector equation or directly between words in a text box. Reopen an equation to edit its source. MathJax runs locally, without a CDN.
+- **Interactive explanations.** Import a complete HTML page, including its CSS and JavaScript. Keep buttons, Canvas, animations and demonstrations working during playback. Move or scale the webpage as one object and place native slide elements over it.
+- **One-click HTML export.** The blue **Export** button produces a compact presentation file with navigation, fullscreen and printing. Upload that file to a static website or embed it in a blog.
+- **AI can work with you throughout.** A local AI agent with file and browser access can develop the narrative, build slides, revise equations and layouts, create interactive demonstrations, and operate the editor through export. You can inspect and adjust the same presentation at each step.
+- **Local files and agent access.** Save an editable JSON document with equation sources and embedded assets. Agents can read or update the JSON, import generated HTML, or use the documented browser API.
+- **English and 简体中文.** Switch the interface language from the top bar. Your choice stays in this browser; it does not translate or rewrite slide content.
 
-交付已附构建后的 `dist/`。仅运行时无需安装项目依赖；修改源码前运行 `npm ci`，修改后运行 `npm run build`，刷新浏览器生效。
+## Run locally
 
-## 主要操作
+Requires **Node.js 20 or newer**. Chrome or Edge is recommended.
 
-- **文本框**：点顶部“文本框”，在画布拖出区域后输入；双击已有文字继续编辑。
-- **自动页码**：点顶部“文本框”旁的下拉箭头 →“自动页码…”，或“⋯ → 自动页码…”设置并应用到文稿。默认封面计为第 1 页但不显示，第二页显示 2；新增、复制、删除和拖动排序后自动更新，可撤销与重做。支持普通数字、两位数字和“页码 / 总页数”，也可调整起始值、显示封面编号。页码是原生文本框，可拖动位置、修改字体和颜色；直接改写编号文字会将该文本框转为普通文字，保留外观。找到已有数字页脚时，设置中可沿用其位置与样式；取消勾选则保留原文字。移除自动页码只删除仍处于自动编号状态的文本框。编号与隐藏封面的设置随 JSON 保存，并在播放、HTML、PDF、图片和 PPTX 中生效。
-- **框选**：从画布空白处拖动选框，与元素部分相交即可选中；碰到组合中的任一成员会选中整个组合。锁定或隐藏的对象不参与框选。
-- **组合缩放**：选中完整组合后拖动四角，文字字号、图片、公式和图形随组合等比缩放；Esc 可取消本次拖动，撤销与重做按整个组合处理。锁定、隐藏或只选中部分成员时不提供组合缩放。
-- **字体**：常用菜单置顶 Helvetica Neue、Times New Roman、Apple Chancery、Arial，显示本机可用状态。顶部“字体”可导入 WOFF/WOFF2/TTF/OTF；导入字体随文稿 JSON 保存。系统字体可直接选用，发布 HTML 时会读取并携带实际使用且允许嵌入的字面。
-- **公式**：编辑文本框或形状文字时，将光标放在文字中间，点顶部“公式”或按 ⌥⌘E，输入 LaTeX 并预览后插入行内公式；公式随文字排版，并跟随所在文字的字号和颜色。双击公式可修改源码。未在文字中编辑时，仍插入可移动、缩放、改色的独立矢量公式。支持多行 aligned、分式、矩阵及公式内自定义宏；公式排版使用本地 MathJax，无 CDN。行内与独立公式的源码随 JSON 保存；发布 HTML 时勾选“保留重新导入编辑能力”也可恢复原生公式编辑。
-- **配色**：颜色面板提供协调主色、浅深色、独立灰阶、文稿配色、最近颜色和可增删的常用色，保留色相、透明度、HEX、RGB 与取色吸管。默认色板参考 Keynote 的主题协调方式；不同 Keynote 主题使用不同颜色，并非一套通用固定色值。新文稿和新图表共用协调配色，已有文稿不会自动改色。
-- **对象样式**：选中对象后，在右侧“样式”顶部应用样式，点“＋”保存当前外观；展开“管理样式”可重命名、用当前外观重定义、删除、恢复内置样式，以及设为同类新对象的默认样式。内置预设也可修改。预设只保存外观，不复制正文、图片、公式或对象的位置尺寸；文本框仍按字号自动测高。重定义不自动更改已有对象，实际套用可撤销。
-- **收起侧栏**：文稿标题旁的导航与格式按钮分别收起、展开左右面板。“专注”同时收起两侧，再次点击恢复此前的布局；画布随可用空间自动调整，选中对象和侧栏页签保留。
-- **图片框**：顶部“图片”旁的箭头 → 插入图片框；右侧“替换图片”会填充已有框，保留位置尺寸。图片支持裁剪、圆角、形状蒙版、边框和阴影。新图片默认带曲面阴影；选中图片后，右侧顶部可一键选择“无 / 投影 / 接触 / 曲面”。可即时调整模糊、不透明度、偏移和颜色；投影可改角度，接触可改透视，曲面可在“中间隆起 / 两端翘起”间调整。旧文稿保留原阴影，点击新样式即可切换。
-- **保存**：文稿持续自动保存在当前浏览器。点“保存”或 ⌘S，新文稿的 JSON 默认保存到 `~/Documents/Code/SlidesStudio/output`，再次保存更新同一文件；同名新文稿自动加序号。通过文件选择器打开的原文件优先写回原处；“另存为”可选择其他位置。外部改动会提示冲突，避免覆盖。另可在“⋯”中下载文稿 JSON。浏览器自动保存与 JSON 文件保存分别显示状态；跨设备/换浏览器时打开 JSON 文件。
-- **播放**：顶部“播放”或 ⌥⌘P；左右方向键换页，Esc 回到编辑器。
-- **画布缩放与移动**：⌘/Ctrl + 滚轮缩放。放大后超出可视区域时，底部和右侧显示滚动条，可拖动到页面各处；普通滚轮上下平移，Shift + 滚轮横向平移。空格加拖拽也可移动画布；右上角缩放百分比菜单中的“适应屏幕”恢复居中。画布未超屏、也未平移时，普通滚轮仍用于翻页。
+From a source checkout:
 
-可直接打开 `examples/我的第一份演示.json` 开始。PNG 与 PDF 导出在“⋯”菜单中；PDF 的“边缘留白”可关闭。
+```sh
+npm ci
+npm run build
+npm start
+```
 
-上述默认目录仅用于文稿 JSON；HTML、PDF、PPTX 和图片沿用浏览器下载或打印流程。
+Open **http://127.0.0.1:4178** and keep the server running. Dependency installation needs access to the package registry; after installation and building, the editor runs locally. For development, use `npm run dev`.
 
-自定义样式库、新建默认样式、常用色和侧栏布局保存于当前浏览器，不写入文稿或撤销历史。对象套用样式后的实际外观仍随文稿 JSON 和发布的 HTML 保存。换浏览器或设备时，样式库与个人偏好不会随文稿迁移。
+If you downloaded a release ZIP containing `dist/`, extract the complete archive and use the appropriate launcher. You do not need to install project dependencies just to run that built release.
 
-PDF 默认导出全部幻灯片，每张单独一页，也可选当前页或每页两张。导出会先准备字体和图片；读取失败会明确报错，避免生成缺图文件。标准版 PPTX 保留图片对象，并为 SVG 图画提供兼容预览。接触与曲面阴影以独立透明图层导出，原图片与普通文字仍为独立对象。含行内公式的文本层在 PPTX 中转为高清透明图片，以保留文字、公式的相对位置和换行；其他文本层及底层图形仍为原生对象。PDF 保留文字和公式的矢量排版。
-
-## HTML 导入与网页发布
-
-顶部 **HTML** 可以打开或粘贴 AI 生成的完整 HTML；选择追加到当前文稿，或作为文稿打开。普通网页整体成为一张幻灯片，保留 CSS、JavaScript、按钮、Canvas、动画和表单，不自动拆成文本框。需要多张网页时分别追加即可。固定 1280×720、1920×1080 或其他尺寸的网页可设置虚拟视口，等比适配文稿；响应式页面可跟随当前文稿。
-
-当前页为 HTML 时，顶部 **HTML** 进入源码编辑，**交互预览** 可实际操作。普通画布保留编辑器的选择与键盘行为，交互在预览或播放中进行。页面上仍可叠加原生文本框、图片与公式。HTML 脚本位于独立 iframe 中，不与编辑器共用 DOM、CSS 或存储；表单事件可运行。
-
-在画布左上角点击 **调整网页位置**，可拖动整个网页，或拖动外框四角等比例缩放。也可输入 X、Y 和缩放百分比，使用 **居中**、**归位** 或方向键微调；Shift 加方向键移动 10px。点击 **完成调整** 恢复普通对象编辑。调整可撤销，随文稿保存，并保留到缩略图、放映和发布的 HTML 中；移动、缩放不会改写网页源码或重新运行脚本。
-
-顶部 **发布 HTML** 默认导出紧凑的单文件播放版，带翻页、全屏、页码和打印，可直接本地打开或上传到静态网站。重复素材只存一次，排版内容无损压缩，打开时自动还原；不降低图片画质，也不把原生文字、SVG 和公式改成截图。素材与所需的英文、公式字体随文件打包；Canvas 图表仅该对象转图片。HTML 页面保留原源码和 JS，离开页面会停止并重置其脚本。HTML 内的其他 CDN、外部或相对路径资源仍需自行打包；需要完全离线时请生成自包含 HTML。
-
-**HTML 默认自动携带英文和公式字体，暂不额外打包中文字库。** 中文文字仍会保留，使用播放设备的系统字体，因此中文的字形和换行可能不同。发布前会检查英文、Greek 和数学符号，读取常规、粗体、斜体等实际字面，并保留字体原有的字形和排版数据；TTC 字体合集只提取用到的字面，再无损压缩。不同幻灯片复用同一字体资源。无法取得所需的英文字体、缺少数学符号或字体限制不允许嵌入时，会明确提示处理，避免静默替换英文。以中文字库排版的英文会提示不在本次自动携带范围，建议改用 Helvetica Neue、Arial 或 Times New Roman。
-
-自动字体包写入 HTML 的预计增量达到 **5 MiB** 时，会显示体积提示；确认后保留这些字体继续导出。字体准备发生在导出副本中，不会把系统字库写入原 JSON，不改动原文稿的文字和设置。勾选“保留重新导入编辑能力”时保留原始文稿数据及其中已有的字体；仅允许预览、打印嵌入的字体不能用于这个可编辑版本。英文字体一致可以稳定字形和换行，不同浏览器的抗锯齿仍可能略有差异。手机播放关闭自动放大文字，并在字体载入后显示页面。
-
-字体包用于发布播放；重新导入编辑仍沿用原文稿的字体设置与原先导入的字体。原文稿、嵌入网页已经携带的字体资源会保留，不计入新增英文字体包的大小。网页的外部 CSS 会在原位置内嵌，英文和公式字体一并打包；无法读取的样式表或禁止嵌入字体的网页 CSP 会明确报错。SVG 图片若含文字或 HTML 内容，需先把文字转成轮廓、转成普通图片，或改用文稿文本框，以免其独立字体环境在其他设备上替换字体；纯路径图形与 MathJax 公式不受影响。
-
-本地入口启动时仅建立本机字体目录及链接，不复制整套系统字体。目录 `dist/local-fonts` 只用于当前机器；分享包会排除它，接收者启动后自行生成。在没有本地字体目录的纯静态部署中，请使用项目预置字体或手动导入字体，导出检查仍然生效。
-
-若希望以后从 HTML 恢复原生对象编辑，导出时勾选 **保留重新导入编辑能力**。这个版本同样压缩，但额外带有完整文稿；通过 **HTML → 打开 HTML 文件 → 作为文稿打开** 可恢复编辑。默认播放版不携带这份编辑备份。旧版带编辑数据的 HTML 仍可导入。JSON 继续用于自动保存与编辑备份，最终展示格式可用 HTML。压缩减小的是存储和传输体积，播放时仍需展开。包含交互网页的文稿应发布为 HTML；需要 PDF 时使用导出网页里的 **打印**，直接转 PNG/PPTX 的入口会明确提示，避免静默丢失网页内容。
-
-可在导入面板点 **载入演示示例**，或使用 `examples/HTML演示示例.html`。Agent 调用、文稿字段与尺寸参数见 [doc/LOCAL_AGENT_API.md](doc/LOCAL_AGENT_API.md)。
-
-## 常用快捷键
-
-| 操作 | Mac |
+| Platform | Launcher |
 | --- | --- |
-| 撤销 / 重做 | ⌘Z / ⇧⌘Z |
-| 打开 / 保存 / 另存为 | ⌘O / ⌘S / ⇧⌘S |
-| 新幻灯片 / 复制 | ⇧⌘N / ⌘D |
-| 插入公式 / 从当前播放 | ⌥⌘E / ⌥⌘P |
-| 组合 / 取消组合 | ⌥⌘G / ⌥⇧⌘G |
-| 上移 / 下移一层 | ⌘] / ⌘[ |
-| 移到顶层 / 底层 | ⇧⌘] / ⇧⌘[ |
-| 精细移动 / 移动 10px | 方向键 / Shift + 方向键 |
-| 增大 / 缩小字号 | ⌘+ / ⌘−（也支持 ⌘=） |
+| macOS | `启动 Slide Studio.command` |
+| Windows | `Start Slide Studio.bat` |
+| Linux | `sh start-slides-studio.sh` |
 
-字号快捷键作用于正在编辑的文字选区，或选中的文本框；每次调整 1px，保留混合字号的相对差异。画布缩放使用右上角缩放按钮。
+On macOS, `安装到应用程序.command` optionally installs a Slide Studio launcher in Applications. That installation needs Apple Command Line Tools; normal startup does not. Keep the extracted project folder, and reinstall the launcher if you move it. Windows and Linux launchers are provided; release verification has been performed on macOS.
 
-完整列表见“⋯ → 键盘快捷键”。浏览器保留的个别系统快捷键以实际环境为准。
+## Make and save a presentation
 
-## Agent 编辑
+Use the toolbar to insert text, images, shapes, tables, charts or equations. Double-click text or an equation to edit it. To insert an inline equation, place the caret inside text and choose **Equation**. Use the HTML button to import a page or edit the source of the current webpage slide. The included `examples/我的第一份演示.json` and `examples/HTML演示示例.html` are generic examples.
 
-保存的 JSON 就是完整的可编辑文稿，保留 LaTeX 源、嵌入图片与字体。Agent 可在本地读写该文件，再通过“打开”载入。浏览器页面也提供 `window.keynoteLocal`，支持读写文稿、修改元素、订阅和落盘。详见 [doc/LOCAL_AGENT_API.md](doc/LOCAL_AGENT_API.md)。
+Browser autosave and a saved document file are separate. **Save** or **⌘S / Ctrl+S** writes an editable JSON document; new documents default to `~/Documents/Code/SlidesStudio/output`. A bound file is updated on subsequent saves, while an unrelated new document with the same name gets a numbered filename. **Save As** lets you choose another location. External changes are reported as conflicts instead of being silently overwritten.
 
-Agent 可直接导入或修改完整 HTML/CSS/JS，也可以创建原生对象。HTML 整页保留，不会自动转换成可单独拖动的文本框和图形。
+Save a JSON copy before changing computers, clearing browser storage or moving to another browser address. Custom styles, favorite colors, interface language and sidebar preferences belong to the current browser; their applied appearance remains part of the saved slides. The default output folder is for JSON documents; HTML, PDF, PPTX and image exports use the browser's download or print flow.
 
-## 源码与许可
+The local save service listens on `127.0.0.1`, checks request origin and uses a runtime save credential. Local document saving does not upload the document to a remote service. Imported HTML runs in a separate sandboxed iframe, but its JavaScript can still request external resources: review code before importing it.
 
-开发：`npm ci`、`npm run dev`；生产构建：`npm run build`；启动交付版：`npm start`。
+Optional remote AI and image-search tools are disabled by default. Developers can opt in with a build-time `VITE_STUDIO_REMOTE_API` endpoint; enabling it sends the requested content to that configured service. Build-time `VITE_*` values are visible in the browser bundle, so do not put a private API key or password in them.
 
-保留上游 [PPTist](https://github.com/pipipi-pikachu/PPTist) 的 AGPL-3.0 许可与作者声明，原 README 存于 `doc/README.upstream.md`，完整许可见 `LICENSE`。Slide Studio 是本地定制版本，不是 Apple Keynote 产品。
+## Publish HTML, including on a blog
 
-回归检查脚本保留在 `scripts/`，验证产物可按需重新生成；公式检查可运行 `node scripts/verify-formulas.mjs`。
+Click **Export** for a compact, single-file HTML presentation. Repeated assets are stored once and the presentation payload is compressed without reducing image quality. Text, vector equations and SVG paths keep their rendered structure; embedded webpage source and JavaScript are retained. A native chart's Canvas rendering is exported as an image; Canvas inside an embedded webpage continues to run its own script.
 
-框选、组合缩放与样式库的回归检查：`node scripts/tests/marquee-selection.test.mjs`、`node scripts/tests/group-resize.test.mjs`、`node scripts/tests/style-presets.test.mjs`。
+The default HTML is a playback file. Enable **Keep document for reimport and editing** when you also want to restore the original native objects later. This includes an additional document copy and therefore increases file size. JSON remains the regular editing backup. To reopen an editable HTML export, use **HTML → Open HTML file → Open as document**.
+
+Upload the exported file, for example `talk.html`, to the static files directory of your blog and link to it or embed it:
+
+```html
+<iframe
+  src="/slides/talk.html"
+  title="My presentation"
+  style="width: 100%; aspect-ratio: 16 / 9; border: 0;"
+  allow="fullscreen"
+  allowfullscreen
+  loading="lazy"
+></iframe>
+```
+
+The host must permit HTML uploads and iframe embeds. The exported file includes its viewer; the Slide Studio editor and Node.js are not needed on the viewing device. A modern browser with support for the bundled decompression workflow is required.
+
+**Offline playback depends on the imported content.** Native slide assets and the automatically collected fonts are included. External scripts, media and other URLs inside an imported webpage still need their original network or file locations unless that webpage already embeds them. Use self-contained HTML/CSS/JS and embedded assets for a fully offline interactive talk.
+
+### Fonts and export size
+
+HTML export automatically packages the required **English/Latin, Greek and math fonts**, including the actual regular, bold and italic faces. It reuses identical font resources across slides and reports missing or restricted fonts rather than silently replacing them. Only embed fonts that permit your intended use.
+
+Additional Chinese/CJK font libraries are **not** automatically included. Chinese text is retained and uses the viewing device's fonts, so its glyphs and line breaks may differ. Fonts already embedded in a document or imported webpage are preserved. The export shows a size warning when the estimated added font data reaches **5 MiB**; continuing keeps those fonts. Font preparation does not add system fonts to your source JSON or change the original slides.
+
+Packaged English fonts stabilize glyphs and line wrapping; browsers may still differ slightly in antialiasing. On a static deployment without the local font catalog, use bundled fonts or import your own font files. SVG images containing live text need outlined text, a raster version, or native slide text boxes for portable typography; path-only drawings and MathJax equations are unaffected.
+
+## Other exports
+
+| Format | Intended use and boundaries |
+| --- | --- |
+| JSON | Editable source, including LaTeX, images and imported fonts. |
+| HTML | Playback and web publishing, including embedded interactive pages. Optional native editing data. |
+| PPTX | A static version. Embedded webpages and their interaction are omitted; native text, images, shapes and equations remain in slide order. A webpage-only slide keeps its background, numbering and blank space. The export dialog reports omitted content. |
+| PDF / images | Static output. For a deck containing embedded webpages, export HTML and use its **Print** control for PDF. |
+
+PPTX is an interchange format and may differ from the editor. In standard mode, ordinary text and images remain separate objects. Text containing inline math is rendered as a high-resolution transparent image to preserve formula alignment; its editable LaTeX source remains in the JSON/optional editable HTML. PPTX exports never execute embedded webpage JavaScript.
+
+## Agents and development
+
+Give an agent your outline, source material and presentation goals, then iterate together on the document it creates. The agent can work from JSON or full HTML/CSS/JS, use the browser API to inspect and change the open document, save a checkpoint, and operate the export interface. You can continue editing the same native objects or webpage source yourself. This workflow uses your own agent and its local tools; it does not require a built-in cloud AI service.
+
+Start with [AGENTS.md](AGENTS.md) for the collaboration workflow and [the local agent API](doc/LOCAL_AGENT_API.md) for the actual document format and supported operations. Use the browser API for a document currently being edited; direct filesystem changes do not automatically update the open editor. Save and review the resulting presentation before publishing it.
+
+The JSON format is readable and editable by local tools. `window.keynoteLocal` provides document operations, element updates, subscriptions and saving. See [the local agent API](doc/LOCAL_AGENT_API.md). Imported webpages remain whole pages; they are not automatically decomposed into native text boxes and shapes.
+
+```sh
+npm run type-check
+node --test --test-concurrency=1 scripts/tests/*.test.mjs
+npm run build
+```
+
+## License and attribution
+
+Keytist / Slide Studio is a modified version of **[PPTist](https://github.com/pipipi-pikachu/PPTist)** by **[pipipi-pikachu](https://github.com/pipipi-pikachu)**. It retains the **GNU Affero General Public License v3.0**; see [LICENSE](LICENSE). The [original upstream README](doc/README.upstream.md), including the original author's public contact and project notices, is retained.
+
+Fonts and dependencies retain their own licenses. See [third-party notices](doc/THIRD_PARTY_NOTICES.md) and the accompanying license files. Public distributions exclude the two upstream converted font binaries whose redistribution provenance was not established; system font files and private documents are not distributed. This project is independent of Apple and is not an Apple Keynote product.

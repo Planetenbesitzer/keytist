@@ -1,3 +1,4 @@
+import { t } from '@/i18n'
 import { STUDIO_THEME_COLORS } from './colors'
 import type { PPTTextElement, PPTShapeElement, Slide, SlideTheme } from '@/types/slides'
 import { renderLatex } from '@/utils/latex'
@@ -23,6 +24,7 @@ export const STUDIO_THEME: SlideTheme = {
   outline: { width: 1, color: '#d2d2d7', style: 'solid' },
 }
 
+/** Only called for a new installation; never rewrites an existing document. */
 export function createStarterDocument() {
   const eq = renderLatex(String.raw`\mathcal{L}_{\mathrm{QCD}}=-\frac{1}{4}F^{a}_{\mu\nu}F^{a\mu\nu}+\sum_f\bar{q}_f\left(i\gamma^\mu D_\mu-m_f\right)q_f`)
   const eqWidth = Math.min(eq.w * 1.08, 820)
@@ -33,39 +35,39 @@ export function createStarterDocument() {
       id: 'studio-intro', background: { type: 'solid', color: '#fbfbfd' },
       elements: [
         text('intro-eyebrow', 'SLIDE STUDIO', 72, 62, 450, 13, blue, 600),
-        text('intro-title', '让想法，<br>清晰呈现。', 72, 150, 620, 62, ink, 600),
-        text('intro-subtitle', '自由排版 · 精致公式 · 从容表达', 76, 326, 560, 21, '#86868b'),
+        text('intro-title', t('让想法，<br>清晰呈现。'), 72, 150, 620, 62, ink, 600),
+        text('intro-subtitle', t('自由排版 · 精致公式 · 从容表达'), 76, 326, 560, 21, '#86868b'),
         rect('intro-blue', 718, 140, 155, 225, '#007aff'),
         rect('intro-purple', 817, 280, 111, 154, '#c4c0ff'),
         rect('intro-light', 679, 341, 113, 98, '#e8e8ed'),
-        text('intro-footer', '你的第一份演示文稿', 76, 481, 550, 13, '#86868b'),
+        text('intro-footer', t('你的第一份演示文稿'), 76, 481, 550, 13, '#86868b'),
         text('intro-number', '01', 903, 481, 55, 13, '#86868b'),
       ],
-      remark: '欢迎。单击选择对象，双击编辑文字或公式。用顶部工具插入内容，右侧调整样式。',
+      remark: t('欢迎。单击选择对象，双击编辑文字或公式。用顶部工具插入内容，右侧调整样式。'),
     },
     {
       id: 'studio-equation', background: { type: 'solid', color: '#ffffff' },
       elements: [
         text('eq-eyebrow', 'THE BEAUTY OF AN EQUATION', 72, 62, 700, 13, blue, 600),
-        text('eq-title', '让公式成为论证的一部分。', 72, 126, 870, 39, ink, 600),
-        text('eq-description', '从一个拉格朗日量出发。', 76, 197, 800, 19, '#86868b'),
+        text('eq-title', t('让公式成为论证的一部分。'), 72, 126, 870, 39, ink, 600),
+        text('eq-description', t('从一个拉格朗日量出发。'), 76, 197, 800, 19, '#86868b'),
         { id: 'qcd-lagrangian', type: 'latex', left: (1000 - eqWidth) / 2, top: 282, width: eqWidth, height: eq.h * (eqWidth / eq.w), rotate: 0, latex: eq.latex, svg: eq.svg, path: '', viewBox: [eq.w, eq.h], color: ink, strokeWidth: 0, fixedRatio: true },
-        text('eq-hint', '双击公式，继续编辑 LaTeX。', 76, 454, 800, 15, '#86868b'),
+        text('eq-hint', t('双击公式，继续编辑 LaTeX。'), 76, 454, 800, 15, '#86868b'),
         text('eq-number', '02', 903, 481, 55, 13, '#86868b'),
       ],
-      remark: '公式是独立对象。选中后可改颜色、移动和缩放；双击可回到 LaTeX 源码。',
+      remark: t('公式是独立对象。选中后可改颜色、移动和缩放；双击可回到 LaTeX 源码。'),
     },
     {
       id: 'studio-image', background: { type: 'solid', color: '#fbfbfd' },
       elements: [
         text('image-eyebrow', 'A LITTLE ROOM TO EXPLORE', 72, 62, 700, 13, blue, 600),
-        text('image-title', '为画面，留一点空间。', 72, 145, 442, 43, ink, 600),
-        text('image-copy', '文字、图像与形状，<br>放在你想要的位置。', 76, 270, 420, 23, '#86868b'),
+        text('image-title', t('为画面，留一点空间。'), 72, 145, 442, 43, ink, 600),
+        text('image-copy', t('文字、图像与形状，<br>放在你想要的位置。'), 76, 270, 420, 23, '#86868b'),
         { id: 'image-art', type: 'image', left: 550, top: 128, width: 370, height: 300, rotate: 0, src: imageSrc, fixedRatio: false, radius: 18, clip: { shape: 'roundRect', range: [[0, 0], [100, 100]] }, outline: { width: 1, color: '#ffffff', style: 'solid' } },
-        text('image-footer', '选择图片，在右侧调整裁剪与边框。', 76, 481, 650, 13, '#86868b'),
+        text('image-footer', t('选择图片，在右侧调整裁剪与边框。'), 76, 481, 650, 13, '#86868b'),
         text('image-number', '03', 903, 481, 55, 13, '#86868b'),
       ],
     },
   ]
-  return Promise.resolve({ title: '我的演示文稿', theme: STUDIO_THEME, slides, viewportSize: 1000, viewportRatio: 0.5625, slideIndex: 0 })
+  return Promise.resolve({ title: t('我的演示文稿'), theme: STUDIO_THEME, slides, viewportSize: 1000, viewportRatio: 0.5625, slideIndex: 0 })
 }

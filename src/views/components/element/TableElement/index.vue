@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     class="editable-element-table"
     ref="elementRef"
     :class="{ 'lock': elementInfo.lock }"
@@ -13,11 +13,11 @@
       class="rotate-wrapper"
       :style="{ transform: `rotate(${elementInfo.rotate}deg)` }"
     >
-      <div 
-        class="element-content" 
+      <div
+        class="element-content"
         v-contextmenu="contextmenus"
       >
-        <EditableTable 
+        <EditableTable
           @mousedown.stop
           :elementId="elementInfo.id"
           :data="elementInfo.data"
@@ -33,15 +33,15 @@
           @changeColWidths="widths => updateColWidths(widths)"
           @changeSelectedCells="cells => updateSelectedCells(cells)"
         />
-        <div 
-          class="table-mask" 
+        <div
+          class="table-mask"
           :class="{ 'lock': elementInfo.lock }"
           v-if="!editable || elementInfo.lock"
           @dblclick="startEdit()"
           @mousedown="$event => handleSelectElement($event)"
           @touchstart="$event => handleSelectElement($event)"
         >
-          <div class="mask-tip" v-if="handleElementId === elementInfo.id" :style="{ transform: `scale(${ 1 / canvasScale })` }">双击编辑</div>
+          <div class="mask-tip" v-if="handleElementId === elementInfo.id" :style="{ transform: `scale(${ 1 / canvasScale })` }">{{ t("双击编辑") }}</div>
         </div>
       </div>
     </div>
@@ -49,6 +49,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { nextTick, onMounted, onUnmounted, ref, watch, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'
@@ -152,7 +153,7 @@ onUnmounted(() => {
 // 更新表格内容数据
 const updateTableCells = (data: TableCell[][]) => {
   slidesStore.updateElement({
-    id: props.elementInfo.id, 
+    id: props.elementInfo.id,
     props: { data },
   })
   addHistorySnapshot()
@@ -173,7 +174,7 @@ const updateColWidths = (widths: number[]) => {
   const colWidths = widths.map(item => item / width)
 
   slidesStore.updateElement({
-    id: props.elementInfo.id, 
+    id: props.elementInfo.id,
     props: { width, colWidths },
   })
   addHistorySnapshot()

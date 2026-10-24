@@ -1,33 +1,33 @@
 <template>
   <div class="media-input">
-    <Tabs 
-      :tabs="tabs" 
-      v-model:value="type" 
-      :tabsStyle="{ marginBottom: '15px' }" 
+    <Tabs
+      :tabs="tabs"
+      v-model:value="type"
+      :tabsStyle="{ marginBottom: '15px' }"
     />
 
     <template v-if="type === 'video'">
-      <Input v-model:value="videoSrc" placeholder="请输入视频地址，e.g. https://xxx.mp4"></Input>
+      <Input v-model:value="videoSrc" :placeholder="t('请输入视频地址，e.g. https://xxx.mp4')"></Input>
       <div class="btns">
         <FileInput accept="video/*" @change="files => uploadVideo(files)">
-          <Button><i-icon-park-outline:upload /> 上传本地视频</Button>
+          <Button><i-icon-park-outline:upload /> {{ t("上传本地视频") }}</Button>
         </FileInput>
         <div class="group">
-          <Button @click="emit('close')" style="margin-right: 10px;">取消</Button>
-          <Button type="primary" @click="insertVideo()">确认</Button>
+          <Button @click="emit('close')" style="margin-right: 10px;">{{ t("取消") }}</Button>
+          <Button type="primary" @click="insertVideo()">{{ t("确认") }}</Button>
         </div>
       </div>
     </template>
 
     <template v-if="type === 'audio'">
-      <Input v-model:value="audioSrc" placeholder="请输入音频地址，e.g. https://xxx.mp3"></Input>
+      <Input v-model:value="audioSrc" :placeholder="t('请输入音频地址，e.g. https://xxx.mp3')"></Input>
       <div class="btns">
         <FileInput accept="audio/*" @change="files => uploadAudio(files)">
-          <Button><i-icon-park-outline:upload /> 上传本地音频</Button>
+          <Button><i-icon-park-outline:upload /> {{ t("上传本地音频") }}</Button>
         </FileInput>
         <div class="group">
-          <Button @click="emit('close')" style="margin-right: 10px;">取消</Button>
-          <Button type="primary" @click="insertAudio()">确认</Button>
+          <Button @click="emit('close')" style="margin-right: 10px;">{{ t("取消") }}</Button>
+          <Button type="primary" @click="insertAudio()">{{ t("确认") }}</Button>
         </div>
       </div>
     </template>
@@ -35,6 +35,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref } from 'vue'
 import message from '@/utils/message'
 import { MIME_MAP } from '@/configs/mime'

@@ -1,28 +1,29 @@
 <template>
   <div class="page-numbers-dialog" @keydown.stop>
-    <h2>自动页码</h2>
-    <p class="intro">新增、删除或调整幻灯片顺序后，页码会自动更新。</p>
+    <h2>{{ t("自动页码") }}</h2>
+    <p class="intro">{{ t("新增、删除或调整幻灯片顺序后，页码会自动更新。") }}</p>
     <div class="settings">
-      <label class="setting"><span>起始编号</span><input type="number" min="0" max="999999" step="1" v-model.number="config.start" aria-label="起始编号" :disabled="busy"></label>
-      <label class="setting"><span>编号格式</span><select v-model="config.format" aria-label="编号格式" :disabled="busy"><option value="number">1, 2, 3</option><option value="twoDigits">01, 02, 03</option><option value="fraction">当前 / 末页</option></select></label>
-      <label class="check"><input type="checkbox" v-model="config.hideOnFirst" :disabled="busy">封面不显示页码（仍计入编号）</label>
+      <label class="setting"><span>{{ t("起始编号") }}</span><input type="number" min="0" max="999999" step="1" v-model.number="config.start" :aria-label="t('起始编号')" :disabled="busy"></label>
+      <label class="setting"><span>{{ t("编号格式") }}</span><select v-model="config.format" :aria-label="t('编号格式')" :disabled="busy"><option value="number">1, 2, 3</option><option value="twoDigits">01, 02, 03</option><option value="fraction">{{ t("当前 / 末页") }}</option></select></label>
+      <label class="check"><input type="checkbox" v-model="config.hideOnFirst" :disabled="busy">{{ t("封面不显示页码（仍计入编号）") }}</label>
     </div>
-    <div class="preview" aria-label="页码预览">
-      <div class="preview-page"><span>封面</span><b>{{ config.hideOnFirst ? '不显示' : label(0) }}</b></div>
-      <div v-if="slides.length > 1" class="preview-page"><span>第二张</span><b>{{ label(1) }}</b></div>
-      <p>共 {{ slides.length }} 张幻灯片</p>
+    <div class="preview" :aria-label="t('页码预览')">
+      <div class="preview-page"><span>{{ t("封面") }}</span><b>{{ config.hideOnFirst ? t("不显示") : label(0) }}</b></div>
+      <div v-if="slides.length > 1" class="preview-page"><span>{{ t("第二张") }}</span><b>{{ label(1) }}</b></div>
+      <p>{{ t("共") }} {{ slides.length }} {{ t("张幻灯片") }}</p>
     </div>
     <div v-if="candidateCount" class="conversion">
-      <label class="check"><input type="checkbox" v-model="replaceExisting" :disabled="busy">沿用已有数字页脚的位置与样式（找到 {{ candidateCount }} 页）</label>
-      <p>仅转换页面底部的数字页脚，保留各页字体、颜色和位置。缺少页码的页面会补上。</p>
+      <label class="check"><input type="checkbox" v-model="replaceExisting" :disabled="busy">{{ t("沿用已有数字页脚的位置与样式（找到") }} {{ candidateCount }} {{ t("页）") }}</label>
+      <p>{{ t("仅转换页面底部的数字页脚，保留各页字体、颜色和位置。缺少页码的页面会补上。") }}</p>
     </div>
-    <p class="help">页码可像文本框一样移动和设置字体、颜色；直接改写编号文字后，该文本框将不再自动更新。</p>
-    <p v-if="error" class="error" role="alert">{{ error }}</p>
-    <div class="actions"><button v-if="hasAutomatic" class="remove" :disabled="busy" @click="apply(true)">移除自动页码</button><span class="spacer"></span><Button :disabled="busy" @click="emit('close')">取消</Button><Button type="primary" :disabled="busy || !slides.length" @click="apply()">{{ busy ? '正在处理…' : '应用到全部幻灯片' }}</Button></div>
+    <p class="help">{{ t("页码可像文本框一样移动和设置字体、颜色；直接改写编号文字后，该文本框将不再自动更新。") }}</p>
+    <p v-if="error" class="error" role="alert">{{ t(error) }}</p>
+    <div class="actions"><button v-if="hasAutomatic" class="remove" :disabled="busy" @click="apply(true)">{{ t("移除自动页码") }}</button><span class="spacer"></span><Button :disabled="busy" @click="emit('close')">{{ t("取消") }}</Button><Button type="primary" :disabled="busy || !slides.length" @click="apply()">{{ busy ? t("正在处理…") : t("应用到全部幻灯片") }}</Button></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { t } from '@/i18n'
 import { computed, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'
@@ -62,7 +63,7 @@ const apply = async (remove = false) => {
     error.value = reason instanceof Error ? reason.message : '无法设置自动页码，请重试。'
   }
   finally {
-    busy.value = false 
+    busy.value = false
   }
 }
 </script>

@@ -4,37 +4,38 @@
       <ThumbnailSlide v-for="slide in slides" :key="slide.id" :slide="slide" :size="viewportSize" />
     </div>
     <div class="description">
-      <h3>紧凑的 HTML，随处演示</h3>
-      <p>保留文字、公式、图片和阴影，附带翻页、全屏与打印。可以直接打开，也可以发布到静态网站。</p>
-      <p>自动携带英文和公式所需的字体，播放时无需另装这些字体。中文不新增打包字库，使用播放设备的字体，换行和字形可能不同。</p>
-      <p v-if="hasHtml">导入的 HTML 保留交互及原有的内嵌字体和素材；外部脚本、图片等仍需原有网络与文件。离开页面会暂停并重置它的脚本。</p>
-      <p>默认导出紧凑播放版，减少重复素材和排版数据，保留原有画质与交互。</p>
+      <h3>{{ t("紧凑的 HTML，随处演示") }}</h3>
+      <p>{{ t("保留文字、公式、图片和阴影，附带翻页、全屏与打印。可以直接打开，也可以发布到静态网站。") }}</p>
+      <p>{{ t("自动携带英文和公式所需的字体，播放时无需另装这些字体。中文不新增打包字库，使用播放设备的字体，换行和字形可能不同。") }}</p>
+      <p v-if="hasHtml">{{ t("导入的 HTML 保留交互及原有的内嵌字体和素材；外部脚本、图片等仍需原有网络与文件。离开页面会暂停并重置它的脚本。") }}</p>
+      <p>{{ t("默认导出紧凑播放版，减少重复素材和排版数据，保留原有画质与交互。") }}</p>
       <div v-if="fontReport" class="font-report" aria-live="polite">
-        <strong>英文与公式字体 · {{ fontStyleCount }} 款样式</strong>
-        <span>自动打包预计增加 {{ formatBytes(fontReport.encodedBytes) }}，相同字体只保存一次。</span>
-        <span v-if="hasHtml">原网页已有的字体与素材保留，不计入上述增量。</span>
-        <span v-for="warning in fontWarnings" :key="warning">{{ warning }}</span>
+        <strong>{{ t("英文与公式字体 ·") }} {{ fontStyleCount }} {{ t("款样式") }}</strong>
+        <span>{{ t("自动打包预计增加") }} {{ formatBytes(fontReport.encodedBytes) }}{{ t("，相同字体只保存一次。") }}</span>
+        <span v-if="hasHtml">{{ t("原网页已有的字体与素材保留，不计入上述增量。") }}</span>
+        <span v-for="warning in fontWarnings" :key="warning">{{ t(warning) }}</span>
       </div>
       <div v-if="sizeWarning" ref="warningRef" class="font-warning" role="alert">
-        <strong>字体包较大</strong>
-        <p>自动打包的英文与公式字体预计占用 {{ formatBytes(fontReport?.encodedBytes || 0) }}，超过 5 MB 提醒值。保留这些字体可稳定英文与公式的排版；中文使用设备字体。完整文件还会压缩。</p>
-        <p v-for="font in largestFonts" :key="font.sourceFamily + font.style + font.weight">{{ font.sourceFamily }} · {{ weightLabel(font.weight) }}{{ font.style === 'italic' ? ' / 斜体' : '' }} · {{ formatBytes(font.encodedBytes) }}</p>
+        <strong>{{ t("字体包较大") }}</strong>
+        <p>{{ t("自动打包的英文与公式字体预计占用") }} {{ formatBytes(fontReport?.encodedBytes || 0) }}{{ t("，超过 5 MB 提醒值。保留这些字体可稳定英文与公式的排版；中文使用设备字体。完整文件还会压缩。") }}</p>
+        <p v-for="font in largestFonts" :key="font.sourceFamily + font.style + font.weight">{{ font.sourceFamily }} · {{ weightLabel(font.weight) }}{{ font.style === 'italic' ? t(" / 斜体") : '' }} · {{ formatBytes(font.encodedBytes) }}</p>
       </div>
-      <p v-if="error" class="export-error" role="alert">{{ error }}</p>
+      <p v-if="error" class="export-error" role="alert">{{ t(error) }}</p>
       <div class="editable-option">
-        <Checkbox v-model:value="keepEditable" :disabled="exporting">保留重新导入编辑能力</Checkbox>
-        <p class="option-hint">勾选后额外保留完整文稿，文件会更大。未勾选时，文本框等原生对象不能从 HTML 中恢复编辑。字体包用于发布播放，重新编辑仍沿用原文稿的字体设置。</p>
+        <Checkbox v-model:value="keepEditable" :disabled="exporting">{{ t("保留重新导入编辑能力") }}</Checkbox>
+        <p class="option-hint">{{ t("勾选后额外保留完整文稿，文件会更大。未勾选时，文本框等原生对象不能从 HTML 中恢复编辑。字体包用于发布播放，重新编辑仍沿用原文稿的字体设置。") }}</p>
       </div>
     </div>
     <div class="btns">
-      <template v-if="sizeWarning"><Button type="primary" @click="finishSizeDecision(true)">保留字体并继续导出</Button><Button @click="finishSizeDecision(false)">取消导出</Button></template>
-      <template v-else><Button type="primary" :disabled="exporting" @click="exportHtml"><i-icon-park-outline:download /> {{ exporting ? '正在打包…' : '导出 HTML' }}</Button><Button :disabled="exporting" @click="emit('close')">关闭</Button></template>
+      <template v-if="sizeWarning"><Button type="primary" @click="finishSizeDecision(true)">{{ t("保留字体并继续导出") }}</Button><Button @click="finishSizeDecision(false)">{{ t("取消导出") }}</Button></template>
+      <template v-else><Button type="primary" :disabled="exporting" @click="exportHtml"><i-icon-park-outline:download /> {{ exporting ? t("正在打包…") : t("导出 HTML") }}</Button><Button :disabled="exporting" @click="emit('close')">{{ t("关闭") }}</Button></template>
     </div>
-    <FullscreenSpin :loading="exporting && !sizeWarning" tip="正在检查并打包页面、字体与素材…" />
+    <FullscreenSpin :loading="exporting && !sizeWarning" :tip="t('正在检查并打包页面、字体与素材…')" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, nextTick, onBeforeUnmount, ref, shallowRef, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { saveAs } from 'file-saver'

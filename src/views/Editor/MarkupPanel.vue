@@ -1,16 +1,16 @@
 <template>
-  <MoveablePanel 
-    class="notes-panel" 
-    :width="300" 
-    :height="130" 
-    title="幻灯片类型标注" 
-    :left="-270" 
+  <MoveablePanel
+    class="notes-panel"
+    :width="300"
+    :height="130"
+    :title="t('幻灯片类型标注')"
+    :left="-270"
     :top="90"
     @close="close()"
   >
     <div class="container">
       <div class="row">
-        <div style="width: 40%;">当前页面类型：</div>
+        <div style="width: 40%;">{{ t("当前页面类型：") }}</div>
         <Select
           style="width: 60%;"
           :value="slideType"
@@ -19,7 +19,7 @@
         />
       </div>
       <div class="row" v-if="handleElement && (handleElement.type === 'text' || (handleElement.type === 'shape' && handleElement.text))">
-        <div style="width: 40%;">当前文本类型：</div>
+        <div style="width: 40%;">{{ t("当前文本类型：") }}</div>
         <Select
           style="width: 60%;"
           :value="textType"
@@ -28,7 +28,7 @@
         />
       </div>
       <div class="row" v-else-if="handleElement && handleElement.type === 'image'">
-        <div style="width: 40%;">当前图片类型：</div>
+        <div style="width: 40%;">{{ t("当前图片类型：") }}</div>
         <Select
           style="width: 60%;"
           :value="imageType"
@@ -36,12 +36,13 @@
           :options="imageTypeOptions"
         />
       </div>
-      <div class="placeholder" v-else>选中图片、文字、带文字的形状，标记类型</div>
+      <div class="placeholder" v-else>{{ t("选中图片、文字、带文字的形状，标记类型") }}</div>
     </div>
   </MoveablePanel>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

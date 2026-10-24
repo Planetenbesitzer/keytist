@@ -2,12 +2,13 @@
   <div class="fullscreen-spin" :class="{ 'mask': mask }" v-if="loading">
     <div class="spin">
       <div class="spinner"></div>
-      <div class="text">{{tip}}</div>
+      <div class="text">{{t(tip)}}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 withDefaults(defineProps<{
   loading?: boolean
   mask?: boolean

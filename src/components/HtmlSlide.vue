@@ -2,12 +2,13 @@
   <div class="html-slide" :data-ready="ready ? 'true' : 'false'"
     :style="{ width: `${width}px`, height: `${height}px`, transform: placementTransform, pointerEvents: interactive ? 'auto' : 'none' }">
     <iframe ref="frameElement" :width="virtualWidth" :height="virtualHeight" :style="iframeStyle" sandbox="allow-scripts allow-forms"
-      title="HTML 幻灯片" referrerpolicy="no-referrer" :tabindex="interactive ? 0 : -1"
+      :title="t('HTML 幻灯片')" referrerpolicy="no-referrer" :tabindex="interactive ? 0 : -1"
       :aria-hidden="!interactive" :data-ready="ready ? 'true' : 'false'" @load="handleLoad" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { t } from '@/i18n'
 import { computed, nextTick, onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import { getHtmlPlacementTransform } from '@/utils/htmlPlacement'
 

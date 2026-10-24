@@ -1,23 +1,23 @@
 <template>
   <div class="html-placement-editor">
-    <div class="html-placement-toolbar" role="group" aria-label="嵌入网页位置" @mousedown.stop @dblclick.stop @keydown="handleToolbarKeydown">
-      <button class="adjust-button" :class="{ active: editing }" :aria-pressed="editing" aria-label="调整嵌入网页位置" @mousedown.prevent @click="toggleEditing">
+    <div class="html-placement-toolbar" role="group" :aria-label="t('嵌入网页位置')" @mousedown.stop @dblclick.stop @keydown="handleToolbarKeydown">
+      <button class="adjust-button" :class="{ active: editing }" :aria-pressed="editing" :aria-label="t('调整嵌入网页位置')" @mousedown.prevent @click="toggleEditing">
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v16M2 10h16M7 5l3-3 3 3M7 15l3 3 3-3M5 7l-3 3 3 3M15 7l3 3-3 3" /></svg>
-        {{ editing ? '完成调整' : '调整网页位置' }}
+        {{ editing ? t("完成调整") : t("调整网页位置") }}
       </button>
       <template v-if="editing">
-        <label>X <input type="number" aria-label="网页水平位置" :value="format(placement.left)" step="1" @change="changeNumber('left', $event)"></label>
-        <label>Y <input type="number" aria-label="网页垂直位置" :value="format(placement.top)" step="1" @change="changeNumber('top', $event)"></label>
-        <label>缩放 <input type="number" aria-label="网页整体缩放百分比" :value="format(placement.scale * 100)" :min="HTML_MIN_SCALE * 100" :max="HTML_MAX_SCALE * 100" step="1" @change="changeNumber('scale', $event)">%</label>
-        <button aria-label="网页居中" @mousedown.prevent @click="center">居中</button>
-        <button aria-label="网页恢复原位和大小" :disabled="isOriginal" @mousedown.prevent @click="commit({ left: 0, top: 0, scale: 1 })">归位</button>
-        <span class="hint">拖动移动 · 四角缩放</span>
+        <label>X <input type="number" :aria-label="t('网页水平位置')" :value="format(placement.left)" step="1" @change="changeNumber('left', $event)"></label>
+        <label>Y <input type="number" :aria-label="t('网页垂直位置')" :value="format(placement.top)" step="1" @change="changeNumber('top', $event)"></label>
+        <label>{{ t("缩放") }} <input type="number" :aria-label="t('网页整体缩放百分比')" :value="format(placement.scale * 100)" :min="HTML_MIN_SCALE * 100" :max="HTML_MAX_SCALE * 100" step="1" @change="changeNumber('scale', $event)">%</label>
+        <button :aria-label="t('网页居中')" @mousedown.prevent @click="center">{{ t("居中") }}</button>
+        <button :aria-label="t('网页恢复原位和大小')" :disabled="isOriginal" @mousedown.prevent @click="commit({ left: 0, top: 0, scale: 1 })">{{ t("归位") }}</button>
+        <span class="hint">{{ t("拖动移动 · 四角缩放") }}</span>
       </template>
     </div>
     <div v-if="editing" ref="frameElement" class="html-placement-frame" :class="{ panning, dragging: !!gesture }"
-      :style="frameStyle" tabindex="0" role="group" aria-label="移动嵌入网页"
+      :style="frameStyle" tabindex="0" role="group" :aria-label="t('移动嵌入网页')"
       @pointerdown.stop.prevent="startGesture($event)" @mousedown.stop @mouseup.stop @click.stop @dblclick.stop.prevent @contextmenu.stop.prevent @keydown="handleFrameKeydown">
-      <span class="frame-caption">HTML 网页</span>
+      <span class="frame-caption">{{ t("HTML 网页") }}</span>
       <button v-for="corner in corners" :key="corner.id" class="resize-handle" :class="corner.id" :aria-label="corner.label"
         @pointerdown.stop.prevent="startGesture($event, corner.id)" @mousedown.stop @click.stop></button>
     </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script setup lang="ts">
+import { t } from '@/i18n'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 import { useMainStore, useSlidesStore, useSnapshotStore } from '@/store'
 import { getSnapshotHistoryEpoch } from '@/store/snapshot'

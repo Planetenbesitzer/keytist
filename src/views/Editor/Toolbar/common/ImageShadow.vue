@@ -1,10 +1,10 @@
 <template>
-  <section class="image-shadow" aria-label="图片阴影">
-    <div class="heading"><span>图片阴影</span><span class="current">{{ shadow ? descriptions[kind] : '无阴影' }}</span></div>
+  <section class="image-shadow" :aria-label="t('图片阴影')">
+    <div class="heading"><span>{{ t("图片阴影") }}</span><span class="current">{{ shadow ? t(descriptions[kind]) : t("无阴影") }}</span></div>
     <div class="presets">
       <button
         v-for="preset in shadowPresets" :key="preset.id" type="button"
-        :aria-label="preset.id === 'none' ? '无阴影' : `${preset.label}阴影`"
+        :aria-label="preset.id === 'none' ? t('无阴影') : t('{0}阴影', { 0: shadowLabel(preset) })"
         :aria-pressed="matchesPreset(preset.shadow)"
         :class="{ selected: matchesPreset(preset.shadow) }"
         @click="managedPresetId = preset.id; applyPreset(preset.shadow)"
@@ -14,55 +14,55 @@
             <BaseImageElement :elementInfo="previewImage(preset.shadow)" />
           </span>
         </span>
-        <span>{{ preset.label }}</span>
+        <span>{{ shadowLabel(preset) }}</span>
       </button>
     </div>
     <details class="shadow-management" @keydown.stop @mousedown.stop>
-      <summary>管理阴影样式<span v-if="managedPreset && !matchesPreset(managedPreset.shadow)"> · 已修改</span></summary>
-      <label>预设<select aria-label="要编辑的阴影预设" v-model="managedPresetId"><option v-for="preset in shadowPresets" :key="preset.id" :value="preset.id">{{ preset.label }}</option></select></label>
-      <label>名称<input aria-label="阴影预设名称" v-model="presetName" maxlength="40"></label>
+      <summary>{{ t("管理阴影样式") }}<span v-if="managedPreset && !matchesPreset(managedPreset.shadow)"> {{ t("· 已修改") }}</span></summary>
+      <label>{{ t("预设") }}<select :aria-label="t('要编辑的阴影预设')" v-model="managedPresetId"><option v-for="preset in shadowPresets" :key="preset.id" :value="preset.id">{{ shadowLabel(preset) }}</option></select></label>
+      <label>{{ t("名称") }}<input :aria-label="t('阴影预设名称')" v-model="presetName" maxlength="40"></label>
       <div class="shadow-actions">
-        <button type="button" :disabled="!presetName.trim()" @click="renameShadowPreset">重命名</button>
-        <button type="button" :disabled="!shadow || managedPresetId === 'none'" @click="redefineShadowPreset">用当前阴影重定义</button>
-        <button type="button" @click="restoreShadowPresets">恢复内置阴影</button>
+        <button type="button" :disabled="!presetName.trim()" @click="renameShadowPreset">{{ t("重命名") }}</button>
+        <button type="button" :disabled="!shadow || managedPresetId === 'none'" @click="redefineShadowPreset">{{ t("用当前阴影重定义") }}</button>
+        <button type="button" @click="restoreShadowPresets">{{ t("恢复内置阴影") }}</button>
       </div>
-      <p>重定义只更新预设，已有图片的阴影不会改变。无阴影预设始终保留为无阴影。</p>
-      <div v-if="presetError" class="preset-error" role="alert">{{ presetError }}</div>
+      <p>{{ t("重定义只更新预设，已有图片的阴影不会改变。无阴影预设始终保留为无阴影。") }}</p>
+      <div v-if="presetError" class="preset-error" role="alert">{{ t(presetError) }}</div>
     </details>
     <div class="adjustments" v-if="shadow" @keydown.stop>
-      <label class="row"><span>模糊</span>
-        <input type="range" aria-label="阴影模糊滑块" min="0" max="60" :value="shadow.blur" @input="setNumber('blur', $event)">
-        <input type="number" aria-label="阴影模糊" min="0" max="100" :value="round(shadow.blur)" @input="setNumber('blur', $event)"><span class="unit">px</span>
+      <label class="row"><span>{{ t("模糊") }}</span>
+        <input type="range" :aria-label="t('阴影模糊滑块')" min="0" max="60" :value="shadow.blur" @input="setNumber('blur', $event)">
+        <input type="number" :aria-label="t('阴影模糊')" min="0" max="100" :value="round(shadow.blur)" @input="setNumber('blur', $event)"><span class="unit">px</span>
       </label>
-      <label class="row"><span>不透明度</span>
-        <input type="range" aria-label="阴影不透明度滑块" min="0" max="100" :value="opacity" @input="setOpacity($event)">
-        <input type="number" aria-label="阴影不透明度" min="0" max="100" :value="opacity" @input="setOpacity($event)"><span class="unit">%</span>
+      <label class="row"><span>{{ t("不透明度") }}</span>
+        <input type="range" :aria-label="t('阴影不透明度滑块')" min="0" max="100" :value="opacity" @input="setOpacity($event)">
+        <input type="number" :aria-label="t('阴影不透明度')" min="0" max="100" :value="opacity" @input="setOpacity($event)"><span class="unit">%</span>
       </label>
-      <label class="row"><span>偏移</span>
-        <input type="range" aria-label="阴影偏移滑块" min="0" max="60" :value="offset" @input="setOffset($event)">
-        <input type="number" aria-label="阴影偏移" min="0" max="100" :value="offset" @input="setOffset($event)"><span class="unit">px</span>
+      <label class="row"><span>{{ t("偏移") }}</span>
+        <input type="range" :aria-label="t('阴影偏移滑块')" min="0" max="60" :value="offset" @input="setOffset($event)">
+        <input type="number" :aria-label="t('阴影偏移')" min="0" max="100" :value="offset" @input="setOffset($event)"><span class="unit">px</span>
       </label>
-      <label class="row" v-if="kind === 'drop'"><span>角度</span>
-        <input type="range" aria-label="阴影角度滑块" min="0" max="359" :value="angle" @input="setAngle($event)">
-        <input type="number" aria-label="阴影角度" min="0" max="359" :value="angle" @input="setAngle($event)"><span class="unit">°</span>
+      <label class="row" v-if="kind === 'drop'"><span>{{ t("角度") }}</span>
+        <input type="range" :aria-label="t('阴影角度滑块')" min="0" max="359" :value="angle" @input="setAngle($event)">
+        <input type="number" :aria-label="t('阴影角度')" min="0" max="359" :value="angle" @input="setAngle($event)"><span class="unit">°</span>
       </label>
       <template v-if="kind === 'contact'">
-        <label class="row"><span>透视</span>
-          <input type="range" aria-label="阴影透视滑块" min="0" max="100" :value="(shadow.perspective ?? 0.35) * 100" @input="setNumber('perspective', $event, 0.01)">
-          <input type="number" aria-label="阴影透视" min="0" max="100" :value="round((shadow.perspective ?? 0.35) * 100)" @input="setNumber('perspective', $event, 0.01)"><span class="unit">%</span>
+        <label class="row"><span>{{ t("透视") }}</span>
+          <input type="range" :aria-label="t('阴影透视滑块')" min="0" max="100" :value="(shadow.perspective ?? 0.35) * 100" @input="setNumber('perspective', $event, 0.01)">
+          <input type="number" :aria-label="t('阴影透视')" min="0" max="100" :value="round((shadow.perspective ?? 0.35) * 100)" @input="setNumber('perspective', $event, 0.01)"><span class="unit">%</span>
         </label>
       </template>
       <template v-if="kind === 'curved'">
-        <label class="row"><span>弯曲</span>
-          <input type="range" aria-label="阴影弯曲滑块" min="-100" max="100" :value="(shadow.curve ?? 0.65) * 100" @input="setNumber('curve', $event, 0.01)">
-          <input type="number" aria-label="阴影弯曲" min="-100" max="100" :value="round((shadow.curve ?? 0.65) * 100)" @input="setNumber('curve', $event, 0.01)"><span class="unit">%</span>
+        <label class="row"><span>{{ t("弯曲") }}</span>
+          <input type="range" :aria-label="t('阴影弯曲滑块')" min="-100" max="100" :value="(shadow.curve ?? 0.65) * 100" @input="setNumber('curve', $event, 0.01)">
+          <input type="number" :aria-label="t('阴影弯曲')" min="-100" max="100" :value="round((shadow.curve ?? 0.65) * 100)" @input="setNumber('curve', $event, 0.01)"><span class="unit">%</span>
         </label>
-        <div class="curve-labels"><span>中间隆起</span><span>两端翘起</span></div>
+        <div class="curve-labels"><span>{{ t("中间隆起") }}</span><span>{{ t("两端翘起") }}</span></div>
       </template>
-      <div class="color-row"><span>颜色</span>
+      <div class="color-row"><span>{{ t("颜色") }}</span>
         <Popover trigger="click">
           <template #content><ColorPicker :modelValue="shadow.color" @update:modelValue="value => updateShadow({ color: value })" /></template>
-          <button type="button" class="color-button" aria-label="阴影颜色" :title="shadow.color"><span :style="{ backgroundColor: shadow.color }"></span></button>
+          <button type="button" class="color-button" :aria-label="t('阴影颜色')" :title="shadow.color"><span :style="{ backgroundColor: shadow.color }"></span></button>
         </Popover>
         <span class="color-name">{{ tinycolor(shadow.color).toHexString().toUpperCase() }}</span>
       </div>
@@ -71,6 +71,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import tinycolor from 'tinycolor2'
@@ -78,6 +79,7 @@ import { useMainStore, useSlidesStore } from '@/store'
 import type { PPTImageElement, PPTImageShadow } from '@/types/slides'
 import { useStylePresetsStore } from '@/store/stylePresets'
 import message from '@/utils/message'
+import { IMAGE_SHADOW_PRESETS } from '@/configs/imageShadow'
 import { getImageShadowKind } from '@/utils/imageShadow'
 import useHistorySnapshot from '@/hooks/useHistorySnapshot'
 import BaseImageElement from '@/views/components/element/ImageElement/BaseImageElement.vue'
@@ -95,6 +97,7 @@ const opacity = computed(() => Math.round(tinycolor(shadow.value?.color).getAlph
 const offset = computed(() => round(Math.hypot(shadow.value?.h || 0, shadow.value?.v || 0)))
 const angle = computed(() => (Math.round(Math.atan2(-(shadow.value?.v || 0), shadow.value?.h || 0) * 180 / Math.PI) + 360) % 360)
 const round = (value: number) => Math.round(value * 10) / 10
+const shadowLabel = (preset: { id: string; label: string }) => IMAGE_SHADOW_PRESETS.some(item => item.id === preset.id && item.label === preset.label) ? t(preset.label) : preset.label
 const shadowPresets = computed(() => stylePresetsStore.library.shadows)
 const managedPresetId = ref('curved')
 const managedPreset = computed(() => shadowPresets.value.find(preset => preset.id === managedPresetId.value))

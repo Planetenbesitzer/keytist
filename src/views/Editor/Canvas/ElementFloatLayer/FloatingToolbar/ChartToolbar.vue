@@ -2,7 +2,7 @@
   <div class="toolbar-content">
     <button class="toolbar-btn" @click="openDataEditor()">
       <i-icon-park-outline:edit class="icon" />
-      <span>编辑数据</span>
+      <span>{{ t("编辑数据") }}</span>
     </button>
     <Popover trigger="click">
       <template #content>
@@ -12,18 +12,19 @@
             v-for="item in chartList"
             :key="item"
             @click="changeChartType(item)"
-          >{{ CHART_TYPE_MAP[item] }}</PopoverMenuItem>
+          >{{ t(CHART_TYPE_MAP[item]) }}</PopoverMenuItem>
         </div>
       </template>
       <button class="toolbar-btn">
         <i-icon-park-outline:chart-histogram class="icon" />
-        <span>类型</span>
+        <span>{{ t("类型") }}</span>
       </button>
     </Popover>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { type Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore, useMainStore } from '@/store'

@@ -192,3 +192,22 @@ test('unsupported browser APIs produce a readable failure instead of a huge fall
   assert.match(status.textContent, /此浏览器不支持本地解压/)
   assert.equal(document.title, '文稿打开失败')
 })
+
+test('English and Chinese standalone loading failures follow the selected UI language', async () => {
+  for (const [language, opening, title, prefix] of [
+    ['en', 'Opening presentation…', 'Unable to open presentation', 'Unable to open presentation: '],
+    ['zh-CN', '正在打开演示文稿…', '文稿打开失败', '无法打开此文稿：'],
+  ]) {
+    const html = '<html><body>Document words 保留原文</body></html>'
+    const packed = await packHtmlPresentation(html, { ...options, language })
+    assert.ok(packed.includes(`<html lang="${language}">`))
+    assert.ok(packed.includes(opening))
+    assert.equal(await decodeCompactHtmlManifest(extractManifest(packed)), html)
+    const loader = [...packed.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].at(-1)[1]
+    const status = { textContent: '' }
+    const document = { getElementById: id => id === 'slide-studio-compact' ? { textContent: '{invalid JSON' } : status }
+    await vm.runInNewContext(loader, { document, Error })
+    assert.ok(status.textContent.startsWith(prefix))
+    assert.equal(document.title, title)
+  }
+})

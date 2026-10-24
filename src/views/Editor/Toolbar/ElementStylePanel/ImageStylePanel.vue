@@ -5,15 +5,15 @@
     <ElementFlip />
 
     <ButtonGroup class="row" passive>
-      <Button first style="width: calc(100% - 32px);" @click="clipImage()"><i-icon-park-outline:tailoring /> 裁剪图片</Button>
+      <Button first style="width: calc(100% - 32px);" @click="clipImage()"><i-icon-park-outline:tailoring /> {{ t("裁剪图片") }}</Button>
       <Popover trigger="click" v-model:value="clipPanelVisible" style="width: 32px;">
         <template #content>
           <div class="clip">
-            <div class="title">按形状：</div>
+            <div class="title">{{ t("按形状：") }}</div>
             <div class="shape-clip">
-              <div 
-                class="shape-clip-item" 
-                v-for="(item, key) in shapeClipPathOptions" 
+              <div
+                class="shape-clip-item"
+                v-for="(item, key) in shapeClipPathOptions"
                 :key="key"
                 @click="presetImageClip(key as string)"
               >
@@ -22,9 +22,9 @@
             </div>
 
             <template v-for="typeItem in ratioClipOptions" :key="typeItem.label">
-              <div class="title" v-if="typeItem.label">按{{typeItem.label}}：</div>
+              <div class="title" v-if="typeItem.label">{{ t("按") }}{{t(typeItem.label)}}：</div>
               <ButtonGroup class="row">
-                <Button 
+                <Button
                   style="flex: 1;"
                   v-for="item in typeItem.children"
                   :key="item.key"
@@ -37,13 +37,13 @@
         <Button last class="popover-btn"><i-icon-park-outline:down /></Button>
       </Popover>
     </ButtonGroup>
-    
+
     <div class="row">
-      <div style="width: 40%;">圆角半径：</div>
-      <NumberInput 
-        :value="handleImageElement.radius || 0" 
-        @update:value="value => updateImage({ radius: value })" 
-        style="width: 60%;" 
+      <div style="width: 40%;">{{ t("圆角半径：") }}</div>
+      <NumberInput
+        :value="handleImageElement.radius || 0"
+        @update:value="value => updateImage({ radius: value })"
+        style="width: 60%;"
       />
     </div>
 
@@ -55,14 +55,15 @@
     <ElementOutline />
     <Divider />
     <FileInput @change="files => replaceImage(files)">
-      <Button class="full-width-btn"><i-icon-park-outline:transform /> 替换图片</Button>
+      <Button class="full-width-btn"><i-icon-park-outline:transform /> {{ t("替换图片") }}</Button>
     </FileInput>
-    <Button class="full-width-btn" @click="resetImage()"><i-icon-park-outline:undo /> 重置样式</Button>
-    <Button class="full-width-btn" @click="setBackgroundImage()"><i-icon-park-outline:theme /> 设为背景</Button>
+    <Button class="full-width-btn" @click="resetImage()"><i-icon-park-outline:undo /> {{ t("重置样式") }}</Button>
+    <Button class="full-width-btn" @click="setBackgroundImage()"><i-icon-park-outline:theme /> {{ t("设为背景") }}</Button>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { type Ref, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'
@@ -177,7 +178,7 @@ const presetImageClip = (shape: string, ratio = 0) => {
     originLeft,
     originTop,
   } = getImageElementDataBeforeClip()
-  
+
   // 纵横比裁剪（形状固定为矩形）
   if (ratio) {
     const imageRatio = originHeight / originWidth

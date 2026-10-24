@@ -1,12 +1,12 @@
 <template>
   <div class="line-pool">
     <div class="category" v-for="(item, i) in LINE_LIST" :key="item.type">
-      <div class="category-name">{{item.type}}</div>
+      <div class="category-name">{{t(item.type)}}</div>
       <div class="line-list">
         <div class="line-item" v-for="(line, j) in item.children" :key="j">
           <div class="line-content" @click="selectLine(line)">
             <svg
-              overflow="visible" 
+              overflow="visible"
               width="20"
               height="20"
             >
@@ -34,10 +34,10 @@
               </defs>
               <path
                 class="line-path"
-                :d="line.path" 
-                stroke="currentColor" 
-                fill="none" 
-                stroke-width="2" 
+                :d="line.path"
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
                 :stroke-dasharray="line.style === 'solid' ? '0, 0' : '4, 1'"
                 :marker-start="line.points[0] ? `url(#${`preset-line-${i}-${j}`}-${line.points[0]}-start)` : ''"
                 :marker-end="line.points[1] ? `url(#${`preset-line-${i}-${j}`}-${line.points[1]}-end)` : ''"
@@ -51,6 +51,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { LINE_LIST, type LinePoolItem } from '@/configs/lines'
 
 import LinePointMarker from '@/views/components/element/LineElement/LinePointMarker.vue'

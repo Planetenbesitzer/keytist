@@ -1,39 +1,40 @@
 <template>
-  <section v-if="kind" class="object-styles" aria-label="对象样式" @keydown.stop @mousedown.stop>
-    <div class="heading"><span>对象样式</span><button type="button" aria-label="将当前外观添加为样式" title="将当前外观添加为样式" @click="add">＋</button></div>
+  <section v-if="kind" class="object-styles" :aria-label="t('对象样式')" @keydown.stop @mousedown.stop>
+    <div class="heading"><span>{{ t("对象样式") }}</span><button type="button" :aria-label="t('将当前外观添加为样式')" :title="t('将当前外观添加为样式')" @click="add">＋</button></div>
     <div class="style-grid">
       <button v-for="preset in presets" :key="preset.id" class="style-card" type="button" :class="{ selected: selectedId === preset.id }"
-        :aria-label="`应用样式 ${preset.name}`" :aria-pressed="selectedId === preset.id" @click="apply(preset)">
+        :aria-label="t('应用样式 {0}', { 0: presetLabel(preset) })" :aria-pressed="selectedId === preset.id" @click="apply(preset)">
         <span class="sample" :class="kind" :style="preview(preset)">{{ kind === 'text' ? 'Aa' : kind === 'latex' ? '𝑥²' : kind === 'line' ? '━' : '' }}</span>
-        <span class="name">{{ preset.name }}<span v-if="defaultId === preset.id" aria-label="新建默认样式" title="新建默认样式"> · 默认</span></span>
+        <span class="name">{{ presetLabel(preset) }}<span v-if="defaultId === preset.id" :aria-label="t('新建默认样式')" :title="t('新建默认样式')"> {{ t("· 默认") }}</span></span>
       </button>
     </div>
-    <div class="selected-state" aria-live="polite">{{ selected ? selected.name : '当前外观' }}<span v-if="modified"> · 已修改</span></div>
+    <div class="selected-state" aria-live="polite">{{ selected ? presetLabel(selected) : t("当前外观") }}<span v-if="modified"> {{ t("· 已修改") }}</span></div>
     <details class="manage">
-      <summary>管理样式</summary>
-      <label class="rename"><span>预设</span><select aria-label="要编辑的对象样式" v-model="selectedId"><option value="" disabled>选择要编辑的样式</option><option v-for="preset in presets" :key="preset.id" :value="preset.id">{{ preset.name }}</option></select></label>
-      <label class="rename"><span>名称</span><input aria-label="样式名称" maxlength="40" v-model="name" :disabled="!selected" @keyup.enter="rename"></label>
+      <summary>{{ t("管理样式") }}</summary>
+      <label class="rename"><span>{{ t("预设") }}</span><select :aria-label="t('要编辑的对象样式')" v-model="selectedId"><option value="" disabled>{{ t("选择要编辑的样式") }}</option><option v-for="preset in presets" :key="preset.id" :value="preset.id">{{ presetLabel(preset) }}</option></select></label>
+      <label class="rename"><span>{{ t("名称") }}</span><input :aria-label="t('样式名称')" maxlength="40" v-model="name" :disabled="!selected" @keyup.enter="rename"></label>
       <div class="actions">
-        <button type="button" :disabled="!selected || !name.trim()" @click="rename">重命名</button>
-        <button type="button" :disabled="!selected" @click="redefine">用当前外观重定义</button>
-        <button type="button" :disabled="!selected || defaultId === selectedId" @click="setDefault">设为新建默认</button>
-        <button type="button" :disabled="!defaultId" @click="clearDefault">取消新建默认</button>
-        <button type="button" :disabled="!selected" @click="remove">删除样式</button>
-        <button type="button" v-if="selected?.builtin" @click="restoreSelected">恢复此内置样式</button>
-        <button type="button" @click="restoreAll">恢复内置样式</button>
+        <button type="button" :disabled="!selected || !name.trim()" @click="rename">{{ t("重命名") }}</button>
+        <button type="button" :disabled="!selected" @click="redefine">{{ t("用当前外观重定义") }}</button>
+        <button type="button" :disabled="!selected || defaultId === selectedId" @click="setDefault">{{ t("设为新建默认") }}</button>
+        <button type="button" :disabled="!defaultId" @click="clearDefault">{{ t("取消新建默认") }}</button>
+        <button type="button" :disabled="!selected" @click="remove">{{ t("删除样式") }}</button>
+        <button type="button" v-if="selected?.builtin" @click="restoreSelected">{{ t("恢复此内置样式") }}</button>
+        <button type="button" @click="restoreAll">{{ t("恢复内置样式") }}</button>
       </div>
-      <p>重定义和默认设置只影响以后应用或新建的对象，已有对象不会随之改变。样式保存在此浏览器中。</p>
+      <p>{{ t("重定义和默认设置只影响以后应用或新建的对象，已有对象不会随之改变。样式保存在此浏览器中。") }}</p>
     </details>
-    <div v-if="error" class="error" role="alert">{{ error }}</div>
+    <div v-if="error" class="error" role="alert">{{ t(error) }}</div>
   </section>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, ref, watch, type CSSProperties } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'
 import { useStylePresetsStore } from '@/store/stylePresets'
-import { applyElementStyle, captureElementStyle, isStyleKind, type ObjectStylePreset } from '@/utils/stylePresets'
+import { BUILTIN_OBJECT_STYLES, applyElementStyle, captureElementStyle, isStyleKind, type ObjectStylePreset } from '@/utils/stylePresets'
 import useHistorySnapshot from '@/hooks/useHistorySnapshot'
 import message from '@/utils/message'
 
@@ -42,6 +43,10 @@ const slidesStore = useSlidesStore()
 const libraryStore = useStylePresetsStore()
 const { addHistorySnapshot } = useHistorySnapshot()
 const kind = computed(() => handleElement.value && isStyleKind(handleElement.value.type) ? handleElement.value.type : null)
+const presetLabel = (preset: ObjectStylePreset) => {
+  const original = BUILTIN_OBJECT_STYLES.find(item => item.id === preset.id && item.kind === preset.kind)
+  return original?.name === preset.name ? t(preset.name) : preset.name
+}
 const presets = computed(() => libraryStore.library.presets.filter(preset => preset.kind === kind.value))
 const defaultId = computed(() => kind.value ? libraryStore.library.defaults[kind.value] : undefined)
 const selectedId = ref('')
@@ -76,7 +81,7 @@ const apply = (preset: ObjectStylePreset) => {
 const add = () => {
   if (!kind.value) return
   perform(() => {
-    selectedId.value = libraryStore.add(kind.value!, `自定义样式 ${presets.value.filter(preset => !preset.builtin).length + 1}`, appearance.value)
+    selectedId.value = libraryStore.add(kind.value!, t('自定义样式 {0}', { 0: presets.value.filter(preset => !preset.builtin).length + 1 }), appearance.value)
   }, '已添加当前外观，可在管理样式中改名')
 }
 const rename = () => {

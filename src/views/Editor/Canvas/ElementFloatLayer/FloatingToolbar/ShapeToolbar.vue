@@ -6,7 +6,7 @@
       </template>
       <button class="toolbar-btn">
         <i-icon-park-outline:fill class="icon" />
-        <span>填充</span>
+        <span>{{ t("填充") }}</span>
       </button>
     </Popover>
     <BorderPanel />
@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, nextTick, type Ref, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

@@ -1,21 +1,22 @@
 <template>
   <div class="element-flip">
     <ButtonGroup class="row">
-      <CheckboxButton 
+      <CheckboxButton
         style="flex: 1;"
         :checked="flipV"
         @click="updateFlip({ flipV: !flipV })"
-      ><i-icon-park-outline:flip-vertically /> 垂直翻转</CheckboxButton>
-      <CheckboxButton 
+      ><i-icon-park-outline:flip-vertically /> {{ t("垂直翻转") }}</CheckboxButton>
+      <CheckboxButton
         style="flex: 1;"
         :checked="flipH"
         @click="updateFlip({ flipH: !flipH })"
-      ><i-icon-park-outline:flip-horizontally /> 水平翻转</CheckboxButton>
+      ><i-icon-park-outline:flip-horizontally /> {{ t("水平翻转") }}</CheckboxButton>
     </ButtonGroup>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

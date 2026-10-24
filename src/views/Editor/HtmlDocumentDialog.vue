@@ -1,34 +1,35 @@
 <template>
   <div class="html-document-dialog" @keydown.stop>
-    <div class="dialog-heading"><div><h2>{{ mode === 'edit' ? '编辑本页 HTML' : '导入 HTML' }}</h2><p>保留完整排版、CSS 和 JavaScript，直接作为幻灯片播放。</p></div>
-      <FileInput accept=".html,.htm,text/html" @change="readHtml"><Button :disabled="busy">打开 HTML 文件…</Button></FileInput>
+    <div class="dialog-heading"><div><h2>{{ mode === 'edit' ? t("编辑本页 HTML") : t("导入 HTML") }}</h2><p>{{ t("保留完整排版、CSS 和 JavaScript，直接作为幻灯片播放。") }}</p></div>
+      <FileInput accept=".html,.htm,text/html" @change="readHtml"><Button :disabled="busy">{{ t("打开 HTML 文件…") }}</Button></FileInput>
     </div>
     <div class="source-toolbar">
-      <div class="view-tabs"><button :class="{ active: view === 'source' }" @click="view = 'source'">源码</button><button :class="{ active: view === 'preview' }" @click="view = 'preview'">交互预览</button></div>
-      <button class="text-button" v-if="mode === 'import'" @click="loadExample">载入演示示例</button>
-      <button class="text-button" v-if="view === 'preview'" @click="previewRevision++">重新运行</button>
+      <div class="view-tabs"><button :class="{ active: view === 'source' }" @click="view = 'source'">{{ t("源码") }}</button><button :class="{ active: view === 'preview' }" @click="view = 'preview'">{{ t("交互预览") }}</button></div>
+      <button class="text-button" v-if="mode === 'import'" @click="loadExample">{{ t("载入演示示例") }}</button>
+      <button class="text-button" v-if="view === 'preview'" @click="previewRevision++">{{ t("重新运行") }}</button>
     </div>
-    <textarea v-if="view === 'source'" v-model="source" class="html-source" aria-label="HTML 源码" spellcheck="false" placeholder="粘贴 AI 生成的完整 HTML，或打开 .html 文件。&#10;&#10;支持内联样式、SVG、Canvas 和 JavaScript 演示。"></textarea>
+    <textarea v-if="view === 'source'" v-model="source" class="html-source" :aria-label="t('HTML 源码')" spellcheck="false" :placeholder="t('粘贴 AI 生成的完整 HTML，或打开 .html 文件。\n\n支持内联样式、SVG、Canvas 和 JavaScript 演示。')"></textarea>
     <div class="preview" v-else>
       <div v-if="source.trim()" class="preview-stage" :style="stageStyle">
         <HtmlSlide :key="previewRevision" :source="source" :width="viewportSize" :height="viewportSize * viewportRatio"
           :left="original?.left" :top="original?.top" :scale="original?.scale"
           :sourceWidth="sourceViewport?.width" :sourceHeight="sourceViewport?.height" interactive />
       </div>
-      <p v-else>打开或粘贴 HTML 后，在这里预览和操作。</p>
+      <p v-else>{{ t("打开或粘贴 HTML 后，在这里预览和操作。") }}</p>
     </div>
     <div class="options">
-      <label><span>网页尺寸</span><select v-model="viewportMode" aria-label="HTML 网页尺寸"><option value="deck">跟随当前文稿</option><option value="1280x720">1280 × 720</option><option value="1920x1080">1920 × 1080</option><option value="custom">自定义</option></select></label>
-      <div class="dimensions" v-if="viewportMode === 'custom'"><input type="number" aria-label="HTML 网页宽度" min="1" max="16384" v-model.number="customWidth"><span>×</span><input type="number" aria-label="HTML 网页高度" min="1" max="16384" v-model.number="customHeight"></div>
-      <label class="destination" v-if="mode === 'import'"><span>导入到</span><select v-model="importMode" aria-label="HTML 导入方式"><option value="append">追加到当前文稿</option><option value="replace">作为文稿打开</option></select></label>
+      <label><span>{{ t("网页尺寸") }}</span><select v-model="viewportMode" :aria-label="t('HTML 网页尺寸')"><option value="deck">{{ t("跟随当前文稿") }}</option><option value="1280x720">1280 × 720</option><option value="1920x1080">1920 × 1080</option><option value="custom">{{ t("自定义") }}</option></select></label>
+      <div class="dimensions" v-if="viewportMode === 'custom'"><input type="number" :aria-label="t('HTML 网页宽度')" min="1" max="16384" v-model.number="customWidth"><span>×</span><input type="number" :aria-label="t('HTML 网页高度')" min="1" max="16384" v-model.number="customHeight"></div>
+      <label class="destination" v-if="mode === 'import'"><span>{{ t("导入到") }}</span><select v-model="importMode" :aria-label="t('HTML 导入方式')"><option value="append">{{ t("追加到当前文稿") }}</option><option value="replace">{{ t("作为文稿打开") }}</option></select></label>
     </div>
-    <p class="help">网页整体保留，普通文本框和图片可继续叠加。引用在线资源的页面播放时仍需联网；本地相对路径素材请内嵌到 HTML。</p>
-    <p class="error" role="alert" v-if="error">{{ error }}</p>
-    <div class="actions"><Button @click="emit('close')" :disabled="busy">取消</Button><Button type="primary" @click="apply" :disabled="busy || !source.trim()">{{ busy ? '正在处理…' : mode === 'edit' ? '应用到本页' : '导入 HTML' }}</Button></div>
+    <p class="help">{{ t("网页整体保留，普通文本框和图片可继续叠加。引用在线资源的页面播放时仍需联网；本地相对路径素材请内嵌到 HTML。") }}</p>
+    <p class="error" role="alert" v-if="error">{{ t(error) }}</p>
+    <div class="actions"><Button @click="emit('close')" :disabled="busy">{{ t("取消") }}</Button><Button type="primary" @click="apply" :disabled="busy || !source.trim()">{{ busy ? t("正在处理…") : mode === 'edit' ? t("应用到本页") : t("导入 HTML") }}</Button></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { t } from '@/i18n'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'

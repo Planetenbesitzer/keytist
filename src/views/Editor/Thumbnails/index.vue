@@ -1,14 +1,14 @@
 <template>
-  <div 
+  <div
     class="thumbnails"
     @mousedown="() => setThumbnailsFocus(true)"
     v-click-outside="() => setThumbnailsFocus(false)"
   >
     <div class="add-slide">
-      <div class="btn" @click="createSlide()"><i-icon-park-outline:plus class="icon" />添加幻灯片</div>
+      <div class="btn" @click="createSlide()"><i-icon-park-outline:plus class="icon" />{{ t("添加幻灯片") }}</div>
       <Popover trigger="click" placement="bottom-start" v-model:value="presetLayoutPopoverVisible" center>
         <template #content>
-          <Templates 
+          <Templates
             @select="slide => { createSlideByTemplate(slide); presetLayoutPopoverVisible = false }"
             @selectAll="({ slides, theme }) => { insertAllTemplates({ slides, theme }); presetLayoutPopoverVisible = false }"
           />
@@ -17,7 +17,7 @@
       </Popover>
     </div>
 
-    <Draggable 
+    <Draggable
       class="thumbnail-list"
       ref="thumbnailsRef"
       :modelValue="slides"
@@ -33,21 +33,21 @@
         <div class="thumbnail-container">
           <div class="section-title"
             :data-section-id="element?.sectionTag?.id || ''"
-            v-if="element.sectionTag || (hasSection && index === 0)" 
+            v-if="element.sectionTag || (hasSection && index === 0)"
             v-contextmenu="contextmenusSection"
             @dblclick="() => editSection(element?.sectionTag?.id || '')"
           >
-            <input 
-              :id="`section-title-input-${element?.sectionTag?.id || 'default'}`" 
+            <input
+              :id="`section-title-input-${element?.sectionTag?.id || 'default'}`"
               type="text"
               :value="element?.sectionTag?.title || ''"
-              placeholder="输入节名称"
+              :placeholder="t('输入节名称')"
               @blur="$event => saveSection($event)"
               @keydown.enter.stop="$event => saveSection($event)"
               v-if="editingSectionId === element?.sectionTag?.id || (index === 0 && editingSectionId === 'default')"
             >
             <span class="text" v-else>
-              <div class="text-content">{{ element?.sectionTag ? (element?.sectionTag?.title || '无标题节') : '默认节' }}</div>
+              <div class="text-content">{{ element?.sectionTag ? (element?.sectionTag?.title || t("无标题节")) : t("默认节") }}</div>
             </span>
           </div>
           <div
@@ -62,18 +62,19 @@
           >
             <div class="label" :class="{ 'offset-left': index >= 99 }">{{ fillDigit(index + 1, 2) }}</div>
             <ThumbnailSlide class="thumbnail" :slide="element" :size="120" :visible="index < slidesLoadLimit" />
-  
+
             <div class="note-flag" v-if="element.notes && element.notes.length" @click="openNotesPanel()">{{ element.notes.length }}</div>
           </div>
         </div>
       </template>
     </Draggable>
 
-    <div class="page-number">幻灯片 {{slideIndex + 1}} / {{slides.length}}</div>
+    <div class="page-number">{{ t("幻灯片") }} {{slideIndex + 1}} / {{slides.length}}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, nextTick, ref, watch, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore, useKeyboardStore } from '@/store'

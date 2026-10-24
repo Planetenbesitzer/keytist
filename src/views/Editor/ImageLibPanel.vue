@@ -1,21 +1,21 @@
 <template>
-  <MoveablePanel 
-    class="image-lib-panel" 
-    :width="360" 
-    :height="580" 
-    :left="-270" 
+  <MoveablePanel
+    class="image-lib-panel"
+    :width="360"
+    :height="580"
+    :left="-270"
     :top="90"
     :contentStyle="{
       overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
     }"
-    title="图片库（来自 pexels.com）" 
+    :title="t('图片库（来自 pexels.com）')"
     @close="close()"
   >
     <div class="container" v-loading="{ state: loading, text: '加载中...' }">
       <div class="tools">
-        <Input class="input" v-model:value="searchWord" placeholder="搜索图片" @enter="search()">
+        <Input class="input" v-model:value="searchWord" :placeholder="t('搜索图片')" @enter="search()">
           <template #prefix>
             <Popover class="more-icon" trigger="click" v-model:value="orientationVisible">
               <template #content>
@@ -26,9 +26,9 @@
                   v-for="item in orientationOptions"
                   :key="item.key"
                   @click="setOrientation(item.key); orientationVisible = false"
-                >{{ item.label }}</PopoverMenuItem>
+                >{{ t(item.label) }}</PopoverMenuItem>
               </template>
-              <div class="search-orientation">{{ orientationMap[orientation] }} <i-icon-park-outline:down style="margin-left: 4px;" /></div>
+              <div class="search-orientation">{{ t(orientationMap[orientation]) }} <i-icon-park-outline:down style="margin-left: 4px;" /></div>
             </Popover>
           </template>
           <template #suffix>
@@ -37,7 +37,7 @@
         </Input>
       </div>
 
-      <ImageWaterfallViewer 
+      <ImageWaterfallViewer
         class="imgs-wrap"
         :list="imgs"
         :columnSpacing="5"
@@ -48,7 +48,7 @@
           <div class="img-item">
             <img :src="props.src">
             <div class="mask">
-              <Button type="primary" size="small" @click="createImageElement(props.src)">插入</Button>
+              <Button type="primary" size="small" @click="createImageElement(props.src)">{{ t("插入") }}</Button>
             </div>
           </div>
         </template>
@@ -58,6 +58,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { onMounted, ref } from 'vue'
 import api from '@/services'
 import { useMainStore } from '@/store/main'
@@ -116,7 +117,7 @@ onMounted(() => {
   search('风景')
 })
 
-const search = (q?: string) => {  
+const search = (q?: string) => {
   const query = q || searchWord.value
   if (!query) return message.error('请输入搜索关键词')
 
@@ -145,10 +146,10 @@ const setOrientation = (value: Orientation) => {
 
 const loadMore = () => {
   if (loading.value) return
-  
+
   const count = page.value * perPage.value
   if (count >= Math.min(max.value, total.value)) return
-  
+
   loading.value = true
   page.value += 1
 

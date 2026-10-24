@@ -1,10 +1,10 @@
 <template>
   <div class="toolbar">
-    <div class="inspector-heading">格式<span>FORMAT</span></div>
-    <Tabs 
-      :tabs="currentTabs" 
-      :value="toolbarState" 
-      card 
+    <div class="inspector-heading">{{ t("格式") }}<span>FORMAT</span></div>
+    <Tabs
+      :tabs="currentTabs"
+      :value="toolbarState"
+      card
       @update:value="key => setToolbarState(key as ToolbarStates)"
     />
     <div class="content">
@@ -14,6 +14,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'

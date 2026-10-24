@@ -4,7 +4,7 @@
       <div class="handler">
         <div class="col-header">
           <div class="col-header-item"
-            v-for="colIndex in 7" 
+            v-for="colIndex in 7"
             :key="colIndex"
           >
             <div class="col-key">{{ alphabet[colIndex - 1] }}</div>
@@ -12,7 +12,7 @@
         </div>
         <div class="row-header">
           <div class="row-header-item"
-            v-for="rowIndex in 31" 
+            v-for="rowIndex in 31"
             :key="rowIndex"
           >
             <div class="row-key">{{ rowIndex }}</div>
@@ -25,21 +25,21 @@
         </div>
       </div>
       <div class="range-box">
-        <div 
-          class="temp-range" 
+        <div
+          class="temp-range"
           :style="{
             width: tempRangeSize.width + 'px',
             height: tempRangeSize.height + 'px',
           }"
         ></div>
-        <div 
-          :class="['range-line', line.type]" 
-          v-for="line in rangeLines" 
-          :key="line.type" 
+        <div
+          :class="['range-line', line.type]"
+          v-for="line in rangeLines"
+          :key="line.type"
           :style="line.style"
         ></div>
-        <div 
-          class="resizable" 
+        <div
+          class="resizable"
           :style="resizablePointStyle"
           @mousedown.stop="changeSelectRange($event)"
         ></div>
@@ -47,12 +47,12 @@
       <table>
         <tbody>
           <tr v-for="rowIndex in 31" :key="rowIndex">
-            <td 
-              v-for="colIndex in 7" 
-              :key="colIndex" 
+            <td
+              v-for="colIndex in 7"
+              :key="colIndex"
               :class="{ 'head': (colIndex === 1 && rowIndex <= selectedRange[1]) || (rowIndex === 1 && colIndex <= selectedRange[0]) }"
             >
-              <input 
+              <input
                 :class="['item', { 'selected': rowIndex <= selectedRange[1] && colIndex <= selectedRange[0] }]"
                 :id="`cell-${rowIndex - 1}-${colIndex - 1}`"
                 v-if="!(rowIndex === 1 && colIndex === 1)"
@@ -68,29 +68,30 @@
 
     <div class="btns">
       <div class="left">
-        图表类型：{{ CHART_TYPE_MAP[chartType] }}
+{{ t("图表类型：") }}   图表类型：{{ CHART_TYPE_MAP[chartType] }}
         <Popover trigger="click" placement="top" v-model:value="chartTypeSelectVisible">
           <template #content>
             <PopoverMenuItem
               center
-              v-for="item in chartList" 
-              :key="item" 
+              v-for="item in chartList"
+              :key="item"
               @click="chartType = item; chartTypeSelectVisible = false"
-            >{{CHART_TYPE_MAP[item]}}</PopoverMenuItem>
+            >{{t(CHART_TYPE_MAP[item])}}</PopoverMenuItem>
           </template>
-          <span class="change">点击更换</span>
+          <span class="change">{{ t("点击更换") }}</span>
         </Popover>
       </div>
       <div class="right">
-        <Button class="btn" @click="closeEditor()">取消</Button>
-        <Button class="btn" @click="clear()">清空数据</Button>
-        <Button type="primary" class="btn" @click="getTableData()">确认</Button>
+        <Button class="btn" @click="closeEditor()">{{ t("取消") }}</Button>
+        <Button class="btn" @click="clear()">{{ t("清空数据") }}</Button>
+        <Button type="primary" class="btn" @click="getTableData()">{{ t("确认") }}</Button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import type { ChartData, ChartType } from '@/types/slides'
 import { KEYS } from '@/configs/hotkey'
@@ -286,13 +287,13 @@ const handlePaste = (e: ClipboardEvent, rowIndex: number, colIndex: number) => {
       clipboardDataFirstItem.getAsString(text => {
         const clipboardData = pasteCustomClipboardString(text)
         if (typeof clipboardData === 'object') return
-   
+
         const excelData = pasteExcelClipboardString(text)
         if (excelData) {
           fillTableData(excelData, rowIndex, colIndex)
           return
         }
-  
+
         document.execCommand('insertText', false, text)
       })
     }
@@ -300,7 +301,7 @@ const handlePaste = (e: ClipboardEvent, rowIndex: number, colIndex: number) => {
       clipboardDataFirstItem.getAsString(html => {
         const htmlData = pasteHTMLTableClipboardString(html)
         if (htmlData) fillTableData(htmlData, rowIndex, colIndex)
-      }) 
+      })
     }
   }
 }

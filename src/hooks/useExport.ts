@@ -17,6 +17,7 @@ import { preparePptxImageSource } from '@/utils/pptxImage'
 import { preparePptxImageShadow } from '@/utils/pptxImageShadow'
 import { assertExportImagesReady } from '@/utils/exportImageReadiness'
 import { preparePptxInlineMathText } from '@/utils/inlineMathExport'
+import { t } from '@/i18n'
 
 import BaseLatexElement from '@/views/components/element/LatexElement/BaseLatexElement.vue'
 import BaseShapeElement from '@/views/components/element/ShapeElement/BaseShapeElement.vue'
@@ -58,7 +59,7 @@ export default () => {
 
   const assertStaticSlides = (roots: Iterable<Element>) => {
     if (Array.from(roots).some(root => root.matches('.html-slide') || root.querySelector('.html-slide'))) {
-      throw new Error('这份文稿包含交互网页，请使用“发布 HTML”保留完整内容；需要 PDF 时可在导出的网页中打印。')
+      throw new Error(t('这份文稿包含交互网页，请使用 HTML 导出保留完整内容；需要 PDF 时可在导出的网页中打印。'))
     }
   }
 
@@ -85,7 +86,7 @@ export default () => {
       return true
     }
     catch (error) {
-      message.error(error instanceof Error ? error.message : '导出图片失败')
+      message.error(error instanceof Error ? error.message : t('导出图片失败'))
       return false
     }
     finally {
@@ -128,14 +129,14 @@ export default () => {
       return true
     }
     catch (error) {
-      message.error(error instanceof Error ? error.message : '导出失败')
+      message.error(error instanceof Error ? error.message : t('导出失败'))
       return false
     }
     finally {
       exporting.value = false
     }
   }
-  
+
   // 导出pptist文件（特有 .pptist 后缀文件）
   const exportSpecificFile = (_slides: Slide[]) => {
     const json = {
@@ -145,7 +146,7 @@ export default () => {
     const blob = new Blob([encrypt(JSON.stringify(json))], { type: '' })
     saveAs(blob, `${title.value}.pptist`)
   }
-  
+
   // 导出JSON文件
   const exportJSON = downloadLocalDocument
 
@@ -415,11 +416,11 @@ export default () => {
   // 获取边框配置
   const getOutlineOption = (outline: PPTElementOutline): pptxgen.ShapeLineProps => {
     const c = formatColor(outline?.color || '#000000')
-    
+
     return {
-      color: c.color, 
+      color: c.color,
       transparency: (1 - c.alpha) * 100,
-      width: (outline.width || 1) / ratioPx2Pt.value, 
+      width: (outline.width || 1) / ratioPx2Pt.value,
       dashType: outline.style ? dashTypeMap[outline.style] as 'solid' | 'dash' | 'sysDot' : 'solid',
     }
   }
@@ -449,9 +450,9 @@ export default () => {
     return isSVGBase64 || isSVGUrl
   }
 
-  // Build native slides after normalizing SVG image sources for portable media.
+  // Only native elements are converted. Embedded HTML is deliberately ignored;
+  // adding every slide first preserves blank placeholders and slide numbering.
   const buildPPTX = async (_slides: Slide[], masterOverwrite: boolean, ignoreMedia: boolean) => {
-    if (_slides.some(slide => slide.html)) throw new Error('交互网页需要使用“发布 HTML”保留完整内容，无法直接转为 PowerPoint 对象。')
     const preparedImages = new Map<PPTImageElement | string, string>()
     for (const [slideIndex, slide] of _slides.entries()) {
       const sources: { source: string; label: string; element?: PPTImageElement }[] = slide.elements.filter((element): element is PPTImageElement => element.type === 'image').map(element => ({ source: element.src, label: element.id, element }))
@@ -468,7 +469,11 @@ export default () => {
           preparedImages.set(key, await preparePptxImageSource(source, viewport))
         }
         catch (error) {
-          throw new Error(`第 ${slideIndex + 1} 页图片 ${label}：${error instanceof Error ? error.message : '无法读取图片。'}`)
+          throw new Error(t('第 {page} 页图片 {label}：{error}', {
+            page: slideIndex + 1,
+            label,
+            error: error instanceof Error ? error.message : t('无法读取图片。'),
+          }))
         }
       }
     }
@@ -680,7 +685,7 @@ export default () => {
               y: el.height / el.viewBox[1],
             }
             const points = formatPoints(toPoints(el.path), scale)
-  
+
             let fillColor = formatColor(el.fill)
             if (el.gradient) {
               const colors = el.gradient.colors
@@ -691,7 +696,7 @@ export default () => {
             }
             if (el.pattern) fillColor = formatColor('#00000000')
             const opacity = el.opacity === undefined ? 1 : el.opacity
-  
+
             const options: pptxgen.ShapeProps = {
               x: el.left / ratioPx2Inch.value,
               y: el.top / ratioPx2Inch.value,
@@ -762,7 +767,7 @@ export default () => {
             }
             if (isBase64Image(source)) options.data = source
             else options.path = source
-  
+
             if (el.flipH) options.flipH = el.flipH
             if (el.flipV) options.flipV = el.flipV
             if (el.rotate) options.rotate = el.rotate
@@ -787,9 +792,9 @@ export default () => {
             w: (maxX - minX) / ratioPx2Inch.value,
             h: (maxY - minY) / ratioPx2Inch.value,
             line: {
-              color: c.color, 
+              color: c.color,
               transparency: (1 - c.alpha) * 100,
-              width: el.width / ratioPx2Pt.value, 
+              width: el.width / ratioPx2Pt.value,
               dashType: dashTypeMap[el.style] as 'solid' | 'dash' | 'sysDot',
               beginArrowType: el.points[0] ? 'arrow' : 'none',
               endArrowType: el.points[1] ? 'arrow' : 'none',
@@ -806,7 +811,7 @@ export default () => {
           for (let i = 0; i < el.data.series.length; i++) {
             const item = el.data.series[i]
             chartData.push({
-              name: `系列${i + 1}`,
+              name: t('系列 {number}', { number: i + 1 }),
               labels: el.data.labels,
               values: item,
             })
@@ -820,7 +825,7 @@ export default () => {
             const supplement = tinycolor(el.themeColors[len - 1]).analogous(10 + 1 - len).map(color => color.toHexString())
             chartColors = [...el.themeColors.slice(0, len - 1), ...supplement].map(color => formatColor(color).color)
           }
-          
+
           const options: pptxgen.IChartOpts = {
             x: el.left / ratioPx2Inch.value,
             y: el.top / ratioPx2Inch.value,
@@ -836,7 +841,7 @@ export default () => {
           const fontSize = 14 / ratioPx2Pt.value
           options.catAxisLabelFontSize = fontSize
           options.valAxisLabelFontSize = fontSize
-          
+
           if (el.fill || el.outline) {
             const plotArea: pptxgen.IChartPropsFillLine = {}
             if (el.fill) {
@@ -890,7 +895,7 @@ export default () => {
             type = pptx.ChartType.doughnut
             options.holeSize = 60
           }
-          
+
           pptxSlide.addChart(type, chartData, options)
         }
 
@@ -990,7 +995,7 @@ export default () => {
 
           pptxSlide.addTable(tableData, options)
         }
-        
+
         else if (el.type === 'latex') {
           const container = document.createElement('div')
           const vm = createVNode(BaseLatexElement, { elementInfo: el }, null)
@@ -1015,7 +1020,7 @@ export default () => {
 
           pptxSlide.addImage(options)
         }
-        
+
         else if (!ignoreMedia && (el.type === 'video' || el.type === 'audio')) {
           const options: pptxgen.MediaProps = {
             x: el.left / ratioPx2Inch.value,
@@ -1030,7 +1035,7 @@ export default () => {
           const extMatch = el.src.match(/\.([a-zA-Z0-9]+)(?:[\?#]|$)/)
           if (extMatch && extMatch[1]) options.extn = extMatch[1]
           else if (el.ext) options.extn = el.ext
-          
+
           const videoExts = ['avi', 'mp4', 'm4v', 'mov', 'wmv']
           const audioExts = ['mp3', 'm4a', 'mp4', 'wav', 'wma']
           if (options.extn && [...videoExts, ...audioExts].includes(options.extn)) {
@@ -1045,6 +1050,7 @@ export default () => {
 
   // 导出PPTX文件
   const exportPPTX = async (_slides: Slide[], masterOverwrite: boolean, ignoreMedia: boolean) => {
+    if (exporting.value) return false
     exporting.value = true
     try {
       const pptx = await buildPPTX(_slides, masterOverwrite, ignoreMedia)
@@ -1052,7 +1058,7 @@ export default () => {
       return true
     }
     catch (error) {
-      message.error(`PPTX 导出失败：${error instanceof Error ? error.message : '无法生成文件。'}`)
+      message.error(t('PPTX 导出失败：{error}', { error: error instanceof Error ? error.message : t('无法生成文件。') }))
       return false
     }
     finally {

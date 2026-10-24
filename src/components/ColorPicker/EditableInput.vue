@@ -2,7 +2,7 @@
   <div class="editable-input">
     <input
       class="input-content"
-      aria-label="十六进制颜色"
+      :aria-label="t('十六进制颜色')"
       :value="val"
       @input="$event => handleInput($event)"
     >
@@ -10,6 +10,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed } from 'vue'
 import tinycolor, { type ColorFormats } from 'tinycolor2'
 

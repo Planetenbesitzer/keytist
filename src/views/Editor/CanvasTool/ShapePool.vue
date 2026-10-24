@@ -1,13 +1,13 @@
 <template>
   <div class="shape-pool">
     <div class="category" v-for="item in SHAPE_LIST" :key="item.type">
-      <div class="category-name">{{item.type}}</div>
+      <div class="category-name">{{t(item.type)}}</div>
       <div class="shape-list">
-        <ShapeItemThumbnail 
+        <ShapeItemThumbnail
           class="shape-item"
-          v-for="(shape, index) in item.children" 
-          :key="index" 
-          :shape="shape" 
+          v-for="(shape, index) in item.children"
+          :key="index"
+          :shape="shape"
           @click="selectShape(shape)"
         />
       </div>
@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { SHAPE_LIST, type ShapePoolItem } from '@/configs/shapes'
 import ShapeItemThumbnail from './ShapeItemThumbnail.vue'
 

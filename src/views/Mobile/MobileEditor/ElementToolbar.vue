@@ -1,35 +1,35 @@
 <template>
   <div class="element-toolbar">
-    <Tabs 
-      :tabs="tabs" 
-      v-model:value="activeTab" 
-      :tabsStyle="{ marginBottom: '8px' }" 
+    <Tabs
+      :tabs="tabs"
+      v-model:value="activeTab"
+      :tabsStyle="{ marginBottom: '8px' }"
       :tabStyle="{
         width: '30%',
         margin: '0 10%',
-      }" 
+      }"
     />
 
     <div class="content">
       <div class="style" v-if="activeTab === 'style'">
         <template v-if="textPropsEnable">
           <ButtonGroup class="row">
-            <CheckboxButton 
+            <CheckboxButton
               style="flex: 1;"
               :checked="richTextAttrs.bold"
               @click="emitRichTextCommand('bold')"
             ><i-icon-park-outline:text-bold /></CheckboxButton>
-            <CheckboxButton 
+            <CheckboxButton
               style="flex: 1;"
               :checked="richTextAttrs.em"
               @click="emitRichTextCommand('em')"
             ><i-icon-park-outline:text-italic /></CheckboxButton>
-            <CheckboxButton 
+            <CheckboxButton
               style="flex: 1;"
               :checked="richTextAttrs.underline"
               @click="emitRichTextCommand('underline')"
             ><i-icon-park-outline:text-underline /></CheckboxButton>
-            <CheckboxButton 
+            <CheckboxButton
               style="flex: 1;"
               :checked="richTextAttrs.strikethrough"
               @click="emitRichTextCommand('strikethrough')"
@@ -37,19 +37,19 @@
           </ButtonGroup>
 
           <ButtonGroup class="row">
-            <Button 
+            <Button
               style="flex: 1;"
               @click="emitRichTextCommand('fontsize-add')"
             ><i-icon-park-outline:font-size />+</Button>
-            <Button 
+            <Button
               style="flex: 1;"
               @click="emitRichTextCommand('fontsize-reduce')"
             ><i-icon-park-outline:font-size />-</Button>
           </ButtonGroup>
 
-          <RadioGroup 
-            class="row" 
-            button-style="solid" 
+          <RadioGroup
+            class="row"
+            button-style="solid"
             :value="richTextAttrs.align"
             @update:value="value => emitRichTextCommand('align', value)"
           >
@@ -60,10 +60,10 @@
         </template>
 
         <div class="row-block" v-if="textColorPropsEnable">
-          <div class="label">文字颜色：</div>
+          <div class="label">{{ t("文字颜色：") }}</div>
           <div class="colors">
-            <div class="color" 
-              v-for="color in colors" 
+            <div class="color"
+              v-for="color in colors"
               :key="color"
               @click="updateFontColor(color)"
             >
@@ -80,10 +80,10 @@
           </div>
         </div>
         <div class="row-block" v-if="fillPropsEnable">
-          <div class="label">填充色：</div>
+          <div class="label">{{ t("填充色：") }}</div>
           <div class="colors">
-            <div class="color" 
-              v-for="color in colors" 
+            <div class="color"
+              v-for="color in colors"
               :key="color"
               @click="updateFill(color)"
             >
@@ -100,35 +100,35 @@
           </div>
         </div>
 
-        <div class="tip" v-if="!textPropsEnable && !textColorPropsEnable && !fillPropsEnable">暂无可用属性</div>
+        <div class="tip" v-if="!textPropsEnable && !textColorPropsEnable && !fillPropsEnable">{{ t("暂无可用属性") }}</div>
       </div>
 
       <div class="common" v-if="activeTab === 'common'">
         <ButtonGroup class="row">
-          <Button style="flex: 1;" @click="copyElement()"><i-icon-park-outline:copy class="icon" /> 复制</Button>
-          <Button style="flex: 1;" @click="deleteElement()"><i-icon-park-outline:delete class="icon" /> 删除</Button>
+          <Button style="flex: 1;" @click="copyElement()"><i-icon-park-outline:copy class="icon" /> {{ t("复制") }}</Button>
+          <Button style="flex: 1;" @click="deleteElement()"><i-icon-park-outline:delete class="icon" /> {{ t("删除") }}</Button>
         </ButtonGroup>
-        
+
         <Divider :margin="20" />
 
         <ButtonGroup class="row">
-          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.TOP)"><i-icon-park-outline:send-to-back class="icon" /> 置顶</Button>
-          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.BOTTOM)"><i-icon-park-outline:bring-to-front-one class="icon" /> 置底</Button>
-          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.UP)"><i-icon-park-outline:bring-to-front class="icon" /> 上移</Button>
-          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.DOWN)"><i-icon-park-outline:sent-to-back class="icon" /> 下移</Button>
+          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.TOP)"><i-icon-park-outline:send-to-back class="icon" /> {{ t("置顶") }}</Button>
+          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.BOTTOM)"><i-icon-park-outline:bring-to-front-one class="icon" /> {{ t("置底") }}</Button>
+          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.UP)"><i-icon-park-outline:bring-to-front class="icon" /> {{ t("上移") }}</Button>
+          <Button style="flex: 1;" @click="orderElement(handleElement!, ElementOrderCommands.DOWN)"><i-icon-park-outline:sent-to-back class="icon" /> {{ t("下移") }}</Button>
         </ButtonGroup>
-        
+
         <Divider :margin="20" />
 
         <ButtonGroup class="row">
-          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.LEFT)"><i-icon-park-outline:align-left class="icon" /> 左对齐</Button>
-          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.HORIZONTAL)"><i-icon-park-outline:align-vertically class="icon" /> 水平居中</Button>
-          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.RIGHT)"><i-icon-park-outline:align-right class="icon" /> 右对齐</Button>
+          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.LEFT)"><i-icon-park-outline:align-left class="icon" /> {{ t("左对齐") }}</Button>
+          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.HORIZONTAL)"><i-icon-park-outline:align-vertically class="icon" /> {{ t("水平居中") }}</Button>
+          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.RIGHT)"><i-icon-park-outline:align-right class="icon" /> {{ t("右对齐") }}</Button>
         </ButtonGroup>
         <ButtonGroup class="row">
-          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.TOP)"><i-icon-park-outline:align-top class="icon" /> 上对齐</Button>
-          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.VERTICAL)"><i-icon-park-outline:align-horizontally class="icon" /> 垂直居中</Button>
-          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.BOTTOM)"><i-icon-park-outline:align-bottom class="icon" /> 下对齐</Button>
+          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.TOP)"><i-icon-park-outline:align-top class="icon" /> {{ t("上对齐") }}</Button>
+          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.VERTICAL)"><i-icon-park-outline:align-horizontally class="icon" /> {{ t("垂直居中") }}</Button>
+          <Button style="flex: 1;" @click="alignElementToCanvas(ElementAlignCommands.BOTTOM)"><i-icon-park-outline:align-bottom class="icon" /> {{ t("下对齐") }}</Button>
         </ButtonGroup>
       </div>
     </div>
@@ -136,6 +136,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

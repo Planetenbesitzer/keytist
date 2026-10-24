@@ -11,13 +11,14 @@
         <i-icon-park-outline:chart-scatter style="font-size: 24px" v-else-if="chart === 'scatter'" />
         <i-icon-park-outline:radar-chart style="font-size: 23px" v-else-if="chart === 'radar'" />
 
-        <div class="name">{{ CHART_TYPE_MAP[chart] }}</div>
+        <div class="name">{{ t(CHART_TYPE_MAP[chart]) }}</div>
       </div>
     </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import type { ChartType } from '@/types/slides'
 import { CHART_TYPE_MAP } from '@/configs/chart'
 

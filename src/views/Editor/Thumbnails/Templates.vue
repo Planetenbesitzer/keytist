@@ -1,35 +1,35 @@
 <template>
   <div class="templates">
     <div class="catalogs">
-      <div class="catalog" 
-        :class="{ 'active': activeCatalog === item.id }" 
-        v-for="item in templates" 
+      <div class="catalog"
+        :class="{ 'active': activeCatalog === item.id }"
+        v-for="item in templates"
         :key="item.id"
         @click="changeCatalog(item.id)"
-      >{{ item.name }}</div>
+      >{{ t(item.name) }}</div>
     </div>
     <div class="content" v-loading="{ state: loading, text: '加载中...' }">
       <div class="header">
         <div class="types">
-          <div class="type" 
+          <div class="type"
             :class="{ 'active': activeType === item.value }"
             v-for="item in types"
             :key="item.value"
             @click="activeType = item.value"
-          >{{ item.label }}</div>
+          >{{ t(item.label) }}</div>
         </div>
-        <div class="insert-all" @click="insertTemplates({ slides, theme })">插入全部</div>
+        <div class="insert-all" @click="insertTemplates({ slides, theme })">{{ t("插入全部") }}</div>
       </div>
       <div class="list" ref="listRef">
         <template v-for="slide in slides" :key="slide.id">
-          <div 
+          <div
             class="slide-item"
             v-if="slide.type === activeType || activeType === 'all'"
           >
             <ThumbnailSlide class="thumbnail" :slide="slide" :size="180" />
-    
+
             <div class="btns">
-              <Button class="btn" type="primary" size="small" @click="insertTemplate(slide)">插入模板</Button>
+              <Button class="btn" type="primary" size="small" @click="insertTemplate(slide)">{{ t("插入模板") }}</Button>
             </div>
           </div>
         </template>
@@ -39,6 +39,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref, onMounted, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'
@@ -92,7 +93,7 @@ const changeCatalog = (id: string) => {
 
     loading.value = false
 
-    if (listRef.value) listRef.value.scrollTo(0, 0) 
+    if (listRef.value) listRef.value.scrollTo(0, 0)
   }).catch(() => {
     loading.value = false
   })
@@ -134,7 +135,7 @@ onMounted(() => {
     }
 
     & + .catalog {
-      margin-top: 3px; 
+      margin-top: 3px;
     }
   }
 }

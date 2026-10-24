@@ -1,7 +1,7 @@
 <template>
   <div class="select-wrap" v-if="disabled">
     <div class="select disabled" ref="selectRef">
-      <div class="selector">{{ value }}</div>
+      <div class="selector">{{ showLabel }}</div>
       <div class="icon">
         <slot name="icon">
           <i-icon-park-outline:down />
@@ -9,10 +9,10 @@
       </div>
     </div>
   </div>
-  <Popover 
+  <Popover
     class="select-wrap"
-    trigger="click" 
-    v-model:value="popoverVisible" 
+    trigger="click"
+    v-model:value="popoverVisible"
     placement="bottom"
     :contentStyle="{
       padding: 0,
@@ -22,17 +22,17 @@
   >
     <template #content>
       <template v-if="search">
-        <Input ref="searchInputRef" simple :placeholder="searchLabel" v-model:value="searchKey" :style="{ width: optionWidth + 2 + 'px' }" />
+        <Input ref="searchInputRef" simple :placeholder="t(searchLabel)" v-model:value="searchKey" :style="{ width: optionWidth + 2 + 'px' }" />
         <Divider :margin="0" />
       </template>
       <div class="options" ref="optionsRef" :style="{ width: optionWidth + 2 + 'px' }">
         <template v-for="(option, index) in showOptions" :key="option.value">
-          <div class="option-group" v-if="option.group && (index === 0 || option.group !== showOptions[index - 1].group)">{{option.group}}</div>
+          <div class="option-group" v-if="option.group && (index === 0 || option.group !== showOptions[index - 1].group)">{{t(option.group)}}</div>
           <div class="option"
             :class="{ disabled: option.disabled, selected: option.value === value }"
             :style="option.fontFamily ? { fontFamily: option.fontFamily } : undefined"
             @click="handleSelect(option)"
-          >{{ option.label }}<span class="option-note" v-if="option.note">{{option.note}}</span></div>
+          >{{ uiOptionLabel(option) }}<span class="option-note" v-if="option.note">{{t(option.note)}}</span></div>
         </template>
       </div>
     </template>
@@ -48,6 +48,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t, uiOptionLabel } from '@/i18n'
 import { computed, onMounted, onUnmounted, ref, watch, nextTick, onBeforeUnmount, useTemplateRef } from 'vue'
 import Popover from './Popover.vue'
 import Input from './Input.vue'
@@ -60,6 +61,7 @@ interface SelectOption {
   fontFamily?: string
   group?: string
   note?: string
+  localize?: boolean
 }
 
 const props = withDefaults(defineProps<{
@@ -92,15 +94,15 @@ const searchInputRef = useTemplateRef<InstanceType<typeof Input>>('searchInputRe
 
 const showLabel = computed(() => {
   const option = props.options.find(item => item.value === props.value)
-  if (option?.fontFamily && option.disabled) return `${option.label} · 未安装`
-  return option?.label || props.defaultLabel || props.value
+  if (option?.fontFamily && option.disabled) return `${uiOptionLabel(option)} · ${t('未安装')}`
+  return option ? uiOptionLabel(option) : props.defaultLabel ? t(props.defaultLabel) : props.value
 })
 
 const showOptions = computed(() => {
   if (!props.search) return props.options
   if (!searchKey.value.trim()) return props.options
   const opts = props.options.filter(item => {
-    return item.label.toLowerCase().indexOf(searchKey.value.toLowerCase()) !== -1
+    return uiOptionLabel(item).toLowerCase().includes(searchKey.value.toLowerCase()) || item.label.toLowerCase().includes(searchKey.value.toLowerCase())
   })
   return opts.length ? opts : props.options
 })

@@ -3,7 +3,7 @@
     class="font-select"
     :value="richTextAttrs.fontname"
     search
-    searchLabel="搜索字体"
+    :searchLabel="t('搜索字体')"
     @update:value="value => emitRichTextCommand('fontname', value as string)"
     :options="FONTS"
   />
@@ -11,7 +11,7 @@
     class="fontsize-select"
     :value="richTextAttrs.fontsize"
     search
-    searchLabel="搜索字号"
+    :searchLabel="t('搜索字号')"
     @update:value="value => emitRichTextCommand('fontsize', value as string)"
     :options="fontSizeOptions.map(item => ({ label: item, value: item }))"
   />
@@ -76,6 +76,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import tinycolor from 'tinycolor2'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'

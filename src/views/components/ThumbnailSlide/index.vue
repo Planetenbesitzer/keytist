@@ -5,7 +5,7 @@
       height: size * viewportRatio + 'px',
     }"
   >
-    <div 
+    <div
       class="elements"
       :style="{
         width: viewportSize + 'px',
@@ -24,11 +24,12 @@
         :elementIndex="index + 1"
       />
     </div>
-    <div class="placeholder" v-else>加载中 ...</div>
+    <div class="placeholder" v-else>{{ t("加载中 ...") }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, provide } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'

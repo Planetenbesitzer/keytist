@@ -1,13 +1,13 @@
 <template>
   <div class="element-opacity">
     <div class="row">
-      <div style="width: 40%;">不透明度：</div>
+      <div style="width: 40%;">{{ t("不透明度：") }}</div>
       <Slider
         :min="0"
         :max="1"
         :step="0.1"
         :value="opacity"
-        @update:value="value => updateOpacity(value as number)" 
+        @update:value="value => updateOpacity(value as number)"
         style="width: 60%;"
       />
     </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

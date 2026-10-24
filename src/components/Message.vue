@@ -1,7 +1,7 @@
 <template>
-  <Transition 
-    name="message-fade" 
-    appear 
+  <Transition
+    name="message-fade"
+    appear
     mode="in-out"
     @beforeLeave="emit('close')"
     @afterLeave="emit('destroy')"
@@ -19,11 +19,11 @@
           <i-icon-park-outline:loading-four class="loading-icon" style="font-size: 18px; color: #d14424;" v-if="type === 'loading'" />
         </div>
         <div class="content">
-          <div class="title" v-if="title">{{ title }}</div>
-          <div class="description">{{ message }}</div>
+          <div class="title" v-if="title">{{ t(title) }}</div>
+          <div class="description">{{ t(message) }}</div>
         </div>
         <div class="control" v-if="closable">
-          <span 
+          <span
             class="close-btn"
             @click="close()"
           >
@@ -36,6 +36,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { onMounted, ref, onBeforeMount } from 'vue'
 
 const props = withDefaults(defineProps<{

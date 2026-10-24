@@ -1,11 +1,11 @@
 <template>
   <div class="element-filter">
     <div class="row">
-      <div style="flex: 2;">启用滤镜：</div>
+      <div style="flex: 2;">{{ t("启用滤镜：") }}</div>
       <div class="switch-wrapper" style="flex: 3;">
-        <Switch 
-          :value="hasFilters" 
-          @update:value="value => toggleFilters(value)" 
+        <Switch
+          :value="hasFilters"
+          @update:value="value => toggleFilters(value)"
         />
       </div>
     </div>
@@ -13,12 +13,12 @@
       <div class="presets">
         <div class="preset-item" v-for="(item, index) in presetFilters" :key="index" @click="applyPresetFilters(item.values)">
           <img :src="handleImageElement.src" alt="" :style="{ filter: filters2Style(item.values) }">
-          <span class="preset-label">{{ item.label }}</span>
+          <span class="preset-label">{{ t(item.label) }}</span>
         </div>
       </div>
       <div class="filter">
         <div class="filter-item" v-for="filter in filterOptions" :key="filter.key">
-          <div class="name">{{filter.label}}</div>
+          <div class="name">{{t(filter.label)}}</div>
           <Slider
             class="filter-slider"
             :max="filter.max"
@@ -34,6 +34,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref, watch, type Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'
@@ -92,7 +93,7 @@ const { addHistorySnapshot } = useHistorySnapshot()
 
 watch(handleElement, () => {
   if (!handleElement.value || handleElement.value.type !== 'image') return
-  
+
   const filters = handleElement.value.filters
   if (filters) {
     filterOptions.value = defaultFilters.map(item => {
@@ -121,7 +122,7 @@ const filters2Style = (filters: ImageElementFilters) => {
 // 设置滤镜
 const updateFilter = (filter: FilterOption, value: number) => {
   const _handleElement = handleElement.value as PPTImageElement
-  
+
   const originFilters = _handleElement.filters || {}
   const filters = { ...originFilters, [filter.key]: `${value}${filter.unit}` }
   slidesStore.updateElement({ id: handleElementId.value, props: { filters } })

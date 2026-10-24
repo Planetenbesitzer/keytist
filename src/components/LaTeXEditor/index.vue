@@ -3,12 +3,12 @@
     <div class="container">
       <div class="left">
         <div class="input-area">
-          <TextArea v-model:value="latex" placeholder="输入 LaTeX 公式" ref="textAreaRef" />
+          <TextArea v-model:value="latex" :placeholder="t('输入 LaTeX 公式')" ref="textAreaRef" />
         </div>
-        <div class="input-help">本地 MathJax 排版 · 支持 aligned、矩阵与 \newcommand 自定义宏</div>
-        <div class="insertion-help" v-if="inline">行内公式：在文字光标处插入，随段落排版；双击公式可再次修改。</div>
+        <div class="input-help">{{ t("本地 MathJax 排版 · 支持 aligned、矩阵与 \\newcommand 自定义宏") }}</div>
+        <div class="insertion-help" v-if="inline">{{ t("行内公式：在文字光标处插入，随段落排版；双击公式可再次修改。") }}</div>
         <div class="preview">
-          <div class="placeholder" v-if="!latex">公式预览</div>
+          <div class="placeholder" v-if="!latex">{{ t("公式预览") }}</div>
           <div class="preview-content" v-else>
             <FormulaContent
               :width="518"
@@ -20,18 +20,18 @@
         </div>
       </div>
       <div class="right">
-        <Tabs 
-          :tabs="tabs" 
-          v-model:value="toolbarState" 
+        <Tabs
+          :tabs="tabs"
+          v-model:value="toolbarState"
           card
         />
         <div class="content">
           <div class="symbol" v-if="toolbarState === 'symbol'">
-            <Tabs 
-              :tabs="symbolTabs" 
-              v-model:value="selectedSymbolKey" 
-              spaceBetween 
-              :tabsStyle="{ margin: '10px 10px 0' }" 
+            <Tabs
+              :tabs="symbolTabs"
+              v-model:value="selectedSymbolKey"
+              spaceBetween
+              :tabsStyle="{ margin: '10px 10px 0' }"
             />
             <div class="symbol-pool">
               <div class="symbol-item" v-for="item in symbolPool" :key="item.latex" @click="insertSymbol(item.latex)">
@@ -41,7 +41,7 @@
           </div>
           <div class="formula" v-else>
             <div class="formula-item" v-for="item in formulaList" :key="item.label">
-              <div class="formula-title">{{item.label}}</div>
+              <div class="formula-title">{{t(item.label)}}</div>
               <div class="formula-item-content" @click="latex = item.latex">
                 <FormulaContent
                   :width="236"
@@ -55,13 +55,14 @@
       </div>
     </div>
     <div class="footer">
-      <Button class="btn" @click="emit('close')">取消</Button>
-      <Button class="btn" type="primary" @click="update()">确定</Button>
+      <Button class="btn" @click="emit('close')">{{ t("取消") }}</Button>
+      <Button class="btn" type="primary" @click="update()">{{ t("确定") }}</Button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, onMounted, ref, useTemplateRef } from 'vue'
 import { renderLatex, renderInlineLatex, type LatexResult } from '@/utils/latex'
 import { FORMULA_LIST, SYMBOL_LIST } from '@/configs/latex'

@@ -1,22 +1,23 @@
 <template>
   <div class="slide-animation-panel">
     <div class="animation-pool">
-      <div 
-        class="animation-item" 
-        :class="{ 'active': currentTurningMode === item.value }" 
-        v-for="item in animations" 
+      <div
+        class="animation-item"
+        :class="{ 'active': currentTurningMode === item.value }"
+        v-for="item in animations"
         :key="item.label"
         @click="updateTurningMode(item.value)"
       >
         <div :class="['animation-block', item.value]">P</div>
-        <div class="animation-text">{{item.label}}</div>
+        <div class="animation-text">{{t(item.label)}}</div>
       </div>
     </div>
-    <Button style="width: 100%;" @click="applyAllSlide()"><i-icon-park-outline:check /> 应用到全部</Button>
+    <Button style="width: 100%;" @click="applyAllSlide()"><i-icon-park-outline:check /> {{ t("应用到全部") }}</Button>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'

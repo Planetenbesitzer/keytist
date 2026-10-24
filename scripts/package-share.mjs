@@ -142,7 +142,7 @@ try {
   for (const name of ['src', 'public', 'dist', 'doc', 'scripts']) {
     await fs.cp(path.join(root, name), path.join(bundle, name), { recursive: true, filter: file => !ignored.has(path.basename(file)) && !file.endsWith('.tsbuildinfo') })
   }
-  const files = ['LICENSE', 'README.md', 'README_zh.md', '开始使用.md', 'package.json', 'package-lock.json', 'index.html', 'env.d.ts', 'vite.config.ts', 'tsconfig.app.json', 'tsconfig.json', 'tsconfig.node.json', 'components.d.ts', '.gitignore', '.eslintrc.cjs', 'commitlint.config.cjs', '启动 Slide Studio.command', '安装到应用程序.command', 'Start Slide Studio.bat', 'start-slides-studio.sh']
+  const files = ['AGENTS.md', 'LICENSE', 'README.md', 'README_zh.md', '开始使用.md', 'package.json', 'package-lock.json', 'index.html', 'env.d.ts', 'vite.config.ts', 'tsconfig.app.json', 'tsconfig.json', 'tsconfig.node.json', 'components.d.ts', '.gitignore', '.eslintrc.cjs', 'commitlint.config.cjs', '启动 Slide Studio.command', '安装到应用程序.command', 'Start Slide Studio.bat', 'start-slides-studio.sh']
   for (const name of files) await fs.copyFile(path.join(root, name), path.join(bundle, name))
   await fs.mkdir(path.join(bundle, 'examples'))
   for (const name of ['我的第一份演示.json', 'HTML演示示例.html']) await fs.copyFile(path.join(root, 'examples', name), path.join(bundle, 'examples', name))

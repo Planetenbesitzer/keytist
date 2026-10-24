@@ -4,7 +4,7 @@
     class="canvas-scrollbar"
     :class="[orientation, { dragging }]"
     role="scrollbar"
-    :aria-label="orientation === 'horizontal' ? '水平滚动画布' : '垂直滚动画布'"
+    :aria-label="orientation === 'horizontal' ? t('水平滚动画布') : t('垂直滚动画布')"
     :aria-orientation="orientation"
     :aria-valuemin="0"
     :aria-valuemax="scrollMax"
@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { t } from '@/i18n'
 import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue'
 
 const props = defineProps<{

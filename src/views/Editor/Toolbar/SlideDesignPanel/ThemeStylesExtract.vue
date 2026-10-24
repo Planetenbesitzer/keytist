@@ -1,53 +1,53 @@
 <template>
   <div class="theme-styles-extract">
-    <Tabs 
-      :tabs="tabs" 
-      v-model:value="activeTab" 
-      :tabsStyle="{ marginBottom: '12px' }" 
-      :tabStyle="{ padding: '8px 12px' }" 
+    <Tabs
+      :tabs="tabs"
+      v-model:value="activeTab"
+      :tabsStyle="{ marginBottom: '12px' }"
+      :tabStyle="{ padding: '8px 12px' }"
     />
     <div class="content">
       <div class="config-item" v-if="themeStyles.fontNames.length">
-        <div class="label">字体：</div>
+        <div class="label">{{ t("字体：") }}</div>
         <div class="values">
           <div class="value-wrap" v-for="(item, index) in themeStyles.fontNames" :key="item">
             <div class="value" :style="{ fontFamily: item }">{{ fontMap[item] || item }}</div>
             <div class="handler">
               <div class="state" :class="{ 'active': selectedIndex.fontName === index }"><i-icon-park-outline:check /></div>
-              <div class="config-btn" @click="selectedIndex.fontName = index">选择</div>
-              <div class="config-btn" @click="updateTheme({ fontName: item }); selectedIndex.fontName = index">应用到主题</div>
+              <div class="config-btn" @click="selectedIndex.fontName = index">{{ t("选择") }}</div>
+              <div class="config-btn" @click="updateTheme({ fontName: item }); selectedIndex.fontName = index">{{ t("应用到主题") }}</div>
             </div>
           </div>
         </div>
       </div>
       <div class="config-item" v-if="themeStyles.fontColors.length">
-        <div class="label">文字颜色：</div>
+        <div class="label">{{ t("文字颜色：") }}</div>
         <div class="values">
           <div class="value-wrap" v-for="(item, index) in themeStyles.fontColors" :key="item">
             <div class="value" :style="{ backgroundColor: item, color: getMostReadableColor(item) }">{{ getHexColor(item) }}</div>
             <div class="handler">
               <div class="state" :class="{ 'active': selectedIndex.fontColor === index }"><i-icon-park-outline:check /></div>
-              <div class="config-btn" @click="selectedIndex.fontColor = index">选择</div>
-              <div class="config-btn" @click="updateTheme({ fontColor: item }); selectedIndex.fontColor = index">应用到主题</div>
+              <div class="config-btn" @click="selectedIndex.fontColor = index">{{ t("选择") }}</div>
+              <div class="config-btn" @click="updateTheme({ fontColor: item }); selectedIndex.fontColor = index">{{ t("应用到主题") }}</div>
             </div>
           </div>
         </div>
       </div>
       <div class="config-item" v-if="themeStyles.backgroundColors.length">
-        <div class="label">背景颜色：</div>
+        <div class="label">{{ t("背景颜色：") }}</div>
         <div class="values">
           <div class="value-wrap" v-for="(item, index) in themeStyles.backgroundColors" :key="item">
             <div class="value" :style="{ backgroundColor: item, color: getMostReadableColor(item) }">{{ getHexColor(item) }}</div>
             <div class="handler">
               <div class="state" :class="{ 'active': selectedIndex.backgroundColor === index }"><i-icon-park-outline:check /></div>
-              <div class="config-btn" @click="selectedIndex.backgroundColor = index">选择</div>
-              <div class="config-btn" @click="updateTheme({ backgroundColor: item }); selectedIndex.backgroundColor = index">应用到主题</div>
+              <div class="config-btn" @click="selectedIndex.backgroundColor = index">{{ t("选择") }}</div>
+              <div class="config-btn" @click="updateTheme({ backgroundColor: item }); selectedIndex.backgroundColor = index">{{ t("应用到主题") }}</div>
             </div>
           </div>
         </div>
       </div>
       <div class="config-item" v-if="themeStyles.themeColors.length">
-        <div class="label">主题色：<span class="tip">（点击色块排除不要的颜色）</span></div>
+        <div class="label">{{ t("主题色：") }}<span class="tip">{{ t("（点击色块排除不要的颜色）") }}</span></div>
         <div class="values inline">
           <div class="value-wrap" v-for="(item, index) in themeStyles.themeColors" :key="item" @click="removeThemeColor(index)">
             <div class="value" :class="{ 'disabled': !selectedIndex.themeColors.includes(index) }" :style="{ backgroundColor: item }"></div>
@@ -57,12 +57,13 @@
     </div>
 
     <div class="btns">
-      <Button class="btn" type="primary" @click="updateAllThemes()"><i-icon-park-outline:check /> 将选中配置保存为主题</Button>
+      <Button class="btn" type="primary" @click="updateAllThemes()"><i-icon-park-outline:check /> {{ t("将选中配置保存为主题") }}</Button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import tinycolor from 'tinycolor2'
@@ -127,7 +128,7 @@ watch(activeTab, () => {
   selectedIndex.value = {
     backgroundColor: 0,
     fontColor: 0,
-    fontName: 0, 
+    fontName: 0,
     themeColors,
   }
 }, { immediate: true })
@@ -159,7 +160,7 @@ const updateAllThemes = () => {
 
 const removeThemeColor = (index: number) => {
   if (selectedIndex.value.themeColors.includes(index)) {
-    selectedIndex.value.themeColors = selectedIndex.value.themeColors.filter(i => i !== index) 
+    selectedIndex.value.themeColors = selectedIndex.value.themeColors.filter(i => i !== index)
   }
   else selectedIndex.value.themeColors.push(index)
 }

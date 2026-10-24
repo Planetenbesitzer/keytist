@@ -2,24 +2,24 @@
   <div class="mobile-preview" ref="mobileRef">
     <div class="thumbnail-list">
       <div class="thumbnail-item" v-for="(slide, index) in slides" :key="slide.id">
-        <ThumbnailSlide 
-          :slide="slide" 
-          :size="screenWidth - 20" 
-          :visible="index < slidesLoadLimit" 
+        <ThumbnailSlide
+          :slide="slide"
+          :size="screenWidth - 20"
+          :visible="index < slidesLoadLimit"
         />
       </div>
     </div>
     <div class="menu">
-      <div class="menu-item" @click="changeMode('editor')"><i-icon-park-outline:edit class="icon" /> 编辑</div>
+      <div class="menu-item" @click="changeMode('editor')"><i-icon-park-outline:edit class="icon" /> {{ t("编辑") }}</div>
       <Divider type="vertical" style="height: 30px;" />
-      <div class="menu-item" @click="changeMode('player')"><i-icon-park-outline:full-screen-play class="icon" /> 播放</div>
+      <div class="menu-item" @click="changeMode('player')"><i-icon-park-outline:full-screen-play class="icon" /> {{ t("播放") }}</div>
       <Divider type="vertical" style="height: 30px;" />
       <div class="menu-item ai" @click="openAIPPTDialog()">AIPPT</div>
     </div>
   </div>
 
   <Modal
-    :visible="!!showAIPPTDialog" 
+    :visible="!!showAIPPTDialog"
     :closeOnClickMask="false"
     :closeOnEsc="false"
     :width="width"
@@ -32,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { onMounted, ref, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

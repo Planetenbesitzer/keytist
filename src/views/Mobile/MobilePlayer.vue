@@ -1,20 +1,20 @@
 <template>
-  <div class="mobile-player" 
+  <div class="mobile-player"
     :style="{
       width: playerSize.width + 'px',
       height: playerSize.height + 'px',
       transform: `rotate(90deg) translateY(-${playerSize.height}px)`,
     }"
   >
-    <div 
-      class="screen-slide-list" 
+    <div
+      class="screen-slide-list"
       @click="toolVisible = !toolVisible"
       @touchstart="$event => touchStartListener($event)"
       @touchend="$event => touchEndListener($event)"
     >
-      <div 
+      <div
         :class="[
-          'slide-item', 
+          'slide-item',
           `turning-mode-${slide.turningMode || 'slideY'}`,
           {
             'current': index === slideIndex,
@@ -25,20 +25,20 @@
             'next': index === slideIndex + 1,
           }
         ]"
-        v-for="(slide, index) in slidesWithTurningMode" 
+        v-for="(slide, index) in slidesWithTurningMode"
         :key="slide.id"
       >
-        <div 
-          class="slide-content" 
+        <div
+          class="slide-content"
           :style="{
             width: slideSize.width + 'px',
             height: slideSize.height + 'px',
           }"
           v-if="Math.abs(slideIndex - index) < 2"
         >
-          <ThumbnailSlide 
-            :slide="slide" 
-            :size="slideSize.width" 
+          <ThumbnailSlide
+            :slide="slide"
+            :size="slideSize.width"
           />
         </div>
       </div>
@@ -46,7 +46,7 @@
 
     <template v-if="toolVisible">
       <div class="header">
-        <div class="back" @click="changeMode('preview')"><i-icon-park-outline:logout /> 退出播放</div>
+        <div class="back" @click="changeMode('preview')"><i-icon-park-outline:logout /> {{ t("退出播放") }}</div>
       </div>
       <MobileThumbnails class="thumbnails" />
     </template>
@@ -54,6 +54,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'

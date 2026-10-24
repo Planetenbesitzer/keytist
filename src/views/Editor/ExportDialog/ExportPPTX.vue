@@ -2,39 +2,39 @@
   <div class="export-pptx-dialog">
     <div class="thumbnails-view">
       <div class="thumbnails" ref="imageThumbnailsRef">
-        <ThumbnailSlide 
-          class="export-thumbnail" 
-          v-for="slide in renderSlides" 
-          :key="slide.id" 
-          :slide="slide" 
-          :size="1600" 
+        <ThumbnailSlide
+          class="export-thumbnail"
+          v-for="slide in renderSlides"
+          :key="slide.id"
+          :slide="slide"
+          :size="1600"
         />
       </div>
     </div>
     <div class="configs">
       <div class="row">
-        <div class="title">导出范围：</div>
+        <div class="title">{{ t('导出范围：') }}</div>
         <RadioGroup
           class="config-item"
           v-model:value="rangeType"
         >
-          <RadioButton style="width: 33.33%;" value="all">全部</RadioButton>
-          <RadioButton style="width: 33.33%;" value="current">当前页</RadioButton>
-          <RadioButton style="width: 33.33%;" value="custom">自定义</RadioButton>
+          <RadioButton style="width: 33.33%;" value="all">{{ t('全部') }}</RadioButton>
+          <RadioButton style="width: 33.33%;" value="current">{{ t('当前页') }}</RadioButton>
+          <RadioButton style="width: 33.33%;" value="custom">{{ t('自定义') }}</RadioButton>
         </RadioGroup>
       </div>
       <div class="row">
-        <div class="title">导出模式：</div>
+        <div class="title">{{ t('导出模式：') }}</div>
         <RadioGroup
           class="config-item"
           v-model:value="exportMode"
         >
-          <RadioButton style="width: 50%;" value="standard">标准版</RadioButton>
-          <RadioButton style="width: 50%;" value="image">纯图版</RadioButton>
+          <RadioButton style="width: 50%;" value="standard">{{ t('标准版') }}</RadioButton>
+          <RadioButton style="width: 50%;" value="image">{{ t('纯图版') }}</RadioButton>
         </RadioGroup>
       </div>
       <div class="row" style="margin-bottom: 32px" v-if="rangeType === 'custom'">
-        <div class="title" :data-range="`（${range[0]} ~ ${range[1]}）`">自定义范围：</div>
+        <div class="title" :data-range="`(${range[0]} ~ ${range[1]})`">{{ t('自定义范围：') }}</div>
         <Slider
           class="config-item"
           range
@@ -44,32 +44,36 @@
           v-model:value="range"
         />
       </div>
-      
+
       <template v-if="exportMode === 'standard'">
         <div class="row">
-          <div class="title">忽略音频/视频：</div>
+          <div class="title">{{ t('忽略音频/视频：') }}</div>
           <div class="config-item">
-            <Switch v-model:value="ignoreMedia" v-tooltip="'导出时默认忽略音视频，若您的幻灯片中存在音视频元素，且希望将其导出到PPTX文件中，可选择关闭「忽略音视频」选项，但要注意这将会大幅增加导出用时。'" />
+            <Switch v-model:value="ignoreMedia" v-tooltip="t('导出时默认忽略音视频，若您的幻灯片中存在音视频元素，且希望将其导出到PPTX文件中，可选择关闭「忽略音视频」选项，但要注意这将会大幅增加导出用时。')" />
           </div>
         </div>
         <div class="row">
-          <div class="title">覆盖默认母版：</div>
+          <div class="title">{{ t('覆盖默认母版：') }}</div>
           <div class="config-item">
             <Switch v-model:value="masterOverwrite" />
           </div>
         </div>
 
         <div class="tip" v-if="!ignoreMedia">
-          提示：1. 支持导出格式：avi、mp4、mov、wmv、mp3、wav；2. 跨域资源无法导出。
+          {{ t('提示：1. 支持导出格式：avi、mp4、mov、wmv、mp3、wav；2. 跨域资源无法导出。') }}
         </div>
       </template>
+      <div class="html-omission" v-if="htmlOmissions.embeddedPageCount" role="status">
+        <p>{{ t('PPTX 会省略 {count} 页中的嵌入网页和交互内容，保留原生文字、图片、形状、公式及原有页序。', { count: htmlOmissions.embeddedPageCount }) }}</p>
+        <p v-if="htmlOmissions.webOnlyPageCount">{{ t('其中 {count} 页只有网页内容，将保留背景、页码和空白占位。完整内容请使用 HTML 导出。', { count: htmlOmissions.webOnlyPageCount }) }}</p>
+      </div>
     </div>
     <div class="btns">
-      <Button class="btn export" type="primary" @click="execExport()"><i-icon-park-outline:download /> 导出 PPTX</Button>
-      <Button class="btn close" @click="emit('close')">关闭</Button>
+      <Button class="btn export" type="primary" @click="execExport()"><i-icon-park-outline:download /> {{ t('导出 PPTX') }}</Button>
+      <Button class="btn close" @click="emit('close')">{{ t('关闭') }}</Button>
     </div>
 
-    <FullscreenSpin :loading="exporting" tip="正在导出..." />
+    <FullscreenSpin :loading="exporting" :tip="t('正在导出...')" />
   </div>
 </template>
 
@@ -78,6 +82,8 @@ import { computed, ref, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'
 import useExport from '@/hooks/useExport'
+import { prepareStaticPptxSlides, getPptxHtmlOmissions } from '@/utils/pptxStaticSlides'
+import { t } from '@/i18n'
 
 import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue'
 import FullscreenSpin from '@/components/FullscreenSpin.vue'
@@ -113,13 +119,14 @@ const selectedSlides = computed(() => {
 
 const renderSlides = computed(() => {
   if (exportMode.value === 'standard') return []
-  return selectedSlides.value
+  return prepareStaticPptxSlides(selectedSlides.value)
 })
+const htmlOmissions = computed(() => getPptxHtmlOmissions(selectedSlides.value))
 
 const execExport = () => {
   if (exportMode.value === 'standard') {
     exportPPTX(selectedSlides.value, masterOverwrite.value, ignoreMedia.value)
-  } 
+  }
   else {
     const slideRefs = imageThumbnailsRef.value!.querySelectorAll('.export-thumbnail')
     exportImagePPTX(slideRefs)
@@ -147,12 +154,14 @@ const execExport = () => {
   }
 }
 .configs {
-  width: 350px;
+  width: min(420px, calc(100% - 40px));
   height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   z-index: 1;
+  overflow: auto;
+  padding: 12px 0;
 
   .row {
     display: flex;
@@ -162,7 +171,8 @@ const execExport = () => {
   }
 
   .title {
-    width: 100px;
+    width: 140px;
+    flex-shrink: 0;
     position: relative;
 
     &::after {
@@ -181,6 +191,17 @@ const execExport = () => {
     color: #aaa;
     line-height: 1.8;
     margin-top: 10px;
+  }
+  .html-omission {
+    padding: 10px 12px;
+    border: 1px solid #e8cf97;
+    border-radius: 8px;
+    background: #fff9ed;
+    color: #735321;
+    font-size: 12px;
+    line-height: 1.6;
+
+    p + p { margin-top: 6px; }
   }
 }
 .btns {

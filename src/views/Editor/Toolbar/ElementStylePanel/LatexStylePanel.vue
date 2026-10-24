@@ -1,13 +1,13 @@
 <template>
   <div class="latex-style-panel">
     <div class="row">
-      <Button style="flex: 1;" @click="openLatexEditor()"><i-icon-park-outline:edit /> 编辑 LaTeX</Button>
+      <Button style="flex: 1;" @click="openLatexEditor()"><i-icon-park-outline:edit /> {{ t("编辑 LaTeX") }}</Button>
     </div>
 
     <Divider />
 
     <div class="row">
-      <div style="width: 40%;">颜色：</div>
+      <div style="width: 40%;">{{ t("颜色：") }}</div>
       <Popover trigger="click" style="width: 60%;">
         <template #content>
           <ColorPicker
@@ -19,19 +19,20 @@
       </Popover>
     </div>
     <div class="row" v-if="!handleLatexElement.svg">
-      <div style="width: 40%;">粗细：</div>
-      <NumberInput 
+      <div style="width: 40%;">{{ t("粗细：") }}</div>
+      <NumberInput
         :min="1"
         :max="3"
-        :value="handleLatexElement.strokeWidth" 
-        @update:value="value => updateLatex({ strokeWidth: value })" 
-        style="width: 60%;" 
+        :value="handleLatexElement.strokeWidth"
+        @update:value="value => updateLatex({ strokeWidth: value })"
+        style="width: 60%;"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { type Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

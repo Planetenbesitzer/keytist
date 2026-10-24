@@ -1,8 +1,13 @@
 import axios from './axios'
 import fetchRequest from './fetch'
+import { t } from '@/i18n'
 
-// export const SERVER_URL = 'http://localhost:5000'
-export const SERVER_URL = (import.meta.env.MODE === 'development') ? '/api' : 'https://server.pptist.cn'
+// Remote tools are opt-in. Local editing and agent access need no cloud service.
+export const SERVER_URL = (import.meta.env.VITE_STUDIO_REMOTE_API || '').replace(/\/$/, '')
+const remoteUrl = (pathname: string) => {
+  if (!SERVER_URL) throw new Error(t('在线服务尚未配置，请设置 VITE_STUDIO_REMOTE_API 后重试。'))
+  return `${SERVER_URL}${pathname}`
+}
 
 interface ImageSearchPayload {
   query: string;
@@ -40,17 +45,17 @@ export default {
     return axios.get(`./mocks/${filename}.json`)
   },
 
-  searchImage(body: ImageSearchPayload): Promise<any> {
-    return axios.post(`${SERVER_URL}/tools/img_search`, body)
+  async searchImage(body: ImageSearchPayload): Promise<any> {
+    return axios.post(remoteUrl('/tools/img_search'), body)
   },
 
-  AIPPT_Outline({
+  async AIPPT_Outline({
     content,
     language,
     provider,
     model,
   }: AIPPTOutlinePayload): Promise<any> {
-    return fetchRequest(`${SERVER_URL}/tools/aippt_outline`, {
+    return fetchRequest(remoteUrl('/tools/aippt_outline'), {
       method: 'POST',
       body: JSON.stringify({
         content,
@@ -62,14 +67,14 @@ export default {
     })
   },
 
-  AIPPT({
+  async AIPPT({
     content,
     language,
     style,
     provider,
     model,
   }: AIPPTPayload): Promise<any> {
-    return fetchRequest(`${SERVER_URL}/tools/aippt`, {
+    return fetchRequest(remoteUrl('/tools/aippt'), {
       method: 'POST',
       body: JSON.stringify({
         content,
@@ -82,11 +87,11 @@ export default {
     })
   },
 
-  AI_Writing({
+  async AI_Writing({
     content,
     command,
   }: AIWritingPayload): Promise<any> {
-    return fetchRequest(`${SERVER_URL}/tools/ai_writing`, {
+    return fetchRequest(remoteUrl('/tools/ai_writing'), {
       method: 'POST',
       body: JSON.stringify({
         content,

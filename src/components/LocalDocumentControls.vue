@@ -1,20 +1,21 @@
 <template>
   <div class="local-document-controls">
-    <span class="save-status" :class="{ error: !!state.error, saving: state.pending || state.saving }" :title="statusTitle" role="status">
-      <span class="status-dot"></span>{{ statusText }}
+    <span class="save-status" :class="{ error: !!state.error, saving: state.pending || state.saving }" :title="t(statusTitle)" role="status">
+      <span class="status-dot"></span>{{ t(statusText) }}
     </span>
-    <button type="button" class="document-button" title="打开本地 JSON 文稿（⌘O / Ctrl+O）" @click="open()">
-      <i-icon-park-outline:folder-open /> <span>打开</span>
+    <button type="button" class="document-button" :title="t('打开本地 JSON 文稿（⌘O / Ctrl+O）')" @click="open()">
+      <i-icon-park-outline:folder-open /> <span>{{ t("打开") }}</span>
     </button>
-    <button type="button" class="document-button" :title="saveTitle" @click="save()">
-      <i-icon-park-outline:save /> <span>保存</span>
+    <button type="button" class="document-button" :title="t(saveTitle)" @click="save()">
+      <i-icon-park-outline:save /> <span>{{ t("保存") }}</span>
     </button>
-    <button type="button" class="document-button save-as" title="另存为 JSON 文件（⇧⌘S / Ctrl+Shift+S）" @click="save(true)">另存为</button>
+    <button type="button" class="document-button save-as" :title="t('另存为 JSON 文件（⇧⌘S / Ctrl+Shift+S）')" @click="save(true)">{{ t("另存为") }}</button>
     <input ref="fileInput" type="file" accept=".json,application/json" hidden @change="readFile" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import {
   localDocumentState as state, openLocalDocumentPicker, openLocalDocumentFile,
@@ -24,12 +25,12 @@ import message from '@/utils/message'
 
 const fileInput = ref<HTMLInputElement>()
 const statusText = computed(() => state.error ? '保存异常' : (state.pending || state.saving) ? '正在保存…' : '已存于此设备')
-const saveTitle = computed(() => state.nativeFileBound ? `保存原文件：${state.fileName}（⌘S / Ctrl+S）` : `保存到${state.filePath || state.outputDirectory || '本地 JSON 文件'}（⌘S / Ctrl+S）`)
+const saveTitle = computed(() => state.nativeFileBound ? t('保存原文件：{0}（⌘S / Ctrl+S）', { 0: state.fileName }) : t('保存到{0}（⌘S / Ctrl+S）', { 0: state.filePath || state.outputDirectory || t('本地 JSON 文件') }))
 const statusTitle = computed(() => {
   if (state.error) return state.error
   const saved = state.lastSavedAt ? new Date(state.lastSavedAt).toLocaleTimeString() : ''
-  const destination = state.nativeFileBound ? `当前文件：${state.fileName}，保存将写回原文件。` : state.filePath ? `最近保存的文件：${state.filePath}。` : state.outputDirectory ? `默认文件目录：${state.outputDirectory}。` : ''
-  return `文稿与嵌入图片、字体自动保存在此浏览器。${saved ? `最近自动保存 ${saved}。` : ''}${destination}使用“保存”写入 JSON 文件。${state.fileName && !state.filePath && !state.nativeFileBound ? `当前文件：${state.fileName}` : ''}`
+  const destination = state.nativeFileBound ? t('当前文件：{0}，保存将写回原文件。', { 0: state.fileName }) : state.filePath ? t('最近保存的文件：{0}。', { 0: state.filePath }) : state.outputDirectory ? t('默认文件目录：{0}。', { 0: state.outputDirectory }) : ''
+  return t('文稿与嵌入图片、字体自动保存在此浏览器。{0}{1}使用“保存”写入 JSON 文件。{2}', { 0: saved ? t('最近自动保存 {0}。', { 0: saved }) : '', 1: destination, 2: state.fileName && !state.filePath && !state.nativeFileBound ? t('当前文件：{0}', { 0: state.fileName }) : '' })
 })
 const showError = (error: unknown) => {
   if (error instanceof DOMException && error.name === 'AbortError') return
@@ -38,25 +39,25 @@ const showError = (error: unknown) => {
 const open = async () => {
   if (!supportsLocalFilePicker()) {
     if (fileInput.value) {
-      fileInput.value.value = ''; fileInput.value.click() 
+      fileInput.value.value = ''; fileInput.value.click()
     }
     return
   }
   try {
-    await openLocalDocumentPicker() 
+    await openLocalDocumentPicker()
   }
   catch (error) {
-    showError(error) 
+    showError(error)
   }
 }
 const readFile = async (event: Event) => {
   const file = (event.target as HTMLInputElement).files?.[0]
   if (!file) return
   try {
-    await openLocalDocumentFile(file); message.success('已打开本地文稿') 
+    await openLocalDocumentFile(file); message.success('已打开本地文稿')
   }
   catch (error) {
-    showError(error) 
+    showError(error)
   }
 }
 const save = async (saveAs = false) => {
@@ -65,14 +66,14 @@ const save = async (saveAs = false) => {
     message.success(result.method === 'download' ? '已下载 JSON 文稿' : result.method === 'server' ? `已保存 ${result.path}` : `已保存 ${result.fileName}`)
   }
   catch (error) {
-    showError(error) 
+    showError(error)
   }
 }
 const onOpen = () => {
-  void open() 
+  void open()
 }
 const onSave = (event: Event) => {
-  void save(!!(event as CustomEvent).detail?.saveAs) 
+  void save(!!(event as CustomEvent).detail?.saveAs)
 }
 onMounted(() => {
   window.addEventListener('keynote-local:open', onOpen)

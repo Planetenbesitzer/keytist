@@ -1,36 +1,37 @@
 <template>
-  <button class="font-tool" title="本机字体与嵌入字体" @click="visible = true">
+  <button class="font-tool" :title="t('本机字体与嵌入字体')" @click="visible = true">
     <i-icon-park-outline:font-size />
-    <span>字体</span>
+    <span>{{ t("字体") }}</span>
   </button>
   <Modal v-model:visible="visible" :width="540" closeButton>
     <div class="local-fonts">
-      <h2>字体</h2>
-      <p class="intro">使用 Mac 常用字体，或将自己的字体文件保存在文稿中。</p>
+      <h2>{{ t("字体") }}</h2>
+      <p class="intro">{{ t("使用 Mac 常用字体，或将自己的字体文件保存在文稿中。") }}</p>
       <div class="actions">
-        <Button type="primary" :disabled="busy" @click="chooseFiles">导入字体文件…</Button>
-        <Button v-if="canReadLocalFonts()" :disabled="busy" @click="readSystemFonts">读取本机字体…</Button>
+        <Button type="primary" :disabled="busy" @click="chooseFiles">{{ t("导入字体文件…") }}</Button>
+        <Button v-if="canReadLocalFonts()" :disabled="busy" @click="readSystemFonts">{{ t("读取本机字体…") }}</Button>
       </div>
       <input ref="fileInput" class="file-input" type="file" accept=".woff,.woff2,.ttf,.otf" multiple @change="importFiles" />
-      <p class="hint">支持 WOFF、WOFF2、TTF 和 OTF。导入后可在所有字体菜单中选择，保存的文稿会携带字体。</p>
+      <p class="hint">{{ t("支持 WOFF、WOFF2、TTF 和 OTF。导入后可在所有字体菜单中选择，保存的文稿会携带字体。") }}</p>
       <div class="status" role="status" v-if="status">{{status}}</div>
-      <h3>文稿中的字体 <span>{{embeddedFonts.length}}</span></h3>
+      <h3>{{ t("文稿中的字体") }} <span>{{embeddedFonts.length}}</span></h3>
       <div class="font-list" v-if="embeddedFonts.length">
         <div class="font-row" v-for="font in embeddedFonts" :key="font.id">
           <div class="font-info">
             <div class="font-name" :style="{ fontFamily: font.family }">{{font.family}}</div>
-            <div class="font-preview" :style="{ fontFamily: font.family }">Aa 文字 · 0123456789</div>
+            <div class="font-preview" :style="{ fontFamily: font.family }">{{ t("Aa 文字 · 0123456789") }}</div>
           </div>
-          <button class="remove" :aria-label="`移除字体 ${font.family}`" @click="removeFont(font.id)">移除</button>
+          <button class="remove" :aria-label="t('移除字体 {0}', { 0: font.family })" @click="removeFont(font.id)">{{ t("移除") }}</button>
         </div>
       </div>
-      <div class="empty" v-else>尚未嵌入字体</div>
-      <p class="hint">本机字体只在安装了该字体的设备上可用。跨设备继续编辑时，请导入对应字体文件。</p>
+      <div class="empty" v-else>{{ t("尚未嵌入字体") }}</div>
+      <p class="hint">{{ t("本机字体只在安装了该字体的设备上可用。跨设备继续编辑时，请导入对应字体文件。") }}</p>
     </div>
   </Modal>
 </template>
 
 <script setup lang="ts">
+import { t } from '@/i18n'
 import { ref, useTemplateRef } from 'vue'
 import Modal from './Modal.vue'
 import Button from './Button.vue'

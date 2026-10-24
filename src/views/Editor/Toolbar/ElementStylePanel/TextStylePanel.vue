@@ -4,7 +4,7 @@
     <Divider />
 
     <div class="row">
-      <div style="width: 40%;">行间距：</div>
+      <div style="width: 40%;">{{ t("行间距：") }}</div>
       <Select style="width: 60%;"
         :value="lineHeight || 1"
         @update:value="value => updateText({ lineHeight: value as number })"
@@ -18,7 +18,7 @@
       </Select>
     </div>
     <div class="row">
-      <div style="width: 40%;">段间距：</div>
+      <div style="width: 40%;">{{ t("段间距：") }}</div>
       <Select style="width: 60%;"
         :value="paragraphSpace || 0"
         @update:value="value => updateText({ paragraphSpace: value as number })"
@@ -32,7 +32,7 @@
       </Select>
     </div>
     <div class="row">
-      <div style="width: 40%;">字间距：</div>
+      <div style="width: 40%;">{{ t("字间距：") }}</div>
       <Select style="width: 60%;"
         :value="wordSpace || 0"
         @update:value="value => updateText({ wordSpace: value as number })"
@@ -46,7 +46,7 @@
       </Select>
     </div>
     <div class="row">
-      <div style="width: 40%;">文本框填充：</div>
+      <div style="width: 40%;">{{ t("文本框填充：") }}</div>
       <Popover trigger="click" style="width: 60%;">
         <template #content>
           <ColorPicker
@@ -68,7 +68,7 @@
         @update:value="value => updateInset(0, value)"
         style="width: 45%;"
       >
-        <template #prefix>上边距：</template>
+        <template #prefix>{{ t("上边距：") }}</template>
       </NumberInput>
       <div style="width: 10%;"></div>
       <NumberInput
@@ -78,7 +78,7 @@
         @update:value="value => updateInset(2, value)"
         style="width: 45%;"
       >
-        <template #prefix>下边距：</template>
+        <template #prefix>{{ t("下边距：") }}</template>
       </NumberInput>
     </div>
     <div class="row">
@@ -89,7 +89,7 @@
         @update:value="value => updateInset(3, value)"
         style="width: 45%;"
       >
-        <template #prefix>左边距：</template>
+        <template #prefix>{{ t("左边距：") }}</template>
       </NumberInput>
       <div style="width: 10%;"></div>
       <NumberInput
@@ -99,13 +99,13 @@
         @update:value="value => updateInset(1, value)"
         style="width: 45%;"
       >
-        <template #prefix>右边距：</template>
+        <template #prefix>{{ t("右边距：") }}</template>
       </NumberInput>
     </div>
 
     <Divider />
     <div class="row">
-      <div style="width: 40%;">固定高度：</div>
+      <div style="width: 40%;">{{ t("固定高度：") }}</div>
       <div class="switch-wrapper" style="width: 60%;">
         <Switch
           :value="fixedHeight"
@@ -120,9 +120,9 @@
       @update:value="value => updateText({ vAlign: value as TextAlignVertical })"
       v-if="fixedHeight"
     >
-      <RadioButton value="top" v-tooltip="'顶对齐'" style="flex: 1;"><i-icon-park-outline:align-text-top-one /></RadioButton>
-      <RadioButton value="middle" v-tooltip="'垂直居中'" style="flex: 1;"><i-icon-park-outline:align-text-middle-one /></RadioButton>
-      <RadioButton value="bottom" v-tooltip="'底对齐'" style="flex: 1;"><i-icon-park-outline:align-text-bottom-one /></RadioButton>
+      <RadioButton value="top" v-tooltip="t('顶对齐')" style="flex: 1;"><i-icon-park-outline:align-text-top-one /></RadioButton>
+      <RadioButton value="middle" v-tooltip="t('垂直居中')" style="flex: 1;"><i-icon-park-outline:align-text-middle-one /></RadioButton>
+      <RadioButton value="bottom" v-tooltip="t('底对齐')" style="flex: 1;"><i-icon-park-outline:align-text-bottom-one /></RadioButton>
     </RadioGroup>
     <Divider />
     <ElementOutline />
@@ -134,6 +134,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

@@ -1,47 +1,47 @@
 <template>
   <div class="color-picker">
-    <div class="picker-tabs" role="tablist" aria-label="颜色选择方式">
-      <button @mousedown.prevent type="button" role="tab" :aria-selected="activeTab === 'palette'" :class="{ active: activeTab === 'palette' }" @click="activeTab = 'palette'">色板</button>
-      <button @mousedown.prevent type="button" role="tab" :aria-selected="activeTab === 'custom'" :class="{ active: activeTab === 'custom' }" @click="activeTab = 'custom'">调色</button>
+    <div class="picker-tabs" role="tablist" :aria-label="t('颜色选择方式')">
+      <button @mousedown.prevent type="button" role="tab" :aria-selected="activeTab === 'palette'" :class="{ active: activeTab === 'palette' }" @click="activeTab = 'palette'">{{ t("色板") }}</button>
+      <button @mousedown.prevent type="button" role="tab" :aria-selected="activeTab === 'custom'" :class="{ active: activeTab === 'custom' }" @click="activeTab = 'custom'">{{ t("调色") }}</button>
     </div>
 
     <div class="palette-panel" v-if="activeTab === 'palette'">
-      <div class="palette-heading"><span>文稿配色</span></div>
-      <div class="swatch-grid document-colors" role="group" aria-label="文稿配色">
-        <button @mousedown.prevent v-for="c in themeColors" :key="c" type="button" class="color-swatch" :class="{ selected: isSelected(c) }" :style="{ '--swatch-color': c }" :title="colorLabel(c)" :aria-label="`文稿色 ${colorLabel(c)}`" :aria-pressed="isSelected(c)" @click="selectPresetColor(c)"></button>
+      <div class="palette-heading"><span>{{ t("文稿配色") }}</span></div>
+      <div class="swatch-grid document-colors" role="group" :aria-label="t('文稿配色')">
+        <button @mousedown.prevent v-for="c in themeColors" :key="c" type="button" class="color-swatch" :class="{ selected: isSelected(c) }" :style="{ '--swatch-color': c }" :title="colorLabel(c)" :aria-label="t('文稿色 {0}', { 0: colorLabel(c) })" :aria-pressed="isSelected(c)" @click="selectPresetColor(c)"></button>
       </div>
 
       <div class="palette-heading common-heading">
-        <span>协调配色</span>
-        <select v-model="selectedScheme" aria-label="协调色板">
-          <option v-for="scheme in STUDIO_COLOR_SCHEMES" :key="scheme.id" :value="scheme.id">{{ scheme.name }}</option>
+        <span>{{ t("协调配色") }}</span>
+        <select v-model="selectedScheme" :aria-label="t('协调色板')">
+          <option v-for="scheme in STUDIO_COLOR_SCHEMES" :key="scheme.id" :value="scheme.id">{{ t(scheme.name) }}</option>
         </select>
       </div>
-      <div class="swatch-grid coordinated-colors" :style="{ gridTemplateColumns: `repeat(${schemeColors.length}, minmax(0, 1fr))` }" role="group" aria-label="协调配色：浅色、主色、深色">
-        <button @mousedown.prevent v-for="swatch in coordinatedColors" :key="swatch.label + swatch.color" type="button" class="color-swatch" :class="{ selected: isSelected(swatch.color) }" :style="{ '--swatch-color': swatch.color }" :title="`${swatch.label} · ${colorLabel(swatch.color)}`" :aria-label="`${swatch.label} ${colorLabel(swatch.color)}`" :aria-pressed="isSelected(swatch.color)" @click="selectPresetColor(swatch.color)"></button>
+      <div class="swatch-grid coordinated-colors" :style="{ gridTemplateColumns: `repeat(${schemeColors.length}, minmax(0, 1fr))` }" role="group" :aria-label="t('协调配色：浅色、主色、深色')">
+        <button @mousedown.prevent v-for="swatch in coordinatedColors" :key="swatch.label + swatch.color" type="button" class="color-swatch" :class="{ selected: isSelected(swatch.color) }" :style="{ '--swatch-color': swatch.color }" :title="`${t(swatch.label)} · ${colorLabel(swatch.color)}`" :aria-label="`${t(swatch.label)} ${colorLabel(swatch.color)}`" :aria-pressed="isSelected(swatch.color)" @click="selectPresetColor(swatch.color)"></button>
       </div>
 
-      <div class="palette-heading"><span>灰阶</span></div>
-      <div class="swatch-grid" role="group" aria-label="灰阶">
-        <button @mousedown.prevent v-for="c in STUDIO_NEUTRAL_COLORS" :key="c" type="button" class="color-swatch" :class="{ selected: isSelected(c) }" :style="{ '--swatch-color': c }" :title="colorLabel(c)" :aria-label="`灰阶 ${colorLabel(c)}`" :aria-pressed="isSelected(c)" @click="selectPresetColor(c)"></button>
+      <div class="palette-heading"><span>{{ t("灰阶") }}</span></div>
+      <div class="swatch-grid" role="group" :aria-label="t('灰阶')">
+        <button @mousedown.prevent v-for="c in STUDIO_NEUTRAL_COLORS" :key="c" type="button" class="color-swatch" :class="{ selected: isSelected(c) }" :style="{ '--swatch-color': c }" :title="colorLabel(c)" :aria-label="t('灰阶 {0}', { 0: colorLabel(c) })" :aria-pressed="isSelected(c)" @click="selectPresetColor(c)"></button>
       </div>
 
       <div class="palette-heading saved-heading">
-        <span>我的常用色</span>
+        <span>{{ t("我的常用色") }}</span>
         <div class="palette-actions">
-          <button @mousedown.prevent v-if="favoriteColors.length" type="button" class="text-action" :aria-pressed="editingFavorites" @click="editingFavorites = !editingFavorites">{{ editingFavorites ? '完成' : '整理' }}</button>
-          <button @mousedown.prevent type="button" class="add-color" :disabled="currentIsFavorite || favoriteColors.length >= MAX_FAVORITES" aria-label="将当前颜色保存为常用色" :title="currentIsFavorite ? '当前颜色已保存' : '保存当前颜色'" @click="saveFavorite()">＋</button>
+          <button @mousedown.prevent v-if="favoriteColors.length" type="button" class="text-action" :aria-pressed="editingFavorites" @click="editingFavorites = !editingFavorites">{{ editingFavorites ? t("完成") : t("整理") }}</button>
+          <button @mousedown.prevent type="button" class="add-color" :disabled="currentIsFavorite || favoriteColors.length >= MAX_FAVORITES" :aria-label="t('将当前颜色保存为常用色')" :title="currentIsFavorite ? t('当前颜色已保存') : t('保存当前颜色')" @click="saveFavorite()">＋</button>
         </div>
       </div>
-      <div v-if="favoriteColors.length" class="swatch-grid saved-colors" role="group" aria-label="我的常用色">
-        <button @mousedown.prevent v-for="c in favoriteColors" :key="c" type="button" class="color-swatch" :class="{ selected: !editingFavorites && isSelected(c), removable: editingFavorites }" :style="{ '--swatch-color': c }" :title="`${editingFavorites ? '删除 ' : ''}${colorLabel(c)}`" :aria-label="`${editingFavorites ? '删除常用色' : '常用色'} ${colorLabel(c)}`" :aria-pressed="!editingFavorites && isSelected(c)" @click="editingFavorites ? removeFavorite(c) : selectPresetColor(c)"><span v-if="editingFavorites" aria-hidden="true">−</span></button>
+      <div v-if="favoriteColors.length" class="swatch-grid saved-colors" role="group" :aria-label="t('我的常用色')">
+        <button @mousedown.prevent v-for="c in favoriteColors" :key="c" type="button" class="color-swatch" :class="{ selected: !editingFavorites && isSelected(c), removable: editingFavorites }" :style="{ '--swatch-color': c }" :title="t('{0}{1}', { 0: editingFavorites ? t('删除') + ' ' : '', 1: colorLabel(c) })" :aria-label="t('{0} {1}', { 0: editingFavorites ? t('删除常用色') : t('常用色'), 1: colorLabel(c) })" :aria-pressed="!editingFavorites && isSelected(c)" @click="editingFavorites ? removeFavorite(c) : selectPresetColor(c)"><span v-if="editingFavorites" aria-hidden="true">−</span></button>
       </div>
-      <p class="palette-empty" v-else>点 ＋ 保存当前颜色</p>
+      <p class="palette-empty" v-else>{{ t("点 ＋ 保存当前颜色") }}</p>
 
       <template v-if="recentColors.length">
-        <div class="palette-heading"><span>最近使用</span></div>
-        <div class="swatch-grid recent-colors" role="group" aria-label="最近使用的颜色">
-          <button @mousedown.prevent v-for="c in recentColors" :key="c" type="button" class="color-swatch" :class="{ selected: isSelected(c) }" :style="{ '--swatch-color': c }" :title="colorLabel(c)" :aria-label="`最近色 ${colorLabel(c)}`" :aria-pressed="isSelected(c)" @click="selectPresetColor(c)"></button>
+        <div class="palette-heading"><span>{{ t("最近使用") }}</span></div>
+        <div class="swatch-grid recent-colors" role="group" :aria-label="t('最近使用的颜色')">
+          <button @mousedown.prevent v-for="c in recentColors" :key="c" type="button" class="color-swatch" :class="{ selected: isSelected(c) }" :style="{ '--swatch-color': c }" :title="colorLabel(c)" :aria-label="t('最近色 {0}', { 0: colorLabel(c) })" :aria-pressed="isSelected(c)" @click="selectPresetColor(c)"></button>
         </div>
       </template>
     </div>
@@ -54,22 +54,23 @@
           <div class="picker-alpha-wrap"><Alpha :value="color" @colorChange="value => changeColor(value)" /></div>
         </div>
       </div>
-      <button @mousedown.prevent type="button" class="save-custom-color" :disabled="currentIsFavorite || favoriteColors.length >= MAX_FAVORITES" @click="saveFavorite()">{{ currentIsFavorite ? '已保存到常用色' : '＋ 保存到常用色' }}</button>
+      <button @mousedown.prevent type="button" class="save-custom-color" :disabled="currentIsFavorite || favoriteColors.length >= MAX_FAVORITES" @click="saveFavorite()">{{ currentIsFavorite ? t("已保存到常用色") : t("＋ 保存到常用色") }}</button>
     </div>
 
     <div class="picker-field">
       <div class="picker-color-wrap"><div class="picker-current-color" :style="{ background: currentColor }"></div><Checkboard /></div>
       <EditableInput class="input" :value="color" @colorChange="value => changeColor(value)" />
-      <button @mousedown.prevent type="button" class="straw" aria-label="取色吸管" title="取色吸管" @click="openEyeDropper()"><i-icon-park-outline:needle /></button>
-      <button @mousedown.prevent type="button" class="transparent" aria-label="无填充（透明）" title="无填充（透明）" @click="selectPresetColor('#00000000')"><Checkboard /></button>
+      <button @mousedown.prevent type="button" class="straw" :aria-label="t('取色吸管')" :title="t('取色吸管')" @click="openEyeDropper()"><i-icon-park-outline:needle /></button>
+      <button @mousedown.prevent type="button" class="transparent" :aria-label="t('无填充（透明）')" :title="t('无填充（透明）')" @click="selectPresetColor('#00000000')"><Checkboard /></button>
     </div>
     <div class="rgb-fields">
-      <label v-for="channel in channels" :key="channel.key">{{ channel.label }}<input type="number" min="0" :max="channel.key === 'a' ? 100 : 255" :aria-label="channel.label" :value="channel.key === 'a' ? Math.round(color.a * 100) : color[channel.key]" @input="event => updateChannel(channel.key, event)"></label>
+      <label v-for="channel in channels" :key="channel.key">{{ t(channel.label) }}<input type="number" min="0" :max="channel.key === 'a' ? 100 : 255" :aria-label="t(channel.label)" :value="channel.key === 'a' ? Math.round(color.a * 100) : color[channel.key]" @input="event => updateChannel(channel.key, event)"></label>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import tinycolor, { type ColorFormats } from 'tinycolor2'
 import { debounce } from 'lodash'

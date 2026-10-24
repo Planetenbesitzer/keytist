@@ -1,17 +1,17 @@
 <template>
   <div class="element-outline">
     <div class="row" v-if="!fixed">
-      <div style="width: 40%;">启用边框：</div>
+      <div style="width: 40%;">{{ t("启用边框：") }}</div>
       <div class="switch-wrapper" style="width: 60%;">
-        <Switch 
-          :value="hasOutline" 
-          @update:value="value => toggleOutline(value)" 
+        <Switch
+          :value="hasOutline"
+          @update:value="value => toggleOutline(value)"
         />
       </div>
     </div>
     <template v-if="hasOutline && outline">
       <div class="row">
-        <div style="width: 40%;">边框样式：</div>
+        <div style="width: 40%;">{{ t("边框样式：") }}</div>
         <SelectCustom style="width: 60%;">
           <template #options>
             <div class="option" v-for="item in lineStyleOptions" :key="item" @click="updateOutline({ style: item })">
@@ -24,7 +24,7 @@
         </SelectCustom>
       </div>
       <div class="row">
-        <div style="width: 40%;">边框颜色：</div>
+        <div style="width: 40%;">{{ t("边框颜色：") }}</div>
         <Popover trigger="click" style="width: 60%;">
           <template #content>
             <ColorPicker
@@ -36,11 +36,11 @@
         </Popover>
       </div>
       <div class="row">
-        <div style="width: 40%;">边框粗细：</div>
-        <NumberInput 
-          :value="outline.width || 0" 
-          @update:value="value => updateOutline({ width: value })" 
-          style="width: 60%;" 
+        <div style="width: 40%;">{{ t("边框粗细：") }}</div>
+        <NumberInput
+          :value="outline.width || 0"
+          @update:value="value => updateOutline({ width: value })"
+          style="width: 60%;"
         />
       </div>
     </template>
@@ -48,6 +48,7 @@
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore, useSlidesStore } from '@/store'

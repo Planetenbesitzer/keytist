@@ -1,4 +1,5 @@
-import type { Directive, DirectiveBinding } from 'vue'
+import { watch, type WatchStopHandle, type Directive, type DirectiveBinding } from 'vue'
+import { t, language } from '@/i18n'
 import tippy, { type Instance, type Placement } from 'tippy.js'
 
 import './tooltip.scss'
@@ -7,6 +8,8 @@ const TOOLTIP_INSTANCE = 'TOOLTIP_INSTANCE'
 
 interface CustomHTMLElement extends HTMLElement {
   [TOOLTIP_INSTANCE]?: Instance
+  stopTooltipLanguageWatch?: WatchStopHandle
+  tooltipSource?: string
 }
 
 type Delay = number | [number | null, number | null]
@@ -33,7 +36,7 @@ const TooltipDirective: Directive = {
     }
 
     el[TOOLTIP_INSTANCE] = tippy(el, {
-      content,
+      content: t(content),
       theme: 'tooltip',
       duration: 100,
       animation: 'scale',
@@ -41,6 +44,8 @@ const TooltipDirective: Directive = {
       placement,
       delay,
     })
+    el.tooltipSource = content
+    el.stopTooltipLanguageWatch = watch(language, () => el[TOOLTIP_INSTANCE]?.setContent(t(el.tooltipSource)))
   },
 
   updated(el: CustomHTMLElement, binding: DirectiveBinding<BindingValue | string>) {
@@ -51,10 +56,14 @@ const TooltipDirective: Directive = {
     else {
       content = binding.value.content
     }
-    if (el[TOOLTIP_INSTANCE]) el[TOOLTIP_INSTANCE].setContent(content)
+    el.tooltipSource = content
+    if (el[TOOLTIP_INSTANCE]) el[TOOLTIP_INSTANCE].setContent(t(content))
   },
-  
+
   unmounted(el: CustomHTMLElement) {
+    el.stopTooltipLanguageWatch?.()
+    delete el.stopTooltipLanguageWatch
+    delete el.tooltipSource
     if (el[TOOLTIP_INSTANCE]) el[TOOLTIP_INSTANCE].destroy()
   },
 }

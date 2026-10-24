@@ -2,22 +2,22 @@
   <div class="aippt-dialog">
     <div class="header">
       <span class="title">AIPPT</span>
-      <span class="subtite" v-if="step === 'template'">从下方挑选合适的模板生成PPT，或<span class="local" v-tooltip="'上传.pptist格式模板文件'" @click="uploadLocalTemplate()">使用本地模板生成</span></span>
-      <span class="subtite" v-else-if="step === 'outline'">确认下方内容大纲（点击编辑内容，右键添加/删除大纲项），开始选择模板</span>
-      <span class="subtite" v-else>在下方输入您的PPT主题，并适当补充信息，如行业、岗位、学科、用途等</span>
+      <span class="subtite" v-if="step === 'template'">{{ t("从下方挑选合适的模板生成PPT，或") }}<span class="local" v-tooltip="t('上传.pptist格式模板文件')" @click="uploadLocalTemplate()">{{ t("使用本地模板生成") }}</span></span>
+      <span class="subtite" v-else-if="step === 'outline'">{{ t("确认下方内容大纲（点击编辑内容，右键添加/删除大纲项），开始选择模板") }}</span>
+      <span class="subtite" v-else>{{ t("在下方输入您的PPT主题，并适当补充信息，如行业、岗位、学科、用途等") }}</span>
     </div>
-    
+
     <template v-if="step === 'setup'">
-      <Input class="input" 
+      <Input class="input"
         ref="inputRef"
-        v-model:value="keyword" 
-        :maxlength="50" 
-        placeholder="请输入PPT主题，如：大学生职业生涯规划" 
+        v-model:value="keyword"
+        :maxlength="50"
+        :placeholder="t('请输入PPT主题，如：大学生职业生涯规划')"
         @enter="createOutline()"
       >
         <template #suffix>
           <span class="count">{{ keyword.length }} / 50</span>
-          <div class="submit" type="primary" @click="createOutline()"><i-icon-park-outline:send class="icon" /> AI 生成</div>
+          <div class="submit" type="primary" @click="createOutline()"><i-icon-park-outline:send class="icon" /> {{ t("AI 生成") }}</div>
         </template>
       </Input>
       <div class="recommends">
@@ -25,8 +25,8 @@
       </div>
       <div class="configs">
         <div class="config-item">
-          <div class="label">语言：</div>
-          <Select 
+          <div class="label">{{ t("语言：") }}</div>
+          <Select
             class="config-content"
             style="width: 80px;"
             v-model:value="language"
@@ -38,8 +38,8 @@
           />
         </div>
         <div class="config-item">
-          <div class="label">风格：</div>
-          <Select 
+          <div class="label">{{ t("风格：") }}</div>
+          <Select
             class="config-content"
             style="width: 80px;"
             v-model:value="style"
@@ -53,8 +53,8 @@
           />
         </div>
         <div class="config-item">
-          <div class="label">模型：</div>
-          <Select 
+          <div class="label">{{ t("模型：") }}</div>
+          <Select
             class="config-content"
             style="width: 190px;"
             v-model:value="model"
@@ -67,8 +67,8 @@
           />
         </div>
         <div class="config-item">
-          <div class="label">配图：</div>
-          <Select 
+          <div class="label">{{ t("配图：") }}</div>
+          <Select
             class="config-content"
             style="width: 100px;"
             v-model:value="img"
@@ -83,7 +83,7 @@
       </div>
       <div class="configs" v-if="!isEmptySlide">
         <div class="config-item">
-          <Checkbox v-model:value="overwrite">覆盖已有幻灯片</Checkbox>
+          <Checkbox v-model:value="overwrite">{{ t("覆盖已有幻灯片") }}</Checkbox>
         </div>
       </div>
     </template>
@@ -93,32 +93,33 @@
          <OutlineEditor v-model:value="outline" />
        </div>
       <div class="btns" v-if="!outlineCreating">
-        <Button class="btn" type="primary" @click="step = 'template'">选择模板</Button>
-        <Button class="btn" @click="outline = ''; step = 'setup'">返回重新生成</Button>
+        <Button class="btn" type="primary" @click="step = 'template'">{{ t("选择模板") }}</Button>
+        <Button class="btn" @click="outline = ''; step = 'setup'">{{ t("返回重新生成") }}</Button>
       </div>
     </div>
     <div class="select-template" v-if="step === 'template'">
       <div class="templates">
-        <div class="template" 
-          :class="{ 'selected': selectedTemplate === template.id }" 
-          v-for="template in templates" 
-          :key="template.id" 
+        <div class="template"
+          :class="{ 'selected': selectedTemplate === template.id }"
+          v-for="template in templates"
+          :key="template.id"
           @click="selectedTemplate = template.id"
         >
           <img :src="template.cover" :alt="template.name">
         </div>
       </div>
       <div class="btns">
-        <Button class="btn" type="primary" @click="createPPT()">生成</Button>
-        <Button class="btn" @click="step = 'outline'">返回大纲</Button>
+        <Button class="btn" type="primary" @click="createPPT()">{{ t("生成") }}</Button>
+        <Button class="btn" @click="step = 'outline'">{{ t("返回大纲") }}</Button>
       </div>
     </div>
 
-    <FullscreenSpin :loading="loading" tip="AI生成中，请耐心等待 ..." />
+    <FullscreenSpin :loading="loading" :tip="t('AI生成中，请耐心等待 ...')" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { ref, onMounted, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { jsonrepair } from 'jsonrepair'
@@ -169,7 +170,7 @@ const recommends = ref([
   '区块链技术及其应用',
   '大学生职业生涯规划',
   '公司年会策划方案',
-]) 
+])
 
 onMounted(() => {
   setTimeout(() => {
@@ -189,7 +190,7 @@ const createOutline = async () => {
   outlineCreating.value = true
 
   const [provider, _model] = model.value.split(':')
-  
+
   const stream = await api.AIPPT_Outline({
     content: keyword.value,
     language: language.value,
@@ -206,7 +207,7 @@ const createOutline = async () => {
 
   const reader: ReadableStreamDefaultReader = stream.body.getReader()
   const decoder = new TextDecoder('utf-8')
-  
+
   const readStream = () => {
     reader.read().then(({ done, value }) => {
       if (done) {
@@ -215,7 +216,7 @@ const createOutline = async () => {
         outlineCreating.value = false
         return
       }
-  
+
       const chunk = decoder.decode(value, { stream: true })
       outline.value += chunk
 
@@ -264,7 +265,7 @@ const createPPT = async (template?: { slides: Slide[], theme: SlideTheme }) => {
 
   const reader: ReadableStreamDefaultReader = stream.body.getReader()
   const decoder = new TextDecoder('utf-8')
-  
+
   const readStream = () => {
     reader.read().then(({ done, value }) => {
       if (done) {
@@ -274,7 +275,7 @@ const createPPT = async (template?: { slides: Slide[], theme: SlideTheme }) => {
         slidesStore.setTheme(templateTheme)
         return
       }
-  
+
       const chunk = decoder.decode(value, { stream: true })
       const lines = chunk.split(/\n+/)
 
@@ -389,7 +390,7 @@ const uploadLocalTemplate = () => {
     margin-bottom: 10px;
     padding-right: 5px;
     @include flex-grid-layout();
-  
+
     .template {
       border: 2px solid $borderColor;
       border-radius: $borderRadius;
@@ -398,7 +399,7 @@ const uploadLocalTemplate = () => {
       &.selected {
         border-color: $themeColor;
       }
-  
+
       img {
         width: 100%;
         min-height: 175px;
@@ -493,7 +494,7 @@ const uploadLocalTemplate = () => {
   .select-template {
     .templates {
       padding-right: 0;
-  
+
       .template {
         img {
           min-height: 60px;

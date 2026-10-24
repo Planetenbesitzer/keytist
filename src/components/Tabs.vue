@@ -4,24 +4,25 @@
       'card': card,
       'space-around': spaceAround,
       'space-between': spaceBetween,
-    }" 
+    }"
     :style="tabsStyle || {}"
   >
-    <div 
-      class="tab" 
+    <div
+      class="tab"
       :class="{ 'active': tab.key === value, 'disabled': tab.disabled }"
-      v-for="tab in tabs" 
+      v-for="tab in tabs"
       :key="tab.key"
       :style="{
         ...(tabStyle || {}),
         '--color': tab.color,
       }"
       @click="!tab.disabled && emit('update:value', tab.key)"
-    >{{tab.label}}</div>
+    >{{t(tab.label)}}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { t } from '@/i18n'
 import { type CSSProperties } from 'vue'
 
 interface TabItem {
