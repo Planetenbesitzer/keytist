@@ -7,6 +7,10 @@ browser API, and the editor UI. No hosted AI account is required. Read
 [the native element schema](src/types/slides.ts) before constructing documents.
 The [AI JSON schema guide](doc/AI_PPT_SCHEMA.md) provides additional examples.
 
+If `.local-maintenance/MAINTENANCE.md` exists, read it before local maintenance.
+It records machine-specific runtime paths and recovery details, is intentionally
+ignored by Git, and must not be committed or included in a release archive.
+
 ## Start and connect
 
 Use Node.js 20 or newer. For a source checkout, run `npm ci`, `npm run build`,
