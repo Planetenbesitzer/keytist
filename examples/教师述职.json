@@ -1,0 +1,5206 @@
+{
+  "title": "教师述职",
+  "width": 1600,
+  "height": 900,
+  "theme": {
+    "backgroundColor": "#FAF8F3",
+    "themeColors": [
+      "#7D293D",
+      "#222B38",
+      "#A27E44",
+      "#73777D",
+      "#EFEAE1",
+      "#DAD6CE"
+    ],
+    "fontColor": "#222B38",
+    "fontName": "SourceHanSans",
+    "outline": {
+      "width": 1,
+      "color": "#DAD6CE",
+      "style": "solid"
+    },
+    "shadow": {
+      "h": 0,
+      "v": 0,
+      "blur": 0,
+      "color": "#00000000"
+    }
+  },
+  "embeddedFonts": [],
+  "slides": [
+    {
+      "id": "faculty-report-01",
+      "type": "cover",
+      "background": {
+        "type": "solid",
+        "color": "#7D293D"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-01-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-01-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">01</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-01-cover-kicker",
+          "name": "cover-kicker",
+          "type": "text",
+          "left": 94,
+          "top": 83,
+          "width": 1320,
+          "height": 47,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>FACULTY WORK REPORT</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#E4CDB5",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-01-cover-title",
+          "name": "cover-title",
+          "type": "text",
+          "left": 86,
+          "top": 204,
+          "width": 1380,
+          "height": 278,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:93px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>教师述职</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#FFFFFF",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-01-cover-year",
+          "name": "cover-year",
+          "type": "text",
+          "left": 94,
+          "top": 533,
+          "width": 1316,
+          "height": 72,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:41px;font-family:Inter,SourceHanSans,sans-serif;\">[报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#F5E8EB",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-01-cover-rule",
+          "type": "line",
+          "left": 94,
+          "top": 673,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1414,
+            0
+          ],
+          "style": "solid",
+          "color": "#A36976",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-01-cover-person",
+          "name": "cover-person",
+          "type": "text",
+          "left": 94,
+          "top": 715,
+          "width": 1360,
+          "height": 50,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]    [院系]    [职称 / 岗位]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#FFFFFF",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-01-cover-date",
+          "name": "cover-date",
+          "type": "text",
+          "left": 94,
+          "top": 782,
+          "width": 1360,
+          "height": 44,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:25px;font-family:Inter,SourceHanSans,sans-serif;\">统计截止：[日期]    汇报日期：[日期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>封面。统一填写年度或聘期、姓名、院系、职称和统计截止日期。此模板为通用成果汇报，不是任何高校的正式考核表。默认聚焦已经完成的工作，没有未来计划或资源决策页。</p>"
+    },
+    {
+      "id": "faculty-report-02",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-02-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>成果概览</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>本年度完成的主要工作</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-02-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">02</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-02-overview-n-0",
+          "name": "overview-n-0",
+          "type": "text",
+          "left": 92,
+          "top": 270,
+          "width": 90,
+          "height": 65,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:43px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>01</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-title-0",
+          "name": "overview-title-0",
+          "type": "text",
+          "left": 216,
+          "top": 270,
+          "width": 360,
+          "height": 58,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:33px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>课程教学</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "link": {
+            "type": "slide",
+            "target": "faculty-report-03"
+          }
+        },
+        {
+          "id": "faculty-report-02-overview-scope-0",
+          "name": "overview-scope-0",
+          "type": "text",
+          "left": 620,
+          "top": 270,
+          "width": 888,
+          "height": 50,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\">完成 [N] 门课程、[N] 学时教学</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-result-0",
+          "name": "overview-result-0",
+          "type": "text",
+          "left": 620,
+          "top": 326,
+          "width": 888,
+          "height": 52,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">形成 [课程 / 教材 / 教学建设成果]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-rule-0",
+          "type": "line",
+          "left": 216,
+          "top": 381,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1292,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-02-overview-n-1",
+          "name": "overview-n-1",
+          "type": "text",
+          "left": 92,
+          "top": 395,
+          "width": 90,
+          "height": 65,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:43px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>02</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-title-1",
+          "name": "overview-title-1",
+          "type": "text",
+          "left": 216,
+          "top": 395,
+          "width": 360,
+          "height": 58,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:33px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>科学研究</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "link": {
+            "type": "slide",
+            "target": "faculty-report-05"
+          }
+        },
+        {
+          "id": "faculty-report-02-overview-scope-1",
+          "name": "overview-scope-1",
+          "type": "text",
+          "left": 620,
+          "top": 395,
+          "width": 888,
+          "height": 50,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\">形成 [N] 项已发表或已接收成果</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-result-1",
+          "name": "overview-result-1",
+          "type": "text",
+          "left": 620,
+          "top": 451,
+          "width": 888,
+          "height": 52,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">代表成果：[研究问题与主要发现]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-rule-1",
+          "type": "line",
+          "left": 216,
+          "top": 506,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1292,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-02-overview-n-2",
+          "name": "overview-n-2",
+          "type": "text",
+          "left": 92,
+          "top": 520,
+          "width": 90,
+          "height": 65,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:43px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>03</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-title-2",
+          "name": "overview-title-2",
+          "type": "text",
+          "left": 216,
+          "top": 520,
+          "width": 360,
+          "height": 58,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:33px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>人才培养</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "link": {
+            "type": "slide",
+            "target": "faculty-report-08"
+          }
+        },
+        {
+          "id": "faculty-report-02-overview-scope-2",
+          "name": "overview-scope-2",
+          "type": "text",
+          "left": 620,
+          "top": 520,
+          "width": 888,
+          "height": 50,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\">完成 [本科 / 硕士 / 博士] 指导任务</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-result-2",
+          "name": "overview-result-2",
+          "type": "text",
+          "left": 620,
+          "top": 576,
+          "width": 888,
+          "height": 52,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">学生成果：[论文 / 学位 / 竞赛成果]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-rule-2",
+          "type": "line",
+          "left": 216,
+          "top": 631,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1292,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-02-overview-n-3",
+          "name": "overview-n-3",
+          "type": "text",
+          "left": 92,
+          "top": 645,
+          "width": 90,
+          "height": 65,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:43px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>04</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-title-3",
+          "name": "overview-title-3",
+          "type": "text",
+          "left": 216,
+          "top": 645,
+          "width": 360,
+          "height": 58,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:33px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>学术与公共服务</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "link": {
+            "type": "slide",
+            "target": "faculty-report-10"
+          }
+        },
+        {
+          "id": "faculty-report-02-overview-scope-3",
+          "name": "overview-scope-3",
+          "type": "text",
+          "left": 620,
+          "top": 645,
+          "width": 888,
+          "height": 50,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\">承担 [学术组织 / 评审 / 院校服务]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-overview-result-3",
+          "name": "overview-result-3",
+          "type": "text",
+          "left": 620,
+          "top": 701,
+          "width": 888,
+          "height": 52,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">实际完成：[具体工作及形成的材料]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-02-scope",
+          "name": "scope",
+          "type": "text",
+          "left": 92,
+          "top": 790,
+          "width": 1416,
+          "height": 42,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:24px;font-family:Inter,SourceHanSans,sans-serif;\">统计范围：[起止日期]；成果身份与完成时间以证明材料为准</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>本页只概括已完成工作的范围和最重要成果。每类概览与后页详表使用相同统计口径，不把团队总产出当作个人业绩。四个栏目标题可点击跳转至相应详细页面。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；华中科技大学电子信息与通信学院 教师年度考核述职通知 https://ei.hust.edu.cn/info/1165/7623.htm</p>"
+    },
+    {
+      "id": "faculty-report-03",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-03-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>教学工作</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-03-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>课程教学完成情况</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-03-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-03-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-03-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">03</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-03-teaching",
+          "name": "teaching",
+          "type": "table",
+          "left": 92,
+          "top": 281,
+          "width": 1416,
+          "height": 420,
+          "rotate": 0,
+          "outline": {
+            "width": 1,
+            "style": "solid",
+            "color": "#DAD6CE"
+          },
+          "colWidths": [
+            0.32,
+            0.24,
+            0.18,
+            0.26
+          ],
+          "cellMinHeight": 105,
+          "rowHeights": [
+            105,
+            105,
+            105,
+            105
+          ],
+          "data": [
+            [
+              {
+                "id": "faculty-report-03-teaching-0-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "学期 / 课程",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-0-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "授课对象与性质",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-0-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "本人授课学时",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-0-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "学生人数 / 角色",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-03-teaching-1-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[学期] / [课程 A]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-1-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[本科 / 必修]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-1-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[N] 学时",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-1-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[N] 人 / [独立授课]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-03-teaching-2-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[学期] / [课程 B]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-2-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[研究生 / 选修]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-2-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[N] 学时",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-2-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[N] 人 / [共同授课]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-03-teaching-3-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[学期] / [课程 C]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-3-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[对象 / 课程性质]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-3-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[N] 学时",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-03-teaching-3-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[N] 人 / [本人角色]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "26px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ]
+          ]
+        },
+        {
+          "id": "faculty-report-03-teaching-total",
+          "name": "teaching-total",
+          "type": "text",
+          "left": 92,
+          "top": 740,
+          "width": 1416,
+          "height": 50,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:30px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>本年度实际完成：[N] 门课程  /  [N] 学时  /  [N] 人或人次</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-03-teaching-evidence",
+          "name": "teaching-evidence",
+          "type": "text",
+          "left": 92,
+          "top": 795,
+          "width": 1416,
+          "height": 39,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">依据：[教务系统记录 / 教学任务书 / 评价材料]    材料编号：[T01–Txx]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>填实际完成课程、本人授课学时与覆盖学生。课程总学时不等于个人授课学时；共同授课须写明本人部分。人数注明是去重人数还是选课人次。教学质量评价与课时数量分别陈述，评价数据附来源和有效回应率。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；华中科技大学电子信息与通信学院 教师年度考核述职通知 https://ei.hust.edu.cn/info/1165/7623.htm</p>"
+    },
+    {
+      "id": "faculty-report-04",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-04-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>教学建设</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>代表性教学成果</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-04-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">04</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-04-teaching-achievement",
+          "name": "teaching-achievement",
+          "type": "text",
+          "left": 92,
+          "top": 263,
+          "width": 1416,
+          "height": 66,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:40px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>[课程 / 教材 / 教学建设成果名称]</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-teaching-problem",
+          "name": "teaching-problem",
+          "type": "text",
+          "left": 92,
+          "top": 371,
+          "width": 565,
+          "height": 48,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>教学问题与已完成改进</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-teaching-changes",
+          "name": "teaching-changes",
+          "type": "text",
+          "left": 92,
+          "top": 435,
+          "width": 565,
+          "height": 130,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">[原教学环节中的具体问题]</span></p><p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">[本人已实施的改进及完成时间]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-teaching-evidence-head",
+          "name": "teaching-evidence-head",
+          "type": "text",
+          "left": 92,
+          "top": 606,
+          "width": 565,
+          "height": 48,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>已形成的成果与成效</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-teaching-outcome",
+          "name": "teaching-outcome",
+          "type": "text",
+          "left": 92,
+          "top": 671,
+          "width": 565,
+          "height": 125,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[已出版教材 / 案例库 / 课程资源]</span></p><p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[评价来源 / 学习结果 / 样本范围]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-teaching-figure-frame",
+          "name": "teaching-figure-frame",
+          "type": "shape",
+          "left": 730,
+          "top": 365,
+          "width": 778,
+          "height": 420,
+          "rotate": 0,
+          "viewBox": [
+            778,
+            420
+          ],
+          "path": "M0 0 L778 0 L778 420 L0 420 Z",
+          "fill": "#F4EFEB",
+          "outline": {
+            "color": "#C5B6AD",
+            "width": 1.5,
+            "style": "dashed"
+          }
+        },
+        {
+          "id": "faculty-report-04-teaching-figure-label",
+          "name": "teaching-figure-label",
+          "type": "text",
+          "left": 765,
+          "top": 525,
+          "width": 708,
+          "height": 78,
+          "rotate": 0,
+          "content": "<p style=\"text-align:center;\"><span style=\"font-size:32px;font-family:Inter,SourceHanSans,sans-serif;\">[课程资源 / 教材 / 教学成果截图]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-04-teaching-figure-caption",
+          "name": "teaching-figure-caption",
+          "type": "text",
+          "left": 758,
+          "top": 720,
+          "width": 722,
+          "height": 46,
+          "rotate": 0,
+          "content": "<p style=\"text-align:center;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\">[材料编号] · [形成时间] · [本人完成部分]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>用一项已完成的课程、教材、案例库或教改成果说明教学贡献。把已经实施的改进、实际形成的材料和可以观察到的教学成效分开。没有基准和有效样本时不写提升比例。不使用虚构评价分数。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；华中科技大学电子信息与通信学院 教师年度考核述职通知 https://ei.hust.edu.cn/info/1165/7623.htm</p>"
+    },
+    {
+      "id": "faculty-report-05",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-05-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>科学研究</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-05-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>科研成果目录</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-05-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-05-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-05-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">05</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-05-research-summary",
+          "name": "research-summary",
+          "type": "text",
+          "left": 92,
+          "top": 260,
+          "width": 1416,
+          "height": 55,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:31px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>已发表 [N] 项    已接收 [N] 项    其他已形成成果 [N] 项</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-05-research-catalogue",
+          "name": "research-catalogue",
+          "type": "table",
+          "left": 92,
+          "top": 344,
+          "width": 1416,
+          "height": 400,
+          "rotate": 0,
+          "outline": {
+            "width": 1,
+            "style": "solid",
+            "color": "#DAD6CE"
+          },
+          "colWidths": [
+            0.32,
+            0.29,
+            0.16,
+            0.23
+          ],
+          "cellMinHeight": 100,
+          "rowHeights": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "data": [
+            [
+              {
+                "id": "faculty-report-05-research-catalogue-0-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "编号 / 成果名称",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-0-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "载体与完成时间",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-0-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "成果状态",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-0-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "本人角色与贡献",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-05-research-catalogue-1-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "R01 / [论文或著作题名]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-1-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[期刊 / 出版社]；[日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-1-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[已发表]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-1-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[作者身份]；[具体工作]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-05-research-catalogue-2-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "R02 / [论文题名]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-2-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[期刊]；[接收日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-2-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[已接收]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-2-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[作者身份]；[具体工作]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-05-research-catalogue-3-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "R03 / [数据 / 软件 / 专利]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-3-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[平台 / 授权号]；[日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-3-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[发布 / 授权状态]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-05-research-catalogue-3-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[完成人身份]；[具体工作]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ]
+          ]
+        },
+        {
+          "id": "faculty-report-05-research-source",
+          "name": "research-source",
+          "type": "text",
+          "left": 92,
+          "top": 786,
+          "width": 1416,
+          "height": 48,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:24px;font-family:Inter,SourceHanSans,sans-serif;\">出处：[DOI / ISBN / arXiv / 仓库版本 / 授权证明]；预印本单独标注，避免重复计数</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>按本年度或本聘期统计。已发表、已接收、预印本、已投稿必须逐项标注，不能混作已发表论文。预印本与正式版本按同一成果归并。作者顺序或通讯身份不替代具体贡献说明。代表性成果可在第6页展开。目录可按实际成果增加或删除行、复制为附录。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；东北农业大学人事处 关于召开学校2023年度专业技术职务评审述职答辩会议的通知 https://rsc.neau.edu.cn/info/1103/1941.htm</p>"
+    },
+    {
+      "id": "faculty-report-06",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-06-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>科学研究</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>代表性研究成果</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-06-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">06</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-06-research-achievement",
+          "name": "research-achievement",
+          "type": "text",
+          "left": 92,
+          "top": 258,
+          "width": 1416,
+          "height": 65,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:40px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>[一句话概括已获得的核心结果]</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-question-head",
+          "name": "research-question-head",
+          "type": "text",
+          "left": 92,
+          "top": 365,
+          "width": 500,
+          "height": 47,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>研究问题</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-question",
+          "name": "research-question",
+          "type": "text",
+          "left": 92,
+          "top": 425,
+          "width": 500,
+          "height": 112,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[解决了哪个明确问题]</span></p><p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[已有认识的具体缺口]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-result-head",
+          "name": "research-result-head",
+          "type": "text",
+          "left": 92,
+          "top": 572,
+          "width": 500,
+          "height": 47,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>主要结果与适用条件</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-result",
+          "name": "research-result",
+          "type": "text",
+          "left": 92,
+          "top": 635,
+          "width": 500,
+          "height": 118,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[新关系 / 机制 / 方法 / 精度]</span></p><p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[成立的条件与证据范围]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-figure-frame",
+          "name": "research-figure-frame",
+          "type": "shape",
+          "left": 656,
+          "top": 357,
+          "width": 852,
+          "height": 367,
+          "rotate": 0,
+          "viewBox": [
+            852,
+            367
+          ],
+          "path": "M0 0 L852 0 L852 367 L0 367 Z",
+          "fill": "#F4EFEB",
+          "outline": {
+            "color": "#C5B6AD",
+            "width": 1.5,
+            "style": "dashed"
+          }
+        },
+        {
+          "id": "faculty-report-06-research-figure-label",
+          "name": "research-figure-label",
+          "type": "text",
+          "left": 691,
+          "top": 490.5,
+          "width": 782,
+          "height": 78,
+          "rotate": 0,
+          "content": "<p style=\"text-align:center;\"><span style=\"font-size:32px;font-family:Inter,SourceHanSans,sans-serif;\">[核心结果图 / 关键公式 / 对比数据]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-figure-caption",
+          "name": "research-figure-caption",
+          "type": "text",
+          "left": 684,
+          "top": 659,
+          "width": 796,
+          "height": 46,
+          "rotate": 0,
+          "content": "<p style=\"text-align:center;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\">[图注：对象、单位、条件与来源]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-contribution",
+          "name": "research-contribution",
+          "type": "text",
+          "left": 656,
+          "top": 744,
+          "width": 852,
+          "height": 49,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:24px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>本人贡献：[理论推导 / 分析 / 实验 / 数据等具体工作]</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-06-research-reference",
+          "name": "research-reference",
+          "type": "text",
+          "left": 92,
+          "top": 799,
+          "width": 1416,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">成果出处：[作者，期刊 / 状态，年份，DOI]    材料编号：[Rxx]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>本页以研究问题、实质结果、证据与本人贡献为主。右侧保留大图区域，插入自己的核心结果图、关键公式或对比数据。理论推导、模拟和实验数据应明确区分；结论的条件与近似不能省略。共同成果注明本人完成的具体部分。可复制此页展示第二项成果。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；东北农业大学人事处 关于召开学校2023年度专业技术职务评审述职答辩会议的通知 https://rsc.neau.edu.cn/info/1103/1941.htm</p>"
+    },
+    {
+      "id": "faculty-report-07",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-07-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>项目履职</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-07-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>科研项目中的已完成工作</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-07-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-07-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-07-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">07</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-07-projects",
+          "name": "projects",
+          "type": "table",
+          "left": 92,
+          "top": 281,
+          "width": 1416,
+          "height": 464,
+          "rotate": 0,
+          "outline": {
+            "width": 1,
+            "style": "solid",
+            "color": "#DAD6CE"
+          },
+          "colWidths": [
+            0.28,
+            0.23,
+            0.28,
+            0.21
+          ],
+          "cellMinHeight": 116,
+          "rowHeights": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "data": [
+            [
+              {
+                "id": "faculty-report-07-projects-0-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "项目 / 编号与执行期",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-0-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "本人角色及负责内容",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-0-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "本年度已完成工作",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-0-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "成果与证明",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-07-projects-1-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[项目 A]\n[编号]；[起止日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-1-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[主持 / 参与]\n[具体承担内容]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-1-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[完成任务或阶段结果]\n[完成日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-1-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[报告 / 论文 / 数据]\n[状态 / 材料编号]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-07-projects-2-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[项目 B]\n[编号]；[起止日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-2-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[主持 / 参与]\n[具体承担内容]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-2-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[完成任务或阶段结果]\n[完成日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-2-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[报告 / 论文 / 数据]\n[状态 / 材料编号]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-07-projects-3-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[项目 C]\n[编号]；[起止日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-3-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[主持 / 参与]\n[具体承担内容]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-3-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[完成任务或阶段结果]\n[完成日期]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-07-projects-3-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[报告 / 论文 / 数据]\n[状态 / 材料编号]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ]
+          ]
+        },
+        {
+          "id": "faculty-report-07-project-status",
+          "name": "project-status",
+          "type": "text",
+          "left": 92,
+          "top": 788,
+          "width": 1416,
+          "height": 45,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">项目状态：[在研 / 已结题]；本页仅陈述统计期内已经完成的工作</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>项目仍在执行也可以报告本年度已经完成的部分，但不能写成项目已结题。写明主持、课题负责人或参与身份，并把团队任务与本人负责内容分开。默认不设置经费页；如学校要求列经费，明确项目总额、本单位承担额、本人负责额和到账口径。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；华中科技大学电子信息与通信学院 教师年度考核述职通知 https://ei.hust.edu.cn/info/1165/7623.htm</p>"
+    },
+    {
+      "id": "faculty-report-08",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-08-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>人才培养</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>人才培养完成情况</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-08-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">08</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-08-mentoring-level-0",
+          "name": "mentoring-level-0",
+          "type": "text",
+          "left": 92,
+          "top": 285,
+          "width": 300,
+          "height": 58,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:36px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>本科生</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-count-0",
+          "name": "mentoring-count-0",
+          "type": "text",
+          "left": 92,
+          "top": 349,
+          "width": 300,
+          "height": 70,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:44px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>[N] 人</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-role-0",
+          "name": "mentoring-role-0",
+          "type": "text",
+          "left": 495,
+          "top": 289,
+          "width": 1013,
+          "height": 62,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">指导职责：[毕业设计 / 科研训练 / 竞赛指导]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-done-0",
+          "name": "mentoring-done-0",
+          "type": "text",
+          "left": 495,
+          "top": 365,
+          "width": 1013,
+          "height": 61,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">完成情况：[已完成的论文 / 作品 / 结项]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-rule-0",
+          "type": "line",
+          "left": 495,
+          "top": 430,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1013,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-08-mentoring-level-1",
+          "name": "mentoring-level-1",
+          "type": "text",
+          "left": 92,
+          "top": 445,
+          "width": 300,
+          "height": 58,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:36px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>硕士生</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-count-1",
+          "name": "mentoring-count-1",
+          "type": "text",
+          "left": 92,
+          "top": 509,
+          "width": 300,
+          "height": 70,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:44px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>[N] 人</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-role-1",
+          "name": "mentoring-role-1",
+          "type": "text",
+          "left": 495,
+          "top": 449,
+          "width": 1013,
+          "height": 62,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">指导职责：[主导师 / 共同导师 / 协助指导]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-done-1",
+          "name": "mentoring-done-1",
+          "type": "text",
+          "left": 495,
+          "top": 525,
+          "width": 1013,
+          "height": 61,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">完成情况：[答辩通过 / 毕业 / 完成培养环节]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-rule-1",
+          "type": "line",
+          "left": 495,
+          "top": 590,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1013,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-08-mentoring-level-2",
+          "name": "mentoring-level-2",
+          "type": "text",
+          "left": 92,
+          "top": 605,
+          "width": 300,
+          "height": 58,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:36px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>博士生</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-count-2",
+          "name": "mentoring-count-2",
+          "type": "text",
+          "left": 92,
+          "top": 669,
+          "width": 300,
+          "height": 70,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:44px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>[N] 人</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-role-2",
+          "name": "mentoring-role-2",
+          "type": "text",
+          "left": 495,
+          "top": 609,
+          "width": 1013,
+          "height": 62,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">指导职责：[主导师 / 共同导师 / 协助指导]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-done-2",
+          "name": "mentoring-done-2",
+          "type": "text",
+          "left": 495,
+          "top": 685,
+          "width": 1013,
+          "height": 61,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:28px;font-family:Inter,SourceHanSans,sans-serif;\">完成情况：[答辩通过 / 毕业 / 完成培养环节]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-08-mentoring-proof",
+          "name": "mentoring-proof",
+          "type": "text",
+          "left": 92,
+          "top": 801,
+          "width": 1416,
+          "height": 34,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">依据：[培养系统 / 答辩记录 / 指导记录]；人数口径：[去重规则与统计截止日]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>分别列本科、硕士、博士，区分主导师、共同导师和协助指导。指导人数、毕业人数和通过答辩人数不是同一指标，不得相加重复统计。按统计截止日填写已完成的培养环节；师生姓名可按使用场景脱敏。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm</p>"
+    },
+    {
+      "id": "faculty-report-09",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-09-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>人才培养</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>学生代表性成果</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-09-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">09</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-09-student-result",
+          "name": "student-result",
+          "type": "text",
+          "left": 92,
+          "top": 259,
+          "width": 1416,
+          "height": 67,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:40px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>[学生论文 / 学位成果 / 竞赛作品名称]</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-student-figure-frame",
+          "name": "student-figure-frame",
+          "type": "shape",
+          "left": 92,
+          "top": 365,
+          "width": 756,
+          "height": 416,
+          "rotate": 0,
+          "viewBox": [
+            756,
+            416
+          ],
+          "path": "M0 0 L756 0 L756 416 L0 416 Z",
+          "fill": "#F4EFEB",
+          "outline": {
+            "color": "#C5B6AD",
+            "width": 1.5,
+            "style": "dashed"
+          }
+        },
+        {
+          "id": "faculty-report-09-student-figure-label",
+          "name": "student-figure-label",
+          "type": "text",
+          "left": 127,
+          "top": 523,
+          "width": 686,
+          "height": 78,
+          "rotate": 0,
+          "content": "<p style=\"text-align:center;\"><span style=\"font-size:32px;font-family:Inter,SourceHanSans,sans-serif;\">[论文首页 / 作品图 / 获奖证明]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-student-figure-caption",
+          "name": "student-figure-caption",
+          "type": "text",
+          "left": 120,
+          "top": 716,
+          "width": 700,
+          "height": 46,
+          "rotate": 0,
+          "content": "<p style=\"text-align:center;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\">[材料编号] · [作者 / 获奖者] · [完成日期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-student-owner-head",
+          "name": "student-owner-head",
+          "type": "text",
+          "left": 910,
+          "top": 365,
+          "width": 598,
+          "height": 48,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>学生及成果状态</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-student-owner",
+          "name": "student-owner",
+          "type": "text",
+          "left": 910,
+          "top": 427,
+          "width": 598,
+          "height": 123,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[学生姓名或脱敏标识] · [培养层次]</span></p><p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[发表 / 答辩 / 获奖的准确状态]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-student-role-head",
+          "name": "student-role-head",
+          "type": "text",
+          "left": 910,
+          "top": 584,
+          "width": 598,
+          "height": 48,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:29px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>本人承担的指导工作</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-student-role",
+          "name": "student-role",
+          "type": "text",
+          "left": 910,
+          "top": 646,
+          "width": 598,
+          "height": 123,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[选题、方法训练、学术指导等]</span></p><p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">[指导角色与可核查记录]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-09-student-reference",
+          "name": "student-reference",
+          "type": "text",
+          "left": 92,
+          "top": 800,
+          "width": 1416,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">成果出处：[期刊 / 学校 / 竞赛主办方]    时间：[日期]    材料编号：[Sxx]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>以学生成果为主体，写明学生作者或获奖者、成果状态与时间。本人贡献写指导工作，不能把学生独立成果直接表述为个人研究产出。竞赛奖项保留等级、主办方与个人/团队属性；论文状态与第5页一致。同一成果跨页展示时保留同一编号，不重复统计。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；东北农业大学人事处 关于召开学校2023年度专业技术职务评审述职答辩会议的通知 https://rsc.neau.edu.cn/info/1103/1941.htm</p>"
+    },
+    {
+      "id": "faculty-report-10",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-10-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>学术共同体</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-10-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>学术交流与公共服务</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-10-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-10-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-10-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">10</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-10-service",
+          "name": "service",
+          "type": "table",
+          "left": 92,
+          "top": 281,
+          "width": 1416,
+          "height": 475,
+          "rotate": 0,
+          "outline": {
+            "width": 1,
+            "style": "solid",
+            "color": "#DAD6CE"
+          },
+          "colWidths": [
+            0.28,
+            0.27,
+            0.18,
+            0.27
+          ],
+          "cellMinHeight": 95,
+          "rowHeights": [
+            95,
+            95,
+            95,
+            95,
+            95
+          ],
+          "data": [
+            [
+              {
+                "id": "faculty-report-10-service-0-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "类别 / 活动或职责",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-0-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "时间与组织单位",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-0-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "本人角色",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-0-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "实际完成内容 / 依据",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-10-service-1-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "学术交流 / [报告题目]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-1-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[会议 / 邀请单位]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-1-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[受邀 / 投稿报告]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-1-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[报告 / 会议议程]；[A01]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-10-service-2-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "学术服务 / [服务事项]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-2-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[期刊 / 学会]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-2-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[审稿 / 组织 / 评审]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-2-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[实际工作与记录]；[A02]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-10-service-3-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "院校服务 / [职责名称]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-3-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[学校 / 院系]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-3-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[任职或承担角色]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-3-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[完成内容与记录]；[A03]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-10-service-4-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "社会服务 / [活动名称]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-4-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[组织单位]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-4-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[本人承担工作]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-10-service-4-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[科普 / 咨询等成果]；[A04]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ]
+          ]
+        },
+        {
+          "id": "faculty-report-10-service-footnote",
+          "name": "service-footnote",
+          "type": "text",
+          "left": 92,
+          "top": 796,
+          "width": 1416,
+          "height": 39,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:24px;font-family:Inter,SourceHanSans,sans-serif;\">同一活动按实际角色归类，报告、组织与参会分别记录</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>区分受邀报告、投稿报告、参会，不能混算。学术服务说明审稿、编委、组织或评审的具体身份与已完成工作。院校服务可列课程思政、班主任、招生、学科建设与公益科普等，按真实职责取舍；师德相关陈述要写实，不填空泛自评。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；华中科技大学电子信息与通信学院 教师年度考核述职通知 https://ei.hust.edu.cn/info/1165/7623.htm</p>"
+    },
+    {
+      "id": "faculty-report-11",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#7D293D"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-11-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>成果总结</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#E4CDB5",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>本年度的代表性贡献</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#FFFFFF",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#A36976",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-11-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">11</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-11-closing-category-0",
+          "name": "closing-category-0",
+          "type": "text",
+          "left": 92,
+          "top": 284,
+          "width": 310,
+          "height": 55,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:32px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>教学</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#E4CDB5",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-result-0",
+          "name": "closing-result-0",
+          "type": "text",
+          "left": 463,
+          "top": 284,
+          "width": 1045,
+          "height": 67,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:35px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>完成 [课程 / 教材 / 教学建设成果]</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#FFFFFF",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-contribution-0",
+          "name": "closing-contribution-0",
+          "type": "text",
+          "left": 463,
+          "top": 362,
+          "width": 1045,
+          "height": 49,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">本人完成：[具体工作]    依据：[Txx]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-rule-0",
+          "type": "line",
+          "left": 463,
+          "top": 420,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1045,
+            0
+          ],
+          "style": "solid",
+          "color": "#A36976",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-11-closing-category-1",
+          "name": "closing-category-1",
+          "type": "text",
+          "left": 92,
+          "top": 437,
+          "width": 310,
+          "height": 55,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:32px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>科研</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#E4CDB5",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-result-1",
+          "name": "closing-result-1",
+          "type": "text",
+          "left": 463,
+          "top": 437,
+          "width": 1045,
+          "height": 67,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:35px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>获得 [明确研究结果 / 形成的研究成果]</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#FFFFFF",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-contribution-1",
+          "name": "closing-contribution-1",
+          "type": "text",
+          "left": 463,
+          "top": 515,
+          "width": 1045,
+          "height": 49,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">本人完成：[具体工作]    依据：[Rxx / Pxx]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-rule-1",
+          "type": "line",
+          "left": 463,
+          "top": 573,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1045,
+            0
+          ],
+          "style": "solid",
+          "color": "#A36976",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-11-closing-category-2",
+          "name": "closing-category-2",
+          "type": "text",
+          "left": 92,
+          "top": 590,
+          "width": 310,
+          "height": 55,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:32px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>育人与服务</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#E4CDB5",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-result-2",
+          "name": "closing-result-2",
+          "type": "text",
+          "left": 463,
+          "top": 590,
+          "width": 1045,
+          "height": 67,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:35px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>形成 [学生成果 / 学术或公共服务成果]</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#FFFFFF",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-contribution-2",
+          "name": "closing-contribution-2",
+          "type": "text",
+          "left": 463,
+          "top": 668,
+          "width": 1045,
+          "height": 49,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:26px;font-family:Inter,SourceHanSans,sans-serif;\">本人完成：[具体工作]    依据：[Sxx / Axx]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#ECDCE0",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-11-closing-line",
+          "name": "closing-line",
+          "type": "text",
+          "left": 92,
+          "top": 797,
+          "width": 1416,
+          "height": 42,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:27px;font-family:Inter,SourceHanSans,sans-serif;\">以上为统计期内已完成工作，敬请评议</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#FFFFFF",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>本页完成成果收束，不谈资源申请或下一步计划。每句话应点出实际完成的工作、形成的成果、本人贡献及证据编号。避免只重复数量，也不要使用显著提升等没有证据的形容词。可选择教学、科研、育人或服务中最重要的三项。</p>"
+    },
+    {
+      "id": "faculty-report-12",
+      "type": "content",
+      "background": {
+        "type": "solid",
+        "color": "#FAF8F3"
+      },
+      "elements": [
+        {
+          "id": "faculty-report-12-section",
+          "name": "section",
+          "type": "text",
+          "left": 92,
+          "top": 46,
+          "width": 1320,
+          "height": 35,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:22px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>附录</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#7D293D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-12-title",
+          "name": "title",
+          "type": "text",
+          "left": 92,
+          "top": 106,
+          "width": 1416,
+          "height": 84,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:54px;font-family:Inter,SourceHanSans,sans-serif;\"><strong>成果与证明材料索引</strong></span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#222B38",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-12-heading-rule",
+          "type": "line",
+          "left": 92,
+          "top": 222,
+          "width": 1.5,
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            1416,
+            0
+          ],
+          "style": "solid",
+          "color": "#DAD6CE",
+          "points": [
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "faculty-report-12-footer",
+          "name": "footer",
+          "type": "text",
+          "left": 92,
+          "top": 843,
+          "width": 1250,
+          "height": 32,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:20px;font-family:Inter,SourceHanSans,sans-serif;\">[姓名]  ·  [院系]  ·  [报告年度 / 聘期]</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        },
+        {
+          "id": "faculty-report-12-page",
+          "name": "page",
+          "type": "text",
+          "left": 1430,
+          "top": 839,
+          "width": 78,
+          "height": 38,
+          "rotate": 0,
+          "content": "<p style=\"text-align:right;\"><span style=\"font-size:23px;font-family:Inter,SourceHanSans,sans-serif;\">12</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top",
+          "textType": "footer",
+          "autoPageNumber": {
+            "start": 1,
+            "format": "twoDigits",
+            "hideOnFirst": true
+          }
+        },
+        {
+          "id": "faculty-report-12-proof-index",
+          "name": "proof-index",
+          "type": "table",
+          "left": 92,
+          "top": 279,
+          "width": 1416,
+          "height": 486,
+          "rotate": 0,
+          "outline": {
+            "width": 1,
+            "style": "solid",
+            "color": "#DAD6CE"
+          },
+          "colWidths": [
+            0.1,
+            0.32,
+            0.25,
+            0.33
+          ],
+          "cellMinHeight": 81,
+          "rowHeights": [
+            81,
+            81,
+            81,
+            81,
+            81,
+            81
+          ],
+          "data": [
+            [
+              {
+                "id": "faculty-report-12-proof-index-0-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "编号",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-0-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "成果或工作事项",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-0-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "完成时间 / 状态",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-0-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "材料位置",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": true,
+                  "color": "#FFFFFF",
+                  "backcolor": "#7D293D",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-12-proof-index-1-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "T01",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-1-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[课程 / 教学建设成果]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-1-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[完成状态]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-1-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[教务记录 / 文件名 / 链接]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-12-proof-index-2-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "R01",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-2-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[论文 / 著作 / 数据等]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-2-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[发表或形成状态]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-2-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[DOI / ISBN / 仓库版本]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-12-proof-index-3-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "P01",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-3-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[项目已完成工作]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-3-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[验收或阶段状态]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-3-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[任务书 / 报告 / 验收记录]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-12-proof-index-4-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "S01",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-4-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[学生成果]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-4-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[成果状态]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-4-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[论文 / 答辩 / 获奖记录]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FAF8F3",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ],
+            [
+              {
+                "id": "faculty-report-12-proof-index-5-0",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "A01",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-5-1",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[学术与公共服务]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-5-2",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[日期]；[完成状态]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              },
+              {
+                "id": "faculty-report-12-proof-index-5-3",
+                "rowspan": 1,
+                "colspan": 1,
+                "text": "[邀请函 / 议程 / 工作记录]",
+                "style": {
+                  "fontname": "Inter,SourceHanSans,sans-serif",
+                  "fontsize": "24px",
+                  "bold": false,
+                  "color": "#222B38",
+                  "backcolor": "#FFFFFF",
+                  "align": "left",
+                  "vAlign": "middle"
+                }
+              }
+            ]
+          ]
+        },
+        {
+          "id": "faculty-report-12-index-cutoff",
+          "name": "index-cutoff",
+          "type": "text",
+          "left": 92,
+          "top": 797,
+          "width": 1416,
+          "height": 39,
+          "rotate": 0,
+          "content": "<p style=\"text-align:left;\"><span style=\"font-size:24px;font-family:Inter,SourceHanSans,sans-serif;\">统计截止：[日期]    材料整理：[姓名]    本人贡献说明：见各项成果页</span></p>",
+          "defaultFontName": "SourceHanSans",
+          "defaultColor": "#73777D",
+          "lineHeight": 1.3,
+          "paragraphSpace": 10,
+          "inset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixedHeight": true,
+          "vAlign": "top"
+        }
+      ],
+      "turningMode": "fade",
+      "remark": "<p>索引对应正文中的成果编号，不再新增业绩。每项成果给出完成日期、状态、本人身份与文件/DOI位置。正式报告可根据数量复制附录页；没有材料时保留待核实标记，不把缺失证明写成已核实。链接需替换为可访问地址，避免含临时目录路径。</p><p>结构参考：上海理工大学能源材料科学研究院 教职工聘期满考核述职PPT模板 https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm；东北农业大学人事处 关于召开学校2023年度专业技术职务评审述职答辩会议的通知 https://rsc.neau.edu.cn/info/1103/1941.htm</p>"
+    }
+  ],
+  "templateMetadata": {
+    "version": "1.0",
+    "created": "2026-10-25",
+    "scenario": "大学教师个人年度或聘期工作成果汇报",
+    "language": "zh-CN",
+    "allBusinessValuesArePlaceholders": true,
+    "placeholderSyntax": "[待填字段]",
+    "contentFocus": "已完成教学、科研、人才培养与学术公共服务；代表性成果、本人贡献、完成时间和佐证材料",
+    "excludedSections": [
+      "企业经营指标",
+      "预算申请",
+      "待决策事项",
+      "未来工作计划"
+    ],
+    "sources": [
+      {
+        "id": "usst",
+        "institution": "上海理工大学能源材料科学研究院",
+        "title": "教职工聘期满考核述职PPT模板",
+        "pageUrl": "https://iems.usst.edu.cn/2023/1018/c15192a308964/page.htm",
+        "fileUrl": "https://iems.usst.edu.cn/_upload/article/files/18/18/e964eded4503a82b156b0fc4860a/bc0ddec5-f57d-49f6-b312-b901ea4621b2.pptx",
+        "published": "2023-10-18",
+        "inspected": "2026-10-25",
+        "filePages": 12,
+        "usedPages": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "evidence": "实际下载PPTX，读取全部12页XML与封面缩略图。第6页列课程与指导工作，第7页列论著与时间，第8页列个人主持项目，第9页列其他成果及本人排序，第10页列公共服务。",
+        "adaptation": "提炼岗位履职与成果分类，不复制原校标、照片、示例业绩或学校专用分类。依用户要求不采用原第12页发展规划。"
+      },
+      {
+        "id": "hust",
+        "institution": "华中科技大学电子信息与通信学院",
+        "title": "教师年度考核述职通知",
+        "pageUrl": "https://ei.hust.edu.cn/info/1165/7623.htm",
+        "inspected": "2026-10-25",
+        "evidence": "通知对PPT内容提出写实要求，教学说明课程、课时与效果，科研区分牵头与参与项目、经费和成果。",
+        "adaptation": "区分本人角色与团队成果，陈述已完成工作并保留佐证字段。"
+      },
+      {
+        "id": "neau",
+        "institution": "东北农业大学人事处",
+        "title": "关于召开学校2023年度专业技术职务评审述职答辩会议的通知",
+        "pageUrl": "https://rsc.neau.edu.cn/info/1103/1941.htm",
+        "published": "2023-11-23",
+        "inspected": "2026-10-25",
+        "evidence": "通知要求PPT成果注明申报人排名与完成时间。",
+        "adaptation": "每项代表成果均留本人贡献、角色、时间与材料编号。"
+      }
+    ],
+    "design": {
+      "canvas": [
+        1600,
+        900
+      ],
+      "palette": {
+        "wine": "#7D293D",
+        "ink": "#222B38",
+        "paper": "#FAF8F3",
+        "white": "#FFFFFF",
+        "muted": "#73777D",
+        "line": "#DAD6CE",
+        "sand": "#EFEAE1",
+        "gold": "#A27E44",
+        "pale": "#F4EFEB"
+      },
+      "titleFontSize": 54,
+      "bodyFontSize": [
+        24,
+        35
+      ],
+      "fontStack": "Inter,SourceHanSans,sans-serif",
+      "margin": 92
+    },
+    "nativeSlideCount": 12,
+    "htmlSlideCount": 0,
+    "figurePlaceholders": [
+      "faculty-report-04-teaching-figure-frame",
+      "faculty-report-06-research-figure-frame",
+      "faculty-report-09-student-figure-frame"
+    ],
+    "sectionLinks": {
+      "teaching": "faculty-report-03",
+      "research": "faculty-report-05",
+      "mentoring": "faculty-report-08",
+      "service": "faculty-report-10"
+    },
+    "notes": "这是结合公开高校模板重新设计的通用模板，不宣称符合任何学校现行强制表格。未复制原校标、图片或原示例数据。用户明确要求聚焦成果，故未采用参考文件的发展规划模块。最终文件不依赖tmp目录。"
+  }
+}
