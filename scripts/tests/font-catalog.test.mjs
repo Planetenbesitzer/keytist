@@ -74,8 +74,8 @@ function cmap4() {
 }
 
 function fontTables(options = {}) {
-  const { family = 'Fixture Sans', subfamily = 'Regular', weight = 400, fsType = 0, coverage = cmap12(), localized = true, variable = false } = options
-  const list = [[1, family], [2, subfamily], [4, `${family} ${subfamily}`], [6, `${family.replaceAll(' ', '')}-${subfamily}`], [16, 'Fixture Extended Sans'], [17, subfamily]]
+  const { family = 'Fixture Sans', preferredFamily = 'Fixture Extended Sans', subfamily = 'Regular', weight = 400, fsType = 0, coverage = cmap12(), localized = true, variable = false } = options
+  const list = [[1, family], [2, subfamily], [4, `${family} ${subfamily}`], [6, `${family.replaceAll(' ', '')}-${subfamily}`], [16, preferredFamily], [17, subfamily]]
   if (localized) list.push([1, '夹具黑体', 0x804])
   const os2 = Buffer.alloc(96)
   os2.writeUInt16BE(4, 0)
@@ -203,6 +203,26 @@ test('catalog reads TTC faces, localized aliases, styles, variable axes and actu
   assert.deepEqual(JSON.parse(await fs.readFile(path.join(f.dist, 'local-fonts/catalog.json'), 'utf8')), catalog)
   assert.equal((await f.generate()).files[0].url, file.url)
   assert.equal((await fs.readdir(path.join(f.dist, 'local-fonts'))).length, 2)
+  assert.deepEqual(await fs.readFile(source), bytes)
+})
+
+test('catalog supplies dingbat-only CSS faces for every text style while retaining native font metadata', async t => {
+  const f = await fixture(t)
+  const face = (extra = {}) => fontTables({ family: 'Menlo', preferredFamily: 'Menlo', coverage: cmap12([[0x27A2, 0x27A2, 1]]), ...extra })
+  const bytes = collection([face(), face({ subfamily: 'Bold', weight: 700 }), face({ subfamily: 'Italic', coverage: cmap12([[65, 90, 1]]) })])
+  const source = path.join(f.fonts, 'symbols.ttc')
+  await fs.writeFile(source, bytes)
+  const catalog = await f.generate()
+  assert.equal(catalog.faces.length, 4)
+  assert.deepEqual(catalog.faces.map(face => [face.faceIndex, face.weight, face.style]), [[0, 400, 'normal'], [0, 400, 'italic'], [1, 700, 'normal'], [1, 700, 'italic']])
+  for (const fallback of catalog.faces) {
+    assert.equal(fallback.url, catalog.files[0].url)
+    assert.equal(fallback.unicodeRange, 'U+2700-27BF')
+    assert.deepEqual(fallback.coverage, [[0x27A2, 0x27A2]])
+    assert.ok(Object.values(catalog.defaultFallbacks).every(stack => fallback.families.some(alias => stack.includes(alias))))
+  }
+  assert.equal(catalog.files[0].faces[0].style, 'normal')
+  assert.equal(catalog.files[0].faces[2].style, 'italic')
   assert.deepEqual(await fs.readFile(source), bytes)
 })
 

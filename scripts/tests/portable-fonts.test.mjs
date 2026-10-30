@@ -1,9 +1,12 @@
 /* eslint-env node, es2022 */
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { readFile } from 'node:fs/promises'
+import { readFile, mkdtemp, rm } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { build } from 'esbuild'
+import { createDingbatFontSources, generateLocalFontCatalog } from '../font-catalog.mjs'
 
 const root = fileURLToPath(new URL('../../', import.meta.url))
 const compiled = await build({ entryPoints: ['src/utils/portableFonts.ts'], absWorkingDir: root, bundle: true, write: false, platform: 'node', format: 'esm', packages: 'external' })
@@ -62,6 +65,12 @@ const makeCollection = (...fonts) => {
 const dataUrl = bytes => `data:font/ttf;base64,${Buffer.from(bytes).toString('base64')}`
 const fontSource = (family, bytes, extra = {}) => ({ family, url: dataUrl(bytes), weight: 400, style: 'normal', ...extra })
 const fakeCatalog = faces => ({ version: 1, faces, defaultFallbacks: [] })
+const generatedCatalog = async (t, faces) => {
+  const directory = await mkdtemp(join(tmpdir(), 'slide-studio-symbol-fallback-test-'))
+  t.after(() => rm(directory, { recursive: true, force: true }))
+  const files = faces.map(face => ({ url: face.url, faces: [{ ...face, fsType: 0, coverage: { complete: true, ranges: readFontCoverage(Buffer.from(face.url.split(',')[1], 'base64')) } }] }))
+  return { ...await generateLocalFontCatalog({ distDirectory: directory, fontDirectories: [] }), faces: [...createDingbatFontSources(files), ...faces] }
+}
 
 test('CSS font stacks retain quoted commas and escaped names', () => {
   assert.deepEqual(parseFontFamilies('"A, B", Helvetica Neue, serif'), ['A, B', 'Helvetica Neue', 'serif'])
@@ -230,6 +239,64 @@ test('Greek and mathematical symbols still receive a bundled non-CJK fallback', 
   assert.equal(result.report.faces[1].sourceFamily, 'Apple Symbols')
   assert.equal(result.report.excludedCjkCharacters, 0)
   assert.match(result.css, /U\+3a8/)
+})
+
+test('generated fallback policy embeds Arial dingbats in regular, bold and italic text', async t => {
+  const arrow = [[0x27A2, 0x27A2]], faces = []
+  for (const [weight, style] of [[400, 'normal'], [700, 'normal'], [400, 'italic'], [700, 'italic']]) {
+    faces.push(fontSource('Arial', makeFont([[32, 126], [weight, weight]]), { weight, style }))
+    faces.push(fontSource('Menlo', makeFont(style === 'normal' ? [[32, 126], ...arrow, [weight, weight]] : [[32, 126], [weight + 1, weight + 1]]), {
+      weight, style,
+    }))
+  }
+  faces.push(fontSource('Apple Symbols', makeFont([[0x3A8, 0x3A8]])))
+  const catalog = await generatedCatalog(t, faces)
+  for (const [weight, style] of [[400, 'normal'], [700, 'normal'], [400, 'italic'], [700, 'italic']]) {
+    const usage = { family: 'Arial', text: 'Arial ➢', weight, style }
+    const result = await preparePortableFonts({}, [], { catalog, usages: [usage] })
+    assert.equal(result.report.faces.length, 2)
+    assert.equal(result.report.faces[0].sourceFamily, 'Arial')
+    assert.equal(result.report.faces[0].weight, weight)
+    assert.equal(result.report.faces[0].style, style)
+    assert.equal(result.report.faces[1].sourceFamily, 'Menlo (symbols)')
+    assert.match(result.css, /unicode-range:[^;}]*U\+27a2[,;]/)
+    assert.equal(usage.text, 'Arial ➢')
+  }
+})
+
+test('generated symbol fallbacks work with Windows and Linux families without Menlo', async t => {
+  for (const family of ['Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans']) {
+    const catalog = await generatedCatalog(t, [fontSource('Arial', makeFont()), fontSource(family, makeFont([[0x27A2, 0x27A2]]))])
+    const result = await preparePortableFonts({}, [], { catalog, usages: [{ family: 'Arial', text: 'Text ➢' }] })
+    assert.deepEqual(result.report.faces.map(face => face.sourceFamily), ['Arial', `${family} (symbols)`])
+  }
+})
+
+test('a primary font covering the symbol does not fetch supplementary fonts', async t => {
+  const primary = fontSource('Arial', makeFont([[32, 126], [0x27A2, 0x27A2]]))
+  const catalog = await generatedCatalog(t, [primary, fontSource('Menlo', makeFont([[0x27A2, 0x27A2]]))])
+  const requests = []
+  const result = await preparePortableFonts({}, [], { catalog, usages: [{ family: 'Arial', text: 'Text ➢' }], fetcher: (...args) => {
+    requests.push(args[0]); return fetch(...args)
+  } })
+  assert.equal(result.report.faces.length, 1)
+  assert.deepEqual(requests, [primary.url])
+})
+
+test('generated symbol fallbacks still reject a genuinely unavailable glyph', async t => {
+  const catalog = await generatedCatalog(t, [fontSource('Arial', makeFont()), fontSource('Menlo', makeFont()), fontSource('.LastResort', makeFont([[0x27A2, 0x27A2]]))])
+  await assert.rejects(preparePortableFonts({}, [], { catalog, usages: [{ family: 'Arial', text: 'Text ➢' }] }), /缺少字符.*U\+27A2/)
+})
+
+test('dingbat descriptors do not shadow a native symbol-family font used for ordinary italic text', async t => {
+  const italic = fontSource('Menlo', makeFont(), { style: 'italic' })
+  const catalog = await generatedCatalog(t, [fontSource('Menlo', makeFont([[32, 126], [0x27A2, 0x27A2]])), italic])
+  const requests = []
+  const result = await preparePortableFonts({}, [], { catalog, usages: [{ family: 'Menlo', text: 'Italic text', style: 'italic' }], fetcher: (...args) => {
+    requests.push(args[0]); return fetch(...args)
+  } })
+  assert.deepEqual(result.report.faces.map(face => [face.sourceFamily, face.style]), [['Menlo', 'italic']])
+  assert.deepEqual(requests, [italic.url])
 })
 
 test('generic families receive explicit aliases that can replace CSS keywords', async () => {

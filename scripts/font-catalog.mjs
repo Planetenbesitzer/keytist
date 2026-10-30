@@ -14,6 +14,10 @@ const MAX_TABLES = 512
 const MAX_FACES = 512
 const MAX_FILES = 5000
 const EXTENSIONS = new Set(['.ttf', '.otf', '.ttc', '.otc', '.woff', '.woff2'])
+// Keep the existing Latin/math fallbacks first. These additional system faces
+// supply dingbats such as U+27A2 without bundling an entire CJK or icon font.
+const SYMBOL_FALLBACKS = ['Segoe UI Symbol', 'Noto Sans Symbols 2', 'Noto Sans Symbols', 'DejaVu Sans', 'Menlo']
+const DINGBAT_FAMILY = 'SlideStudioDingbats'
 const SFNT_SIGNATURES = new Set(['00010000', '4f54544f', '74727565', '74797031'])
 const normalizeName = value => value.replace(/\0/g, '').trim()
 const unique = values => [...new Set(values.filter(Boolean))]
@@ -356,6 +360,33 @@ export async function createLocalFontLink(source, destination, { platform = proc
   return 'hardlink'
 }
 
+/** CSS fallback faces for dingbats only. Font data and native face metadata stay
+ * unchanged. Register each text style explicitly: an Arial italic face otherwise
+ * prevents a normal-only symbol face under the same exported alias from matching.
+ */
+export function createDingbatFontSources(files) {
+  const sources = []
+  for (const family of SYMBOL_FALLBACKS) {
+    const candidates = files.flatMap(file => file.faces.map(face => ({ ...face, url: file.url }))).filter(face =>
+      face.family === family && face.style === 'normal' && Number.isInteger(face.fsType) && !(face.fsType & (0x0002 | 0x0200)) &&
+      face.coverage?.complete && face.coverage.ranges.some(([start, end]) => start <= 0x27BF && end >= 0x2700))
+    for (const weight of [400, 700]) {
+      const face = [...candidates].sort((a, b) => Math.abs(a.weight - weight) - Math.abs(b.weight - weight))[0]
+      if (!face) continue
+      for (const style of ['normal', 'italic']) {
+        sources.push({
+          // Separate the CSS family so ordinary Menlo text still selects its
+          // native italic face and does not fetch a dingbat-only regular face.
+          family: `${face.family} (symbols)`, families: [DINGBAT_FAMILY], url: face.url,
+          faceIndex: face.faceIndex, weight, style, fsType: face.fsType,
+          coverage: face.coverage.ranges, unicodeRange: 'U+2700-27BF',
+        })
+      }
+    }
+  }
+  return sources
+}
+
 /**
  * Generate a versioned metadata catalog and opaque links to real local font
  * files. The distribution must omit local-fonts when it is shared. No font data
@@ -396,8 +427,12 @@ export async function generateLocalFontCatalog({ distDirectory, fontDirectories 
   const catalog = {
     version: 1, generatedAt: new Date().toISOString(), platform: process.platform,
     refreshAfterMs: 24 * 60 * 60 * 1000,
-    defaultFallbacks: { sans: ['Inter', 'SourceHanSans'], serif: ['SourceSerif4', 'SourceHanSerif'], mono: ['JetBrainsMono'] },
-    files, warnings,
+    defaultFallbacks: {
+      sans: ['Inter', 'SourceHanSans', 'Apple Symbols', 'SourceSerif4', DINGBAT_FAMILY],
+      serif: ['SourceSerif4', 'SourceHanSerif', 'Apple Symbols', DINGBAT_FAMILY],
+      mono: ['JetBrainsMono', 'Apple Symbols', 'SourceSerif4', DINGBAT_FAMILY],
+    },
+    faces: createDingbatFontSources(files), files, warnings,
   }
   const temporary = path.join(target, `.catalog-${crypto.randomUUID()}.tmp`)
   try {
