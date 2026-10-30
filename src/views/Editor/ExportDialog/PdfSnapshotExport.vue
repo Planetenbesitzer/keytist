@@ -44,7 +44,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } from 'vue'
 import { saveAs } from 'file-saver'
-import { getFontEmbedCSS, toCanvas } from 'html-to-image'
+import { getFontEmbedCSS, toSvg } from 'html-to-image'
 import { useSlidesStore } from '@/store'
 import { getLocalDocument } from '@/services/localDocument'
 import { getSnapshotHistoryEpoch } from '@/store/snapshot'
@@ -52,6 +52,7 @@ import type { Slide } from '@/types/slides'
 import { t } from '@/i18n'
 import { assertExportImagesReady } from '@/utils/exportImageReadiness'
 import { buildHtmlPdfSnapshotSource, captureHtmlPdfSnapshot } from '@/utils/htmlPdfSnapshot'
+import { createHtmlSnapshotAppearance } from '@/utils/htmlSnapshotAppearance'
 import { createPdfSnapshotSlide } from '@/utils/pdfSnapshotSlide'
 import { createSnapshotPdf, SNAPSHOT_PDF_MAX_FRAMES } from '@/utils/snapshotPdf'
 import Button from '@/components/Button.vue'
@@ -139,9 +140,31 @@ const rasterize = async (slide: Slide, usePreview: boolean): Promise<FrozenFrame
   // Only existing CSS/document font assets are needed while drawing this PNG.
   // Missing system-family names do not trigger portable-font validation.
   const fontEmbedCSS = `${await getFontEmbedCSS(root)}\n${embeddedFontCss()}`
-  const canvas = await toCanvas(root, { pixelRatio: ratio, skipFonts: true, fontEmbedCSS, width: deck.width, height: deck.height, backgroundColor: '#ffffff', skipAutoScale: true })
+  const restoreAppearance = createHtmlSnapshotAppearance(root)
+  const svg = await toSvg(root, {
+    skipFonts: true, fontEmbedCSS, width: deck.width, height: deck.height, backgroundColor: '#ffffff',
+    filter: (node: Node) => {
+      if (!(node instanceof Element)) return true
+      if (['SCRIPT', 'STYLE', 'LINK', 'META'].includes(node.tagName)) return false
+      for (let current: Element | null = node; current; current = current.parentElement) {
+        if (getComputedStyle(current).display === 'none') return false
+      }
+      return true
+    },
+  })
+  const image = document.createElement('img')
+  const canvas = document.createElement('canvas')
   const thumbnail = document.createElement('canvas')
   try {
+    image.src = await restoreAppearance(svg)
+    await image.decode()
+    checkCurrent()
+    canvas.width = Math.floor(deck.width * ratio); canvas.height = Math.floor(deck.height * ratio)
+    const pageContext = canvas.getContext('2d')
+    if (!pageContext) throw new Error(t('无法准备 PDF 画面，请重试。'))
+    pageContext.fillStyle = '#fff'
+    pageContext.fillRect(0, 0, canvas.width, canvas.height)
+    pageContext.drawImage(image, 0, 0, canvas.width, canvas.height)
     checkCurrent()
     thumbnail.width = 220; thumbnail.height = Math.max(1, Math.round(220 * deck.height / deck.width))
     const context = thumbnail.getContext('2d')
@@ -150,6 +173,7 @@ const rasterize = async (slide: Slide, usePreview: boolean): Promise<FrozenFrame
     return { id: crypto.randomUUID(), dataUrl: canvas.toDataURL('image/png'), thumbnail: thumbnail.toDataURL('image/png'), width: canvas.width, height: canvas.height }
   }
   finally {
+    image.src = ''
     canvas.width = 0; canvas.height = 0
     thumbnail.width = 0; thumbnail.height = 0
     rasterSlide.value = undefined

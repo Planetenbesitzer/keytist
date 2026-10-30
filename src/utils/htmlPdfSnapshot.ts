@@ -1,4 +1,5 @@
 import htmlToImageLibrary from 'html-to-image/dist/html-to-image.js?raw'
+import { createHtmlSnapshotAppearance } from './htmlSnapshotAppearance'
 
 export interface HtmlPdfSnapshotOptions {
   token: string
@@ -36,7 +37,7 @@ const snapshotSize = (width: number, height: number, pixelRatio: number) => {
 function installSnapshotBridge(token: string, library: {
   toSvg: (node: HTMLElement, options: Record<string, unknown>) => Promise<string>
   getFontEmbedCSS: (node: HTMLElement, options: Record<string, unknown>) => Promise<string>
-}) {
+}, createAppearance: typeof createHtmlSnapshotAppearance) {
   const requestType = 'keytist:html-pdf-snapshot:request'
   const responseType = 'keytist:html-pdf-snapshot:response'
   const missingImage = 'data:image/x-keytist-pdf-missing,failed'
@@ -126,7 +127,14 @@ function installSnapshotBridge(token: string, library: {
       if (Math.abs(innerWidth - width) > 1 || Math.abs(innerHeight - height) > 1) throw new Error('网页预览尺寸尚未稳定，请稍后重试。')
       await document.fonts.ready
       await prepareImages(document.documentElement)
-      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
+      await new Promise<void>(resolve => {
+        // A busy overlay can occlude this cross-origin iframe. Some browsers
+        // then suspend its animation frames although its DOM is ready to draw.
+        const timer = setTimeout(resolve, 100)
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          clearTimeout(timer); resolve()
+        }))
+      })
       // Reuse CSS-declared webfonts only for this temporary SVG redraw. There
       // is no system-font lookup or portable-font coverage requirement: an
       // unavailable family such as Cambria Math simply keeps browser fallback.
@@ -139,6 +147,10 @@ function installSnapshotBridge(token: string, library: {
         if (element instanceof HTMLTextAreaElement) return { tag: 'textarea', value: element.value }
         return { tag: 'select', selected: [...(element as HTMLSelectElement).options].map(option => option.selected) }
       })
+      // The renderer deep-clones SVG without resolving its descendant styles,
+      // and omits native control pseudo-elements. Pin the current appearance on
+      // the detached result, preserving the preview and its running scripts.
+      const restoreAppearance = createAppearance(document.documentElement)
       const svg = await library.toSvg(document.documentElement, {
         width, height, pixelRatio, canvasWidth: width, canvasHeight: height,
         skipFonts: true, fontEmbedCSS, skipAutoScale: true,
@@ -148,7 +160,8 @@ function installSnapshotBridge(token: string, library: {
           throw new Error('网页图片无法冻结，未生成不完整的快照。')
         },
       })
-      const markup = decodeURIComponent(svg.slice(svg.indexOf(',') + 1))
+      const frozenSvg = await restoreAppearance(svg)
+      const markup = decodeURIComponent(frozenSvg.slice(frozenSvg.indexOf(',') + 1))
       if (markup.includes(missingImage)) throw new Error('网页素材未能完整载入，未生成不完整的快照。')
       const parsed = new DOMParser().parseFromString(markup, 'image/svg+xml')
       if (parsed.querySelector('parsererror')) throw new Error('无法生成网页快照。')
@@ -208,7 +221,7 @@ export const buildHtmlPdfSnapshotSource = (source: string, token: string): strin
   const parsed = new DOMParser().parseFromString(source, 'text/html')
   const script = parsed.createElement('script')
   const escapedToken = JSON.stringify(token).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029')
-  script.textContent = `(()=>{const previous=window.htmlToImage;const module=undefined,exports=undefined,define=undefined;\n${htmlToImageLibrary}\nconst library=window.htmlToImage;if(previous===undefined)delete window.htmlToImage;else window.htmlToImage=previous;(${installSnapshotBridge.toString()})(${escapedToken},library);})()`
+  script.textContent = `(()=>{const previous=window.htmlToImage;const module=undefined,exports=undefined,define=undefined;\n${htmlToImageLibrary}\nconst library=window.htmlToImage;if(previous===undefined)delete window.htmlToImage;else window.htmlToImage=previous;(${installSnapshotBridge.toString()})(${escapedToken},library,${createHtmlSnapshotAppearance.toString()});})()`
     .replace(/<\/script/gi, '<\\/script')
   parsed.head.appendChild(script)
   return `<!DOCTYPE html>\n${parsed.documentElement.outerHTML}`

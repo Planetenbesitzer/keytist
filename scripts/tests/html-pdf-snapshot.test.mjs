@@ -217,7 +217,7 @@ test('the injected bridge escapes script literals and ignores messages from othe
   }
 })
 
-test('CSS webfonts are handed to the temporary SVG while unknown system families impose no font-file requirement', async () => {
+test('CSS webfonts and unknown system families keep working when an occluded preview pauses animation frames', async () => {
   let injected = ''
   const previousParser = globalThis.DOMParser
   globalThis.DOMParser = class {
@@ -229,14 +229,20 @@ test('CSS webfonts are handed to the temporary SVG while unknown system families
   }
   try {
     buildHtmlPdfSnapshotSource('<html><body>Snapshot text</body></html>', options.token)
-    for (const fontCss of ['@font-face{font-family:PreviewOnlyFont;src:url(data:font/woff2;base64,d09GMg==)}', '']) {
+    const variants = ['@font-face{font-family:PreviewOnlyFont;src:url(data:font/woff2;base64,d09GMg==)}', '']
+    for (const { fontCss, paused } of variants.flatMap(fontCss => [false, true].map(paused => ({ fontCss, paused })))) {
       const listeners = [], replies = [], svgOptions = []
       let fontCalls = 0, library
       class Element {
         constructor() {
           this.parentElement = null
+          this.localName = 'html'
+          this.namespaceURI = 'http://www.w3.org/1999/xhtml'
+          this.children = []
         } querySelectorAll() {
           return []
+        } querySelector() {
+          return null
         }
       }
       const root = new Element()
@@ -244,11 +250,13 @@ test('CSS webfonts are handed to the temporary SVG while unknown system families
         parent: { postMessage: data => replies.push(data) }, addEventListener: (_name, callback) => listeners.push(callback),
         document: { documentElement: root, fonts: { ready: Promise.resolve() }, querySelectorAll: () => [] },
         getComputedStyle: () => ({ display: 'block', getPropertyValue: () => '' }),
-        requestAnimationFrame: callback => callback(), innerWidth: 1, innerHeight: 1,
+        requestAnimationFrame: callback => paused ? 0 : callback(), setTimeout, clearTimeout, innerWidth: 1, innerHeight: 1,
         Element, HTMLIFrameElement: class {}, HTMLObjectElement: class {}, HTMLEmbedElement: class {},
         HTMLCanvasElement: class {}, HTMLImageElement: class {}, SVGImageElement: class {},
       }
       context.window = context
+      root.ownerDocument = context.document
+      Object.assign(context.document, { defaultView: context, URL: 'about:srcdoc', baseURI: 'about:srcdoc', styleSheets: [] })
       Object.defineProperty(context, 'htmlToImage', { configurable: true, set: value => {
         library = value
       }, get: () => library && new Proxy(library, { get(target, key) {
