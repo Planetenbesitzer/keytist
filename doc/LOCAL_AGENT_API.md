@@ -237,6 +237,27 @@ picker still accepts files up to 100 MiB. Playback-only imports retain the norma
 Relative or external resources still need to be available to the browser; use a
 self-contained HTML file for reliable offline presentation.
 
+## Frozen-state PDF export
+
+The PDF tab provides a separate interactive preview for documents containing
+HTML slides. Adjust a webpage in this preview and choose **Freeze this frame**;
+several states of one slide can be retained in capture order. Export includes
+native slides in document order and uses the initial state for other webpages
+without saved frames. The current preview is captured as displayed if it has no
+saved frame. Preview interactions and frozen frames never alter the source JSON.
+
+The resulting PDF contains high-resolution images, without scripts or font
+packages. Existing browser fonts and CSS font assets are used only while
+rendering the images; HTML publishing's portable-font checks are not invoked.
+Text in this PDF is not individually selectable. Choose 2× or 3× resolution,
+one to three frames per PDF page, and optional margins. A native-only document
+retains its original vector print path and can opt into image PDF export.
+Uncapturable cross-origin images, nested frames, or restrictive page policies
+produce an error instead of an incomplete frame. The usual opaque HTML sandbox
+is retained. Each export is limited to 300 frames with bounded bitmap sizes.
+
+![Freezing several interactive states for PDF export](images/pdf-snapshot-export.jpg)
+
 ## Portable fonts in published HTML
 
 HTML publishing automatically embeds Latin, Greek and math faces used by native

@@ -54,7 +54,7 @@ screen pixels. `width` and `height` in the document define the canvas.
 | `download()` | Download current native JSON. |
 | `newDocument()` | Replace with a new blank document. |
 
-There is no public `exportHTML` or `exportPPTX` browser method. Use the visible
+There is no public `exportHTML`, `exportPDF`, or `exportPPTX` browser method. Use the visible
 **Export** dialog through browser automation. Language is selected in the header;
 changing language does not translate document content. The API is a browser
 interface, not a network REST endpoint. For offline file generation, write native
@@ -107,6 +107,12 @@ packages. It does not automatically add CJK fonts; Chinese appearance and line
 wrapping can vary. External assets still need their URLs unless bundled.
 Equations and inline-equation text retain their visual form in PPTX; text layers
 with inline equations become images there. Keep JSON for native editing.
+
+PDF export can freeze several interactive states in its own preview and download
+an image-only PDF directly. This preview does not edit the document or inherit
+the live presentation's transient state. Choose each state before freezing it;
+uncaptured other webpages use their initial state. Native-only documents retain
+their original print option. See the API reference for limits and capture errors.
 
 Use a separate port/browser origin for tests. Do not clear an existing user's
 IndexedDB, localStorage, save bindings, presets or documents. Do not distribute

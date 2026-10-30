@@ -6,7 +6,7 @@
       card
       @update:value="key => setDialogForExport(key as DialogForExportTypes)" 
     />
-    <div class="content">
+    <div class="content" :style="dialogForExport === 'pdf' ? { height: 'min(76vh, 730px)' } : undefined">
       <component :is="currentDialogComponent" @close="setDialogForExport('')"></component>
     </div>
   </div>

@@ -15,8 +15,8 @@
       v-if="visible"
     >
       <div class="background" :style="backgroundStyle"></div>
-      <HtmlSlide v-if="slide.html" :key="slide.id" :source="slide.html.source" :sourceWidth="slide.html.width" :sourceHeight="slide.html.height"
-        :left="slide.html.left" :top="slide.html.top" :scale="slide.html.scale" :width="viewportSize" :height="viewportSize * viewportRatio" />
+      <HtmlSlide v-if="slide.html" :key="slide.id" :source="htmlSource ?? slide.html.source" :sourceWidth="slide.html.width" :sourceHeight="slide.html.height"
+        :left="slide.html.left" :top="slide.html.top" :scale="slide.html.scale" :width="viewportSize" :height="viewportSize * viewportRatio" :interactive="interactiveHtml" />
       <ThumbnailElement
         v-for="(element, index) in slide.elements"
         :key="element.id"
@@ -44,8 +44,12 @@ const props = withDefaults(defineProps<{
   slide: Slide
   size: number
   visible?: boolean
+  /** Only PDF's separate preview supplies a capture source and interaction. */
+  htmlSource?: string
+  interactiveHtml?: boolean
 }>(), {
   visible: true,
+  interactiveHtml: false,
 })
 
 const { viewportRatio, viewportSize } = storeToRefs(useSlidesStore())

@@ -1,5 +1,6 @@
 <template>
-  <div class="export-pdf-dialog">
+  <PdfSnapshotExport v-if="snapshotMode" @close="emit('close')" />
+  <div class="export-pdf-dialog" v-else>
     <div class="thumbnails-view">
       <div class="thumbnails" ref="pdfThumbnailsRef">
         <ThumbnailSlide
@@ -50,8 +51,9 @@
         </div>
       </div>
       <div class="tip">
-{{ t("建议：请在弹出的打印窗口中勾选「背景图形」选项，边距选择「默认」。") }}距选择「默认」。
+{{ t("建议：请在弹出的打印窗口中勾选「背景图形」选项，边距选择「默认」。") }}
       </div>
+      <Button @click="snapshotMode = true">{{ t('改用高清画面 PDF') }}</Button>
     </div>
 
     <div class="btns">
@@ -77,12 +79,14 @@ import RadioButton from '@/components/RadioButton.vue'
 import RadioGroup from '@/components/RadioGroup.vue'
 import Select from '@/components/Select.vue'
 import FullscreenSpin from '@/components/FullscreenSpin.vue'
+import PdfSnapshotExport from './PdfSnapshotExport.vue'
 
 const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
 const { slides, currentSlide, viewportRatio } = storeToRefs(useSlidesStore())
+const snapshotMode = ref(slides.value.some(slide => !!slide.html))
 
 const pdfThumbnailsRef = useTemplateRef<HTMLElement>('pdfThumbnailsRef')
 const rangeType = ref<'all' | 'current'>('all')
