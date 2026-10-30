@@ -621,11 +621,42 @@ test('failed opens preserve the previous document, title, native handle and subs
       assert.equal(h.api.localDocumentState.fileName, 'DiFF4Yukawa.json')
       assert.equal(h.api.localDocumentState.nativeFileBound, true)
     }
-    const unreadable = new File([JSON.stringify(documentFor('Bad read'))], 'Bad-read.json')
+    const contents = JSON.stringify(documentFor('Bad read'))
+    const unreadable = new File([contents], 'Bad-read.json')
+    // Node 20 implements Blob.text() through arrayBuffer(), while Node 25
+    // reads its backing bytes directly. Isolate the revision-read
+    // failure from text decoding so both runtimes exercise the intended path.
+    unreadable.text = () => Promise.resolve(contents)
     unreadable.arrayBuffer = () => Promise.reject(new Error('Cannot read bytes'))
     await assert.rejects(h.api.openLocalDocumentFile(unreadable, handleFor(unreadable.name, documentFor('Bad read'))), /无法读取原文件/)
     assert.equal(h.api.getLocalDocument().title, 'DiFF4Yukawa')
     assert.equal(h.api.localDocumentState.fileName, original.name)
+    await h.api.saveLocalDocumentFile()
+    assert.equal(original.writes.length, 1)
+    assert.equal(original.writes[0].slides[0].id, 'DiFF-content')
+    assert.equal(h.calls.server.length, 0)
+  }
+  finally {
+    await h.close()
+  }
+})
+
+test('a failed text read preserves the previous document and subsequent native Save target', async () => {
+  const h = await createHarness()
+  try {
+    const original = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+    h.chooseOpen(original)
+    await h.api.openLocalDocumentPicker()
+    const before = h.api.getLocalDocument()
+    const contents = JSON.stringify(documentFor('Bad text read'))
+    const unreadable = new File([contents], 'Bad-text-read.json')
+    const readError = new Error('Cannot read document text')
+    unreadable.text = () => Promise.reject(readError)
+    unreadable.arrayBuffer = () => Promise.resolve(new TextEncoder().encode(contents).buffer)
+    await assert.rejects(h.api.openLocalDocumentFile(unreadable, handleFor(unreadable.name, documentFor('Bad text read'))), error => error === readError)
+    assert.deepEqual(h.api.getLocalDocument(), before)
+    assert.equal(h.api.localDocumentState.fileName, original.name)
+    assert.equal(h.api.localDocumentState.nativeFileBound, true)
     await h.api.saveLocalDocumentFile()
     assert.equal(original.writes.length, 1)
     assert.equal(original.writes[0].slides[0].id, 'DiFF-content')
