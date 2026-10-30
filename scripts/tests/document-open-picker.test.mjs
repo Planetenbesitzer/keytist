@@ -6,6 +6,10 @@ import ts from 'typescript'
 
 const service = await readFile(new URL('../../src/services/localDocument.ts', import.meta.url), 'utf8')
 const controls = await readFile(new URL('../../src/components/LocalDocumentControls.vue', import.meta.url), 'utf8')
+const revisionApi = {}
+new Function('exports', ts.transpileModule(await readFile(new URL('../../src/utils/nativeFileRevision.ts', import.meta.url), 'utf8'), {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
+}).outputText)(revisionApi)
 const declaration = (source, name) => {
   const ast = ts.createSourceFile('production.ts', source, ts.ScriptTarget.Latest, true)
   let found
@@ -47,11 +51,11 @@ const fixture = ({ name = '文稿.json', mime = '', contents = JSON.stringify(do
   } }
   const api = evaluate(`
     const { pickerWindow, localDocumentState, enqueueDocumentOperation, applyDocument,
-      scheduleLocalSave, flushLocalDocument, getLocalDocument, synchronizeAutoPageNumbers } = dependencies;
-    let fileHandle = dependencies.originalHandle, outputBinding = dependencies.originalOutputBinding, documentSession = 0;
+      scheduleLocalSave, flushLocalDocument, getLocalDocument, synchronizeAutoPageNumbers, getNativeFileRevision } = dependencies;
+    let fileHandle = dependencies.originalHandle, outputBinding = dependencies.originalOutputBinding, documentSession = 0, nativeFileRevision;
     ${declarations}
     return { openLocalDocumentPicker, openLocalDocumentFile, supportsLocalFilePicker,
-      binding: () => ({ fileHandle, outputBinding, documentSession }) };
+      binding: () => ({ fileHandle, outputBinding, documentSession, nativeFileRevision }) };
   `, {
     pickerWindow, localDocumentState: state, originalHandle, originalOutputBinding,
     enqueueDocumentOperation: operation => operation(),
@@ -63,6 +67,7 @@ const fixture = ({ name = '文稿.json', mime = '', contents = JSON.stringify(do
     },
     scheduleLocalSave: () => calls.push('schedule'), flushLocalDocument: () => Promise.resolve(calls.push('flush')),
     getLocalDocument: () => current, synchronizeAutoPageNumbers: slides => slides,
+    getNativeFileRevision: revisionApi.getNativeFileRevision,
   })
   return { api, state, calls, handle, originalHandle, originalOutputBinding, pickerWindow, current: () => current }
 }
@@ -77,6 +82,7 @@ for (const [name, mime] of [['文稿.json', 'application/json'], ['文稿.json',
     assert.equal(item.state.nativeFileBound, true)
     assert.equal(item.api.binding().fileHandle, item.handle)
     assert.equal(item.api.binding().outputBinding, undefined)
+    assert.match(item.api.binding().nativeFileRevision, /^[a-f0-9]{64}$/)
   })
 }
 

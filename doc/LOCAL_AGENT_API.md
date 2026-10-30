@@ -81,6 +81,16 @@ browser reloads keep that binding; changing the document title does not rename
 the bound file. Opening or creating another document clears the binding. Binding
 metadata lives only in browser IndexedDB and is not added to the user's JSON.
 
+Native file handles also retain the SHA-256 of the exact file bytes read or last
+saved. Save compares that version before writing and again before committing
+the temporary native stream. External edits stop the save without replacing the
+file or discarding the editor's current content; use Save As for a new target.
+The baseline survives reloads and detects changes even when size and timestamp
+are unchanged. Legacy handles without a recorded version require the target to
+be selected again instead of silently accepting the current disk file.
+
+![External changes block native JSON overwrites](images/native-file-conflict.jpg)
+
 New files with an existing name receive a distinct filename. Rewriting a bound
 file checks its previous content revision; if another program changed that file,
 Save reports the conflict and preserves the external file. A known local server

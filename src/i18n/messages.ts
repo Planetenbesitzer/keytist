@@ -1472,4 +1472,9 @@ export const englishMessages: Record<string, string> = {
   '改用高清画面 PDF': 'Use high-resolution image PDF',
   '每次最多保留 300 帧，请分批导出。': 'Keep up to 300 frames at a time. Export in batches.',
   '冻结画面占用较大，请先导出一批或降低清晰度。': 'The frozen frames are large. Export a batch first, or lower the resolution.',
+  '文件已在外部修改或替换。请另存为新文件，避免覆盖。': 'The file was modified or replaced outside the editor. Save As a new file to avoid overwriting it.',
+  '无法确认原文件是否已在外部修改，请重新选择文件或另存为，避免覆盖。': 'The original file version is unknown. Select the target again or Save As to avoid overwriting it.',
+  '无法读取原文件，请重新选择文件或另存为，避免覆盖。': 'The original file cannot be read. Select the target again or Save As to avoid overwriting it.',
+  '此浏览器不支持原文件修改检查，请使用本机地址或升级浏览器后重试。': 'This browser cannot verify the original file. Use the local app address or update your browser.',
+  '无法校验原文件是否已被修改，未执行保存。请重新选择文件或另存为。': 'Could not verify the original file, so nothing was written. Select the target again or Save As.',
 }

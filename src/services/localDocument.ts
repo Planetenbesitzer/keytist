@@ -8,6 +8,7 @@ import { getEmbeddedFonts, restoreEmbeddedFonts, type EmbeddedFont } from '@/uti
 import { renderLatex } from '@/utils/latex'
 import { normalizeInlineMathHTML } from '@/utils/inlineMath'
 import { preloadOutputConfiguration, saveOutputFile, type OutputFileBinding } from '@/services/outputFiles'
+import { assertNativeFileUnchanged, getNativeFileRevision } from '@/utils/nativeFileRevision'
 import { normalizeImageShadow } from '@/utils/imageShadow'
 import { normalizeHtmlSlide, parseHtmlDocumentAsync, type ImportHtmlOptions, type HtmlViewport } from '@/services/htmlDocument'
 import { getPageNumberText, inheritAutoPageNumbers, normalizeAutomaticPageNumberConfig, synchronizeAutoPageNumbers } from '@/utils/pageNumbers'
@@ -49,6 +50,11 @@ interface FilePickerWindow {
   showSaveFilePicker?: (options: unknown) => Promise<WritableDocumentFile>
 }
 
+interface SelectedDocumentFile {
+  handle: WritableDocumentFile
+  revision: string
+}
+
 interface StoredDocument {
   id: string
   document: LocalDocument
@@ -60,6 +66,7 @@ interface StoredDocument {
   outputBinding?: OutputFileBinding
   fileHandle?: WritableDocumentFile
   nativeFileBound?: boolean
+  nativeFileRevision?: string
 }
 
 // Keep this database separate from the temporary per-session undo database.
@@ -84,6 +91,7 @@ export const localDocumentState = reactive({
 })
 
 let fileHandle: WritableDocumentFile | undefined
+let nativeFileRevision: string | undefined
 let outputBinding: OutputFileBinding | undefined
 let extraDocumentFields: Record<string, unknown> = {}
 let starterTheme: SlideTheme | undefined
@@ -225,6 +233,7 @@ export const flushLocalDocument = (): Promise<void> => {
     outputBinding: outputBinding ? { ...outputBinding } : undefined,
     fileHandle,
     nativeFileBound: localDocumentState.nativeFileBound || localDocumentState.needsSaveTarget,
+    nativeFileRevision,
   }
   localDocumentState.saving = true
   queuedWrites++
@@ -313,10 +322,11 @@ const applyDocument = async (document: LocalDocument, slideIndex = 0, resetHisto
   }
 }
 
-const replaceLocalDocument = async (document: LocalDocument, openedFile?: { file: File; handle?: WritableDocumentFile }) => {
+const replaceLocalDocument = async (document: LocalDocument, openedFile?: { file: File; handle?: WritableDocumentFile; revision?: string }) => {
   await applyDocument(document)
   documentSession++
   fileHandle = openedFile?.handle
+  nativeFileRevision = openedFile?.revision
   localDocumentState.nativeFileBound = !!fileHandle
   localDocumentState.needsSaveTarget = false
   outputBinding = undefined
@@ -338,11 +348,12 @@ export const openLocalDocumentFile = (file: File | Promise<File>, handle?: Writa
   void selectedFile.catch(() => undefined)
   return enqueueDocumentOperation(async () => {
     const source = await selectedFile
-    const document = normalizeLocalDocument(await source.text())
+    const [contents, revision] = await Promise.all([source.text(), handle ? getNativeFileRevision(source) : undefined])
+    const document = normalizeLocalDocument(contents)
     // A renamed/copied JSON can still carry another presentation's old title.
     // File-open identity follows the selected file; API loads retain their title.
     document.title = source.name.replace(/\.json$/i, '') || document.title
-    return replaceLocalDocument(document, { file: source, handle })
+    return replaceLocalDocument(document, { file: source, handle, revision })
   })
 }
 
@@ -383,11 +394,13 @@ export const downloadLocalDocument = () => {
   saveAs(blob, documentFilename())
 }
 
-const writeLocalDocumentFile = async (options: { saveAs?: boolean }, nativeSelection?: Promise<WritableDocumentFile>) => {
+const writeLocalDocumentFile = async (options: { saveAs?: boolean }, nativeSelection?: Promise<SelectedDocumentFile>) => {
   const session = documentSession
   const contents = JSON.stringify(getLocalDocument(), null, 2)
   const suggestedName = options.saveAs ? documentFilename() : localDocumentState.fileName || documentFilename()
-  let target = options.saveAs || localDocumentState.needsSaveTarget ? await nativeSelection : fileHandle
+  const selected = options.saveAs || localDocumentState.needsSaveTarget ? await nativeSelection : undefined
+  let target = options.saveAs || localDocumentState.needsSaveTarget ? selected?.handle : fileHandle
+  let expectedRevision = selected?.revision ?? nativeFileRevision
   if (localDocumentState.needsSaveTarget && !target) throw new Error('请重新选择此文稿的保存位置。')
   await flushLocalDocument().catch(() => undefined)
   if (!target && !options.saveAs) {
@@ -408,6 +421,7 @@ const writeLocalDocumentFile = async (options: { saveAs?: boolean }, nativeSelec
         suggestedName,
         types: [{ description: 'Keynote Local 文稿', accept: { 'application/json': ['.json'] } }],
       })
+      expectedRevision = await getNativeFileRevision(await target.getFile())
     }
   }
   if (!target) {
@@ -418,9 +432,14 @@ const writeLocalDocumentFile = async (options: { saveAs?: boolean }, nativeSelec
     throw new Error('未获得此文件的写入权限，请重新点击保存并允许访问，或选择另存为。')
   }
   if (session !== documentSession) throw new Error('文稿已切换，请保存当前文稿。')
+  const nextNativeRevision = await getNativeFileRevision(contents)
+  await assertNativeFileUnchanged(target, expectedRevision)
   const writable = await target.createWritable()
   try {
     await writable.write(contents)
+    // The native stream writes a temporary file until close. Recheck the live
+    // destination before committing, including edits made while writing.
+    await assertNativeFileUnchanged(target, expectedRevision)
     await writable.close()
   }
   catch (error) {
@@ -429,6 +448,7 @@ const writeLocalDocumentFile = async (options: { saveAs?: boolean }, nativeSelec
   }
   if (session !== documentSession) return { method: 'file' as const, fileName: target.name }
   fileHandle = target
+  nativeFileRevision = nextNativeRevision
   localDocumentState.nativeFileBound = true
   localDocumentState.needsSaveTarget = false
   outputBinding = undefined
@@ -445,7 +465,7 @@ export const saveLocalDocumentFile = (options: { saveAs?: boolean } = {}) => {
   const nativeSelection = (options.saveAs || localDocumentState.needsSaveTarget) && pickerWindow.showSaveFilePicker ? pickerWindow.showSaveFilePicker({
     suggestedName: options.saveAs ? documentFilename() : localDocumentState.fileName || documentFilename(),
     types: [{ description: 'Keynote Local 文稿', accept: { 'application/json': ['.json'] } }],
-  }) : undefined
+  }).then(async handle => ({ handle, revision: await getNativeFileRevision(await handle.getFile()) })) : undefined
   void nativeSelection?.catch(() => undefined)
   return enqueueDocumentOperation(() => {
     if (nativeSelection && session !== documentSession) throw new Error('文稿已切换，请保存当前文稿。')
@@ -650,9 +670,10 @@ export const initializeLocalDocument = async (createStarter: () => Promise<Start
       localDocumentState.fileSavedAt = stored.fileSavedAt || 0
       outputBinding = stored.outputBinding ? { ...stored.outputBinding } : undefined
       fileHandle = stored.fileHandle
+      nativeFileRevision = typeof stored.nativeFileRevision === 'string' && /^[a-f0-9]{64}$/.test(stored.nativeFileRevision) ? stored.nativeFileRevision : undefined
       localDocumentState.nativeFileBound = !!fileHandle
-      localDocumentState.needsSaveTarget = !fileHandle && !!stored.fileName && !outputBinding &&
-        stored.nativeFileBound !== false && !!pickerWindow.showSaveFilePicker
+      localDocumentState.needsSaveTarget = (!!fileHandle && !nativeFileRevision) || (!fileHandle && !!stored.fileName && !outputBinding &&
+        stored.nativeFileBound !== false && !!pickerWindow.showSaveFilePicker)
     }
   }
   catch (error) {

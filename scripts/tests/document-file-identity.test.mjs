@@ -10,6 +10,12 @@ const source = await readFile(new URL('../../src/services/localDocument.ts', imp
 const compiled = ts.transpileModule(source, {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
 }).outputText
+const nativeRevisionSource = await readFile(new URL('../../src/utils/nativeFileRevision.ts', import.meta.url), 'utf8')
+const nativeRevisionCompiled = ts.transpileModule(nativeRevisionSource, {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
+}).outputText
+const nativeRevision = {}
+new Function('exports', nativeRevisionCompiled)(nativeRevision)
 const clone = value => JSON.parse(JSON.stringify(value))
 const theme = { themeColors: ['#123456'], backgroundColor: '#fff', fontColor: '#000', fontName: 'Arial', outline: {}, shadow: {} }
 const documentFor = (title = 'tevworkshop_v2', slideId = title) => ({
@@ -23,19 +29,48 @@ const deferred = () => {
 }
 const tick = () => new Promise(resolve => setImmediate(resolve))
 const handleFor = (name, document, { permission = 'granted', onWritable } = {}) => {
-  const writes = [], permissions = []
-  return {
-    name, writes, permissions,
-    getFile: () => Promise.resolve(new File([JSON.stringify(document)], name, { type: 'application/json' })),
+  const writes = [], permissions = [], temporaryWrites = []
+  let contents = JSON.stringify(document), lastModified = 123, readError
+  let writableCount = 0, abortCount = 0
+  const handle = {
+    name, writes, permissions, temporaryWrites,
+    get contents() {
+      return contents
+    },
+    get writableCount() {
+      return writableCount
+    },
+    get abortCount() {
+      return abortCount
+    },
+    externalWrite: (value, options = {}) => {
+      contents = typeof value === 'string' ? value : JSON.stringify(value)
+      lastModified = options.lastModified ?? lastModified
+    },
+    failReads: error => readError = error,
+    getFile: () => readError ? Promise.reject(readError) : Promise.resolve(new File([contents], name, { type: 'application/json', lastModified })),
     requestPermission: options => {
       permissions.push(options); return Promise.resolve(permission)
     },
     createWritable: async () => {
+      writableCount++
       if (onWritable) await onWritable()
       let pending
-      return { write: value => Promise.resolve(pending = value), close: () => Promise.resolve(writes.push(JSON.parse(pending))), abort: async () => {} }
+      return {
+        write: value => {
+          temporaryWrites.push(value); pending = value; return Promise.resolve()
+        },
+        close: () => {
+          contents = pending; lastModified++
+          writes.push(JSON.parse(pending)); return Promise.resolve()
+        },
+        abort: () => {
+          abortCount++; return Promise.resolve()
+        },
+      }
     },
   }
+  return handle
 }
 const storageFor = record => ({ record, puts: [], rejectHandles: false, failWith: undefined })
 const createHarness = async ({ storage = storageFor(), native = true, serverUnavailable = false } = {}) => {
@@ -113,6 +148,7 @@ const createHarness = async ({ storage = storageFor(), native = true, serverUnav
     '@/services/htmlDocument': { normalizeHtmlSlide: value => value },
     '@/utils/pageNumbers': { synchronizeAutoPageNumbers: value => value },
     '@/utils/historySnapshots': { flushPendingHistorySnapshots: async () => {} },
+    '@/utils/nativeFileRevision': nativeRevision,
   }
   const exports = {}
   new Function('require', 'exports', 'window', 'document', compiled)(id => {
@@ -136,6 +172,8 @@ test('opening a renamed JSON uses its filename as title and writes back to that 
     assert.equal(h.api.getLocalDocument().title, 'DiFF4Yukawa')
     assert.equal(h.api.localDocumentState.fileName, 'DiFF4Yukawa.json')
     assert.equal(h.api.localDocumentState.nativeFileBound, true)
+    assert.equal(h.storage.record.nativeFileRevision, await nativeRevision.getNativeFileRevision(await handle.getFile()))
+    assert.equal(Object.hasOwn(h.api.getLocalDocument(), 'nativeFileRevision'), false)
     const result = await h.api.saveLocalDocumentFile()
     assert.equal(result.fileName, 'DiFF4Yukawa.json')
     assert.equal(handle.writes.length, 1)
@@ -302,13 +340,228 @@ test('permission denial keeps the existing target and never writes to an unrelat
   }
 })
 
+test('external native JSON changes with unchanged size and time block Save without losing local edits or the binding', async () => {
+  const h = await createHarness()
+  try {
+    const handle = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+    h.chooseOpen(handle)
+    await h.api.openLocalDocumentPicker()
+    const before = await handle.getFile()
+    const baseline = h.storage.record.nativeFileRevision
+    h.store.setTitle('Unsaved local edits')
+    const external = handle.contents.replace('Old title', 'New title')
+    handle.externalWrite(external)
+    const changed = await handle.getFile()
+    assert.equal(changed.size, before.size)
+    assert.equal(changed.lastModified, before.lastModified)
+    await assert.rejects(h.api.saveLocalDocumentFile(), /文件已在外部修改或替换/)
+    assert.equal(handle.writableCount, 0)
+    assert.equal(handle.contents, external)
+    assert.equal(h.api.getLocalDocument().title, 'Unsaved local edits')
+    assert.equal(h.api.localDocumentState.fileName, 'DiFF4Yukawa.json')
+    assert.equal(h.api.localDocumentState.nativeFileBound, true)
+    assert.equal(h.storage.record.nativeFileRevision, baseline)
+    assert.equal(h.storage.record.fileHandle, handle)
+    assert.equal(h.calls.server.length + h.calls.downloads.length, 0)
+  }
+  finally {
+    await h.close()
+  }
+})
+
+test('a native revision restored from browser storage still detects later external changes', async () => {
+  const storage = storageFor()
+  const first = await createHarness({ storage })
+  const handle = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+  first.chooseOpen(handle)
+  await first.api.openLocalDocumentPicker()
+  await first.close()
+  const baseline = storage.record.nativeFileRevision
+  handle.externalWrite(documentFor('External title', 'external-content'))
+  const restored = await createHarness({ storage })
+  try {
+    assert.equal(restored.api.localDocumentState.needsSaveTarget, false)
+    await assert.rejects(restored.api.saveLocalDocumentFile(), /文件已在外部修改或替换/)
+    assert.equal(handle.writes.length, 0)
+    assert.equal(restored.api.getLocalDocument().slides[0].id, 'DiFF-content')
+    assert.equal(restored.api.localDocumentState.fileName, 'DiFF4Yukawa.json')
+    assert.equal(storage.record.nativeFileRevision, baseline)
+    assert.equal(storage.record.fileHandle, handle)
+    assert.equal(restored.calls.server.length + restored.calls.downloads.length, 0)
+  }
+  finally {
+    await restored.close()
+  }
+})
+
+test('successful native saves advance the stored revision for subsequent saves', async () => {
+  const h = await createHarness()
+  try {
+    const handle = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+    h.chooseOpen(handle)
+    await h.api.openLocalDocumentPicker()
+    let baseline = h.storage.record.nativeFileRevision
+    for (const title of ['First local edit', 'Second local edit']) {
+      h.store.setTitle(title)
+      await h.api.saveLocalDocumentFile()
+      const savedRevision = h.storage.record.nativeFileRevision
+      assert.notEqual(savedRevision, baseline)
+      assert.equal(savedRevision, await nativeRevision.getNativeFileRevision(await handle.getFile()))
+      baseline = savedRevision
+    }
+    assert.equal(handle.writes.length, 2)
+    assert.equal(JSON.parse(handle.contents).title, 'Second local edit')
+    assert.equal(h.calls.server.length + h.calls.downloads.length, 0)
+  }
+  finally {
+    await h.close()
+  }
+})
+
+test('a change after opening the native writable stream aborts before close and keeps the external file', async () => {
+  const h = await createHarness()
+  const external = documentFor('External during write', 'external-content')
+  const handle = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'), { onWritable: () => handle.externalWrite(external) })
+  try {
+    h.chooseOpen(handle)
+    await h.api.openLocalDocumentPicker()
+    const baseline = h.storage.record.nativeFileRevision
+    await assert.rejects(h.api.saveLocalDocumentFile(), /文件已在外部修改或替换/)
+    assert.equal(handle.temporaryWrites.length, 1)
+    assert.equal(handle.abortCount, 1)
+    assert.equal(handle.writes.length, 0)
+    assert.deepEqual(JSON.parse(handle.contents), external)
+    assert.equal(h.storage.record.nativeFileRevision, baseline)
+    assert.equal(h.storage.record.fileHandle, handle)
+    assert.equal(h.calls.server.length + h.calls.downloads.length, 0)
+  }
+  finally {
+    await h.close()
+  }
+})
+
+test('Save As resolves an external conflict only after a new target succeeds', async () => {
+  const h = await createHarness()
+  try {
+    const original = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+    h.chooseOpen(original)
+    await h.api.openLocalDocumentPicker()
+    const baseline = h.storage.record.nativeFileRevision
+    h.store.setTitle('Unsaved local edits')
+    const external = documentFor('External title', 'external-content')
+    original.externalWrite(external)
+    await assert.rejects(h.api.saveLocalDocumentFile(), /文件已在外部修改或替换/)
+
+    const denied = handleFor('Denied.json', documentFor(), { permission: 'denied' })
+    h.chooseSave(denied)
+    await assert.rejects(h.api.saveLocalDocumentFile({ saveAs: true }), /写入权限/)
+    h.chooseSave(new DOMException('Cancelled', 'AbortError'))
+    await assert.rejects(h.api.saveLocalDocumentFile({ saveAs: true }), { name: 'AbortError' })
+    assert.equal(denied.writes.length, 0)
+    assert.equal(h.api.localDocumentState.fileName, original.name)
+    assert.equal(h.storage.record.fileHandle, original)
+    assert.equal(h.storage.record.nativeFileRevision, baseline)
+
+    const copy = handleFor('DiFF4Yukawa-copy.json', documentFor('Chosen existing target'))
+    h.chooseSave(copy)
+    await h.api.saveLocalDocumentFile({ saveAs: true })
+    assert.equal(copy.writes.length, 1)
+    assert.equal(copy.writes[0].title, 'Unsaved local edits')
+    assert.equal(h.api.localDocumentState.fileName, copy.name)
+    assert.equal(h.storage.record.fileHandle, copy)
+    assert.equal(h.storage.record.nativeFileRevision, await nativeRevision.getNativeFileRevision(await copy.getFile()))
+    assert.deepEqual(JSON.parse(original.contents), external)
+    await h.api.saveLocalDocumentFile()
+    assert.equal(copy.writes.length, 2)
+    assert.equal(original.writes.length, 0)
+    assert.equal(h.calls.server.length + h.calls.downloads.length, 0)
+  }
+  finally {
+    await h.close()
+  }
+})
+
+test('an older stored native handle without a revision requires target confirmation and cancellation changes nothing', async () => {
+  const original = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+  const record = { ...legacyRecord(), fileHandle: original, nativeFileBound: true }
+  const h = await createHarness({ storage: storageFor(record) })
+  try {
+    assert.equal(h.api.localDocumentState.needsSaveTarget, true)
+    h.chooseSave(new DOMException('Cancelled', 'AbortError'))
+    await assert.rejects(h.api.saveLocalDocumentFile(), { name: 'AbortError' })
+    assert.equal(original.writes.length, 0)
+    assert.equal(h.api.localDocumentState.fileName, original.name)
+    assert.equal(h.storage.record.fileHandle, original)
+    assert.equal(h.storage.record.nativeFileRevision, undefined)
+    h.chooseSave(original)
+    await h.api.saveLocalDocumentFile()
+    assert.equal(original.writes.length, 1)
+    assert.equal(h.api.localDocumentState.needsSaveTarget, false)
+    assert.equal(h.storage.record.nativeFileRevision, await nativeRevision.getNativeFileRevision(await original.getFile()))
+    assert.equal(h.calls.server.length + h.calls.downloads.length, 0)
+  }
+  finally {
+    await h.close()
+  }
+})
+
+test('a native read failure preserves the old target and revision rather than saving elsewhere', async () => {
+  const h = await createHarness()
+  try {
+    const handle = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+    h.chooseOpen(handle)
+    await h.api.openLocalDocumentPicker()
+    const baseline = h.storage.record.nativeFileRevision
+    handle.failReads(new DOMException('Denied', 'NotAllowedError'))
+    await assert.rejects(h.api.saveLocalDocumentFile(), /无法读取原文件/)
+    assert.equal(handle.writableCount, 0)
+    assert.equal(h.storage.record.fileHandle, handle)
+    assert.equal(h.storage.record.nativeFileRevision, baseline)
+    assert.equal(h.api.localDocumentState.fileName, handle.name)
+    assert.equal(h.calls.server.length + h.calls.downloads.length, 0)
+    handle.failReads(undefined)
+    await h.api.saveLocalDocumentFile()
+    assert.equal(handle.writes.length, 1)
+  }
+  finally {
+    await h.close()
+  }
+})
+
+test('a Save As target changed after picker selection is rejected without replacing the old binding', async () => {
+  const h = await createHarness()
+  try {
+    const original = handleFor('DiFF4Yukawa.json', documentFor('Old title', 'DiFF-content'))
+    h.chooseOpen(original)
+    await h.api.openLocalDocumentPicker()
+    const baseline = h.storage.record.nativeFileRevision
+    const chosen = handleFor('Copy.json', documentFor('Existing copy'))
+    const external = documentFor('Changed after selection', 'external-copy')
+    chosen.requestPermission = () => {
+      chosen.externalWrite(external); return Promise.resolve('granted')
+    }
+    h.chooseSave(chosen)
+    await assert.rejects(h.api.saveLocalDocumentFile({ saveAs: true }), /文件已在外部修改或替换/)
+    assert.equal(chosen.writableCount, 0)
+    assert.deepEqual(JSON.parse(chosen.contents), external)
+    assert.equal(h.api.localDocumentState.fileName, original.name)
+    assert.equal(h.storage.record.fileHandle, original)
+    assert.equal(h.storage.record.nativeFileRevision, baseline)
+    assert.equal(h.calls.server.length + h.calls.downloads.length, 0)
+  }
+  finally {
+    await h.close()
+  }
+})
+
 test('open A, open B and Save are serialized so B content can never reach A handle', async () => {
   const h = await createHarness()
   const gate = deferred()
   try {
     const a = handleFor('A.json', documentFor('Old A title', 'A-content'))
     const b = handleFor('B.json', documentFor('Old B title', 'B-content'))
-    const aFile = { name: 'A.json', text: () => gate.promise }
+    const aFile = new File([JSON.stringify(documentFor('Old A title', 'A-content'))], 'A.json')
+    aFile.text = () => gate.promise
     const openA = h.api.openLocalDocumentFile(aFile, a)
     const openB = h.api.openLocalDocumentFile(await b.getFile(), b)
     const save = h.api.saveLocalDocumentFile()
@@ -368,6 +621,11 @@ test('failed opens preserve the previous document, title, native handle and subs
       assert.equal(h.api.localDocumentState.fileName, 'DiFF4Yukawa.json')
       assert.equal(h.api.localDocumentState.nativeFileBound, true)
     }
+    const unreadable = new File([JSON.stringify(documentFor('Bad read'))], 'Bad-read.json')
+    unreadable.arrayBuffer = () => Promise.reject(new Error('Cannot read bytes'))
+    await assert.rejects(h.api.openLocalDocumentFile(unreadable, handleFor(unreadable.name, documentFor('Bad read'))), /无法读取原文件/)
+    assert.equal(h.api.getLocalDocument().title, 'DiFF4Yukawa')
+    assert.equal(h.api.localDocumentState.fileName, original.name)
     await h.api.saveLocalDocumentFile()
     assert.equal(original.writes.length, 1)
     assert.equal(original.writes[0].slides[0].id, 'DiFF-content')

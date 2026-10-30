@@ -27,6 +27,7 @@ const codec = await server.ssrLoadModule('/src/utils/htmlCompact.ts')
 const placement = await server.ssrLoadModule('/src/utils/htmlPlacement.ts')
 const pageNumbers = await server.ssrLoadModule('/src/utils/pageNumbers.ts')
 const historySnapshots = await server.ssrLoadModule('/src/utils/historySnapshots.ts')
+const nativeFileRevision = await server.ssrLoadModule('/src/utils/nativeFileRevision.ts')
 
 // Importing reads only title and script metadata. A detached XML DOM keeps the
 // tests inert and never creates a browser/profile, script context or local DB.
@@ -120,6 +121,7 @@ const createHarness = async () => {
     '@/services/htmlDocument': html,
     '@/utils/pageNumbers': pageNumbers,
     '@/utils/historySnapshots': historySnapshots,
+    '@/utils/nativeFileRevision': nativeFileRevision,
   })
   return {
     html, local, store,
