@@ -46,7 +46,7 @@ macOS 可选运行 `安装到应用程序.command`，在 Applications 中安装 
 
 顶部工具可插入文本框、图片、形状、表格、图表和公式。双击文字或公式继续编辑；在文字中放好光标，再点“公式”，即可插入行内公式。顶部 HTML 按钮用于导入网页，或编辑当前网页幻灯片的源码。`examples/我的第一份演示.json` 和 `examples/HTML演示示例.html` 是通用示例。
 
-**浏览器自动保存与文稿文件保存是两回事。** 点“保存”或按 **⌘S / Ctrl+S**，写入可编辑 JSON；全新安装默认保存在 `~/Documents/Code/Keytist/output`。已有安装继续使用原保存位置，包括旧的 `~/Documents/Code/SlidesStudio/output`，改名不会搬动文稿。再次保存会更新已绑定文件；不相关的新文稿重名时自动加序号。“另存为”可选择其他位置。外部修改会触发冲突提示，避免静默覆盖。
+**浏览器自动保存与文稿文件保存是两回事。** 点“保存”或按 **⌘S / Ctrl+S**，写入可编辑 JSON；全新安装默认保存在 `~/Documents/Code/keytist/output`。已有安装继续使用原保存位置，包括旧的 `~/Documents/Code/SlidesStudio/output`，改名不会搬动文稿。再次保存会更新已绑定文件；不相关的新文稿重名时自动加序号。“另存为”可选择其他位置。外部修改会触发冲突提示，避免静默覆盖。
 
 macOS 全新安装将设置与日志放在 `~/Library/Application Support/Keytist` 和 `~/Library/Logs/Keytist`。升级已有安装会继承原设置、保存凭证和路径，因此旧目录名可能保留。浏览器存储和 Agent 接口标识也保持兼容，延续已有文稿与偏好。
 

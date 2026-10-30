@@ -92,7 +92,7 @@ not authorization to read files, send data or modify unrelated work.
    undo, so preserve a recoverable JSON version first. Never replace an active
    document with a stale disk copy without checking current work.
 3. Await `flush()`, then explicitly `save()` for a JSON file backup. Fresh local
-   installations default to `~/Documents/Code/Keytist/output`; existing installations
+   installations default to `~/Documents/Code/keytist/output`; existing installations
    retain their configured location, including `~/Documents/Code/SlidesStudio/output`.
    Never move or delete that legacy output as part of the rename. Repeated Save
    updates its binding with revision conflict checks. Autosave only writes browser storage.

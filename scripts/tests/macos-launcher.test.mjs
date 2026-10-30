@@ -9,12 +9,26 @@ import { launcherConfiguration } from '../macos/launcher-config.mjs'
 
 const repository = fileURLToPath(new URL('../..', import.meta.url))
 
-test('new launcher configuration uses Keytist paths', () => {
+test('new launcher configuration uses lowercase keytist output', () => {
   const configuration = launcherConfiguration({ repositoryPath: '/source/keytist', nodePath: '/runtime/node', home: '/users/example', exists: () => false })
   assert.equal(configuration.repositoryPath, '/source/keytist')
   assert.equal(configuration.nodePath, '/runtime/node')
   assert.equal(configuration.localURL, 'http://127.0.0.1:4178')
-  assert.equal(configuration.defaultOutputDirectory, '/users/example/Documents/Code/Keytist/output')
+  assert.equal(configuration.defaultOutputDirectory, '/users/example/Documents/Code/keytist/output')
+})
+
+test('launcher configuration keeps the actual spelling of an existing Keytist directory', () => {
+  const verification = path.join(repository, 'verification', 'full-path-rename')
+  fs.mkdirSync(verification, { recursive: true })
+  const home = fs.mkdtempSync(path.join(verification, 'launcher-case-'))
+  try {
+    fs.mkdirSync(path.join(home, 'Documents', 'Code', 'Keytist'), { recursive: true })
+    const configuration = launcherConfiguration({ repositoryPath: '/source/keytist', nodePath: '/runtime/node', home })
+    assert.equal(configuration.defaultOutputDirectory, path.join(home, 'Documents', 'Code', 'Keytist', 'output'))
+  }
+  finally {
+    fs.rmSync(home, { recursive: true, force: true })
+  }
 })
 
 test('installing without previous config still retains an existing legacy output', () => {

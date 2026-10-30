@@ -1,6 +1,6 @@
 /* eslint-env node, es2021 */
 import fs from 'node:fs/promises'
-import { constants, existsSync } from 'node:fs'
+import { constants, existsSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import crypto from 'node:crypto'
@@ -23,11 +23,28 @@ const equalSecret = (actual, expected) => {
 }
 const sameFile = (a, b) => a.dev === b.dev && a.ino === b.ino && a.size === b.size && a.mtimeNs === b.mtimeNs && a.ctimeNs === b.ctimeNs
 
-export function resolveLocalFileDirectories({ outputDirectory, settingsDirectory, home = os.homedir(), env = process.env, exists = existsSync } = {}) {
+export function resolveLocalFileDirectories({ outputDirectory, settingsDirectory, home = os.homedir(), env = process.env, exists = existsSync, readDirectory = readdirSync } = {}) {
   const legacyOutput = path.join(home, 'Documents', 'Code', 'SlidesStudio', 'output')
   const legacySettings = path.join(home, 'Library', 'Application Support', 'Slide Studio')
+  const defaultOutput = () => {
+    if (exists(legacyOutput)) return legacyOutput
+    const codeDirectory = path.join(home, 'Documents', 'Code')
+    let entries
+    try {
+      entries = readDirectory(codeDirectory)
+    }
+    catch (error) {
+      if (error.code !== 'ENOENT') throw error
+      entries = []
+    }
+    // existsSync cannot distinguish these spellings on a case-insensitive disk.
+    // Keep the spelling of an existing installation so its path-based save keys
+    // agree with the launcher; genuinely fresh installations use lowercase.
+    const folder = entries.includes('keytist') ? 'keytist' : entries.includes('Keytist') ? 'Keytist' : 'keytist'
+    return path.join(codeDirectory, folder, 'output')
+  }
   return {
-    outputDirectory: path.resolve(outputDirectory || env.STUDIO_OUTPUT_DIR || (exists(legacyOutput) ? legacyOutput : path.join(home, 'Documents', 'Code', 'Keytist', 'output'))),
+    outputDirectory: path.resolve(outputDirectory || env.STUDIO_OUTPUT_DIR || defaultOutput()),
     settingsDirectory: path.resolve(settingsDirectory || env.STUDIO_SETTINGS_DIR || (exists(legacySettings) ? legacySettings : path.join(home, 'Library', 'Application Support', 'Keytist'))),
   }
 }

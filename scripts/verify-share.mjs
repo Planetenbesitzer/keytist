@@ -62,7 +62,7 @@ async function verifyRuntime(zip, directory, expectedVersion) {
       env: {
         ...process.env, HOME: home, USERPROFILE: home, LOCALAPPDATA: path.join(home, 'AppData/Local'),
         XDG_DATA_HOME: path.join(home, '.local/share'), STUDIO_PORT: '0',
-        STUDIO_OUTPUT_DIR: path.join(home, 'Documents/Code/Keytist/output'),
+        STUDIO_OUTPUT_DIR: path.join(home, 'Documents/Code/keytist/output'),
         STUDIO_SETTINGS_DIR: path.join(home, 'Library/Application Support/Keytist'),
       },
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -105,7 +105,7 @@ async function verifyRuntime(zip, directory, expectedVersion) {
     assert(catalog.version === 1 && Array.isArray(catalog.files), 'Recipient font catalog is invalid')
     assert(!JSON.stringify(catalog).includes(home), 'Recipient font catalog exposes filesystem paths')
     const config = await (await fetch(`${origin}/api/local/config`)).json()
-    const output = await fs.realpath(path.join(home, 'Documents/Code/Keytist/output'))
+    const output = await fs.realpath(path.join(home, 'Documents/Code/keytist/output'))
     assert(config.outputDirectory === output, 'Save API is not isolated inside temporary HOME')
     const example = await zip.file('Keytist/examples/我的第一份演示.json').async('string')
     const headers = { 'X-SlideStudio-Token': config.token }

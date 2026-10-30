@@ -80,7 +80,7 @@ kept in browser storage for reloads; if a previous handle cannot be restored,
 Save asks the user to choose the target again instead of switching files.
 With no opened native handle, the local
 Keytist server saves into its configured default output directory without a
-picker. Fresh installations use `~/Documents/Code/Keytist/output`; existing
+picker. Fresh installations use `~/Documents/Code/keytist/output`; existing
 installations keep their original path, including the legacy
 `~/Documents/Code/SlidesStudio/output`. The rename does not move documents or
 reset settings and save credentials. The returned server
