@@ -73,16 +73,16 @@ export function createHtmlSnapshotAppearance(root: HTMLElement): (svgDataUrl: st
     for (let index = 0; index < text.length; index++) {
       const char = text[index]
       if (char === '\\') {
-        index++; continue 
+        index++; continue
       }
       if (quote) {
-        if (char === quote) quote = ''; continue 
+        if (char === quote) quote = ''; continue
       }
       if (char === '"' || char === "'") quote = char
       else if (char === '(' || char === '[') depth++
       else if (char === ')' || char === ']') depth--
       else if (char === ',' && depth === 0) {
-        result.push(text.slice(start, index)); start = index + 1 
+        result.push(text.slice(start, index)); start = index + 1
       }
     }
     result.push(text.slice(start))
@@ -94,10 +94,10 @@ export function createHtmlSnapshotAppearance(root: HTMLElement): (svgDataUrl: st
     const owner = part.slice(0, match.index).trim() || '*'
     return controlElements.some(element => {
       try {
-        return element.matches(owner) 
+        return element.matches(owner)
       }
       catch {
-        return true 
+        return true
       } // Preserve a native skin rule if its owner cannot be queried separately.
     })
   })
@@ -130,10 +130,10 @@ export function createHtmlSnapshotAppearance(root: HTMLElement): (svgDataUrl: st
     seenSheets.add(sheet)
     let rules: CSSRuleList
     try {
-      rules = sheet.cssRules 
+      rules = sheet.cssRules
     }
     catch {
-      throw new Error('网页控件的样式表无法读取，未生成外观不完整的快照。') 
+      throw new Error('网页控件的样式表无法读取，未生成外观不完整的快照。')
     }
     visitRules(rules, sheet.href || root.ownerDocument.baseURI, wrappers)
   }
@@ -147,10 +147,10 @@ export function createHtmlSnapshotAppearance(root: HTMLElement): (svgDataUrl: st
     if (value.startsWith('#') || value.startsWith('data:')) return value
     let url: URL
     try {
-      url = new URL(value, base) 
+      url = new URL(value, base)
     }
     catch {
-      throw new Error('网页样式包含无法解析的素材地址。') 
+      throw new Error('网页样式包含无法解析的素材地址。')
     }
     return url.hash && sameDocument.has(withoutHash(url.href)) ? url.hash : url.href
   }
@@ -165,10 +165,10 @@ export function createHtmlSnapshotAppearance(root: HTMLElement): (svgDataUrl: st
       if (resourceCache.size >= 256) throw new Error('网页样式素材过多，无法完整冻结。')
       let response: Response
       try {
-        response = await fetch(source) 
+        response = await fetch(source)
       }
       catch {
-        throw new Error('网页样式素材无法读取，未生成外观不完整的快照。') 
+        throw new Error('网页样式素材无法读取，未生成外观不完整的快照。')
       }
       if (!response.ok) throw new Error('网页样式素材无法读取，未生成外观不完整的快照。')
       const blob = await response.blob()
@@ -201,10 +201,10 @@ export function createHtmlSnapshotAppearance(root: HTMLElement): (svgDataUrl: st
     if (!svgDataUrl.startsWith('data:image/svg+xml')) throw new Error('网页快照的 SVG 数据无效。')
     let markup: string
     try {
-      markup = decodeURIComponent(svgDataUrl.slice(svgDataUrl.indexOf(',') + 1)) 
+      markup = decodeURIComponent(svgDataUrl.slice(svgDataUrl.indexOf(',') + 1))
     }
     catch {
-      throw new Error('网页快照的 SVG 数据无效。') 
+      throw new Error('网页快照的 SVG 数据无效。')
     }
     const parsed = new DOMParser().parseFromString(markup, 'image/svg+xml')
     if (parsed.querySelector('parsererror')) throw new Error('网页快照的 SVG 数据无效。')

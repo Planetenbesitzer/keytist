@@ -218,7 +218,7 @@ test('skin URLs use their original stylesheet base and only selected skin assets
     return Promise.resolve(new Response(new Blob(['<svg/>'], { type: 'image/svg+xml' }), { status: 200 }))
   }
   t.after(() => {
-    globalThis.fetch = oldFetch 
+    globalThis.fetch = oldFetch
   })
   const source = element('div', [element('input')]), clone = element('div', [element('input')])
   const env = harness(t, source, clone)
@@ -239,14 +239,14 @@ test('an unreadable active control stylesheet or failed skin asset refuses a mis
   const source = element('div', [element('input')]), clone = element('div', [element('input')])
   const env = harness(t, source, clone)
   env.document.styleSheets = [{ get cssRules() {
-    throw new Error('Cross-origin stylesheet') 
+    throw new Error('Cross-origin stylesheet')
   } }]
   assert.throws(() => createHtmlSnapshotAppearance(source), /网页控件的样式表无法读取/)
   env.document.styleSheets = [sheet([skin('input::-webkit-slider-thumb', 'background-image:url(missing.png)')])]
   const oldFetch = globalThis.fetch
   globalThis.fetch = () => Promise.resolve(new Response('Unavailable', { status: 404 }))
   t.after(() => {
-    globalThis.fetch = oldFetch 
+    globalThis.fetch = oldFetch
   })
   await assert.rejects(env.capture(), /网页样式素材无法读取/)
 })
@@ -255,7 +255,7 @@ test('unrelated unreadable stylesheets impose no new font or image requirement w
   const source = element('div', [vector('svg', [vector('text')])]), clone = element('div', [vector('svg', [vector('text')])])
   const env = harness(t, source, clone)
   env.document.styleSheets = [{ get cssRules() {
-    throw new Error('Not needed for a native control') 
+    throw new Error('Not needed for a native control')
   } }]
   await env.capture()
   assert.equal(clone.children.length, 1)
