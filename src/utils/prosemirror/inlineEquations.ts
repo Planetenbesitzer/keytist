@@ -10,6 +10,7 @@ interface EquationEditor {
   flush: () => void
   beforeChange: () => void
   changed: () => void
+  active?: () => boolean
 }
 
 export interface InlineEquationTarget {
@@ -24,15 +25,38 @@ export interface InlineEquationTarget {
 
 const editors = new Map<EditorView, EquationEditor>()
 const targets = new WeakSet<InlineEquationTarget>()
+let rememberedTarget: InlineEquationTarget | undefined
+const pendingRequests = new Map<EditorView, () => void>()
+
+export const isInlineEquationShortcut = (event: Pick<KeyboardEvent, 'code' | 'key' | 'metaKey' | 'ctrlKey' | 'altKey'>) =>
+  (event.metaKey || event.ctrlKey) && event.altKey && (event.code === 'KeyE' || (!event.code && event.key.toLowerCase() === 'e'))
 
 export const registerEquationEditor = (editor: EquationEditor) => {
   editors.set(editor.view, editor)
-  return () => editors.delete(editor.view)
+  const document = editor.view.dom.ownerDocument
+  const onOtherInputFocus = (event: FocusEvent) => {
+    const target = event.target as HTMLElement | null
+    if (target?.closest?.('input, textarea, select, [contenteditable="true"]') && !editor.view.dom.contains(target)) {
+      forgetInlineEquationTarget(editor.view)
+    }
+  }
+  document.addEventListener?.('focusin', onOtherInputFocus)
+  return () => {
+    document.removeEventListener?.('focusin', onOtherInputFocus)
+    forgetInlineEquationTarget(editor.view)
+    editors.delete(editor.view)
+  }
 }
 
-/** Capture only a live text caret, never a previously focused text object. */
+export const forgetInlineEquationTarget = (view: EditorView) => {
+  pendingRequests.get(view)?.()
+  if (rememberedTarget?.editor.view === view) rememberedTarget = undefined
+}
+
+/** Resume a blurred caret only in the same still-selected, unchanged text box. */
 export const captureInlineEquationTarget = (view?: EditorView, position?: number): InlineEquationTarget | undefined => {
   const editor = view ? editors.get(view) : [...editors.values()].find(item => item.view.hasFocus())
+  if (!view && !editor && rememberedTarget?.editor.active?.() && isCurrent(rememberedTarget)) return rememberedTarget
   if (!editor || editor.view.isDestroyed || !editor.view.dom.isConnected || !editor.editable()) return undefined
   editor.flush()
   const state = editor.view.state
@@ -47,6 +71,11 @@ export const captureInlineEquationTarget = (view?: EditorView, position?: number
   }
   targets.add(target)
   return target
+}
+
+export const rememberInlineEquationTarget = (view: EditorView) => {
+  const editor = editors.get(view)
+  rememberedTarget = editor?.active?.() && !view.composing ? captureInlineEquationTarget(view) : undefined
 }
 
 export const isInlineEquationTarget = (value: unknown): value is InlineEquationTarget =>
@@ -103,9 +132,40 @@ export const applyInlineEquation = (target: InlineEquationTarget, latex: string)
   return view
 }
 
-export const requestInlineEquation = (view: EditorView, position?: number) => {
+export const requestInlineEquation = (view?: EditorView, position?: number): boolean => {
+  const editor = view ? editors.get(view) : [...editors.values()].find(item => item.view.hasFocus())
+  if (editor && (editor.view.isDestroyed || !editor.view.dom.isConnected || !editor.editable())) return false
+  if (editor?.view.composing) {
+    const currentView = editor.view
+    if (pendingRequests.has(currentView)) return true
+    const identity = editor.identity()
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const cancel = () => {
+      clearTimeout(timer)
+      currentView.dom.removeEventListener('compositionend', afterComposition)
+      pendingRequests.delete(currentView)
+    }
+    const afterComposition = () => {
+      clearTimeout(timer)
+      // ProseMirror settles composition/DOM changes on its own 20 ms task.
+      timer = setTimeout(() => {
+        if (currentView.composing) return
+        cancel()
+        if (editors.get(currentView) !== editor || currentView.isDestroyed || !currentView.dom.isConnected ||
+            !editor.editable() || editor.identity() !== identity || (editor.active && !editor.active())) return
+        currentView.focus()
+        requestInlineEquation(currentView, position)
+      }, 25)
+    }
+    pendingRequests.set(currentView, cancel)
+    currentView.dom.addEventListener('compositionend', afterComposition)
+    // Moving focus commits the IME candidate before a bookmark is captured.
+    currentView.dom.blur()
+    afterComposition()
+    return true
+  }
   const target = captureInlineEquationTarget(view, position)
   if (!target) return false
-  view.dom.ownerDocument.defaultView?.dispatchEvent(new CustomEvent('keynote-local:insert-equation', { detail: { inlineTarget: target } }))
+  target.editor.view.dom.ownerDocument.defaultView?.dispatchEvent(new CustomEvent('keynote-local:insert-equation', { detail: { inlineTarget: target } }))
   return true
 }

@@ -3,6 +3,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { Buffer } from 'node:buffer'
 import { readFile } from 'node:fs/promises'
+import { setTimeout as delay } from 'node:timers/promises'
 import ts from 'typescript'
 import { Schema } from 'prosemirror-model'
 import { EditorState, NodeSelection, TextSelection } from 'prosemirror-state'
@@ -19,6 +20,7 @@ const compiled = ts.transpileModule(source, {
 const {
   registerEquationEditor, captureInlineEquationTarget, isInlineEquationTarget,
   applyInlineEquation, restoreInlineEquationTarget, focusEquationEditor, requestInlineEquation,
+  rememberInlineEquationTarget, forgetInlineEquationTarget, isInlineEquationShortcut,
 } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`)
 
 const schema = new Schema({
@@ -38,14 +40,37 @@ const marks = [schema.marks.fontsize.create({ fontsize: '28px' }), schema.marks.
 const text = (value, styling = []) => schema.text(value, styling)
 const equation = (latex, styling = []) => schema.nodes.inline_math.create({ latex }, null, styling)
 const documentFor = children => schema.nodes.doc.create(null, schema.nodes.paragraph.create(null, children))
-const makeEditor = (doc, { from = 1, to = from, styling, plugins = [], focused = true } = {}) => {
-  const calls = { flush: 0, beforeChange: 0, changed: 0, focus: 0, transactions: [], events: [] }
-  const current = { identity: 'epoch-1:slide-1:text-1', editable: true, focused }
+const makeEditor = (doc, { from = 1, to = from, styling, plugins = [], focused = true, active = true, onBlur } = {}) => {
+  const calls = { flush: 0, beforeChange: 0, changed: 0, focus: 0, blur: 0, transactions: [], events: [], focusListeners: new Set() }
+  const current = { identity: 'epoch-1:slide-1:text-1', editable: true, focused, active }
   const state = EditorState.create({ doc, selection: TextSelection.create(doc, from, to), storedMarks: styling, plugins })
+  const ownerDocument = Object.assign(new EventTarget(), {
+    defaultView: { dispatchEvent: event => calls.events.push(event) },
+  })
+  const addDocumentListener = ownerDocument.addEventListener.bind(ownerDocument)
+  const removeDocumentListener = ownerDocument.removeEventListener.bind(ownerDocument)
+  ownerDocument.addEventListener = (type, listener, options) => {
+    if (type === 'focusin') calls.focusListeners.add(listener)
+    addDocumentListener(type, listener, options)
+  }
+  ownerDocument.removeEventListener = (type, listener, options) => {
+    if (type === 'focusin') calls.focusListeners.delete(listener)
+    removeDocumentListener(type, listener, options)
+  }
+  const dom = Object.assign(new EventTarget(), {
+    isConnected: true,
+    ownerDocument,
+    contains: target => target === dom || target?.editorDOM === dom,
+    blur: () => {
+      calls.blur++; current.focused = false
+      onBlur?.(view, current, calls)
+    },
+  })
   const view = {
     state,
     isDestroyed: false,
-    dom: { isConnected: true, ownerDocument: { defaultView: { dispatchEvent: event => calls.events.push(event) } } },
+    composing: false,
+    dom,
     hasFocus: () => current.focused,
     focus: () => {
       current.focused = true; calls.focus++
@@ -56,11 +81,36 @@ const makeEditor = (doc, { from = 1, to = from, styling, plugins = [], focused =
   }
   const unregister = registerEquationEditor({
     view, identity: () => current.identity, editable: () => current.editable,
+    active: () => current.active,
     flush: () => calls.flush++, beforeChange: () => calls.beforeChange++, changed: () => calls.changed++,
   })
   return { view, current, calls, unregister }
 }
 const children = doc => [...doc.firstChild.content.content]
+const focusElement = (fixture, kind, inside = false) => {
+  const target = {
+    editorDOM: inside ? fixture.view.dom : undefined,
+    closest: () => ['input', 'textarea', 'select', 'contenteditable'].includes(kind) ? target : null,
+  }
+  const event = new Event('focusin')
+  Object.defineProperty(event, 'target', { value: target })
+  fixture.view.dom.ownerDocument.dispatchEvent(event)
+}
+const withCustomEvent = async operation => {
+  const originalCustomEvent = globalThis.CustomEvent
+  globalThis.CustomEvent = class {
+    constructor(type, options) {
+      this.type = type; this.detail = options.detail
+    }
+  }
+  try {
+    await operation()
+  }
+  finally {
+    if (originalCustomEvent === undefined) delete globalThis.CustomEvent
+    else globalThis.CustomEvent = originalCustomEvent
+  }
+}
 
 test('a captured caret inserts between mixed text and keeps typography for the equation and subsequent typing', () => {
   const fixture = makeEditor(documentFor([text('前文After', marks)]), { from: 3 })
@@ -313,5 +363,273 @@ test('an editor request dispatches the captured target and does not create a fal
     fixture.unregister()
     if (originalCustomEvent === undefined) delete globalThis.CustomEvent
     else globalThis.CustomEvent = originalCustomEvent
+  }
+})
+
+test('a remembered blurred caret resumes in the same still-selected text object and retains its range and marks', async () => {
+  await withCustomEvent(() => {
+    const fixture = makeEditor(documentFor([text('before after', marks)]), { from: 8 })
+    try {
+      rememberInlineEquationTarget(fixture.view)
+      fixture.current.focused = false
+      const target = captureInlineEquationTarget()
+      assert.equal(target.editor.view, fixture.view)
+      assert.equal(target.bookmark.resolve(target.document).from, 8)
+      assert.deepEqual(target.marks, marks)
+      assert.equal(requestInlineEquation(), true)
+      assert.equal(fixture.calls.events.length, 1)
+      assert.equal(fixture.calls.events[0].detail.inlineTarget, target)
+      applyInlineEquation(target, 'x')
+      assert.deepEqual(children(fixture.view.state.doc).map(node => node.isText ? node.text : node.attrs.latex), ['before ', 'x', 'after'])
+      assert.deepEqual(fixture.view.state.doc.nodeAt(8).marks, marks)
+      assert.equal(captureInlineEquationTarget(), undefined, 'A consumed remembered target cannot be reused')
+    }
+    finally {
+      fixture.unregister()
+    }
+  })
+})
+
+for (const change of ['inactive', 'identity', 'document', 'locked', 'destroyed', 'detached', 'unregistered']) {
+  test(`${change} invalidates implicit resumption of a remembered text caret`, () => {
+    const fixture = makeEditor(documentFor([text('original')]), { from: 4 })
+    try {
+      rememberInlineEquationTarget(fixture.view)
+      fixture.current.focused = false
+      if (change === 'inactive') fixture.current.active = false
+      if (change === 'identity') fixture.current.identity = 'epoch-2:slide-2:text-1'
+      if (change === 'document') fixture.view.dispatch(fixture.view.state.tr.insertText('changed'))
+      if (change === 'locked') fixture.current.editable = false
+      if (change === 'destroyed') fixture.view.isDestroyed = true
+      if (change === 'detached') fixture.view.dom.isConnected = false
+      if (change === 'unregistered') fixture.unregister()
+      assert.equal(captureInlineEquationTarget(), undefined)
+      assert.equal(fixture.calls.changed, 0)
+    }
+    finally {
+      fixture.unregister()
+    }
+  })
+}
+
+test('forgetting a deselected object prevents its old caret from returning when the same object is selected again', () => {
+  const fixture = makeEditor(documentFor([text('old caret')]), { from: 5 })
+  try {
+    rememberInlineEquationTarget(fixture.view)
+    fixture.current.focused = false
+    fixture.current.active = false
+    forgetInlineEquationTarget(fixture.view)
+    fixture.current.active = true
+    assert.equal(captureInlineEquationTarget(), undefined)
+  }
+  finally {
+    fixture.unregister()
+  }
+})
+
+test('forgetting another view does not erase the currently remembered object caret', () => {
+  const first = makeEditor(documentFor([text('first')]), { focused: false })
+  const second = makeEditor(documentFor([text('second')]), { from: 3 })
+  try {
+    rememberInlineEquationTarget(second.view)
+    second.current.focused = false
+    forgetInlineEquationTarget(first.view)
+    assert.equal(captureInlineEquationTarget().editor.view, second.view)
+  }
+  finally {
+    first.unregister(); second.unregister()
+  }
+})
+
+test('an inactive or composing editor cannot replace a remembered caret with a new capture', () => {
+  for (const state of ['inactive', 'composing']) {
+    const fixture = makeEditor(documentFor([text('new caret')]), { from: 4 })
+    try {
+      if (state === 'inactive') fixture.current.active = false
+      else fixture.view.composing = true
+      rememberInlineEquationTarget(fixture.view)
+      fixture.current.focused = false
+      assert.equal(captureInlineEquationTarget(), undefined)
+      assert.equal(fixture.calls.flush, 0)
+    }
+    finally {
+      fixture.unregister()
+    }
+  }
+})
+
+test('composition requests wait for the committed text and latest caret, and repeated requests open only once', async () => {
+  await withCustomEvent(async () => {
+    const fixture = makeEditor(documentFor([text('abcdef', marks)]), {
+      from: 3,
+      onBlur: view => {
+        setTimeout(() => {
+          view.dispatch(view.state.tr.insertText('中文'))
+          view.composing = false
+          view.dom.dispatchEvent(new Event('compositionend'))
+        }, 10)
+      },
+    })
+    try {
+      fixture.view.composing = true
+      assert.equal(requestInlineEquation(fixture.view), true)
+      assert.equal(requestInlineEquation(fixture.view), true)
+      assert.equal(fixture.calls.blur, 1)
+      assert.equal(fixture.calls.flush, 0, 'Do not capture the uncommitted composition document')
+      assert.equal(fixture.calls.events.length, 0)
+      await delay(5)
+      assert.equal(fixture.calls.events.length, 0)
+      await delay(75)
+      assert.equal(fixture.calls.events.length, 1)
+      assert.equal(fixture.calls.focus, 1)
+      const target = fixture.calls.events[0].detail.inlineTarget
+      assert.equal(target.document, fixture.view.state.doc)
+      assert.equal(target.document.textContent, 'ab中文cdef')
+      assert.equal(target.bookmark.resolve(target.document).from, 5)
+      applyInlineEquation(target, 'x')
+      assert.deepEqual(children(fixture.view.state.doc).map(node => node.isText ? node.text : node.attrs.latex), ['ab中文', 'x', 'cdef'])
+      assert.deepEqual(fixture.view.state.doc.nodeAt(5).marks, marks)
+    }
+    finally {
+      fixture.unregister()
+    }
+  })
+})
+
+for (const change of ['inactive', 'identity', 'locked', 'destroyed', 'detached', 'unregistered', 'forgotten']) {
+  test(`${change} cancels a waiting composition request without opening a formula or stealing focus`, async () => {
+    await withCustomEvent(async () => {
+      const fixture = makeEditor(documentFor([text('original')]), {
+        from: 4,
+        onBlur: view => {
+          view.composing = false
+          view.dom.dispatchEvent(new Event('compositionend'))
+        },
+      })
+      try {
+        fixture.view.composing = true
+        assert.equal(requestInlineEquation(fixture.view), true)
+        if (change === 'inactive') fixture.current.active = false
+        if (change === 'identity') fixture.current.identity = 'epoch-2:slide-2:text-1'
+        if (change === 'locked') fixture.current.editable = false
+        if (change === 'destroyed') fixture.view.isDestroyed = true
+        if (change === 'detached') fixture.view.dom.isConnected = false
+        if (change === 'unregistered') fixture.unregister()
+        if (change === 'forgotten') {
+          fixture.current.active = false
+          forgetInlineEquationTarget(fixture.view)
+          fixture.current.active = true
+        }
+        await delay(50)
+        assert.equal(fixture.calls.events.length, 0)
+        assert.equal(fixture.calls.focus, 0)
+        assert.equal(fixture.calls.changed, 0)
+        assert.equal(fixture.view.state.doc.textContent, 'original')
+      }
+      finally {
+        fixture.unregister()
+      }
+    })
+  })
+}
+
+test('the equation shortcut recognizes physical E with Mac dead keys and Chinese input, or a legacy key without code', () => {
+  const base = { code: 'KeyE', key: 'e', metaKey: true, ctrlKey: false, altKey: true }
+  for (const override of [{}, { key: 'Dead' }, { key: 'Process' }, { key: '´' }, { metaKey: false, ctrlKey: true }, { code: '', key: 'E' }]) {
+    assert.equal(isInlineEquationShortcut({ ...base, ...override }), true, JSON.stringify(override))
+  }
+  for (const override of [{ altKey: false }, { metaKey: false, ctrlKey: false }, { code: 'KeyF' }, { code: '', key: 'Dead' }]) {
+    assert.equal(isInlineEquationShortcut({ ...base, ...override }), false, JSON.stringify(override))
+  }
+})
+
+test('focusing another input area forgets a blurred caret and cancels a pending composition request', async () => {
+  for (const kind of ['input', 'textarea', 'select', 'contenteditable']) {
+    const fixture = makeEditor(documentFor([text('original')]), { from: 4 })
+    try {
+      rememberInlineEquationTarget(fixture.view)
+      fixture.current.focused = false
+      assert.equal(captureInlineEquationTarget().editor.view, fixture.view)
+      focusElement(fixture, kind)
+      assert.equal(captureInlineEquationTarget(), undefined, `Do not reuse a caret after focus enters another ${kind}`)
+    }
+    finally {
+      fixture.unregister()
+    }
+  }
+  await withCustomEvent(async () => {
+    const fixture = makeEditor(documentFor([text('original')]), {
+      onBlur: view => {
+        view.composing = false
+        view.dom.dispatchEvent(new Event('compositionend'))
+      },
+    })
+    try {
+      fixture.view.composing = true
+      assert.equal(requestInlineEquation(fixture.view), true)
+      focusElement(fixture, 'input')
+      await delay(50)
+      assert.equal(fixture.calls.events.length, 0)
+      assert.equal(fixture.calls.focus, 0)
+    }
+    finally {
+      fixture.unregister()
+    }
+  })
+})
+
+test('ordinary toolbar and same-editor focus preserve the caret, and unregister removes the document focus listener', async () => {
+  const fixture = makeEditor(documentFor([text('original')]), { from: 4 })
+  try {
+    assert.equal(fixture.calls.focusListeners.size, 1)
+    rememberInlineEquationTarget(fixture.view)
+    fixture.current.focused = false
+    focusElement(fixture, 'button')
+    assert.equal(captureInlineEquationTarget().editor.view, fixture.view)
+    focusElement(fixture, 'contenteditable', true)
+    assert.equal(captureInlineEquationTarget().editor.view, fixture.view)
+    fixture.unregister()
+    assert.equal(fixture.calls.focusListeners.size, 0)
+  }
+  finally {
+    fixture.unregister()
+  }
+  await withCustomEvent(async () => {
+    const pending = makeEditor(documentFor([text('original')]), {
+      onBlur: view => {
+        view.composing = false
+        view.dom.dispatchEvent(new Event('compositionend'))
+      },
+    })
+    try {
+      pending.view.composing = true
+      requestInlineEquation(pending.view)
+      focusElement(pending, 'button')
+      await delay(50)
+      assert.equal(pending.calls.events.length, 1, 'An ordinary toolbar button must not cancel the requested equation')
+    }
+    finally {
+      pending.unregister()
+      assert.equal(pending.calls.focusListeners.size, 0)
+    }
+  })
+})
+
+test('invalid composing editors reject requests before blurring or scheduling work', () => {
+  for (const invalid of ['destroyed', 'detached', 'locked']) {
+    const fixture = makeEditor(documentFor([text('original')]))
+    try {
+      fixture.view.composing = true
+      if (invalid === 'destroyed') fixture.view.isDestroyed = true
+      if (invalid === 'detached') fixture.view.dom.isConnected = false
+      if (invalid === 'locked') fixture.current.editable = false
+      assert.equal(requestInlineEquation(fixture.view), false)
+      assert.equal(fixture.calls.blur, 0)
+      assert.equal(fixture.calls.flush, 0)
+      assert.equal(fixture.calls.events.length, 0)
+    }
+    finally {
+      fixture.unregister()
+    }
   }
 })

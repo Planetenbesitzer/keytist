@@ -103,7 +103,7 @@
           <i-icon-park-outline:insert-table class="icon" /> <span class="text">{{ t("表格") }}</span>
         </div>
       </Popover>
-      <div class="insert-handler-item equation-tool" role="button" :aria-label="t('插入公式')" data-testid="insert-equation" v-tooltip="t('插入公式（⌥⌘E）')" @mousedown.prevent @click="openEquation()">
+      <div class="insert-handler-item equation-tool" role="button" tabindex="0" :aria-label="t('插入公式')" data-testid="insert-equation" v-tooltip="t('插入公式（⌥⌘E）')" @mousedown.prevent @click="openEquation()" @keydown.enter.prevent="openEquation()" @keydown.space.prevent="openEquation()">
         <i-icon-park-outline:formula class="icon" /> <span class="text">{{ t("公式") }}</span>
       </div>
       <Popover trigger="click" v-model:value="mediaInputVisible" :offset="10">
@@ -183,7 +183,7 @@ import type { ShapePoolItem } from '@/configs/shapes'
 import type { LinePoolItem } from '@/configs/lines'
 import type { PPTShapeElement } from '@/types/slides'
 import useScaleCanvas from '@/hooks/useScaleCanvas'
-import { applyInlineEquation, captureInlineEquationTarget, focusEquationEditor, isInlineEquationTarget, restoreInlineEquationTarget, type InlineEquationTarget } from '@/utils/prosemirror/inlineEquations'
+import { applyInlineEquation, focusEquationEditor, isInlineEquationTarget, requestInlineEquation, restoreInlineEquationTarget, type InlineEquationTarget } from '@/utils/prosemirror/inlineEquations'
 import { getSnapshotHistoryEpoch } from '@/store/snapshot'
 import type { LatexResult } from '@/utils/latex'
 import message from '@/utils/message'
@@ -258,7 +258,8 @@ const currentEquationIdentity = () => `${getSnapshotHistoryEpoch()}:${slidesStor
 const openEquation = (event?: Event) => {
   if (latexEditorVisible.value) return
   const requested = (event as CustomEvent | undefined)?.detail?.inlineTarget
-  const target = isInlineEquationTarget(requested) ? requested : captureInlineEquationTarget()
+  if (!isInlineEquationTarget(requested) && requestInlineEquation()) return
+  const target = isInlineEquationTarget(requested) ? requested : undefined
   inlineEquationTarget.value = target
   equationValue.value = target?.latex || ''
   equationRevision.value++

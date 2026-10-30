@@ -68,7 +68,12 @@ await studio.newDocument() // One blank slide with the local default theme.
 
 `studio.download()` immediately downloads the current JSON document.
 `await studio.save()` writes back to the native file opened in this session when
-the browser supports File System Access. With no opened native handle, the local
+the browser supports File System Access. Opening a JSON file uses its filename
+without `.json` as the document title, even if the JSON carries an older title.
+API `loadDocument` calls continue to use the supplied title. Native handles are
+kept in browser storage for reloads; if a previous handle cannot be restored,
+Save asks the user to choose the target again instead of switching files.
+With no opened native handle, the local
 Slide Studio server saves into its configured default output directory (normally
 `~/Documents/Code/SlidesStudio/output`) without a picker. The returned server
 result contains `fileName`, `path`, `fileKey`, and `revision`. Repeated saves and
@@ -100,8 +105,12 @@ No account or cloud document service is involved.
 ## Inline equations in native text
 
 While editing a text box or shape text, place the caret between words and use
-the toolbar's equation button or Option+Command+E (⌥⌘E). The equation stays in
-the text flow and follows the surrounding font size and color. Double-click it
+the toolbar's equation button, Option+Command+E (⌥⌘E) on Mac, or Ctrl+Alt+E.
+An active IME candidate is committed before the formula dialog opens. Moving
+focus to the toolbar retains the caret while the same unchanged text object
+is selected; selecting another object or slide discards that insertion point.
+The equation stays in the text flow and follows the surrounding font size and
+color. Double-click it
 to edit its LaTeX. Outside text editing, inserting an equation retains the
 existing independent vector-object behavior.
 

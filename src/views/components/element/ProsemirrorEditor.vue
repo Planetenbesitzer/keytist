@@ -16,7 +16,7 @@ import type { EditorView } from 'prosemirror-view'
 import { EditorState } from 'prosemirror-state'
 import { toggleMark, wrapIn, lift } from 'prosemirror-commands'
 import { initProsemirrorEditor, createDocument, getEmptyTextMarks, serializeDocument } from '@/utils/prosemirror'
-import { registerEquationEditor, requestInlineEquation } from '@/utils/prosemirror/inlineEquations'
+import { forgetInlineEquationTarget, isInlineEquationShortcut, registerEquationEditor, rememberInlineEquationTarget, requestInlineEquation } from '@/utils/prosemirror/inlineEquations'
 import { getSnapshotHistoryEpoch } from '@/store/snapshot'
 import { isActiveOfParentNodeType, findNodesWithSameMark, getTextAttrs, autoSelectAll, addMark, markActive, getFontsize } from '@/utils/prosemirror/utils'
 import emitter, { EmitterEvents, type RichTextAction, type RichTextCommand } from '@/utils/emitter'
@@ -88,6 +88,7 @@ const handleFocus = () => {
 const handleBlur = () => {
   handleInput()
   handleInput.flush()
+  rememberInlineEquationTarget(editorView)
   mainStore.setDisableHotkeysState(false)
   emit('blur')
 }
@@ -101,7 +102,7 @@ const handleClick = debounce(function() {
 }, 30, { trailing: true })
 
 const handleKeydown = (editorView: EditorView, e: KeyboardEvent) => {
-  if ((e.metaKey || e.ctrlKey) && e.altKey && e.code === 'KeyE' && !e.isComposing && props.editable) {
+  if (isInlineEquationShortcut(e) && props.editable) {
     e.preventDefault()
     e.stopPropagation()
     return requestInlineEquation(editorView)
@@ -148,6 +149,11 @@ watch(() => [props.value, slidesStore.currentSlide, getSnapshotHistoryEpoch()] a
   }
   if (editorView.hasFocus()) return
 
+  // Blur flushes pending edits back through Vue while a font/color control owns
+  // focus. Do not reparse that echo: HTML parsing can normalize typed spaces,
+  // making the document look different and replacing it would erase the range.
+  if (textContent.value.replace(/ style=\"\"/g, '') === serializeDocument(editorView).replace(/ style=\"\"/g, '')) return
+
   const { doc, tr } = editorView.state
   const nextDocument = createDocument(textContent.value)
   // The formula modal briefly owns focus while its transaction is echoed back
@@ -166,6 +172,10 @@ watch(() => [props.value, slidesStore.currentSlide, getSnapshotHistoryEpoch()] a
 // 打开/关闭编辑器的编辑模式
 watch(() => props.editable, () => {
   editorView.setProps({ editable: () => props.editable })
+})
+
+watch(handleElementId, id => {
+  if (editorView && id !== props.elementId) forgetInlineEquationTarget(editorView)
 })
 
 // 暴露 focus 方法
@@ -367,6 +377,7 @@ onMounted(() => {
   unregisterEquationEditor = registerEquationEditor({
     view: editorView,
     identity: () => `${contentEpoch}:${contentSlideId}:${props.elementId}`,
+    active: () => handleElementId.value === props.elementId,
     editable: () => props.editable && isCurrentContent() && !!slidesStore.currentSlide?.elements.some(element => element.id === props.elementId && !element.lock),
     flush: () => {
       handleInput(); handleInput.flush()

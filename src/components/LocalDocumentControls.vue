@@ -10,7 +10,8 @@
       <i-icon-park-outline:save /> <span>{{ t("保存") }}</span>
     </button>
     <button type="button" class="document-button save-as" :title="t('另存为 JSON 文件（⇧⌘S / Ctrl+Shift+S）')" @click="save(true)">{{ t("另存为") }}</button>
-    <input ref="fileInput" type="file" accept=".json,application/json" hidden @change="readFile" />
+    <!-- Let document validation decide; macOS type filters can disable valid JSON files. -->
+    <input ref="fileInput" type="file" hidden @change="readFile" />
   </div>
 </template>
 
@@ -25,11 +26,11 @@ import message from '@/utils/message'
 
 const fileInput = ref<HTMLInputElement>()
 const statusText = computed(() => state.error ? '保存异常' : (state.pending || state.saving) ? '正在保存…' : '已存于此设备')
-const saveTitle = computed(() => state.nativeFileBound ? t('保存原文件：{0}（⌘S / Ctrl+S）', { 0: state.fileName }) : t('保存到{0}（⌘S / Ctrl+S）', { 0: state.filePath || state.outputDirectory || t('本地 JSON 文件') }))
+const saveTitle = computed(() => state.needsSaveTarget ? t('重新选择保存位置：{0}（⌘S / Ctrl+S）', { 0: state.fileName }) : state.nativeFileBound ? t('保存原文件：{0}（⌘S / Ctrl+S）', { 0: state.fileName }) : t('保存到{0}（⌘S / Ctrl+S）', { 0: state.filePath || state.outputDirectory || t('本地 JSON 文件') }))
 const statusTitle = computed(() => {
   if (state.error) return state.error
   const saved = state.lastSavedAt ? new Date(state.lastSavedAt).toLocaleTimeString() : ''
-  const destination = state.nativeFileBound ? t('当前文件：{0}，保存将写回原文件。', { 0: state.fileName }) : state.filePath ? t('最近保存的文件：{0}。', { 0: state.filePath }) : state.outputDirectory ? t('默认文件目录：{0}。', { 0: state.outputDirectory }) : ''
+  const destination = state.needsSaveTarget ? t('保存前需要重新选择文件：{0}。', { 0: state.fileName }) : state.nativeFileBound ? t('当前文件：{0}，保存将写回原文件。', { 0: state.fileName }) : state.filePath ? t('最近保存的文件：{0}。', { 0: state.filePath }) : state.outputDirectory ? t('默认文件目录：{0}。', { 0: state.outputDirectory }) : ''
   return t('文稿与嵌入图片、字体自动保存在此浏览器。{0}{1}使用“保存”写入 JSON 文件。{2}', { 0: saved ? t('最近自动保存 {0}。', { 0: saved }) : '', 1: destination, 2: state.fileName && !state.filePath && !state.nativeFileBound ? t('当前文件：{0}', { 0: state.fileName }) : '' })
 })
 const showError = (error: unknown) => {

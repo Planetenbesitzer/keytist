@@ -150,7 +150,7 @@ export default () => {
       enterScreening()
       return
     }
-    if (ctrlOrMetaKeyActive && altKey && key === 'E' && !disableHotkeys.value) {
+    if (ctrlOrMetaKeyActive && altKey && key === 'E' && !inField && !disableHotkeys.value) {
       e.preventDefault()
       window.dispatchEvent(new Event('keynote-local:insert-equation'))
       return
