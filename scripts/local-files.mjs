@@ -1,6 +1,6 @@
 /* eslint-env node, es2021 */
 import fs from 'node:fs/promises'
-import { constants } from 'node:fs'
+import { constants, existsSync } from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import crypto from 'node:crypto'
@@ -22,6 +22,15 @@ const equalSecret = (actual, expected) => {
   return received.length === trusted.length && crypto.timingSafeEqual(received, trusted)
 }
 const sameFile = (a, b) => a.dev === b.dev && a.ino === b.ino && a.size === b.size && a.mtimeNs === b.mtimeNs && a.ctimeNs === b.ctimeNs
+
+export function resolveLocalFileDirectories({ outputDirectory, settingsDirectory, home = os.homedir(), env = process.env, exists = existsSync } = {}) {
+  const legacyOutput = path.join(home, 'Documents', 'Code', 'SlidesStudio', 'output')
+  const legacySettings = path.join(home, 'Library', 'Application Support', 'Slide Studio')
+  return {
+    outputDirectory: path.resolve(outputDirectory || env.STUDIO_OUTPUT_DIR || (exists(legacyOutput) ? legacyOutput : path.join(home, 'Documents', 'Code', 'Keytist', 'output'))),
+    settingsDirectory: path.resolve(settingsDirectory || env.STUDIO_SETTINGS_DIR || (exists(legacySettings) ? legacySettings : path.join(home, 'Library', 'Application Support', 'Keytist'))),
+  }
+}
 
 export function validateFileName(value) {
   if (typeof value !== 'string' || !value.trim() || value === '.' || value === '..' || value.includes('/') || value.includes('\\') || [...value].some(char => char.codePointAt(0) < 32 || char.codePointAt(0) === 127) || Buffer.byteLength(value) > 240 || path.basename(value) !== value) {
@@ -47,7 +56,7 @@ async function durableSecret(settingsDirectory) {
     const existing = await fs.open(filename, constants.O_RDONLY | constants.O_NOFOLLOW)
     try {
       const stat = await existing.stat()
-      if (!stat.isFile() || stat.size !== 32) throw new Error('本地保存密钥无效，请检查 Slide Studio 设置目录。')
+      if (!stat.isFile() || stat.size !== 32) throw new Error('本地保存密钥无效，请检查 Keytist 设置目录。')
       await existing.chmod(0o600)
       return await existing.readFile()
     }
@@ -61,8 +70,7 @@ async function durableSecret(settingsDirectory) {
 }
 
 export async function createLocalFileStore(options = {}) {
-  const configuredDirectory = path.resolve(options.outputDirectory || process.env.STUDIO_OUTPUT_DIR || path.join(os.homedir(), 'Documents', 'Code', 'SlidesStudio', 'output'))
-  const settingsDirectory = path.resolve(options.settingsDirectory || process.env.STUDIO_SETTINGS_DIR || path.join(os.homedir(), 'Library', 'Application Support', 'Slide Studio'))
+  const { outputDirectory: configuredDirectory, settingsDirectory } = resolveLocalFileDirectories(options)
   const maxBytes = options.maxBytes || MAX_FILE_BYTES
   await fs.mkdir(configuredDirectory, { recursive: true, mode: 0o700 })
   const outputDirectory = await fs.realpath(configuredDirectory)

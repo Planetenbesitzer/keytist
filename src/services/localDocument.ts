@@ -419,7 +419,7 @@ const writeLocalDocumentFile = async (options: { saveAs?: boolean }, nativeSelec
     if (pickerWindow.showSaveFilePicker) {
       target = await pickerWindow.showSaveFilePicker({
         suggestedName,
-        types: [{ description: 'Keynote Local 文稿', accept: { 'application/json': ['.json'] } }],
+        types: [{ description: 'Keytist 文稿', accept: { 'application/json': ['.json'] } }],
       })
       expectedRevision = await getNativeFileRevision(await target.getFile())
     }
@@ -464,7 +464,7 @@ export const saveLocalDocumentFile = (options: { saveAs?: boolean } = {}) => {
   // Save As must start its picker inside the click gesture, before queueing.
   const nativeSelection = (options.saveAs || localDocumentState.needsSaveTarget) && pickerWindow.showSaveFilePicker ? pickerWindow.showSaveFilePicker({
     suggestedName: options.saveAs ? documentFilename() : localDocumentState.fileName || documentFilename(),
-    types: [{ description: 'Keynote Local 文稿', accept: { 'application/json': ['.json'] } }],
+    types: [{ description: 'Keytist 文稿', accept: { 'application/json': ['.json'] } }],
   }).then(async handle => ({ handle, revision: await getNativeFileRevision(await handle.getFile()) })) : undefined
   void nativeSelection?.catch(() => undefined)
   return enqueueDocumentOperation(() => {

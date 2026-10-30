@@ -1,6 +1,6 @@
 # Third-party notices
 
-Slide Studio is a locally modified version of [PPTist](https://github.com/pipipi-pikachu/PPTist). The application source is distributed under the GNU Affero General Public License, version 3. The full license is in `../LICENSE`; the upstream author and project notices are retained in `README.upstream.md` and `../README_zh.md`. The third-party components below retain their own licenses.
+Keytist is a locally modified version of [PPTist](https://github.com/pipipi-pikachu/PPTist). The application source is distributed under the GNU Affero General Public License, version 3. The full license is in `../LICENSE`; the upstream author and project notices are retained in `README.upstream.md` and `../README_zh.md`. The third-party components below retain their own licenses.
 
 ## Fonts
 
@@ -34,12 +34,12 @@ The share package contains **19 bundled fonts**. It omits the Alibaba PuHuiTi an
 
 For the original installation that retains MiSans: this software uses MiSans fonts. Copyright © 2020–2023 Beijing Xiaomi Mobile Software Co., Ltd. All Rights Reserved. The official MiSans agreement is retained in full; this notice does not grant any additional font rights.
 
-The preferred font menu names **Helvetica Neue, Times New Roman, Apple Chancery and Arial** refer only to locally installed fonts on the recipient's computer. Their proprietary font binaries are not bundled or relicensed by Slide Studio. Availability and appearance depend on that computer's installed fonts. Fonts imported by a document's author are separate document assets and must be used under their own terms.
+The preferred font menu names **Helvetica Neue, Times New Roman, Apple Chancery and Arial** refer only to locally installed fonts on the recipient's computer. Their proprietary font binaries are not bundled or relicensed by Keytist. Availability and appearance depend on that computer's installed fonts. Fonts imported by a document's author are separate document assets and must be used under their own terms.
 
 Where a current upstream license file has a newer copyright range or additional names, the original embedded notices above remain in the metadata inventory. The downloaded license files are preserved as received; they do not change the recorded version of the local font binary. Download URLs, dates and checksums are recorded in [sources.json](third-party/fonts/sources.json).
 
 ## JavaScript and other dependencies
 
-The package manifest and lockfile identify the software dependencies. Their own copyright notices and license texts are supplied with the share package under its third-party license directory. These dependencies are not relicensed merely by inclusion with Slide Studio. Preserve the supplied notices when redistributing the package.
+The package manifest and lockfile identify the software dependencies. Their own copyright notices and license texts are supplied with the share package under its third-party license directory. These dependencies are not relicensed merely by inclusion with Keytist. Preserve the supplied notices when redistributing the package.
 
-Slide Studio is an independent project and is not an Apple Keynote product or endorsed by the font publishers named above.
+Keytist is an independent project and is not an Apple Keynote product or endorsed by the font publishers named above.

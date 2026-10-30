@@ -12,9 +12,9 @@ const run = promisify(execFile)
 const root = fileURLToPath(new URL('../', import.meta.url))
 const { version } = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'))
 if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error('Invalid release version in package.json.')
-const archive = path.resolve(process.argv[2] || path.join(os.homedir(), `Documents/Code/SlidesStudio/Slide-Studio-${version}-share.zip`))
-const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'slide-studio-package-'))
-const bundle = path.join(temporary, 'Slide-Studio')
+const archive = path.resolve(process.argv[2] || process.env.SHARE_OUTPUT || path.join(root, `releases/Keytist-${version}-share.zip`))
+const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'keytist-package-'))
+const bundle = path.join(temporary, 'Keytist')
 const partial = `${archive}.partial.zip`
 let ownsPartial = false
 const exists = async file => {
@@ -119,7 +119,7 @@ async function manifest(directory, relative = '') {
 
 async function zipBundle() {
   const zip = new JSZip()
-  async function add(directory, relative = 'Slide-Studio') {
+  async function add(directory, relative = 'Keytist') {
     for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
       const file = path.join(directory, entry.name), name = path.posix.join(relative, entry.name)
       if (entry.isDirectory()) await add(file, name)
@@ -142,11 +142,11 @@ try {
   for (const name of ['src', 'public', 'dist', 'doc', 'scripts']) {
     await fs.cp(path.join(root, name), path.join(bundle, name), { recursive: true, filter: file => !ignored.has(path.basename(file)) && !file.endsWith('.tsbuildinfo') })
   }
-  const files = ['AGENTS.md', 'LICENSE', 'README.md', 'README_zh.md', '开始使用.md', 'package.json', 'package-lock.json', 'index.html', 'env.d.ts', 'vite.config.ts', 'tsconfig.app.json', 'tsconfig.json', 'tsconfig.node.json', 'components.d.ts', '.gitignore', '.eslintrc.cjs', 'commitlint.config.cjs', '启动 Slide Studio.command', '安装到应用程序.command', 'Start Slide Studio.bat', 'start-slides-studio.sh']
+  const files = ['AGENTS.md', 'LICENSE', 'README.md', 'README_zh.md', '开始使用.md', 'package.json', 'package-lock.json', 'index.html', 'env.d.ts', 'vite.config.ts', 'tsconfig.app.json', 'tsconfig.json', 'tsconfig.node.json', 'components.d.ts', '.gitignore', '.eslintrc.cjs', 'commitlint.config.cjs', '启动 Keytist.command', '安装到应用程序.command', 'Start Keytist.bat', 'start-keytist.sh']
   for (const name of files) await fs.copyFile(path.join(root, name), path.join(bundle, name))
   await fs.mkdir(path.join(bundle, 'examples'))
   for (const name of ['我的第一份演示.json', 'HTML演示示例.html']) await fs.copyFile(path.join(root, 'examples', name), path.join(bundle, 'examples', name))
-  for (const name of ['启动 Slide Studio.command', '安装到应用程序.command', 'start-slides-studio.sh', 'scripts/install-macos-app.sh']) await fs.chmod(path.join(bundle, name), 0o755)
+  for (const name of ['启动 Keytist.command', '安装到应用程序.command', 'start-keytist.sh', 'scripts/install-macos-app.sh']) await fs.chmod(path.join(bundle, name), 0o755)
   await buildShareVariant()
   const dependencyCount = await dependencyLicenses()
   const entries = await manifest(bundle)

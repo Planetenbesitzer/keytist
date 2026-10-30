@@ -1,5 +1,5 @@
 {
-  "name": "slide-studio-local",
+  "name": "keytist",
   "version": "2.5.0",
   "private": true,
   "type": "module",
@@ -15,7 +15,7 @@
     "start:open": "node scripts/serve.mjs --open"
   },
   "author": "pipipi_pikachu@163.com",
-  "homepage": "https://github.com/pipipi-pikachu/PPTist",
+  "homepage": "https://github.com/Planetenbesitzer/keytist",
   "dependencies": {
     "animate.css": "^4.1.1",
     "axios": "^1.7.9",

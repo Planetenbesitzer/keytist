@@ -28,10 +28,10 @@ export const preloadOutputConfiguration = (): Promise<LocalOutputConfig | null> 
       return null
     }
     if (response.status === 404 || !response.headers.get('content-type')?.includes('application/json')) return null
-    if (!response.ok) throw new Error('无法读取本地保存目录，请重新启动 Slide Studio。')
+    if (!response.ok) throw new Error('无法读取本地保存目录，请重新启动 Keytist。')
     const config = await response.json()
     if (config.version !== 1 || typeof config.outputDirectory !== 'string' || typeof config.token !== 'string') {
-      throw new Error('本地保存服务版本不匹配，请重新启动 Slide Studio。')
+      throw new Error('本地保存服务版本不匹配，请重新启动 Keytist。')
     }
     return config as LocalOutputConfig
   })()

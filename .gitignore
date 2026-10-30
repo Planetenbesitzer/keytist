@@ -35,6 +35,7 @@ coverage
 /output/
 /verification/
 /verification.html
+/releases/
 
 # Machine-specific maintenance records and private recovery material.
 /.local-maintenance/

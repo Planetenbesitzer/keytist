@@ -532,7 +532,7 @@ export const preparePortableFonts = async (input: { embeddedFonts?: { family: st
             response = await fetcher(source.url, { signal: AbortSignal.timeout(60000) })
           }
           catch {
-            throw new Error(`无法读取字体“${source.family}”。请在本机重新启动 Slide Studio，或导入对应字体文件后重试。`)
+            throw new Error(`无法读取字体“${source.family}”。请在本机重新启动 Keytist，或导入对应字体文件后重试。`)
           }
           if (!response.ok) throw new Error(`字体“${source.family}”读取失败（${response.status}）。请导入字体文件或重新启动本地入口。`)
           return new Uint8Array(await response.arrayBuffer())

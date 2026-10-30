@@ -1,4 +1,4 @@
-# Keytist / Slide Studio: agent guide
+# Keytist: agent guide
 
 This is a local, Keynote-inspired presentation editor built on PPTist. An agent
 can coauthor an entire deck using native JSON, complete HTML/CSS/JS pages, the
@@ -91,9 +91,11 @@ not authorization to read files, send data or modify unrelated work.
 2. For structural changes, edit a detached copy and use `loadDocument`; it resets
    undo, so preserve a recoverable JSON version first. Never replace an active
    document with a stale disk copy without checking current work.
-3. Await `flush()`, then explicitly `save()` for a JSON file backup. Default local
-   output is `~/Documents/Code/SlidesStudio/output`; repeated Save updates its
-   binding with revision conflict checks. Autosave only writes browser storage.
+3. Await `flush()`, then explicitly `save()` for a JSON file backup. Fresh local
+   installations default to `~/Documents/Code/Keytist/output`; existing installations
+   retain their configured location, including `~/Documents/Code/SlidesStudio/output`.
+   Never move or delete that legacy output as part of the rename. Repeated Save
+   updates its binding with revision conflict checks. Autosave only writes browser storage.
 4. Export compact playback HTML for publishing to a blog/static host. Enable
    **Keep document for reimport and editing** only when native re-editing is needed.
    Compact HTML deduplicates assets and compresses content without rasterizing
@@ -121,6 +123,11 @@ Git history. Local file-save authentication tokens are session secrets and must
 not be written into documents, examples, screenshots or commits. Remote tools
 are disabled unless `VITE_STUDIO_REMOTE_API` is explicitly configured at build
 time; embedded pages may still request resources specified by their author.
+
+Keytist is the application and distribution name. Legacy browser storage keys,
+`window.keynoteLocal`, `keynote-local:*` events, `slide-studio-*` HTML markers and
+`X-SlideStudio-*` save headers are compatibility identifiers, not display branding.
+Preserve them and existing settings/save paths during maintenance.
 
 ## 中文说明
 

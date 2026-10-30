@@ -1,5 +1,5 @@
 #!/bin/zsh
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit 1
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 if ! command -v node >/dev/null 2>&1; then
   print '需要 Node.js 20 或更新版本。安装后重新打开此文件。'

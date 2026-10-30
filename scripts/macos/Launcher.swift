@@ -44,21 +44,21 @@ func serverState(at url: URL) -> ServerState {
     }
     guard let response = result.response else { return .unavailable }
     let html = String(data: result.data ?? Data(), encoding: .utf8) ?? ""
-    return response.statusCode == 200 && html.contains("<title>Slide Studio") ? .ready : .occupied
+    return response.statusCode == 200 && isEditorPage(html) ? .ready : .occupied
 }
 
 func readConfiguration() throws -> LauncherConfiguration {
     guard let resource = Bundle.main.resourceURL?.appendingPathComponent("launcher.json") else {
-        throw LauncherError.message("启动器配置缺失，请重新安装 Slide Studio。")
+        throw LauncherError.message("启动器配置缺失，请重新安装 Keytist。")
     }
     let config = try JSONDecoder().decode(LauncherConfiguration.self, from: Data(contentsOf: resource))
     let manager = FileManager.default
     guard manager.isExecutableFile(atPath: config.nodePath) else {
-        throw LauncherError.message("本机运行程序的位置已变化，请重新运行 Slide Studio 安装脚本。")
+        throw LauncherError.message("本机运行程序的位置已变化，请重新运行 Keytist 安装脚本。")
     }
     guard manager.fileExists(atPath: config.repositoryPath + "/scripts/serve.mjs"),
           manager.fileExists(atPath: config.repositoryPath + "/dist/index.html") else {
-        throw LauncherError.message("未找到 Slide Studio 文件。若移动了项目，请在新位置重新运行安装脚本。")
+        throw LauncherError.message("未找到 Keytist 文件。若移动了项目，请在新位置重新运行安装脚本。")
     }
     return config
 }
@@ -77,8 +77,9 @@ func appendLog(_ text: String, to url: URL) {
 
 func ensureServer(_ config: LauncherConfiguration, url: URL) throws {
     let manager = FileManager.default
-    let support = manager.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support/Slide Studio", isDirectory: true)
-    let logs = manager.homeDirectoryForCurrentUser.appendingPathComponent("Library/Logs/Slide Studio", isDirectory: true)
+    let directories = launcherDirectories(home: manager.homeDirectoryForCurrentUser)
+    let support = directories.support
+    let logs = directories.logs
     try manager.createDirectory(at: support, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
     try manager.createDirectory(at: logs, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
     try manager.createDirectory(atPath: config.defaultOutputDirectory, withIntermediateDirectories: true)
@@ -116,6 +117,9 @@ func ensureServer(_ config: LauncherConfiguration, url: URL) throws {
     var environment = ProcessInfo.processInfo.environment
     environment["STUDIO_PORT"] = "4178"
     environment["STUDIO_OUTPUT_DIR"] = config.defaultOutputDirectory
+    if environment["STUDIO_SETTINGS_DIR"]?.isEmpty ?? true {
+        environment["STUDIO_SETTINGS_DIR"] = support.path
+    }
     process.environment = environment
     process.standardInput = FileHandle.nullDevice
     process.standardOutput = output
@@ -131,43 +135,48 @@ func ensureServer(_ config: LauncherConfiguration, url: URL) throws {
         case .unavailable: break
         }
         if !process.isRunning {
-            throw LauncherError.message("Slide Studio 未能启动。请查看用户资源库中 Logs/Slide Studio/server.log。")
+            throw LauncherError.message("Keytist 未能启动。请查看日志：\(serverLog.path)。")
         }
         Thread.sleep(forTimeInterval: 0.2)
     } while Date() < deadline
-    throw LauncherError.message("Slide Studio 启动超时，请稍后重新打开。")
+    throw LauncherError.message("Keytist 启动超时，请稍后重新打开。")
 }
 
-let arguments = Set(CommandLine.arguments.dropFirst())
-do {
-    let config = try readConfiguration()
-    guard let url = URL(string: config.localURL), url.absoluteString == "http://127.0.0.1:4178" else {
-        throw LauncherError.message("本地地址配置无效，请重新安装 Slide Studio。")
-    }
-    if arguments.contains("--check") {
-        let result: [String: Any] = ["application": Bundle.main.bundlePath, "node": config.nodePath, "repository": config.repositoryPath, "url": config.localURL, "defaultOutputDirectory": config.defaultOutputDirectory, "server": serverState(at: url).rawValue]
-        let data = try JSONSerialization.data(withJSONObject: result, options: [.prettyPrinted, .sortedKeys])
-        FileHandle.standardOutput.write(data)
-        FileHandle.standardOutput.write(Data("\n".utf8))
-    } else {
-        try ensureServer(config, url: url)
-        if !arguments.contains("--no-open") {
-            guard NSWorkspace.shared.open(url) else { throw LauncherError.message("无法打开默认浏览器，请在浏览器访问 http://127.0.0.1:4178。") }
-            let log = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Logs/Slide Studio/launcher.log")
-            appendLog("Opened default browser at \(config.localURL)", to: log)
+@main
+enum KeytistLauncher {
+    static func main() {
+        let arguments = Set(CommandLine.arguments.dropFirst())
+        do {
+            let config = try readConfiguration()
+            guard let url = URL(string: config.localURL), url.absoluteString == "http://127.0.0.1:4178" else {
+                throw LauncherError.message("本地地址配置无效，请重新安装 Keytist。")
+            }
+            if arguments.contains("--check") {
+                let result: [String: Any] = ["application": Bundle.main.bundlePath, "node": config.nodePath, "repository": config.repositoryPath, "url": config.localURL, "defaultOutputDirectory": config.defaultOutputDirectory, "server": serverState(at: url).rawValue]
+                let data = try JSONSerialization.data(withJSONObject: result, options: [.prettyPrinted, .sortedKeys])
+                FileHandle.standardOutput.write(data)
+                FileHandle.standardOutput.write(Data("\n".utf8))
+            } else {
+                try ensureServer(config, url: url)
+                if !arguments.contains("--no-open") {
+                    guard NSWorkspace.shared.open(url) else { throw LauncherError.message("无法打开默认浏览器，请在浏览器访问 http://127.0.0.1:4178。") }
+                    let log = launcherDirectories(home: FileManager.default.homeDirectoryForCurrentUser).logs.appendingPathComponent("launcher.log")
+                    appendLog("Opened default browser at \(config.localURL)", to: log)
+                }
+            }
+        } catch {
+            let text = error.localizedDescription
+            FileHandle.standardError.write(Data((text + "\n").utf8))
+            if !arguments.contains("--check") && !arguments.contains("--no-open") {
+                NSApplication.shared.setActivationPolicy(.accessory)
+                NSApplication.shared.activate(ignoringOtherApps: true)
+                let alert = NSAlert()
+                alert.messageText = "无法启动 Keytist"
+                alert.informativeText = text
+                alert.addButton(withTitle: "好")
+                alert.runModal()
+            }
+            exit(1)
         }
     }
-} catch {
-    let text = error.localizedDescription
-    FileHandle.standardError.write(Data((text + "\n").utf8))
-    if !arguments.contains("--check") && !arguments.contains("--no-open") {
-        NSApplication.shared.setActivationPolicy(.accessory)
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        let alert = NSAlert()
-        alert.messageText = "无法启动 Slide Studio"
-        alert.informativeText = text
-        alert.addButton(withTitle: "好")
-        alert.runModal()
-    }
-    exit(1)
 }

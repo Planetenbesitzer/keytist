@@ -1,4 +1,4 @@
-# Keytist · Slide Studio
+# Keytist
 
 English | [简体中文](README_zh.md)
 
@@ -6,7 +6,7 @@ English | [简体中文](README_zh.md)
 
 A local presentation editor built on [PPTist](https://github.com/pipipi-pikachu/PPTist), with a Keynote-inspired interface and a workflow for scientific talks and the web.
 
-Create slides with editable text, images, shapes and LaTeX. Add a complete HTML/CSS/JavaScript page when a static figure is not enough, then export the presentation as a compact HTML file for a talk, a website or your blog. The application is called **Slide Studio**; this repository is **keytist**.
+Create slides with editable text, images, shapes and LaTeX. Add a complete HTML/CSS/JavaScript page when a static figure is not enough, then export the presentation as a compact HTML file for a talk, a website or your blog.
 
 ## What makes it useful
 
@@ -36,17 +36,19 @@ If you downloaded a release ZIP containing `dist/`, extract the complete archive
 
 | Platform | Launcher |
 | --- | --- |
-| macOS | `启动 Slide Studio.command` |
-| Windows | `Start Slide Studio.bat` |
-| Linux | `sh start-slides-studio.sh` |
+| macOS | `启动 Keytist.command` |
+| Windows | `Start Keytist.bat` |
+| Linux | `sh start-keytist.sh` |
 
-On macOS, `安装到应用程序.command` optionally installs a Slide Studio launcher in Applications. That installation needs Apple Command Line Tools; normal startup does not. Keep the extracted project folder, and reinstall the launcher if you move it. Windows and Linux launchers are provided; release verification has been performed on macOS.
+On macOS, `安装到应用程序.command` optionally installs **Keytist.app** in Applications. That installation needs Apple Command Line Tools; normal startup does not. Keep the extracted project folder, and reinstall the launcher if you move it. Windows and Linux launchers are provided; release verification has been performed on macOS.
 
 ## Make and save a presentation
 
 Use the toolbar to insert text, images, shapes, tables, charts or equations. Double-click text or an equation to edit it. To insert an inline equation, place the caret inside text and choose **Equation**. Use the HTML button to import a page or edit the source of the current webpage slide. The included `examples/我的第一份演示.json` and `examples/HTML演示示例.html` are generic examples.
 
-Browser autosave and a saved document file are separate. **Save** or **⌘S / Ctrl+S** writes an editable JSON document; new documents default to `~/Documents/Code/SlidesStudio/output`. A bound file is updated on subsequent saves, while an unrelated new document with the same name gets a numbered filename. **Save As** lets you choose another location. External changes are reported as conflicts instead of being silently overwritten.
+Browser autosave and a saved document file are separate. **Save** or **⌘S / Ctrl+S** writes an editable JSON document; a fresh installation defaults to `~/Documents/Code/Keytist/output`. Existing installations retain their configured save location, including the legacy `~/Documents/Code/SlidesStudio/output` folder; the rename does not move documents. A bound file is updated on subsequent saves, while an unrelated new document with the same name gets a numbered filename. **Save As** lets you choose another location. External changes are reported as conflicts instead of being silently overwritten.
+
+On macOS, fresh installations keep settings and logs under `~/Library/Application Support/Keytist` and `~/Library/Logs/Keytist`. Upgrading an existing installation reuses its settings, save credential and paths, so older directory names may remain. Browser storage and agent API identifiers also remain compatible with existing documents and preferences.
 
 Save a JSON copy before changing computers, clearing browser storage or moving to another browser address. Custom styles, favorite colors, interface language and sidebar preferences belong to the current browser; their applied appearance remains part of the saved slides. The default output folder is for JSON documents; HTML, PDF, PPTX and image exports use the browser's download or print flow.
 
@@ -73,7 +75,7 @@ Upload the exported file, for example `talk.html`, to the static files directory
 ></iframe>
 ```
 
-The host must permit HTML uploads and iframe embeds. The exported file includes its viewer; the Slide Studio editor and Node.js are not needed on the viewing device. A modern browser with support for the bundled decompression workflow is required.
+The host must permit HTML uploads and iframe embeds. The exported file includes its viewer; the Keytist editor and Node.js are not needed on the viewing device. A modern browser with support for the bundled decompression workflow is required.
 
 **Offline playback depends on the imported content.** Native slide assets and the automatically collected fonts are included. External scripts, media and other URLs inside an imported webpage still need their original network or file locations unless that webpage already embeds them. Use self-contained HTML/CSS/JS and embedded assets for a fully offline interactive talk.
 
@@ -92,7 +94,7 @@ Packaged English fonts stabilize glyphs and line wrapping; browsers may still di
 | JSON | Editable source, including LaTeX, images and imported fonts. |
 | HTML | Playback and web publishing, including embedded interactive pages. Optional native editing data. |
 | PPTX | A static version. Embedded webpages and their interaction are omitted; native text, images, shapes and equations remain in slide order. A webpage-only slide keeps its background, numbering and blank space. The export dialog reports omitted content. |
-| PDF / images | Static output. For a deck containing embedded webpages, export HTML and use its **Print** control for PDF. |
+| PDF / images | Static output. PDF can freeze several interactive states in a separate preview and download them as a high-resolution image PDF. Native-only documents retain the print option. |
 
 PPTX is an interchange format and may differ from the editor. In standard mode, ordinary text and images remain separate objects. Text containing inline math is rendered as a high-resolution transparent image to preserve formula alignment; its editable LaTeX source remains in the JSON/optional editable HTML. PPTX exports never execute embedded webpage JavaScript.
 
@@ -128,6 +130,6 @@ The badge and chart update automatically; caching may delay the displayed counts
 
 ## License and attribution
 
-Keytist / Slide Studio is a modified version of **[PPTist](https://github.com/pipipi-pikachu/PPTist)** by **[pipipi-pikachu](https://github.com/pipipi-pikachu)**. It retains the **GNU Affero General Public License v3.0**; see [LICENSE](LICENSE). The [original upstream README](doc/README.upstream.md), including the original author's public contact and project notices, is retained.
+Keytist is a modified version of **[PPTist](https://github.com/pipipi-pikachu/PPTist)** by **[pipipi-pikachu](https://github.com/pipipi-pikachu)**. It retains the **GNU Affero General Public License v3.0**; see [LICENSE](LICENSE). The [original upstream README](doc/README.upstream.md), including the original author's public contact and project notices, is retained.
 
 Fonts and dependencies retain their own licenses. See [third-party notices](doc/THIRD_PARTY_NOTICES.md) and the accompanying license files. Public distributions exclude the two upstream converted font binaries whose redistribution provenance was not established; system font files and private documents are not distributed. This project is independent of Apple and is not an Apple Keynote product.

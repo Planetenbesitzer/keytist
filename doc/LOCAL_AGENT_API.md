@@ -24,7 +24,12 @@ editing, and saving a native document.
 
 ## Browser API
 
-Wait for `window.keynoteLocal` or the `keynote-local:ready` event. API version 1.0:
+Wait for `window.keynoteLocal` or the `keynote-local:ready` event. API version is 1.0.
+
+These API names, browser storage keys, `slide-studio-*` export markers and
+`X-SlideStudio-*` local-save headers are retained compatibility identifiers.
+The application and release are named Keytist; do not rename these identifiers
+when using or extending the existing format.
 
 ```js
 const studio = window.keynoteLocal
@@ -74,8 +79,11 @@ API `loadDocument` calls continue to use the supplied title. Native handles are
 kept in browser storage for reloads; if a previous handle cannot be restored,
 Save asks the user to choose the target again instead of switching files.
 With no opened native handle, the local
-Slide Studio server saves into its configured default output directory (normally
-`~/Documents/Code/SlidesStudio/output`) without a picker. The returned server
+Keytist server saves into its configured default output directory without a
+picker. Fresh installations use `~/Documents/Code/Keytist/output`; existing
+installations keep their original path, including the legacy
+`~/Documents/Code/SlidesStudio/output`. The rename does not move documents or
+reset settings and save credentials. The returned server
 result contains `fileName`, `path`, `fileKey`, and `revision`. Repeated saves and
 browser reloads keep that binding; changing the document title does not rename
 the bound file. Opening or creating another document clears the binding. Binding
@@ -102,7 +110,7 @@ unchanged.
 `await studio.save({ saveAs: true })` chooses a new native target. In a standalone
 static build without the local save API, ordinary Save retains the native picker
 or browser-download fallback.
-A native file picker requires a real user click. On the local Slide Studio
+A native file picker requires a real user click. On the local Keytist
 server an unattended agent can call `await studio.save()` to write the configured
 output directory. In a standalone build it can instead use `getDocument()` and
 write JSON through its filesystem tool, or use `download()` through browser

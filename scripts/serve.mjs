@@ -58,12 +58,12 @@ const server = http.createServer(async (req, res) => {
 const localFiles = createLocalFilesHandler(fileStore, () => server.address()?.port || port)
 server.on('error', error => {
   if (error.code === 'EADDRINUSE') {
-    console.log(`Slide Studio 已在 http://127.0.0.1:${port} 运行。`);if (process.argv.includes('--open')) execFile('open', [`http://127.0.0.1:${port}`]);process.exit(0)
+    console.log(`Keytist 已在 http://127.0.0.1:${port} 运行。`);if (process.argv.includes('--open')) execFile('open', [`http://127.0.0.1:${port}`]);process.exit(0)
   }
   console.error(error);process.exit(1)
 })
 server.listen(port, '127.0.0.1', () => {
   const actualPort = server.address()?.port || port
-  console.log(`Slide Studio · http://127.0.0.1:${actualPort}\n文稿保存在本机。保持此窗口开启；按 Control-C 退出。`)
+  console.log(`Keytist · http://127.0.0.1:${actualPort}\n文稿保存在本机。保持此窗口开启；按 Control-C 退出。`)
   if (process.argv.includes('--open')) execFile('open', [`http://127.0.0.1:${actualPort}`])
 })

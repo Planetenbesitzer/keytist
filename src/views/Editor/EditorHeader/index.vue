@@ -5,7 +5,7 @@
       <div class="document-name">
         <input v-if="editingTitle" ref="titleInput" v-model="titleValue" class="document-title-input" :aria-label="t('文稿名称')" @blur="finishTitle" @keydown.enter="finishTitle" @keydown.esc="editingTitle = false">
         <button v-else class="document-title" :title="t('点按重命名')" @click="startTitle">{{ title }} <span>⌄</span></button>
-        <div class="document-caption">Slide Studio <span>·</span> {{ t("本地文稿") }}</div>
+        <div class="document-caption">Keytist <span>·</span> {{ t("本地文稿") }}</div>
       </div>
     </div>
     <div class="workspace-views" role="group" :aria-label="t('工作区视图')">
@@ -42,7 +42,7 @@
             <FileInput accept=".pptx" @change="importPPTXFile"><PopoverMenuItem>{{ t("导入 PowerPoint…") }}</PopoverMenuItem></FileInput>
             <Divider :margin="6" />
             <PopoverMenuItem @click="hotkeyDrawerVisible = true">{{ t("键盘快捷键") }} <span class="menu-shortcut">⌘</span></PopoverMenuItem>
-            <PopoverMenuItem @click="aboutVisible = true">{{ t("关于 Slide Studio") }}</PopoverMenuItem>
+            <PopoverMenuItem @click="aboutVisible = true">{{ t("关于 Keytist") }}</PopoverMenuItem>
           </div>
         </template>
         <button class="header-button" :aria-label="t('导出与更多选项')" :title="t('导出与更多选项')"><i-icon-park-outline:more /></button>
@@ -51,7 +51,7 @@
     </div>
     <Drawer :width="360" v-model:visible="hotkeyDrawerVisible" placement="right"><HotkeyDoc /><template #title>{{ t("键盘快捷键") }}</template></Drawer>
     <Modal v-model:visible="aboutVisible" :width="440">
-      <div class="about-studio"><div class="about-icon"><i-icon-park-outline:slide-two /></div><h2>Slide Studio</h2><p>{{ t("一张画布，一份清晰的表达。") }}</p><p class="about-detail">{{ t("在本地编辑与保存演示文稿。") }}<br>{{ t("基于 PPTist 开源编辑器定制，采用 AGPL-3.0 许可。") }}</p><a href="https://github.com/pipipi-pikachu/PPTist" target="_blank" rel="noreferrer">PPTist · pipipi-pikachu</a></div>
+      <div class="about-studio"><div class="about-icon"><i-icon-park-outline:slide-two /></div><h2>Keytist</h2><p>{{ t("一张画布，一份清晰的表达。") }}</p><p class="about-detail">{{ t("在本地编辑与保存演示文稿。") }}<br>{{ t("基于 PPTist 开源编辑器定制，采用 AGPL-3.0 许可。") }}</p><a href="https://github.com/pipipi-pikachu/PPTist" target="_blank" rel="noreferrer">PPTist · pipipi-pikachu</a></div>
     </Modal>
     <Modal v-model:visible="htmlDialogVisible" :width="htmlDialogWidth"><HtmlDocumentDialog :mode="htmlDialogMode" :width="htmlDialogWidth" @close="htmlDialogVisible = false" /></Modal>
     <Modal v-model:visible="pageNumbersVisible" :width="520"><PageNumbersDialog @close="pageNumbersVisible = false" /></Modal>

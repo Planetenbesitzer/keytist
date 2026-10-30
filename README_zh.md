@@ -1,4 +1,4 @@
-# Keytist · Slide Studio
+# Keytist
 
 [English](README.md) | 简体中文
 
@@ -6,7 +6,7 @@
 
 基于 [PPTist](https://github.com/pipipi-pikachu/PPTist) 的本地演示文稿编辑器，采用 Keynote 风格的界面与编辑体验，面向科研报告和网页展示。
 
-用可编辑的文字、图片、形状和 LaTeX 制作 slides；需要动态解释时，直接插入完整的 HTML/CSS/JavaScript 网页。完成后，一键导出紧凑的 HTML 文件，用于报告、静态网站或博客。应用名称仍为 **Slide Studio**，本仓库名为 **keytist**。
+用可编辑的文字、图片、形状和 LaTeX 制作 slides；需要动态解释时，直接插入完整的 HTML/CSS/JavaScript 网页。完成后，一键导出紧凑的 HTML 文件，用于报告、静态网站或博客。
 
 ## 特色
 
@@ -36,17 +36,19 @@ npm start
 
 | 系统 | 启动入口 |
 | --- | --- |
-| macOS | `启动 Slide Studio.command` |
-| Windows | `Start Slide Studio.bat` |
-| Linux | `sh start-slides-studio.sh` |
+| macOS | `启动 Keytist.command` |
+| Windows | `Start Keytist.bat` |
+| Linux | `sh start-keytist.sh` |
 
-macOS 可选运行 `安装到应用程序.command`，在 Applications 中安装 Slide Studio 启动入口。这一步需要 Apple Command Line Tools，普通启动不需要。安装后仍需保留解压目录；移动项目后，请从新位置重新安装入口。Windows、Linux 提供对应脚本；发布包的启动核验在 macOS 上完成。
+macOS 可选运行 `安装到应用程序.command`，在 Applications 中安装 **Keytist.app**。这一步需要 Apple Command Line Tools，普通启动不需要。安装后仍需保留解压目录；移动项目后，请从新位置重新安装入口。Windows、Linux 提供对应脚本；发布包的启动核验在 macOS 上完成。
 
 ## 制作与安全保存
 
 顶部工具可插入文本框、图片、形状、表格、图表和公式。双击文字或公式继续编辑；在文字中放好光标，再点“公式”，即可插入行内公式。顶部 HTML 按钮用于导入网页，或编辑当前网页幻灯片的源码。`examples/我的第一份演示.json` 和 `examples/HTML演示示例.html` 是通用示例。
 
-**浏览器自动保存与文稿文件保存是两回事。** 点“保存”或按 **⌘S / Ctrl+S**，写入可编辑 JSON；新文稿默认保存在 `~/Documents/Code/SlidesStudio/output`。再次保存会更新已绑定文件；不相关的新文稿重名时自动加序号。“另存为”可选择其他位置。外部修改会触发冲突提示，避免静默覆盖。
+**浏览器自动保存与文稿文件保存是两回事。** 点“保存”或按 **⌘S / Ctrl+S**，写入可编辑 JSON；全新安装默认保存在 `~/Documents/Code/Keytist/output`。已有安装继续使用原保存位置，包括旧的 `~/Documents/Code/SlidesStudio/output`，改名不会搬动文稿。再次保存会更新已绑定文件；不相关的新文稿重名时自动加序号。“另存为”可选择其他位置。外部修改会触发冲突提示，避免静默覆盖。
+
+macOS 全新安装将设置与日志放在 `~/Library/Application Support/Keytist` 和 `~/Library/Logs/Keytist`。升级已有安装会继承原设置、保存凭证和路径，因此旧目录名可能保留。浏览器存储和 Agent 接口标识也保持兼容，延续已有文稿与偏好。
 
 换电脑、清除浏览器数据或更换浏览器地址前，请保存一份 JSON。自定义样式库、常用色、界面语言与侧栏偏好保存在当前浏览器；已经应用到对象上的外观仍随文稿保存。默认输出目录仅用于 JSON；HTML、PDF、PPTX 和图片使用浏览器的下载或打印流程。
 
@@ -73,7 +75,7 @@ macOS 可选运行 `安装到应用程序.command`，在 Applications 中安装 
 ></iframe>
 ```
 
-博客平台需要允许上传 HTML 和嵌入 iframe。导出文件自带播放器，观看设备无需安装 Slide Studio 或 Node.js，但需要支持文件内解压流程的现代浏览器。
+博客平台需要允许上传 HTML 和嵌入 iframe。导出文件自带播放器，观看设备无需安装 Keytist 或 Node.js，但需要支持文件内解压流程的现代浏览器。
 
 **能否离线播放，取决于导入网页的资源。** 原生幻灯片素材与自动收集的字体会随文件保存；网页内引用的外部脚本、媒体和其他 URL，仍需要原来的网络或文件位置，除非网页已经将这些资源内嵌。完全离线的互动报告，应使用自包含 HTML/CSS/JS 和内嵌素材。
 
@@ -92,7 +94,7 @@ HTML 默认自动携带所需的 **英文/Latin、Greek 和数学字体**，包�
 | JSON | 可编辑源文稿，保留 LaTeX、图片与导入字体。 |
 | HTML | 展示与网页发布，保留嵌入互动网页；可选携带原生编辑数据。 |
 | PPTX | 静态版本。省略嵌入网页及其交互，保留原生文字、图片、形状、公式和原有页序；只有网页的页面保留背景、页码与空白区域。导出面板会提示省略内容。 |
-| PDF / 图片 | 静态输出。含嵌入网页的文稿如需 PDF，请先导出 HTML，再使用播放器中的“打印”。 |
+| PDF / 图片 | 静态输出。PDF 可在独立预览中逐帧冻结多个交互状态，直接下载高清画面 PDF；纯原生文稿仍可使用打印。 |
 
 PPTX 是交换格式，显示可能与编辑器存在差异。标准模式下，普通文字与图片仍为独立对象；含行内公式的文字层转为高清透明图片，以保留相对位置与换行，LaTeX 源码保留在 JSON 或可编辑 HTML 中。PPTX 不会执行嵌入网页的 JavaScript。
 
@@ -128,6 +130,6 @@ npm run build
 
 ## 许可与致谢
 
-Keytist / Slide Studio 基于 **[pipipi-pikachu](https://github.com/pipipi-pikachu)** 的 **[PPTist](https://github.com/pipipi-pikachu/PPTist)** 修改，保留 **GNU Affero General Public License v3.0**，完整内容见 [LICENSE](LICENSE)。[上游原 README](doc/README.upstream.md) 保留了原作者的公开联系方式与项目声明。
+Keytist 基于 **[pipipi-pikachu](https://github.com/pipipi-pikachu)** 的 **[PPTist](https://github.com/pipipi-pikachu/PPTist)** 修改，保留 **GNU Affero General Public License v3.0**，完整内容见 [LICENSE](LICENSE)。[上游原 README](doc/README.upstream.md) 保留了原作者的公开联系方式与项目声明。
 
 字体及依赖仍遵循各自许可，见 [第三方声明](doc/THIRD_PARTY_NOTICES.md) 和随附许可文件。公开发行不包含上游两份尚未确认转分发来源链的转换字体，也不包含系统字体或私人文稿。本项目独立于 Apple，并非 Apple Keynote 产品。

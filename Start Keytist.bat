@@ -12,7 +12,7 @@ if not exist "dist\index.html" (
   pause
   exit /b 1
 )
-echo Slide Studio
+echo Keytist
 echo Open http://127.0.0.1:4178 in your browser.
 echo Keep this window open. Press Ctrl+C to stop.
 node scripts\serve.mjs

@@ -73,7 +73,7 @@ export async function decodeCompactHtmlManifest(input: unknown, maxBytes = 512 *
   const exactKeys = (value: Record<string, unknown>, keys: string[]) => Object.keys(value).length === keys.length && keys.every(key => Object.prototype.hasOwnProperty.call(value, key))
   if (!record(input) || !exactKeys(input, ['version', 'encoding', 'editable', 'payload'])) fail('文件头格式无效')
   const manifest = input as Record<string, unknown>
-  if (manifest.version !== 1) fail('不支持此文件版本，请使用新版 Slide Studio')
+  if (manifest.version !== 1) fail('不支持此文件版本，请使用新版 Keytist')
   if (manifest.encoding !== 'gzip-base64') fail('不支持此压缩编码')
   if (typeof manifest.editable !== 'boolean' || typeof manifest.payload !== 'string') fail('文件头字段无效')
   const encoded = manifest.payload as string
@@ -198,7 +198,7 @@ export async function packHtmlPresentation(html: string, options: { editable: bo
   const manifest: CompactManifest = { version: 1, encoding: 'gzip-base64', editable: options.editable, payload: encodeBase64(compressed) }
   const english = options.language === 'en'
   const loader = `Promise.resolve().then(()=>(${decodeCompactHtmlManifest.toString()})(JSON.parse(document.getElementById('${COMPACT_HTML_MARKER_ID}').textContent))).then(html=>{document.open();document.write(html);document.close()}).catch(error=>{document.getElementById('compact-status').textContent=${JSON.stringify(english ? 'Unable to open presentation: ' : '无法打开此文稿：')}+(error instanceof Error?error.message:${JSON.stringify(english ? 'Damaged file' : '文件损坏')});document.title=${JSON.stringify(english ? 'Unable to open presentation' : '文稿打开失败')}})`
-  const output = `<!doctype html><html lang="${english ? 'en' : 'zh-CN'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Slide Studio compact HTML"><title>${escapeHtml(options.title.slice(0, 512))}</title><style>html,body{height:100%;margin:0;background:#17181c;color:#f5f5f7;font-family:system-ui,sans-serif}body{display:grid;place-items:center}p{max-width:34em;padding:24px;line-height:1.6}</style></head><body><p id="compact-status" role="status">${english ? 'Opening presentation…' : '正在打开演示文稿…'}</p><noscript>${english ? 'Enable JavaScript to open this presentation.' : '此演示文稿需要启用 JavaScript 才能打开。'}</noscript><script id="${COMPACT_HTML_MARKER_ID}" type="application/json">${JSON.stringify(manifest)}</script><script>${loader}</script></body></html>`
+  const output = `<!doctype html><html lang="${english ? 'en' : 'zh-CN'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Keytist compact HTML"><title>${escapeHtml(options.title.slice(0, 512))}</title><style>html,body{height:100%;margin:0;background:#17181c;color:#f5f5f7;font-family:system-ui,sans-serif}body{display:grid;place-items:center}p{max-width:34em;padding:24px;line-height:1.6}</style></head><body><p id="compact-status" role="status">${english ? 'Opening presentation…' : '正在打开演示文稿…'}</p><noscript>${english ? 'Enable JavaScript to open this presentation.' : '此演示文稿需要启用 JavaScript 才能打开。'}</noscript><script id="${COMPACT_HTML_MARKER_ID}" type="application/json">${JSON.stringify(manifest)}</script><script>${loader}</script></body></html>`
   if (utf8Size(output) > COMPACT_HTML_MAX_BYTES) throw new Error('HTML 文件超过 512 MiB 安全上限，未生成文件')
   return output
 }

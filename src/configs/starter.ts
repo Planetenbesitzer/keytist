@@ -34,7 +34,7 @@ export function createStarterDocument() {
     {
       id: 'studio-intro', background: { type: 'solid', color: '#fbfbfd' },
       elements: [
-        text('intro-eyebrow', 'SLIDE STUDIO', 72, 62, 450, 13, blue, 600),
+        text('intro-eyebrow', 'Keytist', 72, 62, 450, 13, blue, 600),
         text('intro-title', t('让想法，<br>清晰呈现。'), 72, 150, 620, 62, ink, 600),
         text('intro-subtitle', t('自由排版 · 精致公式 · 从容表达'), 76, 326, 560, 21, '#86868b'),
         rect('intro-blue', 718, 140, 155, 225, '#007aff'),
